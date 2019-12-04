@@ -33,7 +33,9 @@ public class BCBoardDTO {
     // notnull (javax) 줘야할까? 
     private String title;
     private String content;
+    // 멤버클래스로 줘야할듯? 
     private String mid;
+
     private String audioPath;
     private String audioName;
 

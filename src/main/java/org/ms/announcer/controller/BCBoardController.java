@@ -43,16 +43,17 @@ public class BCBoardController {
     // 등록하는거 아니면 모두 get으로 받아라.. mapping성격이 다 다르다
     @GetMapping(value="/prelisten")
     public ResponseEntity<List<String>> preListen(BCBoardDTO dto, String gender) {
-        System.out.println(dto);
-        System.out.println(gender);
         ResponseEntity<byte[]> response = makeAudio(dto,gender);
         List<String> list = new ArrayList<>();
         list.add(FileUtil.audioSave("tmp"+dto.getTitle(), response.getBody()).replace("\\", "-"));
         return new ResponseEntity<>(list, HttpStatus.OK);
+
     }
     
     @GetMapping(value="/{uploadPath}")
     public ResponseEntity<byte[]> pathCheck(@PathVariable("uploadPath") String uploadPath) {
+        System.out.println(uploadPath);
+        System.out.println("업로드패스확인=================================================");
         File audioFile = new File(uploadPath.replace("-", "\\"));
         byte[] audioData = null;
         try {
@@ -93,7 +94,6 @@ public class BCBoardController {
         RestTemplate restTemplate = new RestTemplate();
 
         xmlString += gender.equals("man") ? manVoice : womanVoice;
-        System.out.println("xmlString 중간확인 : "+xmlString);
         xmlString += dto.getContent()+"</voice></speak>";
         System.out.println(xmlString);
        

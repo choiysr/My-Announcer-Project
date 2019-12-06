@@ -1,6 +1,7 @@
 package org.ms.announcer.controller;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,10 @@ import org.ms.announcer.domain.BCBoardDTO;
 import org.ms.announcer.service.BCBoardService;
 import org.ms.announcer.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -79,9 +84,20 @@ public class BCBoardController {
         // list로 돌아가게, ((((((바로 재생이 시작되어야함(시간 체크해서?) 이건 list에서 하자능 )))
     }
 
-    @GetMapping("/list")
-    public void list() {
 
+    // get 방식으로 url dptj 원하는 페이지, 오늘 날짜를 받는다.
+    @GetMapping("/todaylist/{Startdate}")
+    public ResponseEntity<Page<BCBoardDTO>> list( 
+       
+       @PathVariable("Startdate") String Startdate ) {
+
+        //정렬하여 값 가져올 기준 
+         Pageable page = PageRequest.of(0, 300, Sort.Direction.ASC, "startdate","starttime");
+        //문자열로 가저온 것을 split
+        String[] date =Startdate.split("-");
+        //값을 얻어온다.
+        Page<BCBoardDTO> result = service.getTodayList(LocalDate.of(Integer.parseInt(date[0]),Integer.parseInt(date[1]),Integer.parseInt(date[2])), page);
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
     // KAKAO API

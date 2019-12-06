@@ -7,6 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Test HTML Page</h1>
+    <h1>bclist</h1>
+    <div >
+        <ul th:each=" board, state : ${list}">
+            <li th:text="${board.title}"></li>
+            <li th:text="${board.content}"></li>
+            <li th:text="${board.audioName}"></li>
+        </ul>
+    </div>
+
 </body>
 </html>

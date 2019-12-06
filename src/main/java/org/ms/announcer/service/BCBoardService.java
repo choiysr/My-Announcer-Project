@@ -1,5 +1,7 @@
 package org.ms.announcer.service;
 
+import java.util.List;
+
 import org.ms.announcer.domain.BCBoardDTO;
 
 /**
@@ -8,5 +10,7 @@ import org.ms.announcer.domain.BCBoardDTO;
 public interface BCBoardService {
 
     public void register(BCBoardDTO dto);
+
+    public List<BCBoardDTO> getlist();
     
 }

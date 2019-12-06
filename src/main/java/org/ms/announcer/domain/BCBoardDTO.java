@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -33,16 +32,15 @@ public class BCBoardDTO {
     // notnull (javax) 줘야할까? 
     private String title;
     private String content;
-    // 멤버클래스로 줘야할듯? 
+    // MemberDTO만들면 MEMBER로 수정해야함. 
     private String mid;
-
     private String audioPath;
     private String audioName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startdate;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime starttime;
 
     @CreationTimestamp

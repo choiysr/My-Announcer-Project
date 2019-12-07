@@ -9,6 +9,9 @@
 </head>
 <body>
     <h1>Today BrodCastList</h1>
+    <form action="/register.html"> 
+        <input value="등록하기" type="submit">
+    </form>
     <div id="listdiv" >
        
 
@@ -63,7 +66,6 @@
             var hour = today.getHours().toString().length == 1? "0"+today.getHours():today.getHours();
             var minute = today.getMinutes().toString().length == 1? "0"+today.getMinutes():today.getMinutes();
             var page = 1;
-           
             var date = today.getFullYear() + "-" + month + "-" + day;
             var time = hour + ":" + minute;
 

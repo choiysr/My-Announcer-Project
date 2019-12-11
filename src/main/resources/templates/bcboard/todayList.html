@@ -4,7 +4,7 @@
 <head>
    <meta charset="utf-8">
    <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <title>Wishlist || Hurst</title>
+   <title>My Announcer</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,16 +34,23 @@
    <!-- custom sytle for modal 모달창 custom 스타일임 -->
    <style>
       .modal-body table {
-         height: 100;
-         width: 100%;
+         height: 120;
+         width: 100vw;
       }
 
-      .ymd select {
-         width: 31.8%;
+      #registerFormTable th input {
+         width: 36vw;
       }
 
-      .time select {
-         width: 48%;
+      .formTitle {
+         width: 100px;
+         padding-right: 3%;
+         text-align: right;
+      }
+
+      #registerFormDiv {
+         padding-left: 25%;
+         padding-right: 25%;
       }
    </style>
 </head>
@@ -215,7 +222,7 @@
                            <li><a href="single-product.html">Single Product</a></li>
                            <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
                            <li><a href="cart.html">Shopping Cart</a></li>
-                           <li><a href="wishlist.html">Wishlist</a></li>
+                           <li><a href="todayList.html">todayList</a></li>
                            <li><a href="checkout.html">Checkout</a></li>
                            <li><a href="order.html">Order</a></li>
                            <li><a href="login.html">login / Registration</a></li>
@@ -263,7 +270,7 @@
                                  <li><a href="single-product.html">Single Product</a></li>
                                  <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
                                  <li><a href="cart.html">Shopping Cart</a></li>
-                                 <li><a href="wishlist.html">Wishlist</a></li>
+                                 <li><a href="todayList.html">todayList</a></li>
                                  <li><a href="checkout.html">Checkout</a></li>
                                  <li><a href="order.html">Order</a></li>
                                  <li><a href="login.html">login / Registration</a></li>
@@ -293,12 +300,12 @@
                <div class="col-md-12">
                   <div class="heading-banner">
                      <div class="heading-banner-title">
-                        <h2>Wishlist</h2>
+                        <h2>todayList</h2>
                      </div>
                      <div class="breadcumbs pb-15">
                         <ul>
                            <li><a href="index.html">Home</a></li>
-                           <li>Wishlist</li>
+                           <li>todayList</li>
                         </ul>
                      </div>
                   </div>
@@ -307,24 +314,24 @@
          </div>
       </div>
       <!-- HEADING-BANNER END -->
-      <!-- WISHLIST-AREA START -->
-      <div class="shopping-cart-area  pt-80 pb-80">
+      <!-- TODAYLIST-AREA START -->
+      <div class="shopping-cart-area  pt-50 pb-60">
          <div class="container">
             <div class="row">
                <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="shopping-cart">
                      <!-- Nav tabs -->
                      <ul class="cart-page-menu row clearfix mb-30">
-                        <li><a href="#shopping-cart" data-toggle="tab">shopping cart</a></li>
-                        <li class="active"><a href="#wishlist" data-toggle="tab">wishlist</a></li>
-                        <li><a href="#check-out" data-toggle="tab">check out</a></li>
-                        <li><a href="#order-complete" data-toggle="tab">order complete</a></li>
+                        <!--                         <li><a href="#shopping-cart" data-toggle="tab">shopping cart</a></li> -->
+                        <li class="active"><a href="#todayList" data-toggle="tab">오늘의 방송</a></li>
+                        <li><a href="#check-out" data-toggle="tab">방송등록</a></li>
+                        <!--                         <li><a href="#order-complete" data-toggle="tab">order complete</a></li> -->
                      </ul>
 
                      <!-- Tab panes -->
                      <div class="tab-content">
                         <!-- shopping-cart start -->
-                        <div class="tab-pane" id="shopping-cart">
+                        <!-- <div class="tab-pane" id="shopping-cart">
                            <form action="#">
                               <div class="shop-cart-table">
                                  <div class="table-content table-responsive">
@@ -341,7 +348,7 @@
                                        <tbody>
                                           <tr>
                                              <td class="product-thumbnail  text-left">
-                                                <!-- Single-product start -->
+                                               
                                                 <div class="single-product">
                                                    <div class="product-img">
                                                       <a href="single-product.html"><img src="img/product/2.jpg"
@@ -354,7 +361,7 @@
                                                       <p class="mb-0">Size : SL</p>
                                                    </div>
                                                 </div>
-                                                <!-- Single-product end -->
+                                               
                                              </td>
                                              <td class="product-price">$56.00</td>
                                              <td class="product-quantity">
@@ -370,7 +377,7 @@
                                           </tr>
                                           <tr>
                                              <td class="product-thumbnail  text-left">
-                                                <!-- Single-product start -->
+                                                
                                                 <div class="single-product">
                                                    <div class="product-img">
                                                       <a href="single-product.html"><img src="img/product/12.jpg"
@@ -383,7 +390,7 @@
                                                       <p class="mb-0">Size : SL</p>
                                                    </div>
                                                 </div>
-                                                <!-- Single-product end -->
+                                               
                                              </td>
                                              <td class="product-price">$56.00</td>
                                              <td class="product-quantity">
@@ -399,7 +406,7 @@
                                           </tr>
                                           <tr>
                                              <td class="product-thumbnail  text-left">
-                                                <!-- Single-product start -->
+                                            
                                                 <div class="single-product">
                                                    <div class="product-img">
                                                       <a href="single-product.html"><img src="img/product/6.jpg"
@@ -412,7 +419,7 @@
                                                       <p class="mb-0">Size : SL</p>
                                                    </div>
                                                 </div>
-                                                <!-- Single-product end -->
+                                              
                                              </td>
                                              <td class="product-price">$56.00</td>
                                              <td class="product-quantity">
@@ -488,20 +495,22 @@
                                  </div>
                               </div>
                            </form>
-                        </div>
+                        </div> -->
                         <!-- shopping-cart end -->
-                        <!-- wishlist start -->
+                        <!-- todayList start -->
                         <!-- 여기가 뿌리는 곳 입니다~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~오늘 방송 -->
-                        <div class="tab-pane active" id="wishlist">
+                        <div class="tab-pane active" id="todayList">
                            <form action="#">
                               <div class="shop-cart-table">
                                  <div class="table-content table-responsive">
                                     <button id="bcRegister">등록하기</button>
                                     <table id="listtable">
+
+                                       <!--  
                                        <tbody>
                                           <tr>
                                              <td class="product-thumbnail  text-left">
-                                                <!-- Single-product start -->
+                                          
                                                 <div class="single-product">
                                                    <div class="product-img">
                                                       <a href="single-product.html"><img src="img/product/2.jpg"
@@ -514,7 +523,7 @@
                                                       <p class="mb-0">Size : SL</p>
                                                    </div>
                                                 </div>
-                                                <!-- Single-product end -->
+                                        
                                              </td>
                                              <td class="product-price">$56.00</td>
                                              <td class="product-stock">in stock</td>
@@ -528,7 +537,7 @@
                                           </tr>
                                           <tr>
                                              <td class="product-thumbnail  text-left">
-                                                <!-- Single-product start -->
+                                          
                                                 <div class="single-product">
                                                    <div class="product-img">
                                                       <a href="single-product.html"><img src="img/product/12.jpg"
@@ -541,7 +550,7 @@
                                                       <p class="mb-0">Size : SL</p>
                                                    </div>
                                                 </div>
-                                                <!-- Single-product end -->
+                                             
                                              </td>
                                              <td class="product-price">$56.00</td>
                                              <td class="product-stock">in stock</td>
@@ -555,7 +564,7 @@
                                           </tr>
                                           <tr>
                                              <td class="product-thumbnail  text-left">
-                                                <!-- Single-product start -->
+                                           
                                                 <div class="single-product">
                                                    <div class="product-img">
                                                       <a href="single-product.html"><img src="img/product/6.jpg"
@@ -568,7 +577,7 @@
                                                       <p class="mb-0">Size : SL</p>
                                                    </div>
                                                 </div>
-                                                <!-- Single-product end -->
+                                       
                                              </td>
                                              <td class="product-price">$56.00</td>
                                              <td class="product-stock">in stock</td>
@@ -580,23 +589,115 @@
                                                 <a href="#"><i class="zmdi zmdi-close"></i></a>
                                              </td>
                                           </tr>
-                                       </tbody>
+                                       </tbody> -->
                                     </table>
                                  </div>
                               </div>
                            </form>
                         </div>
-                        <!-- wishlist end -->
+                        <!-- TODAYLIST end -->
                         <!-- check-out start -->
                         <!-- 써먹을데가 있을 것 같다. 등록창으로 -->
                         <div class="tab-pane" id="check-out">
+                           <!--아이디 변경해줘야함!!-->
                            <form action="#">
                               <div class="shop-cart-table check-out-wrap">
                                  <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                       <div class="billing-details pr-20">
-                                          <h4 class="title-1 title-border text-uppercase mb-30">billing details</h4>
-                                          <input type="text" placeholder="Your name here...">
+                                    <!-- <div class="col-md-6 col-sm-6 col-xs-12"> -->
+                                    <!--         <div class="billing-details pr-20"> -->
+                                    <h3 style="text-align: center;">방송등록</h3>
+                                    <br>
+                                    <div id="registerFormDiv" style="text-align: right;">
+                                       <input type="checkbox" class="urgentCheck">긴급공지<br>
+                                       <table id="registerFormTable">
+                                          <tr>
+                                             <th class="formTitle" style="width: 300px;"><strong>제목</strong></th>
+                                             <th><input class="title" type="text" id="title" placeholder="제목을 입력하세요">
+                                             </th>
+                                          </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>내용</strong></th>
+                                             <th><textarea class="custom-textarea" id="content"
+                                                   placeholder="내용을 입력하세요"></textarea></th>
+                                          </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>음성설정</strong></th>
+                                             <th><select class="custom-select mb-15" id="voiceGender">
+                                                   <option value="woman">여성</option>
+                                                   <option value="man">남성</option>
+                                                </select></th>
+                                          </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>알람음</strong></th>
+                                             <th><select class="custom-select mb-15" id="alarmBell">
+                                                   <option value="1">알람음1</option>
+                                                   <option value="2">알람음2</option>
+                                                   <option value="3">알람음3</option>
+                                                   <option value="4">알람음4</option>
+                                                   <option value="5">알람음5</option>
+                                                </select></th>
+                                          </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>광고삽입</strong></th>
+                                             <th>
+                                                <input type="file" name="adUpload">
+                                             </th>
+                                          </tr>
+                                          <tr>
+                                             <th>　</th>
+                                          </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>방송일자</strong></th>
+                                             <th>
+                                                <div class="ymd">
+                                                   <input type="date" id="ymdSet">
+                                                </div>
+                                             </th>
+                                          </tr>
+                                          <tr>
+                                             <th>　</th>
+                                          </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>방송시간</strong></th>
+                                             <th>
+                                                <div class="time">
+                                                   <input type="time" id="timeSet">
+                                                </div>
+                                             </th>
+                                          </tr>
+                                          </tr>
+                                          <tr>
+                                             <th>　</th>
+                                          </tr>
+                                          <tr>
+                                             <div class="mt-20">
+                                                <th></th>
+                                                <th style="text-align: right">
+                                                   <button class="repeat">반복설정</button>
+                                                   <button class="preListen">미리듣기</button>
+                                                   <button class="submitBtn" disabled=true>등록</button></th>
+                                             </div>
+                                          </tr>
+                                       </table>
+                                       <div class="audioArea" style="display: none;">
+                                          <audio id="player" controls>
+                                             <source id="sourceLink" src="">
+                                          </audio>
+                                       </div>
+                                       <div class="alarmAudioArea" style="display: none;">
+                                          <audio id="alarmPlayer" controls>
+                                             <source id="alarmSourceLink" src="">
+                                          </audio>
+                                       </div>
+                                       <div class="adAudioArea" style="display: none;">
+                                             <audio id="adPlayer" controls>
+                                                <source id="adSourceLink" src="">
+                                             </audio>
+                                          </div>
+                                    </div>
+
+
+                                    <!-- <input type="text" placeholder="Your name here...">
                                           <input type="text" placeholder="Email address here...">
                                           <input type="text" placeholder="Phone here...">
                                           <input type="text" placeholder="Company neme here...">
@@ -625,10 +726,10 @@
                                              <option>Ottawa</option>
                                           </select>
                                           <textarea class="custom-textarea"
-                                             placeholder="Your address here..."></textarea>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12 mt-xs-30">
+                                             placeholder="Your address here..."></textarea> -->
+                                    <!--    </div> -->
+                                    <!--  </div> -->
+                                    <!--                                     <div class="col-md-6 col-sm-6 col-xs-12 mt-xs-30">
                                        <div class="billing-details pl-20">
                                           <h4 class="title-1 title-border text-uppercase mb-30">ship to different
                                              address</h4>
@@ -663,8 +764,8 @@
                                           <textarea class="custom-textarea"
                                              placeholder="Your address here..."></textarea>
                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    </div> -->
+                                    <!--  <div class="col-md-6 col-sm-6 col-xs-12">
                                        <div class="our-order payment-details mt-60 pr-20">
                                           <h4 class="title-1 title-border text-uppercase mb-30">our order</h4>
                                           <table>
@@ -702,28 +803,26 @@
                                              </tbody>
                                           </table>
                                        </div>
-                                    </div>
+                                    </div> -->
                                     <!-- payment-method -->
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                        <div class="payment-method mt-60  pl-20">
                                           <h4 class="title-1 title-border text-uppercase mb-30">payment method</h4>
                                           <div class="payment-accordion">
-                                             <!-- Accordion start  -->
+                                  
                                              <h3 class="payment-accordion-toggle active">Direct Bank Transfer</h3>
                                              <div class="payment-content default">
                                                 <p>Make your payment directly into our bank account. Please use your
                                                    Order ID as the payment reference. Your order won't be shipped until
                                                    the funds have cleared in our account.</p>
                                              </div>
-                                             <!-- Accordion end -->
-                                             <!-- Accordion start -->
+                                     
                                              <h3 class="payment-accordion-toggle">Cheque Payment</h3>
                                              <div class="payment-content">
                                                 <p>Please send your cheque to Store Name, Store Street, Store Town,
                                                    Store State / County, Store Postcode.</p>
                                              </div>
-                                             <!-- Accordion end -->
-                                             <!-- Accordion start -->
+                                       
                                              <h3 class="payment-accordion-toggle">PayPal</h3>
                                              <div class="payment-content">
                                                 <p>Pay via PayPal; you can pay with your credit card if you don�t have a
@@ -733,19 +832,19 @@
                                                 <a href="#"><img src="img/payment/3.png" alt="" /></a>
                                                 <a href="#"><img src="img/payment/4.png" alt="" /></a>
                                              </div>
-                                             <!-- Accordion end -->
+                                     
                                              <button class="button-one submit-button mt-15" data-text="place order"
                                                 type="submit">place order</button>
                                           </div>
                                        </div>
-                                    </div>
+                                    </div> -->
                                  </div>
                               </div>
                            </form>
                         </div>
                         <!-- check-out end -->
                         <!-- order-complete start -->
-                        <div class="tab-pane" id="order-complete">
+                        <!-- <div class="tab-pane" id="order-complete">
                            <form action="#">
                               <div class="thank-recieve bg-white mb-30">
                                  <p>Thank you. Your order has been received.</p>
@@ -810,27 +909,27 @@
                                           </table>
                                        </div>
                                     </div>
-                                    <!-- payment-method -->
+                               
                                     <div class="col-md-6 col-sm-6 col-sm-12 mt-xs-30">
                                        <div class="payment-method  pl-20">
                                           <h4 class="title-1 title-border text-uppercase mb-30">payment method</h4>
                                           <div class="payment-accordion">
-                                             <!-- Accordion start  -->
+                                         
                                              <h3 class="payment-accordion-toggle active">Direct Bank Transfer</h3>
                                              <div class="payment-content default">
                                                 <p>Make your payment directly into our bank account. Please use your
                                                    Order ID as the payment reference. Your order won't be shipped until
                                                    the funds have cleared in our account.</p>
                                              </div>
-                                             <!-- Accordion end -->
-                                             <!-- Accordion start -->
+                                      
+                                           
                                              <h3 class="payment-accordion-toggle">Cheque Payment</h3>
                                              <div class="payment-content">
                                                 <p>Please send your cheque to Store Name, Store Street, Store Town,
                                                    Store State / County, Store Postcode.</p>
                                              </div>
-                                             <!-- Accordion end -->
-                                             <!-- Accordion start -->
+                                             
+                                             
                                              <h3 class="payment-accordion-toggle">PayPal</h3>
                                              <div class="payment-content">
                                                 <p>Pay via PayPal; you can pay with your credit card if you don�t have a
@@ -840,7 +939,7 @@
                                                 <a href="#"><img src="img/payment/3.png" alt="" /></a>
                                                 <a href="#"><img src="img/payment/4.png" alt="" /></a>
                                              </div>
-                                             <!-- Accordion end -->
+                                             
                                              <button class="button-one submit-button mt-15" data-text="place order"
                                                 type="submit">place order</button>
                                           </div>
@@ -849,7 +948,7 @@
                                  </div>
                               </div>
                            </form>
-                        </div>
+                        </div> -->
                         <!-- order-complete end -->
                      </div>
                   </div>
@@ -857,7 +956,7 @@
             </div>
          </div>
       </div>
-      <!-- WISHLIST-AREA END -->
+      <!-- TODAYLIST-AREA END -->
 
       <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
       <div class="hiddenAlarm" style="display: none;">
@@ -884,7 +983,7 @@
       </div>
 
       <!-- Register Modal 소라 -->
-      <div class="modal fade" id="bcRegisterModal" aria-hidden="true" tabindex="-1">
+      <!-- <div class="modal fade" id="bcRegisterModal" aria-hidden="true" tabindex="-1">
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
@@ -950,7 +1049,7 @@
                         <div class="mt-20">
                            <th></th>
                            <th style="text-align: right">
-                              <!-- test -->
+                    
                               <button class="repeat">반복설정</button>
                               <button class="preListen">미리듣기</button>
                               <button class="submitBtn" disabled=true>등록</button></th>
@@ -967,13 +1066,13 @@
                         <source id="alarmSourceLink" src="">
                      </audio>
                   </div>
-               </div><!-- end of modal body  -->
+               </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                </div>
             </div>
          </div>
-      </div>
+      </div> -->
       <!-- end of modal -->
 
       <!-- end of Register Modal -->
@@ -999,7 +1098,7 @@
                         <h3 class="footer-title  title-border">accounts</h3>
                         <ul class="footer-menu">
                            <li><a href="my-account.html"><i class="zmdi zmdi-dot-circle"></i>My Account</a></li>
-                           <li><a href="wishlist.html"><i class="zmdi zmdi-dot-circle"></i>My Wishlist</a></li>
+                           <li><a href="todayList.html"><i class="zmdi zmdi-dot-circle"></i>My todayList</a></li>
                            <li><a href="cart.html"><i class="zmdi zmdi-dot-circle"></i>My Cart</a></li>
                            <li><a href="login.html"><i class="zmdi zmdi-dot-circle"></i>Sign In</a></li>
                            <li><a href="checkout.html"><i class="zmdi zmdi-dot-circle"></i>Check out</a></li>
@@ -1155,6 +1254,16 @@
          }
       }, 60000);
 
+<<<<<<< HEAD
+
+      function startPlay(target) {
+         console.log("무엇이문제인고")
+         console.log(target.id);
+         console.log("체크체크")
+         console.log($("#" + target.id).data('alarmBell'));
+         var targetAudio = $("#" + target.id)[0];
+         console.log(targetAudio);
+=======
           ///////////////////// list play button click event(for playing with alarm) ////////////////////
          // 리스트의 재생버튼을 클릭했을때 알람음을 먼저 틀고 이후에 재생되도록 함.
          // 오디오태그의 data-alarmBell에 해당 방송의 알람음이 설정되어있음. (지우면 안됨)
@@ -1176,10 +1285,23 @@
       function startPlay(target,event) {
          event.preventDefault()
          var targetAudio = $("#"+target);
+>>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
          //audio0815(아이디)를 이용해서 알람 찾고 해당하는 알람 재생.  
          //클릭되면 사운드웨이브 띄우고 + 재생버튼을 정지버튼으로 만들고 
          //재생이 끝나면 다시 audioLine.jpg띄우고 재생버튼 다시 생기게 
          // 
+<<<<<<< HEAD
+         var targetAlarm = "#hiddenAlarm" + $(targetAudio.data('alarmBell'));
+         var targetAlaramObj = $(targetAlarm)[0];
+         var targetAudioObj = $(targetAudio)[0];
+         console.log(targetAlarmObj);
+         console.log("체크체크")
+         targetAlaramObj.play();
+         console.log("체크체크")
+         targetAlaramObj.addEventListener("ended", function (e) {
+            $(targetAudioObj).play();
+         });
+=======
          var targetAlarm = "#hiddenAlarm" + targetAudio.data("alarmbell");
          var targetAlaramObj = $(targetAlarm)[0]
          var targetAudioObj =  $(targetAudio)[0]
@@ -1190,6 +1312,7 @@
             targetAlaramObj.addEventListener("ended", function (e) {
                   targetAudioObj.play();
             });
+>>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
       }
 
 
@@ -1205,7 +1328,11 @@
                '<tr class="listTable">' +
                '<td style="height:70px; width:10vw;">' + '<h3>' + list.title + '</h3>' + '</td>' +
                '<td>' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
+<<<<<<< HEAD
+               '<td>' + '<a href="#"><i class="far fa-play-circle" style="font-size:30px" onclick="startPlay(audio' + time + ');"></a></i>' + '</td>' +
+=======
                '<td>' + '<a href="#"><i class="far fa-play-circle playBtn" style="font-size:30px" data-time = "'+time+'"></a></i>' + '</td>' +
+>>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
                // 재생중에는 i class를 far fa-stop-circle로 바꿔줌 .
                '<td class="test" style="padding-left: 5px; padding-right: 5px; height:70px;">' +
                '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="'+ list.audioVO.alarmBells  + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
@@ -1283,20 +1410,20 @@
 
 
          ///////////////////// modal event area ////////////////////
-         var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj;
+         var startdate, starttime, title, content, gender, alarmBell, adFile, formData, jsonData, alarmObj, sourceObj;
+
          // 미리듣기/등록하기 클릭시 dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
          function setAllElement() {
             title = $("#title").val();
             content = $("#content").val();
             gender = $("#voiceGender option:selected").val();
             alarmBell = $("#alarmBell option:selected").val();
+            adFile = $("input[name='adUpload']")[0];
+            formData = new FormData();
             alarmObj = $("#alarmPlayer")[0];
             sourceObj = $("#player")[0];
          }
 
-         // [등록하기] 버튼이벤트(모달창 띄우기)
-         $("#bcRegister").on("click", function () {
-            $("#bcRegisterModal").modal(); // 모달창을 띄운다. 
 
             // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
             $(".urgentCheck").change(function (e) {
@@ -1305,8 +1432,10 @@
                $(".repeat").prop("disabled", isChecked);
             });
 
+
             // 미리듣기 버튼 이벤트
             $(".preListen").on("click", function (e) {
+               e.preventDefault
                $(".submitBtn").prop("disabled", false);
                setAllElement();
                jsonData = {
@@ -1355,9 +1484,9 @@
                         gender: gender,
                         startdate: startdate,
                         starttime: starttime,
-                        audioVO:{alarmBells: alarmBell}
+                        audioVO: { alarmBells: alarmBell }
                         // audioName: $("#sourceLink").attr("filename"),
-                        
+
                      };
 
                      alarmObj.play();
@@ -1394,7 +1523,7 @@
                   contentType: "application/json; charset=utf-8",
                }); // end of ajax
             }); // end of submitbutton event
-         }); // 등록하기 버튼 이벤트 
+
       }); // end of ready function 
    </script>
 </body>

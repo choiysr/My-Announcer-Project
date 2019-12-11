@@ -11,7 +11,6 @@ import lombok.Data;
 @Data
 @Embeddable
 public class AudioVO {
-
     
     private String audioPath;
     private String audioName;

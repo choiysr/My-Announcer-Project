@@ -29,6 +29,7 @@
    <link rel="stylesheet" th:href="@{~/css/shortcode.css}">
    <link rel="stylesheet" th:href="@{~/css/responsive.css}">
    <script th:src="@{~/js/vendor/modernizr-2.8.3.min.js}"></script>
+   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
    <!-- custom sytle for modal 모달창 custom 스타일임 -->
    <style>
@@ -587,6 +588,7 @@
                         </div>
                         <!-- wishlist end -->
                         <!-- check-out start -->
+                        <!-- 써먹을데가 있을 것 같다. 등록창으로 -->
                         <div class="tab-pane" id="check-out">
                            <form action="#">
                               <div class="shop-cart-table check-out-wrap">
@@ -858,7 +860,7 @@
       <!-- WISHLIST-AREA END -->
 
       <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
-      <div class="hiddenAlarm" aria-hidden="true">
+      <div class="hiddenAlarm" style="display: none;">
          <audio id="hiddenAlarm1" controls>
             <source id="hiddenAlarmSourceLink1"
                src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
@@ -1154,6 +1156,46 @@
             $(target)[0].play()
          }
       }, 60000);
+
+          ///////////////////// list play button click event(for playing with alarm) ////////////////////
+         // 리스트의 재생버튼을 클릭했을때 알람음을 먼저 틀고 이후에 재생되도록 함.
+         // 오디오태그의 data-alarmBell에 해당 방송의 알람음이 설정되어있음. (지우면 안됨)
+/*          $('.listTable a').on("click", function (e) {
+            console.log("끄아아아앙")
+            e.preventDefault;
+            targetAlarmNumber = $(".playerInList data-alarmBell");
+            targetID = "#hiddenAlarm" + targetAlarmNumber;
+            console.log("===============확인해")
+            console.log(targetAlarmNumber);
+            hiddenAlaramObj = $(targetID)[0].play();
+            Console.log(hiddenAlaramObj);
+            hiddenAlarmObj.addEventListener("ended", function (e) {
+               
+            });
+         })
+ */
+      // 
+      function startPlay(target) {
+         console.log("무엇이문제인고")
+         console.log(target.id);
+         console.log("체크체크")
+         console.log($("#"+target.id).data('alarmBell'));
+         var targetAudio = $("#"+target.id)[0];
+         console.log(targetAudio);
+         var targetAlarm = "#hiddenAlarm" + $(targetAudio.data('alarmBell'));
+         var targetAlaramObj = $(targetAlarm)[0];
+         var targetAudioObj =  $(targetAudio)[0];
+         console.log(targetAlarmObj);
+         console.log("체크체크")
+         targetAlaramObj.play();
+         console.log("체크체크")
+         targetAlaramObj.addEventListener("ended", function (e) {
+               $(targetAudioObj).play();
+         });
+      }
+
+
+
       //리스트 뿌려주는 코드
       function appendlist(list) {
          var str = ""
@@ -1162,13 +1204,19 @@
             var wholePathOfFile = list.audioPath.replace(/\\/gi, "-") + list.audioName;
 
             str +=
-               '<tr>' +
-               '<td style="height:70px;" >' + '<h3>' + list.title + '</h3>' + '</td>' +
-               '<td style="padding-left: 5px; padding-right: 5px; height:70px;">' + '<audio style=" width: 40vw; min-width: 1cm;" id="' + time + '" controls class="playerInList" data-alarmBell="' + list.alarmBell + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
-               '<p>시작시간 ' + list.starttime.substring(0, 5) + '</P>' +
+               '<tr class="listTable">' +
+               '<td style="height:70px; width:10vw;">' + '<h3>' + list.title + '</h3>' + '</td>' +
+               '<td>' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
+               '<td>' + '<a href="#"><i class="far fa-play-circle" style="font-size:30px" onclick="startPlay(audio'+time + ');"></a></i>' + '</td>' +
+               '<td style="padding-left: 5px; padding-right: 5px; height:70px;">' +
+               '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.alarmBell + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
+               //'<img src="../../img/mscustom/audioLine.jpg" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'+
+               '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
+               // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw; visibility:hidden;">'+
+               //'<p>시작시간 ' + list.starttime.substring(0, 5) + '</P>' +
                '</td>' +
-               '<td>' + '<p  style="padding-left: 5px; min-width: 0.8cm;" >수정</P>' + '</td>' +
-               '<td>' + '<p  style="padding-left: 5px; min-width: 0.8cm;" >삭제</P>' + '</td>' +
+               '<td>' + '<p  style="padding-left: 5px; min-width: 0.8cm;" >수정</p>' + '</td>' +
+               '<td>' + '<p  style="padding-left: 5px; min-width: 0.8cm;" >삭제</p>' + '</td>' +
                '</tr>'
          });
          listdiv.html(str)
@@ -1201,25 +1249,6 @@
                appendlist(result)
             }
          }); // end of todayList get ajax 
-
-         ///////////////////// list play button click event(for playing with alarm) ////////////////////
-         // 리스트의 재생버튼을 클릭했을때 알람음을 먼저 틀고 이후에 재생되도록 함.
-         // 오디오태그의 data-alarmBell에 해당 방송의 알람음이 설정되어있음. (지우면 안됨)
-         $(".playerInList").on("play", function (e) {
-            e.preventDefault;
-            targetAlarmNumber = $(".playerInList data-alarmBell");
-            targetID = "#hiddenAlarm" + targetAlarmNumber;
-            console.log("===============확인해")
-            console.log(targetAlarmNumber);
-            hiddenAlaramObj = $(targetID)[0].play();
-            Console.log(hiddenAlaramObj);
-            hiddenAlarmObj.addEventListener("ended", function (e) {
-               this.play();
-            });
-         })
-
-
-
 
 
          ///////////////////// modal event area ////////////////////

@@ -1254,54 +1254,16 @@
          }
       }, 60000);
 
-<<<<<<< HEAD
 
-      function startPlay(target) {
-         console.log("무엇이문제인고")
-         console.log(target.id);
-         console.log("체크체크")
-         console.log($("#" + target.id).data('alarmBell'));
-         var targetAudio = $("#" + target.id)[0];
-         console.log(targetAudio);
-=======
-          ///////////////////// list play button click event(for playing with alarm) ////////////////////
-         // 리스트의 재생버튼을 클릭했을때 알람음을 먼저 틀고 이후에 재생되도록 함.
-         // 오디오태그의 data-alarmBell에 해당 방송의 알람음이 설정되어있음. (지우면 안됨)
-/*          $('.listTable a').on("click", function (e) {
-            console.log("끄아아아앙")
-            e.preventDefault;
-            targetAlarmNumber = $(".playerInList data-alarmBell");
-            targetID = "#hiddenAlarm" + targetAlarmNumber;
-            console.log("===============확인해")
-            console.log(targetAlarmNumber);
-            hiddenAlaramObj = $(targetID)[0].play();
-            Console.log(hiddenAlaramObj);
-            hiddenAlarmObj.addEventListener("ended", function (e) {
-               
-            });
-         })
- */
-      // 
+
       function startPlay(target,event) {
          event.preventDefault()
          var targetAudio = $("#"+target);
->>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
          //audio0815(아이디)를 이용해서 알람 찾고 해당하는 알람 재생.  
          //클릭되면 사운드웨이브 띄우고 + 재생버튼을 정지버튼으로 만들고 
          //재생이 끝나면 다시 audioLine.jpg띄우고 재생버튼 다시 생기게 
          // 
-<<<<<<< HEAD
-         var targetAlarm = "#hiddenAlarm" + $(targetAudio.data('alarmBell'));
-         var targetAlaramObj = $(targetAlarm)[0];
-         var targetAudioObj = $(targetAudio)[0];
-         console.log(targetAlarmObj);
-         console.log("체크체크")
-         targetAlaramObj.play();
-         console.log("체크체크")
-         targetAlaramObj.addEventListener("ended", function (e) {
-            $(targetAudioObj).play();
-         });
-=======
+
          var targetAlarm = "#hiddenAlarm" + targetAudio.data("alarmbell");
          var targetAlaramObj = $(targetAlarm)[0]
          var targetAudioObj =  $(targetAudio)[0]
@@ -1312,7 +1274,7 @@
             targetAlaramObj.addEventListener("ended", function (e) {
                   targetAudioObj.play();
             });
->>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
+
       }
 
 
@@ -1328,11 +1290,7 @@
                '<tr class="listTable">' +
                '<td style="height:70px; width:10vw;">' + '<h3>' + list.title + '</h3>' + '</td>' +
                '<td>' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
-<<<<<<< HEAD
-               '<td>' + '<a href="#"><i class="far fa-play-circle" style="font-size:30px" onclick="startPlay(audio' + time + ');"></a></i>' + '</td>' +
-=======
                '<td>' + '<a href="#"><i class="far fa-play-circle playBtn" style="font-size:30px" data-time = "'+time+'"></a></i>' + '</td>' +
->>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
                // 재생중에는 i class를 far fa-stop-circle로 바꿔줌 .
                '<td class="test" style="padding-left: 5px; padding-right: 5px; height:70px;">' +
                '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="'+ list.audioVO.alarmBells  + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
@@ -1432,7 +1390,7 @@
 
             // 미리듣기 버튼 이벤트
             $(".preListen").on("click", function (e) {
-               e.preventDefault
+               e.preventDefault();
                $(".submitBtn").prop("disabled", false);
                setAllElement();
                jsonData = {

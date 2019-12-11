@@ -1229,10 +1229,13 @@
             e.preventDefault();
             var btn = $(this)
             
-            // if(btn.attr('class') === 'far fa-stop-circle'){
-            //    console.log("aaaaaaaaaaaaaaaaaaaaa")
+            if(btn.attr('class') === 'far fa-stop-circle playBtn'){
+               var target =  $(this).attr('data-time');
+               var audio = $("#audio"+ target)
+               var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
+               console.log(targetAlarm[0]);
 
-            // }
+            }
             
             
             var target =  $(this).attr('data-time');
@@ -1241,7 +1244,7 @@
             
             var img = btn.closest("tr").children(".test").children(".playImg")
             img.attr("src", "../../img/mscustom/soundwave.gif")
-            btn.attr('class', 'far fa-stop-circle')
+            btn.attr('class', 'far fa-stop-circle playBtn')
             
             targetAlarm[0].play();
             

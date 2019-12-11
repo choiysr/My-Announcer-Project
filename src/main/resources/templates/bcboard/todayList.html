@@ -1149,8 +1149,6 @@
          var Minutes = new Date().getMinutes() < 10 ? "0" + new Date().getMinutes() : new Date().getMinutes()
          var seconds = new Date().getSeconds() < 10 ? "0" + new Date().getSeconds() : new Date().getSeconds();
          var now = hour + "" + Minutes
-         console.log(now)
-         console.log("===============")
          var target = "#" + now;
          if ($(target).length == 1) {
             $(target)[0].play()
@@ -1201,7 +1199,7 @@
          var str = ""
          list.content.forEach(list => {
             var time = list.starttime.substring(0, 5).replace(":", "")
-            var wholePathOfFile = list.audioPath.replace(/\\/gi, "-") + list.audioName;
+            var wholePathOfFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.audioName;
 
             str +=
                '<tr class="listTable">' +
@@ -1324,8 +1322,9 @@
                         gender: gender,
                         startdate: startdate,
                         starttime: starttime,
+                        audioVO:{alarmBells: alarmBell}
                         // audioName: $("#sourceLink").attr("filename"),
-                        alarmBell: alarmBell
+                        
                      };
 
                      alarmObj.play();

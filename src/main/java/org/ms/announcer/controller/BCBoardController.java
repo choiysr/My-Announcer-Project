@@ -73,12 +73,13 @@ public class BCBoardController {
     // 최종 저장
     @PostMapping(value = "/register")
     public void registerBC(@RequestBody BCBoardDTO dto) {
+        System.out.println(dto);
         ResponseEntity<byte[]> response = makeAudio(dto);
         String wholePath = FileUtil.audioSave(dto.getTitle(), response.getBody());
         String pathWithoutFname = wholePath.substring(0, wholePath.lastIndexOf("\\") + 1); // 파일명을 제외한 경로.뒤에 슬래시 포함
         String fileName = wholePath.substring((pathWithoutFname.length()), wholePath.length()); // uuid+파일명
-        dto.setAudioPath(pathWithoutFname);
-        dto.setAudioName(fileName);
+        dto.getAudioVO().setAudioPath(pathWithoutFname);
+        dto.getAudioVO().setAudioName(fileName);
         service.register(dto);
     }
 

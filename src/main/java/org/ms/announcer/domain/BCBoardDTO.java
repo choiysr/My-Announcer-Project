@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,10 +35,10 @@ public class BCBoardDTO {
     private String content;
     // MemberDTO만들면 MEMBER로 수정해야함. 
     private String mid;
-    private String audioPath;
-    private String audioName;
+    // private String audioPath;
+    // private String audioName;
     private String gender;
-    private String alarmBell;
+    // private String alarmBell;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startdate;
@@ -50,5 +51,8 @@ public class BCBoardDTO {
 
     @UpdateTimestamp
     private LocalDateTime updateddate;
+
+    @Embedded
+    private AudioVO audioVO;
 
 }

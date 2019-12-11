@@ -23,7 +23,7 @@ public class BasicController {
     public void getTodayList(Model model) {
     }
 
-    @GetMapping("/totalList")
+    @GetMapping("/totallist")
     public void getTotalList() {
     }
 

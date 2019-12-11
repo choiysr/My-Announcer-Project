@@ -1254,6 +1254,7 @@
          }
       }, 60000);
 
+<<<<<<< HEAD
 
       function startPlay(target) {
          console.log("무엇이문제인고")
@@ -1262,10 +1263,34 @@
          console.log($("#" + target.id).data('alarmBell'));
          var targetAudio = $("#" + target.id)[0];
          console.log(targetAudio);
+=======
+          ///////////////////// list play button click event(for playing with alarm) ////////////////////
+         // 리스트의 재생버튼을 클릭했을때 알람음을 먼저 틀고 이후에 재생되도록 함.
+         // 오디오태그의 data-alarmBell에 해당 방송의 알람음이 설정되어있음. (지우면 안됨)
+/*          $('.listTable a').on("click", function (e) {
+            console.log("끄아아아앙")
+            e.preventDefault;
+            targetAlarmNumber = $(".playerInList data-alarmBell");
+            targetID = "#hiddenAlarm" + targetAlarmNumber;
+            console.log("===============확인해")
+            console.log(targetAlarmNumber);
+            hiddenAlaramObj = $(targetID)[0].play();
+            Console.log(hiddenAlaramObj);
+            hiddenAlarmObj.addEventListener("ended", function (e) {
+               
+            });
+         })
+ */
+      // 
+      function startPlay(target,event) {
+         event.preventDefault()
+         var targetAudio = $("#"+target);
+>>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
          //audio0815(아이디)를 이용해서 알람 찾고 해당하는 알람 재생.  
          //클릭되면 사운드웨이브 띄우고 + 재생버튼을 정지버튼으로 만들고 
          //재생이 끝나면 다시 audioLine.jpg띄우고 재생버튼 다시 생기게 
          // 
+<<<<<<< HEAD
          var targetAlarm = "#hiddenAlarm" + $(targetAudio.data('alarmBell'));
          var targetAlaramObj = $(targetAlarm)[0];
          var targetAudioObj = $(targetAudio)[0];
@@ -1276,6 +1301,18 @@
          targetAlaramObj.addEventListener("ended", function (e) {
             $(targetAudioObj).play();
          });
+=======
+         var targetAlarm = "#hiddenAlarm" + targetAudio.data("alarmbell");
+         var targetAlaramObj = $(targetAlarm)[0]
+         var targetAudioObj =  $(targetAudio)[0]
+         console.log($(this));
+         console.log(this)
+         $(this).attr('class','fa-stop-circle');
+         targetAlaramObj.play();
+            targetAlaramObj.addEventListener("ended", function (e) {
+                  targetAudioObj.play();
+            });
+>>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
       }
 
 
@@ -1291,12 +1328,16 @@
                '<tr class="listTable">' +
                '<td style="height:70px; width:10vw;">' + '<h3>' + list.title + '</h3>' + '</td>' +
                '<td>' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
+<<<<<<< HEAD
                '<td>' + '<a href="#"><i class="far fa-play-circle" style="font-size:30px" onclick="startPlay(audio' + time + ');"></a></i>' + '</td>' +
+=======
+               '<td>' + '<a href="#"><i class="far fa-play-circle playBtn" style="font-size:30px" data-time = "'+time+'"></a></i>' + '</td>' +
+>>>>>>> 71ea6f48eacfe3855ae45411209a223170cf8770
                // 재생중에는 i class를 far fa-stop-circle로 바꿔줌 .
-               '<td style="padding-left: 5px; padding-right: 5px; height:70px;">' +
-               '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.alarmBell + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
-               //'<img src="../../img/mscustom/audioLine.jpg" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'+
-               '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
+               '<td class="test" style="padding-left: 5px; padding-right: 5px; height:70px;">' +
+               '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="'+ list.audioVO.alarmBells  + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
+               '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'+
+               // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
                // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw; visibility:hidden;">'+
                //'<p>시작시간 ' + list.starttime.substring(0, 5) + '</P>' +
                '</td>' +
@@ -1311,7 +1352,36 @@
       /////////////////////////////////////////////////////////////// after loading dom 
 
       $(document).ready(function () {
+         listdiv.on('click','.playBtn',function(e){
+            e.preventDefault();
+            var btn = $(this)
+            
+            // if(btn.attr('class') === 'far fa-stop-circle'){
+            //    console.log("aaaaaaaaaaaaaaaaaaaaa")
 
+            // }
+            
+            
+            var target =  $(this).attr('data-time');
+            var audio = $("#audio"+ target)
+            var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
+            
+            var img = btn.closest("tr").children(".test").children(".playImg")
+            img.attr("src", "../../img/mscustom/soundwave.gif")
+            btn.attr('class', 'far fa-stop-circle')
+            
+            targetAlarm[0].play();
+            
+
+            targetAlarm[0].addEventListener("ended", function (e) {
+               audio[0].play()
+               audio[0].addEventListener("ended", function (e) {
+                  btn.attr('class', 'far fa-play-circle playBtn')
+                  img.attr("src", "../../img/mscustom/audioLine.jpg")
+               })
+            });
+
+         })
          //데이터 가져오는 코드
          var today = new Date();
          var day = ((today.getDate()).toString().length == 1 ? "0" + (today.getDate()) : (today.getDate()));

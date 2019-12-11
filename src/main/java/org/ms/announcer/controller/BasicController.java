@@ -16,17 +16,15 @@ import lombok.Setter;
 @RequestMapping("/bcboard/*")
 public class BasicController {
 
-    @Setter(onMethod_ = {@Autowired} )
+    @Setter(onMethod_ = { @Autowired })
     BCBoardService bcboardService;
 
-    @GetMapping("/register" )
-    public void getRegister() {
-        System.out.println("들어왔나요??");
+    @GetMapping("/todayList")
+    public void getTodayList(Model model) {
     }
 
-    @GetMapping("/bclist" )
-    public void getbclist(Model model) {
-        model.addAttribute("list", bcboardService.getlist());
+    @GetMapping("/totalList")
+    public void getTotalList() {
     }
-    
+
 }

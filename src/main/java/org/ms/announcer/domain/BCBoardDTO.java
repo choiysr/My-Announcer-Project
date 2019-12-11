@@ -36,6 +36,8 @@ public class BCBoardDTO {
     private String mid;
     private String audioPath;
     private String audioName;
+    private String gender;
+    private String alarmBell;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startdate;

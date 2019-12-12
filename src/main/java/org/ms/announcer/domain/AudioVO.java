@@ -17,6 +17,6 @@ public class AudioVO {
     
     private String alarmBell;
     private String intro;
-    private String end;
+    private String ending;
     
 }

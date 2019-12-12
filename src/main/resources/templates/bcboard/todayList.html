@@ -612,24 +612,25 @@
                                        <table id="registerFormTable">
                                           <tr>
                                              <th class="formTitle" style="width: 300px;"><strong>제목</strong></th>
-                                             <th><input class="title" type="text" id="title" placeholder="제목을 입력하세요">
+                                             <th colspan="2"><input class="title" type="text" id="title"
+                                                   placeholder="제목을 입력하세요">
                                              </th>
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>내용</strong></th>
-                                             <th><textarea class="custom-textarea" id="content"
+                                             <th colspan="2"><textarea class="custom-textarea" id="content"
                                                    placeholder="내용을 입력하세요"></textarea></th>
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>음성설정</strong></th>
-                                             <th><select class="custom-select mb-15" id="voiceGender">
+                                             <th colspan="2"><select class="custom-select mb-15" id="voiceGender">
                                                    <option value="woman">여성</option>
                                                    <option value="man">남성</option>
                                                 </select></th>
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>알람음</strong></th>
-                                             <th><select class="custom-select mb-15" id="alarmBell">
+                                             <th colspan="2"><select class="custom-select mb-15" id="alarmBell">
                                                    <option value="1">알람음1</option>
                                                    <option value="2">알람음2</option>
                                                    <option value="3">알람음3</option>
@@ -638,9 +639,24 @@
                                                 </select></th>
                                           </tr>
                                           <tr>
-                                             <th class="formTitle"><strong>광고삽입</strong></th>
+                                             <th class="formTitle"><strong>INTRO</strong></th>
                                              <th>
-                                                <input type="file" name="adUpload">
+                                                <input type="file" name="intro">
+                                             </th>
+                                             <th class="uploadCancelBtn">
+
+                                             </th>
+                                          </tr>
+                                          <tr>
+                                             <th>　</th>
+                                          </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>ENDING</strong></th>
+                                             <th>
+                                                <input type="file" name="ending">
+                                             </th>
+                                             <th class="uploadCancelBtn">
+
                                              </th>
                                           </tr>
                                           <tr>
@@ -648,7 +664,7 @@
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>방송일자</strong></th>
-                                             <th>
+                                             <th colspan="2">
                                                 <div class="ymd">
                                                    <input type="date" id="ymdSet">
                                                 </div>
@@ -659,7 +675,7 @@
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>방송시간</strong></th>
-                                             <th>
+                                             <th colspan="2">
                                                 <div class="time">
                                                    <input type="time" id="timeSet">
                                                 </div>
@@ -672,7 +688,7 @@
                                           <tr>
                                              <div class="mt-20">
                                                 <th></th>
-                                                <th style="text-align: right">
+                                                <th style="text-align: right" colspan="2">
                                                    <button class="repeat">반복설정</button>
                                                    <button class="preListen">미리듣기</button>
                                                    <button class="submitBtn" disabled=true>등록</button></th>
@@ -690,10 +706,10 @@
                                           </audio>
                                        </div>
                                        <div class="adAudioArea" style="display: none;">
-                                             <audio id="adPlayer" controls>
-                                                <source id="adSourceLink" src="">
-                                             </audio>
-                                          </div>
+                                          <audio id="adPlayer" controls>
+                                             <source id="adSourceLink" src="">
+                                          </audio>
+                                       </div>
                                     </div>
 
 
@@ -959,7 +975,7 @@
       <!-- TODAYLIST-AREA END -->
 
       <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
-      <div class="hiddenAlarm" style="display: none;">
+      <div class="hiddenAlarm">
          <audio id="hiddenAlarm1" controls>
             <source id="hiddenAlarmSourceLink1"
                src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
@@ -1254,30 +1270,20 @@
          }
       }, 60000);
 
-
-
-      function startPlay(target,event) {
+      function startPlay(target, event) {
          event.preventDefault()
-         var targetAudio = $("#"+target);
-         //audio0815(아이디)를 이용해서 알람 찾고 해당하는 알람 재생.  
-         //클릭되면 사운드웨이브 띄우고 + 재생버튼을 정지버튼으로 만들고 
-         //재생이 끝나면 다시 audioLine.jpg띄우고 재생버튼 다시 생기게 
-         // 
-
+         var targetAudio = $("#" + target);
          var targetAlarm = "#hiddenAlarm" + targetAudio.data("alarmbell");
          var targetAlaramObj = $(targetAlarm)[0]
-         var targetAudioObj =  $(targetAudio)[0]
+         var targetAudioObj = $(targetAudio)[0]
          console.log($(this));
          console.log(this)
-         $(this).attr('class','fa-stop-circle');
+         $(this).attr('class', 'fa-stop-circle');
          targetAlaramObj.play();
-            targetAlaramObj.addEventListener("ended", function (e) {
-                  targetAudioObj.play();
-            });
-
+         targetAlaramObj.addEventListener("ended", function (e) {
+            targetAudioObj.play();
+         });
       }
-
-
 
       //리스트 뿌려주는 코드
       function appendlist(list) {
@@ -1290,11 +1296,11 @@
                '<tr class="listTable">' +
                '<td style="height:70px; width:10vw;">' + '<h3>' + list.title + '</h3>' + '</td>' +
                '<td>' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
-               '<td>' + '<a href="#"><i class="far fa-play-circle playBtn" style="font-size:30px" data-time = "'+time+'"></a></i>' + '</td>' +
+               '<td>' + '<a href="#"><i class="far fa-play-circle playBtn" style="font-size:30px" data-time = "' + time + '"></a></i>' + '</td>' +
                // 재생중에는 i class를 far fa-stop-circle로 바꿔줌 .
                '<td class="test" style="padding-left: 5px; padding-right: 5px; height:70px;">' +
-               '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="'+ list.audioVO.alarmBells  + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
-               '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'+
+               '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBells + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
+               '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
                // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
                // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw; visibility:hidden;">'+
                //'<p>시작시간 ' + list.starttime.substring(0, 5) + '</P>' +
@@ -1310,26 +1316,27 @@
       /////////////////////////////////////////////////////////////// after loading dom 
 
       $(document).ready(function () {
-         listdiv.on('click','.playBtn',function(e){
+         listdiv.on('click', '.playBtn', function (e) {
             e.preventDefault();
             var btn = $(this)
-            
-            // if(btn.attr('class') === 'far fa-stop-circle'){
-            //    console.log("aaaaaaaaaaaaaaaaaaaaa")
-
-            // }
-            
-            
-            var target =  $(this).attr('data-time');
-            var audio = $("#audio"+ target)
-            var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
-            
+            var target = $(this).attr('data-time');
+            var audio = $("#audio" + target)
             var img = btn.closest("tr").children(".test").children(".playImg")
+            var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
+            console.log("TARGETALARAM" + targetAlarm);
+
+            if (btn.attr('class') === 'far fa-stop-circle playBtn') {
+               targetAlarm[0].pause();
+               targetAlarm[0].currentTime = 0;
+               audio[0].pause();
+               audio[0].currentTime = 0;
+               btn.attr('class', 'far fa-play-circle playBtn')
+               img.attr("src", "../../img/mscustom/audioLine.jpg")
+               return;
+            }
             img.attr("src", "../../img/mscustom/soundwave.gif")
-            btn.attr('class', 'far fa-stop-circle')
-            
+            btn.attr('class', 'far fa-stop-circle playBtn')
             targetAlarm[0].play();
-            
 
             targetAlarm[0].addEventListener("ended", function (e) {
                audio[0].play()
@@ -1365,7 +1372,7 @@
 
 
          ///////////////////// modal event area ////////////////////
-         var startdate, starttime, title, content, gender, alarmBell, adFile, formData, jsonData, alarmObj, sourceObj;
+         var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj;
 
          // 미리듣기/등록하기 클릭시 dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
          function setAllElement() {
@@ -1373,114 +1380,164 @@
             content = $("#content").val();
             gender = $("#voiceGender option:selected").val();
             alarmBell = $("#alarmBell option:selected").val();
-            adFile = $("input[name='adUpload']")[0];
-            formData = new FormData();
             alarmObj = $("#alarmPlayer")[0];
             sourceObj = $("#player")[0];
          }
 
 
-            // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
-            $(".urgentCheck").change(function (e) {
-               var isChecked = $(".urgentCheck").is(":checked");
-               $("#ymdSet, #timeSet").prop("disabled", isChecked);
-               $(".repeat").prop("disabled", isChecked);
+         // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
+         $(".urgentCheck").change(function (e) {
+            var isChecked = $(".urgentCheck").is(":checked");
+            $("#ymdSet, #timeSet").prop("disabled", isChecked);
+            $(".repeat").prop("disabled", isChecked);
+         });
+
+
+         // 파일업로드 part 
+         // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
+         $("input[type='file']").change(function (e) {
+            var formData = new FormData();
+            var additionalAudio = $(this)[0].files;
+            console.log(additionalAudio);
+            // 유효성 검사(파일크기, 파일형식)
+            if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) return false;
+            formData.append("uploadFile", additionalAudio[0]);
+            $.ajax({
+               url: 'http://localhost:8080/rbcboard/fileUpload',
+               processData: false,
+               contentType: false,
+               data: formData,
+               type: 'GET',
+               dataType: 'json',
+               success: function (result) {
+                  console.log("success됐나요??")
+                  console.log(result);
+                  makeCancelBtn(result);
+               }
             });
+         }) // end of upload 
+
+         // 파일 유효성 검사 function (파일크기, 파일형식)
+         function validateFile(fileName, fileSize) {
+            var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
+            var maxSize = 5242880;
+            if (fileSize > maxSize) {
+               alert("업로드 가능한 파일 크기를 초과했습니다.")
+               return false;
+            }
+            if (!regex.test(fileName)) {
+               alert("해당 종류의 파일은 업로드 할 수 없습니다.")
+               return false;
+            }
+         }
+
+         // 파일 업로드되면 취소하는 버튼 만드는 function
+         function makeCancelBtn(result) {
+            console.log("make헤헤");
+         }
 
 
-            // 미리듣기 버튼 이벤트
-            $(".preListen").on("click", function (e) {
-               e.preventDefault();
-               $(".submitBtn").prop("disabled", false);
-               setAllElement();
-               jsonData = {
-                  title: title,
-                  content: content,
-                  gender: gender,
-                  alarmBell: alarmBell
-               };
+         // 미리듣기 버튼 이벤트
+         $(".preListen").on("click", function (e) {
+            e.preventDefault();
+            $(".submitBtn").prop("disabled", false);
+            setAllElement();
+            jsonData = {
+               title: title,
+               content: content,
+               gender: gender,
+               alarmBell: alarmBell
+            };
 
-               $.ajax({
-                  url: 'http://localhost:8080/rbcboard/prelisten',
-                  data: jsonData,
-                  type: 'GET',
-                  dataType: 'json',
-                  success: function (result) {
-                     $("#sourceLink").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
-                     $("#player")[0].load();
-                     $("#alarmSourceLink").attr('src', "http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm" + alarmBell + ".wav");
-                     $("#alarmPlayer")[0].load();
-                     alarmObj.play();
-                     alarmObj.addEventListener("ended", function (e) {
-                        sourceObj.play();
+            $.ajax({
+               url: 'http://localhost:8080/rbcboard/prelisten',
+               data: jsonData,
+               type: 'GET',
+               dataType: 'json',
+               success: function (result) {
+                  $("#sourceLink").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
+                  $("#player")[0].load();
+                  // 나중에 alarm서버에 저장해서 local말고 서버폴더로 설정해줄것  
+                  $("#alarmSourceLink").attr('src', "http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm" + alarmBell + ".wav");
+                  $("#alarmPlayer")[0].load();
+                  alarmObj.play();
+                  alarmObj.addEventListener("ended", function (e) {
+                     sourceObj.play();
+                  });
+               }
+            }); // end of ajax
+         }); //end of preListen button event
+
+         // 저장버튼 클릭 이벤트(선행조건:미리듣기)
+         $(".submitBtn").on("click", function (e) {
+            e.preventDefault();
+            setAllElement();
+            var result;
+
+            if ($(".urgentCheck").is(":checked")) {
+               result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
+               if (!result) {
+                  return; // confirm창에서 취소버튼을 누른경우. 
+               } else { // 긴급공지 
+                  var uToday = new Date();
+                  var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
+                  var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));
+                  var uHour = uToday.getHours().toString().length == 1 ? "0" + uToday.getHours() : uToday.getHours();
+                  var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
+                  var uDate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
+                  var uTime = uHour + ":" + uMinute;
+                  startdate = uDate;
+                  starttime = uTime;
+
+                  jsonData = {
+                     content: content,
+                     title: title,
+                     gender: gender,
+                     startdate: startdate,
+                     starttime: starttime,
+                     audioVO: { alarmBell: alarmBell }
+                  };
+
+                  alarmObj.play();
+                  alarmObj.addEventListener("ended", function (e) {
+                     sourceObj.play();
+                     sourceObj.addEventListener("ended", function (e) {
+                        location.reload();
                      });
-                  }
-               }); // end of ajax
-            }); //end of preListen button event
+                  });
+               }
+            } else { // 긴급방송이 아닌경우 
+               result = confirm("방송을 등록하시겠습니까?");
+               if (!result) {
+                  return;
+               } else {
+                  var ymdSet = $("#ymdSet")[0];
+                  var timeSet = $("#timeSet")[0]
+                  startdate = ymdSet.value;
+                  console.log(startdate);
+                  console.log("startdate 위에확인");
+                  starttime = timeSet.value;
+                  console.log(starttime);
+                  console.log("starttime 위에확인");
+                  jsonData = {
+                     content: content,
+                     title: title,
+                     gender: gender,
+                     startdate: startdate,
+                     starttime: starttime,
+                     audioVO: { alarmBell: alarmBell }
+                  };
+                  location.reload();
+               }
+            } // end of else(긴급방송이 아닌경우)
 
-            // 저장버튼 클릭 이벤트(선행조건:미리듣기)
-            $(".submitBtn").on("click", function (e) {
-               e.preventDefault();
-               setAllElement();
-               var result;
-
-               if ($(".urgentCheck").is(":checked")) {
-                  result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
-                  if (!result) {
-                     return; // confirm창에서 취소버튼을 누른경우. 
-                  } else {
-                     startdate = date;
-                     starttime = time;
-
-                     jsonData = {
-                        content: content,
-                        title: title,
-                        gender: gender,
-                        startdate: startdate,
-                        starttime: starttime,
-                        audioVO: { alarmBell: alarmBell }
-                     };
-
-                     alarmObj.play();
-                     alarmObj.addEventListener("ended", function (e) {
-                        sourceObj.play();
-                        sourceObj.addEventListener("ended", function (e) {
-                           location.reload();
-                        });
-                     });
-                  }
-               } else { // 긴급방송이 아닌경우 
-                  result = confirm("방송을 등록하시겠습니까?");
-                  if (!result) {
-                     return;
-                  } else {
-                     var ymdSet = $("#ymdSet")[0];
-                     var timeSet = $("#timeSet")[0]
-                     startdate = ymdSet.value;
-                     console.log(startdate);
-                     console.log("startdate 위에확인");
-                     starttime = timeSet.value;
-                     console.log(starttime);
-                     console.log("starttime 위에확인");
-                     jsonData = {
-                        content: content,
-                        title: title,
-                        gender: gender,
-                        startdate: startdate,
-                        starttime: starttime,
-                        audioVO: { alarmBell: alarmBell }
-                     };
-                     location.reload();
-                  }
-               } // end of else(긴급방송이 아닌경우)
-
-               $.ajax({
-                  url: 'http://localhost:8080/rbcboard/register',
-                  data: JSON.stringify(jsonData),
-                  type: 'POST',
-                  contentType: "application/json; charset=utf-8",
-               }); // end of ajax
-            }); // end of submitbutton event
+            $.ajax({
+               url: 'http://localhost:8080/rbcboard/register',
+               data: JSON.stringify(jsonData),
+               type: 'POST',
+               contentType: "application/json; charset=utf-8",
+            }); // end of ajax
+         }); // end of submitbutton event
       }); // end of ready function 
    </script>
 </body>

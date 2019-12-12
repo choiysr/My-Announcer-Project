@@ -13,7 +13,6 @@ import org.springframework.util.FileCopyUtils;
  */
 public final class FileUtil {
 
-    // ~6일까지 폴더경로 날짜별 설정.
     // 나중에 CP 썸네일이미지 설정시 타입확인해서 저장해주게 수정할것
     public static String audioSave(String audioName, byte[] audio) {
 

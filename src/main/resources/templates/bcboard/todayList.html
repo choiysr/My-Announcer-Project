@@ -516,6 +516,7 @@
             </div>
          </div>
       </div>
+<<<<<<< HEAD
       <!-- TODAYLIST-AREA END -->
 <<<<<<< HEAD
 
@@ -568,6 +569,61 @@
             src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
       </audio>
    </div>
+=======
+      <<<<<<< HEAD <!-- TODAYLIST-AREA END -->
+         <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
+         <div class="hiddenAlarm">
+            <audio id="hiddenAlarm1" controls>
+               <source id="hiddenAlarmSourceLink1"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
+            </audio>
+            <audio id="hiddenAlarm2" controls>
+               <source id="hiddenAlarmSourceLink2"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm2.wav">
+            </audio>
+            <audio id="hiddenAlarm3" controls>
+               <source id="hiddenAlarmSourceLink3"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm3.wav">
+            </audio>
+            <audio id="hiddenAlarm4" controls>
+               <source id="hiddenAlarmSourceLink4"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm4.wav">
+            </audio>
+            <audio id="hiddenAlarm5" controls>
+               <source id="hiddenAlarmSourceLink5"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
+            </audio>
+         </div>
+         =======
+         <!-- TODAYLIST-AREA END -->
+
+         <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
+         <div class="hiddenAlarm">
+            <audio id="hiddenAlarm1" controls>
+               <source id="hiddenAlarmSourceLink1"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
+            </audio>
+            <audio id="hiddenAlarm2" controls>
+               <source id="hiddenAlarmSourceLink2"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm2.wav">
+            </audio>
+            <audio id="hiddenAlarm3" controls>
+               <source id="hiddenAlarmSourceLink3"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm3.wav">
+            </audio>
+            <audio id="hiddenAlarm4" controls>
+               <source id="hiddenAlarmSourceLink4"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm4.wav">
+            </audio>
+            <audio id="hiddenAlarm5" controls>
+               <source id="hiddenAlarmSourceLink5"
+                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
+            </audio>
+         </div>
+   </div>
+   <!-- TODAYLIST-AREA END -->
+   >>>>>>> 992a1881efe37674dc0f8023344033189af34110
+>>>>>>> asdasdasd
 
    <!-- Register Modal 소라 -->
    <!-- <div class="modal fade" id="bcRegisterModal" aria-hidden="true" tabindex="-1">
@@ -1224,6 +1280,21 @@
 
          })
 
+
+         $.ajax({
+            url: 'http://localhost:8080/rbcboard/register',
+            data: JSON.stringify(jsonData),
+            type: 'POST',
+            contentType: "application/json; charset=utf-8"
+         }); // end of ajax
+
+         loadpage(1, "title", "")
+
+         $("#searchbtn").on("click", function (e) {
+            e.preventDefault();
+            $("#category").val();
+            loadpage(1, $("#category").val(), $("#search").val())
+         })
 
 
       }); // end of ready function 

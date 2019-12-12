@@ -17,6 +17,10 @@ public interface BCBoardRepository extends JpaRepository<BCBoardDTO, Integer> {
 
     Page<BCBoardDTO> findByTitleLike(String title, Pageable page);
 
-    Page<BCBoardDTO> findByStartdateLike(String startdate, Pageable page);
+    Page<BCBoardDTO> findByStartdate(LocalDate startdate, Pageable page);
+
+    Page<BCBoardDTO> findByStartdateLike(LocalDate startdate, Pageable page);
+
+    //2019-12-00
     
 }

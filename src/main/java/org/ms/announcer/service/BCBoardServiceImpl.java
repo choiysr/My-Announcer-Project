@@ -42,9 +42,14 @@ public class BCBoardServiceImpl implements BCBoardService {
         // 카테고리구분
         if (category.equals("title")) {
             data = repos.findByTitleLike(search, page);
-        } else {
+        } else if(category.equals("year-month-day")){
             System.out.println("==============================꺄오======================================");
-            data = repos.findByStartdateLike(search, page);
+
+            String[] searchDateArr = search.replace("%", "").split("-");
+            LocalDate sdate = LocalDate.of(Integer.parseInt(searchDateArr[0]),Integer.parseInt(searchDateArr[1]),Integer.parseInt(searchDateArr[2]));
+            // LocalDate sdate = LocalDate.
+            data = repos.findByStartdate(sdate, page);
+        } else {
         }
         Map<String, Object> result = new HashMap<>();
         int now = data.getNumber();

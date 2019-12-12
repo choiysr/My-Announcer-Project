@@ -517,6 +517,7 @@
          </div>
       </div>
       <!-- TODAYLIST-AREA END -->
+<<<<<<< HEAD
 
       <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
       <div class="hiddenAlarm">
@@ -543,6 +544,124 @@
       </div>
    </div>
    <!-- TODAYLIST-AREA END -->
+=======
+   <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
+   <div class="hiddenAlarm">
+      <audio id="hiddenAlarm1" controls>
+         <source id="hiddenAlarmSourceLink1"
+            src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
+      </audio>
+      <audio id="hiddenAlarm2" controls>
+         <source id="hiddenAlarmSourceLink2"
+            src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm2.wav">
+      </audio>
+      <audio id="hiddenAlarm3" controls>
+         <source id="hiddenAlarmSourceLink3"
+            src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm3.wav">
+      </audio>
+      <audio id="hiddenAlarm4" controls>
+         <source id="hiddenAlarmSourceLink4"
+            src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm4.wav">
+      </audio>
+      <audio id="hiddenAlarm5" controls>
+         <source id="hiddenAlarmSourceLink5"
+            src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
+      </audio>
+   </div>
+
+   <!-- Register Modal 소라 -->
+   <!-- <div class="modal fade" id="bcRegisterModal" aria-hidden="true" tabindex="-1">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">방송 등록</h4>
+               </div>
+               <div class="modal-body">
+                  <input type="checkbox" class="urgentCheck">긴급공지<br>
+                  <table>
+                     <tr>
+                        <th><strong>제목</strong></th>
+                        <th><input class="title" type="text" id="title" placeholder="제목을 입력하세요"></th>
+                     </tr>
+                     <tr>
+                        <th>
+                           <strong>내용</strong>
+                        </th>
+                        <th>
+                           <textarea class="custom-textarea" id="content" placeholder="내용을 입력하세요"></textarea>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th><strong>음성설정</strong></th>
+                        <th>
+                           <select class="custom-select mb-15" id="voiceGender">
+                              <option value="woman">여성</option>
+                              <option value="man">남성</option>
+                           </select>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th><strong>알람음설정</strong></th>
+                        <th>
+                           <select class="custom-select mb-15" id="alarmBell">
+                              <option value="1">알람음1</option>
+                              <option value="2">알람음2</option>
+                              <option value="3">알람음3</option>
+                              <option value="4">알람음4</option>
+                              <option value="5">알람음5</option>
+                           </select>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th><strong>방송일자</strong></th>
+                        <th>
+                           <div class="ymd">
+                              <input type="date" id=ymdSet>
+                           </div>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th><strong>방송시간</strong></th>
+                        <th>
+                           <div class="time">
+                              <input type="time" id=timeSet>
+                           </div>
+                        </th>
+                     </tr>
+                     <tr>
+                        <div class="mt-20">
+                           <th></th>
+                           <th style="text-align: right">
+                    
+                              <button class="repeat">반복설정</button>
+                              <button class="preListen">미리듣기</button>
+                              <button class="submitBtn" disabled=true>등록</button></th>
+                        </div>
+                     </tr>
+                  </table>
+                  <div class="audioArea" style="display: none;">
+                     <audio id="player" controls>
+                        <source id="sourceLink" src="">
+                     </audio>
+                  </div>
+                  <div class="alarmAudioArea" style="display: none;">
+                     <audio id="alarmPlayer" controls>
+                        <source id="alarmSourceLink" src="">
+                     </audio>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+               </div>
+            </div>
+         </div>
+      </div> -->
+   <!-- end of modal -->
+>>>>>>> asdad
 
    <!-- end of Register Modal -->
 
@@ -1023,7 +1142,7 @@
                      gender: gender,
                      startdate: startdate,
                      starttime: starttime,
-                     audioVO: { alarmBells: alarmBell }
+                     audioVO: { alarmBell: alarmBell }
                   };
 
                   alarmObj.play();

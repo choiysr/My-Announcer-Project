@@ -73,7 +73,11 @@ public class BCBoardController {
     // 최종 저장
     @PostMapping(value = "/register")
     public void registerBC(@RequestBody BCBoardDTO dto) {
+        System.out.println("컨트롤러에서 dto잘 들어왔나 확인해 봅시다======");
         System.out.println(dto);
+        System.out.println(dto.getStartdate());
+        System.out.println(dto.getStarttime());
+
         ResponseEntity<byte[]> response = makeAudio(dto);
         String wholePath = FileUtil.audioSave(dto.getTitle(), response.getBody());
         String pathWithoutFname = wholePath.substring(0, wholePath.lastIndexOf("\\") + 1); // 파일명을 제외한 경로.뒤에 슬래시 포함
@@ -84,12 +88,12 @@ public class BCBoardController {
     }
 
     // get 방식으로 url dptj 원하는 페이지, 오늘 날짜를 받는다.
-    @GetMapping("/todayList/{Startdate}")
-    public ResponseEntity<Page<BCBoardDTO>> list(@PathVariable("Startdate") String Startdate) {
+    @GetMapping("/todayList/{startdate}")
+    public ResponseEntity<Page<BCBoardDTO>> list(@PathVariable("startdate") String startdate) {
         // 정렬하여 값 가져올 기준
         Pageable page = PageRequest.of(0, 300, Direction.ASC, "startdate", "starttime");
         // 문자열로 가저온 것을 split
-        String[] date = Startdate.split("-");
+        String[] date = startdate.split("-");
         // 값을 얻어온다.
         Page<BCBoardDTO> result = service.getTodayList(
                 LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), page);
@@ -100,17 +104,11 @@ public class BCBoardController {
     public ResponseEntity<Map<String, Object>> getTotalList(
             @PageableDefault(page = 0, direction = Direction.ASC, sort = { "startdate", "starttime" }) Pageable page,
             String category, String search) {
-
-                System.out.println("컨트롤러 호출 확인 ===============");
         Map<String, Object> result = service.getAllList(page, category, search);
- /*        for(int i = 0 ; i < result.size(); i++) {
-            System.out.println();
-        } */
-        System.out.println("컨트롤러 호출 확인 ==============2222=");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }   
 
-
+    
 
     ////////// API METHOD ////////////
 

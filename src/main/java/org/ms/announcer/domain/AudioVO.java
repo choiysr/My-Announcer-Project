@@ -15,7 +15,7 @@ public class AudioVO {
     private String audioPath;
     private String audioName;
     
-    private String alarmBells;
+    private String alarmBell;
     private String intro;
     private String end;
     

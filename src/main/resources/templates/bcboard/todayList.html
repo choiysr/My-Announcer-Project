@@ -1408,7 +1408,6 @@
                   success: function (result) {
                      $("#sourceLink").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
                      $("#player")[0].load();
-                     /*                      $("#sourceLink").attr("filename", result[0]); */
                      $("#alarmSourceLink").attr('src', "http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm" + alarmBell + ".wav");
                      $("#alarmPlayer")[0].load();
                      alarmObj.play();
@@ -1421,7 +1420,7 @@
 
             // 저장버튼 클릭 이벤트(선행조건:미리듣기)
             $(".submitBtn").on("click", function (e) {
-
+               e.preventDefault();
                setAllElement();
                var result;
 
@@ -1439,9 +1438,7 @@
                         gender: gender,
                         startdate: startdate,
                         starttime: starttime,
-                        audioVO: { alarmBells: alarmBell }
-                        // audioName: $("#sourceLink").attr("filename"),
-
+                        audioVO: { alarmBell: alarmBell }
                      };
 
                      alarmObj.play();
@@ -1457,20 +1454,26 @@
                   if (!result) {
                      return;
                   } else {
-                     startdate = $(".year option:selected").val() + "-" + $(".month option:selected").val() + "-" + $(".day option:selected").val();
-                     starttime = $(".hour option:selected").val() + ":" + $(".minute option:selected").val();
+                     var ymdSet = $("#ymdSet")[0];
+                     var timeSet = $("#timeSet")[0]
+                     startdate = ymdSet.value;
+                     console.log(startdate);
+                     console.log("startdate 위에확인");
+                     starttime = timeSet.value;
+                     console.log(starttime);
+                     console.log("starttime 위에확인");
                      jsonData = {
                         content: content,
                         title: title,
                         gender: gender,
                         startdate: startdate,
                         starttime: starttime,
-                        // audioName: $("#sourceLink").attr("filename"),
-                        alarmBell: alarmBell
+                        audioVO: { alarmBell: alarmBell }
                      };
                      location.reload();
                   }
                } // end of else(긴급방송이 아닌경우)
+
                $.ajax({
                   url: 'http://localhost:8080/rbcboard/register',
                   data: JSON.stringify(jsonData),
@@ -1478,7 +1481,6 @@
                   contentType: "application/json; charset=utf-8",
                }); // end of ajax
             }); // end of submitbutton event
-
       }); // end of ready function 
    </script>
 </body>

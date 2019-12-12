@@ -46,15 +46,16 @@ public class BCBoardController {
     @Setter(onMethod_ = { @Autowired })
     private BCBoardService service;
 
-    // ==================== Intro/ending 파일업로드 ===================
-    @GetMapping(value = "/fileUpload")
+    // ==================== Intro/ending 파일업로드 =================== 
+    @PostMapping(value = "/fileUpload") // 얘는 왜 get으로 안되는가? 
     public ResponseEntity<List<String>> fileUpload(MultipartFile additionalAudio) {
-        System.out.println("controller진입확인");
-        // 유효성검사는 view단에서 완료
         // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임. (prelisten수정 view and controller)
         List<String> list = new ArrayList<>();
+        System.out.println("name확인========================================================");
+        
+        String fileNameWithoutType = additionalAudio.getOriginalFilename().substring(0,additionalAudio.getOriginalFilename().lastIndexOf("."));
         try {
-            list.add(audioSave("tmp" + additionalAudio.getOriginalFilename(), additionalAudio.getBytes()).replace("\\", "/"));
+            list.add(audioSave("tmp" + fileNameWithoutType, additionalAudio.getBytes()).replace("\\", "-"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,11 +90,6 @@ public class BCBoardController {
     // 최종 저장
     @PostMapping(value = "/register")
     public void registerBC(@RequestBody BCBoardDTO dto) {
-        System.out.println("컨트롤러에서 dto잘 들어왔나 확인해 봅시다======");
-        System.out.println(dto);
-        System.out.println(dto.getStartdate());
-        System.out.println(dto.getStarttime());
-
         ResponseEntity<byte[]> response = makeAudio(dto);
         String wholePath = audioSave(dto.getTitle(), response.getBody());
         String pathWithoutFname = wholePath.substring(0, wholePath.lastIndexOf("\\") + 1); // 파일명을 제외한 경로.뒤에 슬래시 포함

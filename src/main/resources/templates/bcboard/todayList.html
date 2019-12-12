@@ -14,6 +14,7 @@
    <!-- Google Font -->
    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
    <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}">
    <link rel="stylesheet" th:href="@{~/css/animate.css}">
@@ -332,173 +333,6 @@
 
                      <!-- Tab panes -->
                      <div class="tab-content">
-                        <!-- shopping-cart start -->
-                        <!-- <div class="tab-pane" id="shopping-cart">
-                           <form action="#">
-                              <div class="shop-cart-table">
-                                 <div class="table-content table-responsive">
-                                    <table>
-                                       <thead>
-                                          <tr>
-                                             <th class="product-thumbnail">Product</th>
-                                             <th class="product-price">Price</th>
-                                             <th class="product-quantity">Quantity</th>
-                                             <th class="product-subtotal">Total</th>
-                                             <th class="product-remove">Remove</th>
-                                          </tr>
-                                       </thead>
-                                       <tbody>
-                                          <tr>
-                                             <td class="product-thumbnail  text-left">
-                                               
-                                                <div class="single-product">
-                                                   <div class="product-img">
-                                                      <a href="single-product.html"><img src="img/product/2.jpg"
-                                                            alt="" /></a>
-                                                   </div>
-                                                   <div class="product-info">
-                                                      <h4 class="post-title"><a class="text-light-black" href="#">dummy
-                                                            product name</a></h4>
-                                                      <p class="mb-0">Color : Black</p>
-                                                      <p class="mb-0">Size : SL</p>
-                                                   </div>
-                                                </div>
-                                               
-                                             </td>
-                                             <td class="product-price">$56.00</td>
-                                             <td class="product-quantity">
-                                                <div class="cart-plus-minus">
-                                                   <input type="text" value="02" name="qtybutton"
-                                                      class="cart-plus-minus-box">
-                                                </div>
-                                             </td>
-                                             <td class="product-subtotal">$112.00</td>
-                                             <td class="product-remove">
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <td class="product-thumbnail  text-left">
-                                                
-                                                <div class="single-product">
-                                                   <div class="product-img">
-                                                      <a href="single-product.html"><img src="img/product/12.jpg"
-                                                            alt="" /></a>
-                                                   </div>
-                                                   <div class="product-info">
-                                                      <h4 class="post-title"><a class="text-light-black" href="#">dummy
-                                                            product name</a></h4>
-                                                      <p class="mb-0">Color : Black</p>
-                                                      <p class="mb-0">Size : SL</p>
-                                                   </div>
-                                                </div>
-                                               
-                                             </td>
-                                             <td class="product-price">$56.00</td>
-                                             <td class="product-quantity">
-                                                <div class="cart-plus-minus">
-                                                   <input type="text" value="02" name="qtybutton"
-                                                      class="cart-plus-minus-box">
-                                                </div>
-                                             </td>
-                                             <td class="product-subtotal">$112.00</td>
-                                             <td class="product-remove">
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <td class="product-thumbnail  text-left">
-                                            
-                                                <div class="single-product">
-                                                   <div class="product-img">
-                                                      <a href="single-product.html"><img src="img/product/6.jpg"
-                                                            alt="" /></a>
-                                                   </div>
-                                                   <div class="product-info">
-                                                      <h4 class="post-title"><a class="text-light-black" href="#">dummy
-                                                            product name</a></h4>
-                                                      <p class="mb-0">Color : Black</p>
-                                                      <p class="mb-0">Size : SL</p>
-                                                   </div>
-                                                </div>
-                                              
-                                             </td>
-                                             <td class="product-price">$56.00</td>
-                                             <td class="product-quantity">
-                                                <div class="cart-plus-minus">
-                                                   <input type="text" value="02" name="qtybutton"
-                                                      class="cart-plus-minus-box">
-                                                </div>
-                                             </td>
-                                             <td class="product-subtotal">$112.00</td>
-                                             <td class="product-remove">
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                             </td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="customer-login mt-30">
-                                       <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
-                                       <p class="text-gray">Enter your coupon code if you have one!</p>
-                                       <input type="text" placeholder="Enter your code here.">
-                                       <button type="submit" data-text="apply coupon"
-                                          class="button-one submit-button mt-15">apply coupon</button>
-                                    </div>
-                                 </div>
-                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="customer-login payment-details mt-30">
-                                       <h4 class="title-1 title-border text-uppercase">payment details</h4>
-                                       <table>
-                                          <tbody>
-                                             <tr>
-                                                <td class="text-left">Cart Subtotal</td>
-                                                <td class="text-right">$155.00</td>
-                                             </tr>
-                                             <tr>
-                                                <td class="text-left">Cart Subtotal</td>
-                                                <td class="text-right">$15.00</td>
-                                             </tr>
-                                             <tr>
-                                                <td class="text-left">Vat</td>
-                                                <td class="text-right">$00.00</td>
-                                             </tr>
-                                             <tr>
-                                                <td class="text-left">Order Total</td>
-                                                <td class="text-right">$170.00</td>
-                                             </tr>
-                                          </tbody>
-                                       </table>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="col-md-12">
-                                    <div class="customer-login mt-30">
-                                       <h4 class="title-1 title-border text-uppercase">culculate shipping</h4>
-                                       <p class="text-gray">Enter your coupon code if you have one!</p>
-                                       <div class="row">
-                                          <div class="col-md-4 col-sm-4 col-xs-12">
-                                             <input type="text" placeholder="Country">
-                                          </div>
-                                          <div class="col-md-4 col-sm-4 col-xs-12">
-                                             <input type="text" placeholder="Region / State">
-                                          </div>
-                                          <div class="col-md-4 col-sm-4 col-xs-12">
-                                             <input type="text" placeholder="Post code">
-                                          </div>
-                                       </div>
-                                       <button type="submit" data-text="get a quote"
-                                          class="button-one submit-button mt-15">get a quote</button>
-                                    </div>
-                                 </div>
-                              </div>
-                           </form>
-                        </div> -->
-                        <!-- shopping-cart end -->
                         <!-- todayList start -->
                         <!-- 여기가 뿌리는 곳 입니다~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~오늘 방송 -->
                         <div class="tab-pane active" id="todayList">
@@ -507,91 +341,6 @@
                                  <div class="table-content table-responsive">
                                     <button id="bcRegister">등록하기</button>
                                     <table id="listtable">
-
-                                       <!--  
-                                       <tbody>
-                                          <tr>
-                                             <td class="product-thumbnail  text-left">
-                                          
-                                                <div class="single-product">
-                                                   <div class="product-img">
-                                                      <a href="single-product.html"><img src="img/product/2.jpg"
-                                                            alt="" /></a>
-                                                   </div>
-                                                   <div class="product-info">
-                                                      <h4 class="post-title"><a class="text-light-black" href="#">dummy
-                                                            product name</a></h4>
-                                                      <p class="mb-0">Color : Black</p>
-                                                      <p class="mb-0">Size : SL</p>
-                                                   </div>
-                                                </div>
-                                        
-                                             </td>
-                                             <td class="product-price">$56.00</td>
-                                             <td class="product-stock">in stock</td>
-                                             <td class="product-add-cart">
-                                                <a class="text-light-black" href="#"><i
-                                                      class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                             </td>
-                                             <td class="product-remove">
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <td class="product-thumbnail  text-left">
-                                          
-                                                <div class="single-product">
-                                                   <div class="product-img">
-                                                      <a href="single-product.html"><img src="img/product/12.jpg"
-                                                            alt="" /></a>
-                                                   </div>
-                                                   <div class="product-info">
-                                                      <h4 class="post-title"><a class="text-light-black" href="#">dummy
-                                                            product name</a></h4>
-                                                      <p class="mb-0">Color : Black</p>
-                                                      <p class="mb-0">Size : SL</p>
-                                                   </div>
-                                                </div>
-                                             
-                                             </td>
-                                             <td class="product-price">$56.00</td>
-                                             <td class="product-stock">in stock</td>
-                                             <td class="product-add-cart">
-                                                <a class="text-light-black" href="#"><i
-                                                      class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                             </td>
-                                             <td class="product-remove">
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <td class="product-thumbnail  text-left">
-                                           
-                                                <div class="single-product">
-                                                   <div class="product-img">
-                                                      <a href="single-product.html"><img src="img/product/6.jpg"
-                                                            alt="" /></a>
-                                                   </div>
-                                                   <div class="product-info">
-                                                      <h4 class="post-title"><a class="text-light-black" href="#">dummy
-                                                            product name</a></h4>
-                                                      <p class="mb-0">Color : Black</p>
-                                                      <p class="mb-0">Size : SL</p>
-                                                   </div>
-                                                </div>
-                                       
-                                             </td>
-                                             <td class="product-price">$56.00</td>
-                                             <td class="product-stock">in stock</td>
-                                             <td class="product-add-cart">
-                                                <a class="text-light-black" href="#"><i
-                                                      class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                             </td>
-                                             <td class="product-remove">
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                             </td>
-                                          </tr>
-                                       </tbody> -->
                                     </table>
                                  </div>
                               </div>
@@ -644,9 +393,11 @@
                                              <th class="formTitle"><strong>INTRO</strong></th>
                                              <th>
                                                 <input type="file" name="intro">
+                                                <audio id="introPlayer" controls style="display: none;">
+                                                   <source id="introLink" src="">
+                                                </audio>
                                              </th>
                                              <th class="uploadCancelBtn">
-
                                              </th>
                                           </tr>
                                           <tr>
@@ -656,9 +407,11 @@
                                              <th class="formTitle"><strong>ENDING</strong></th>
                                              <th>
                                                 <input type="file" name="ending">
+                                                <audio id="endingPlayer" controls style="display: none;">
+                                                   <source id="endingLink" src="">
+                                                </audio>
                                              </th>
                                              <th class="uploadCancelBtn">
-
                                              </th>
                                           </tr>
                                           <tr>
@@ -707,155 +460,9 @@
                                              <source id="alarmSourceLink" src="">
                                           </audio>
                                        </div>
-                                       <div class="adAudioArea" style="display: none;">
-                                          <audio id="adPlayer" controls>
-                                             <source id="adSourceLink" src="">
-                                          </audio>
-                                       </div>
                                     </div>
 
 
-                                    <!-- <input type="text" placeholder="Your name here...">
-                                          <input type="text" placeholder="Email address here...">
-                                          <input type="text" placeholder="Phone here...">
-                                          <input type="text" placeholder="Company neme here...">
-                                          <select class="custom-select mb-15">
-                                             <option>Contry</option>
-                                             <option>Bangladesh</option>
-                                             <option>United States</option>
-                                             <option>united Kingdom</option>
-                                             <option>Australia</option>
-                                             <option>Canada</option>
-                                          </select>
-                                          <select class="custom-select mb-15">
-                                             <option>State</option>
-                                             <option>Dhaka</option>
-                                             <option>New York</option>
-                                             <option>London</option>
-                                             <option>Melbourne</option>
-                                             <option>Ottawa</option>
-                                          </select>
-                                          <select class="custom-select mb-15">
-                                             <option>Town / City</option>
-                                             <option>Dhaka</option>
-                                             <option>New York</option>
-                                             <option>London</option>
-                                             <option>Melbourne</option>
-                                             <option>Ottawa</option>
-                                          </select>
-                                          <textarea class="custom-textarea"
-                                             placeholder="Your address here..."></textarea> -->
-                                    <!--    </div> -->
-                                    <!--  </div> -->
-                                    <!--                                     <div class="col-md-6 col-sm-6 col-xs-12 mt-xs-30">
-                                       <div class="billing-details pl-20">
-                                          <h4 class="title-1 title-border text-uppercase mb-30">ship to different
-                                             address</h4>
-                                          <input type="text" placeholder="Your name here...">
-                                          <input type="text" placeholder="Email address here...">
-                                          <input type="text" placeholder="Phone here...">
-                                          <input type="text" placeholder="Company neme here...">
-                                          <select class="custom-select mb-15">
-                                             <option>Contry</option>
-                                             <option>Bangladesh</option>
-                                             <option>United States</option>
-                                             <option>united Kingdom</option>
-                                             <option>Australia</option>
-                                             <option>Canada</option>
-                                          </select>
-                                          <select class="custom-select mb-15">
-                                             <option>State</option>
-                                             <option>Dhaka</option>
-                                             <option>New York</option>
-                                             <option>London</option>
-                                             <option>Melbourne</option>
-                                             <option>Ottawa</option>
-                                          </select>
-                                          <select class="custom-select mb-15">
-                                             <option>Town / City</option>
-                                             <option>Dhaka</option>
-                                             <option>New York</option>
-                                             <option>London</option>
-                                             <option>Melbourne</option>
-                                             <option>Ottawa</option>
-                                          </select>
-                                          <textarea class="custom-textarea"
-                                             placeholder="Your address here..."></textarea>
-                                       </div>
-                                    </div> -->
-                                    <!--  <div class="col-md-6 col-sm-6 col-xs-12">
-                                       <div class="our-order payment-details mt-60 pr-20">
-                                          <h4 class="title-1 title-border text-uppercase mb-30">our order</h4>
-                                          <table>
-                                             <thead>
-                                                <tr>
-                                                   <th><strong>Product</strong></th>
-                                                   <th class="text-right"><strong>Total</strong></th>
-                                                </tr>
-                                             </thead>
-                                             <tbody>
-                                                <tr>
-                                                   <td>Dummy Product Name x 2</td>
-                                                   <td class="text-right">$86.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Dummy Product Name x 1</td>
-                                                   <td class="text-right">$69.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Cart Subtotal</td>
-                                                   <td class="text-right">$155.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Shipping and Handing</td>
-                                                   <td class="text-right">$15.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Vat</td>
-                                                   <td class="text-right">$00.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Order Total</td>
-                                                   <td class="text-right">$170.00</td>
-                                                </tr>
-                                             </tbody>
-                                          </table>
-                                       </div>
-                                    </div> -->
-                                    <!-- payment-method -->
-                                    <!--                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                       <div class="payment-method mt-60  pl-20">
-                                          <h4 class="title-1 title-border text-uppercase mb-30">payment method</h4>
-                                          <div class="payment-accordion">
-                                  
-                                             <h3 class="payment-accordion-toggle active">Direct Bank Transfer</h3>
-                                             <div class="payment-content default">
-                                                <p>Make your payment directly into our bank account. Please use your
-                                                   Order ID as the payment reference. Your order won't be shipped until
-                                                   the funds have cleared in our account.</p>
-                                             </div>
-                                     
-                                             <h3 class="payment-accordion-toggle">Cheque Payment</h3>
-                                             <div class="payment-content">
-                                                <p>Please send your cheque to Store Name, Store Street, Store Town,
-                                                   Store State / County, Store Postcode.</p>
-                                             </div>
-                                       
-                                             <h3 class="payment-accordion-toggle">PayPal</h3>
-                                             <div class="payment-content">
-                                                <p>Pay via PayPal; you can pay with your credit card if you don�t have a
-                                                   PayPal account.</p>
-                                                <a href="#"><img src="img/payment/1.png" alt="" /></a>
-                                                <a href="#"><img src="img/payment/2.png" alt="" /></a>
-                                                <a href="#"><img src="img/payment/3.png" alt="" /></a>
-                                                <a href="#"><img src="img/payment/4.png" alt="" /></a>
-                                             </div>
-                                     
-                                             <button class="button-one submit-button mt-15" data-text="place order"
-                                                type="submit">place order</button>
-                                          </div>
-                                       </div>
-                                    </div> -->
                                  </div>
                               </div>
                            </form>
@@ -887,242 +494,38 @@
 
                      <!-- totalList end -->
 
-
-
-                     <!-- order-complete start -->
-                     <!-- <div class="tab-pane" id="order-complete">
-                           <form action="#">
-                              <div class="thank-recieve bg-white mb-30">
-                                 <p>Thank you. Your order has been received.</p>
-                              </div>
-                              <div class="order-info bg-white text-center clearfix mb-30">
-                                 <div class="single-order-info">
-                                    <h4 class="title-1 text-uppercase text-light-black mb-0">order no</h4>
-                                    <p class="text-uppercase text-light-black mb-0"><strong>m 2653257</strong></p>
-                                 </div>
-                                 <div class="single-order-info">
-                                    <h4 class="title-1 text-uppercase text-light-black mb-0">Date</h4>
-                                    <p class="text-uppercase text-light-black mb-0"><strong>june 15, 2016</strong></p>
-                                 </div>
-                                 <div class="single-order-info">
-                                    <h4 class="title-1 text-uppercase text-light-black mb-0">Total</h4>
-                                    <p class="text-uppercase text-light-black mb-0"><strong>$ 170.00</strong></p>
-                                 </div>
-                                 <div class="single-order-info">
-                                    <h4 class="title-1 text-uppercase text-light-black mb-0">payment method</h4>
-                                    <p class="text-uppercase text-light-black mb-0"><a href="#"><strong>check
-                                             payment</strong></a></p>
-                                 </div>
-                              </div>
-                              <div class="shop-cart-table check-out-wrap">
-                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-sm-12">
-                                       <div class="our-order payment-details pr-20">
-                                          <h4 class="title-1 title-border text-uppercase mb-30">our order</h4>
-                                          <table>
-                                             <thead>
-                                                <tr>
-                                                   <th><strong>Product</strong></th>
-                                                   <th class="text-right"><strong>Total</strong></th>
-                                                </tr>
-                                             </thead>
-                                             <tbody>
-                                                <tr>
-                                                   <td>Dummy Product Name x 2</td>
-                                                   <td class="text-right">$86.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Dummy Product Name x 1</td>
-                                                   <td class="text-right">$69.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Cart Subtotal</td>
-                                                   <td class="text-right">$155.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Shipping and Handing</td>
-                                                   <td class="text-right">$15.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Vat</td>
-                                                   <td class="text-right">$00.00</td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Order Total</td>
-                                                   <td class="text-right">$170.00</td>
-                                                </tr>
-                                             </tbody>
-                                          </table>
-                                       </div>
-                                    </div>
-                               
-                                    <div class="col-md-6 col-sm-6 col-sm-12 mt-xs-30">
-                                       <div class="payment-method  pl-20">
-                                          <h4 class="title-1 title-border text-uppercase mb-30">payment method</h4>
-                                          <div class="payment-accordion">
-                                         
-                                             <h3 class="payment-accordion-toggle active">Direct Bank Transfer</h3>
-                                             <div class="payment-content default">
-                                                <p>Make your payment directly into our bank account. Please use your
-                                                   Order ID as the payment reference. Your order won't be shipped until
-                                                   the funds have cleared in our account.</p>
-                                             </div>
-                                      
-                                           
-                                             <h3 class="payment-accordion-toggle">Cheque Payment</h3>
-                                             <div class="payment-content">
-                                                <p>Please send your cheque to Store Name, Store Street, Store Town,
-                                                   Store State / County, Store Postcode.</p>
-                                             </div>
-                                             
-                                             
-                                             <h3 class="payment-accordion-toggle">PayPal</h3>
-                                             <div class="payment-content">
-                                                <p>Pay via PayPal; you can pay with your credit card if you don�t have a
-                                                   PayPal account.</p>
-                                                <a href="#"><img src="img/payment/1.png" alt="" /></a>
-                                                <a href="#"><img src="img/payment/2.png" alt="" /></a>
-                                                <a href="#"><img src="img/payment/3.png" alt="" /></a>
-                                                <a href="#"><img src="img/payment/4.png" alt="" /></a>
-                                             </div>
-                                             
-                                             <button class="button-one submit-button mt-15" data-text="place order"
-                                                type="submit">place order</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </form>
-                        </div> -->
-                     <!-- order-complete end -->
                   </div>
                </div>
             </div>
          </div>
       </div>
-     <!-- TODAYLIST-AREA END -->
+      <!-- TODAYLIST-AREA END -->
 
-         <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
-         <div class="hiddenAlarm">
-            <audio id="hiddenAlarm1" controls>
-               <source id="hiddenAlarmSourceLink1"
-                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
-            </audio>
-            <audio id="hiddenAlarm2" controls>
-               <source id="hiddenAlarmSourceLink2"
-                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm2.wav">
-            </audio>
-            <audio id="hiddenAlarm3" controls>
-               <source id="hiddenAlarmSourceLink3"
-                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm3.wav">
-            </audio>
-            <audio id="hiddenAlarm4" controls>
-               <source id="hiddenAlarmSourceLink4"
-                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm4.wav">
-            </audio>
-            <audio id="hiddenAlarm5" controls>
-               <source id="hiddenAlarmSourceLink5"
-                  src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
-            </audio>
-         </div>
+      <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
+      <div class="hiddenAlarm">
+         <audio id="hiddenAlarm1" controls>
+            <source id="hiddenAlarmSourceLink1"
+               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
+         </audio>
+         <audio id="hiddenAlarm2" controls>
+            <source id="hiddenAlarmSourceLink2"
+               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm2.wav">
+         </audio>
+         <audio id="hiddenAlarm3" controls>
+            <source id="hiddenAlarmSourceLink3"
+               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm3.wav">
+         </audio>
+         <audio id="hiddenAlarm4" controls>
+            <source id="hiddenAlarmSourceLink4"
+               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm4.wav">
+         </audio>
+         <audio id="hiddenAlarm5" controls>
+            <source id="hiddenAlarmSourceLink5"
+               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
+         </audio>
+      </div>
    </div>
    <!-- TODAYLIST-AREA END -->
-
-   <!-- Register Modal 소라 -->
-   <!-- <div class="modal fade" id="bcRegisterModal" aria-hidden="true" tabindex="-1">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h4 class="modal-title">방송 등록</h4>
-               </div>
-               <div class="modal-body">
-                  <input type="checkbox" class="urgentCheck">긴급공지<br>
-                  <table>
-                     <tr>
-                        <th><strong>제목</strong></th>
-                        <th><input class="title" type="text" id="title" placeholder="제목을 입력하세요"></th>
-                     </tr>
-                     <tr>
-                        <th>
-                           <strong>내용</strong>
-                        </th>
-                        <th>
-                           <textarea class="custom-textarea" id="content" placeholder="내용을 입력하세요"></textarea>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th><strong>음성설정</strong></th>
-                        <th>
-                           <select class="custom-select mb-15" id="voiceGender">
-                              <option value="woman">여성</option>
-                              <option value="man">남성</option>
-                           </select>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th><strong>알람음설정</strong></th>
-                        <th>
-                           <select class="custom-select mb-15" id="alarmBell">
-                              <option value="1">알람음1</option>
-                              <option value="2">알람음2</option>
-                              <option value="3">알람음3</option>
-                              <option value="4">알람음4</option>
-                              <option value="5">알람음5</option>
-                           </select>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th><strong>방송일자</strong></th>
-                        <th>
-                           <div class="ymd">
-                              <input type="date" id=ymdSet>
-                           </div>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th>
-                        </th>
-                     </tr>
-                     <tr>
-                        <th><strong>방송시간</strong></th>
-                        <th>
-                           <div class="time">
-                              <input type="time" id=timeSet>
-                           </div>
-                        </th>
-                     </tr>
-                     <tr>
-                        <div class="mt-20">
-                           <th></th>
-                           <th style="text-align: right">
-                    
-                              <button class="repeat">반복설정</button>
-                              <button class="preListen">미리듣기</button>
-                              <button class="submitBtn" disabled=true>등록</button></th>
-                        </div>
-                     </tr>
-                  </table>
-                  <div class="audioArea" style="display: none;">
-                     <audio id="player" controls>
-                        <source id="sourceLink" src="">
-                     </audio>
-                  </div>
-                  <div class="alarmAudioArea" style="display: none;">
-                     <audio id="alarmPlayer" controls>
-                        <source id="alarmSourceLink" src="">
-                     </audio>
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-               </div>
-            </div>
-         </div>
-      </div> -->
-   <!-- end of modal -->
-
-   <!-- end of Register Modal -->
 
    <!-- FOOTER START -->
    <footer>
@@ -1472,16 +875,18 @@
 
 
          ///////////////////// modal event area ////////////////////
-         var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj;
+         var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
 
          // 미리듣기/등록하기 클릭시 dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
-         function setAllElement() {
+         function setAllElements() {
             title = $("#title").val();
             content = $("#content").val();
             gender = $("#voiceGender option:selected").val();
             alarmBell = $("#alarmBell option:selected").val();
             alarmObj = $("#alarmPlayer")[0];
             sourceObj = $("#player")[0];
+            introObj = $("#introPlayer")[0];
+            endingObj = $("#endingPlayer")[0];
          }
 
 
@@ -1495,45 +900,59 @@
 
          // 파일업로드 part 
          // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
-         $("input[type='file']").change(function (e) {
+         $("input[type='file']").change(function () {
             var formData = new FormData();
             var additionalAudio = $(this)[0].files;
-            console.log(additionalAudio);
+            var fileTagName = this.name;
             // 유효성 검사(파일크기, 파일형식)
-            if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) return false;
-            formData.append("uploadFile", additionalAudio[0]);
+            if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) {
+               $(this).val("");
+               return false;
+            }
+            formData.append("additionalAudio", additionalAudio[0]);
+            formData.append("forRegister",false);
             $.ajax({
                url: 'http://localhost:8080/rbcboard/fileUpload',
                processData: false,
                contentType: false,
                data: formData,
-               type: 'GET',
+               type: 'POST',
                dataType: 'json',
                success: function (result) {
-                  console.log("success됐나요??")
                   console.log(result);
-                  makeCancelBtn(result);
+                  console.log(additionalAudio[0].name);
+                  console.log(additionalAudio[0]);
+                  $("#" + fileTagName + "Link").attr('src', "http://localhost:8080/rbcboard/" + result[0])
+                  makeCancelBtn(fileTagName);
                }
             });
          }) // end of upload 
 
-         // 파일 유효성 검사 function (파일크기, 파일형식)
+         // 파일 유효성 검사 function (파일크기, 파일형식) == 
          function validateFile(fileName, fileSize) {
             var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
-            var maxSize = 5242880;
+            var maxSize = 10485760;
             if (fileSize > maxSize) {
                alert("업로드 가능한 파일 크기를 초과했습니다.")
                return false;
             };
             if (!regex.test(fileName)) {
-               alert("해당 종류의 파일은 업로드 할 수 없습니다.")
+               alert("해당 형식의 파일은 업로드 할 수 없습니다.")
                return false;
             };
+            return true;
          }
 
          // 파일 업로드되면 취소하는 버튼 만드는 function
-         function makeCancelBtn(result) {
-            console.log("make헤헤");
+         function makeCancelBtn(targetAudioTagName) {
+            var targetAudio = $("input[name='" + targetAudioTagName + "']");
+            var btnArea = targetAudio.parent().parent().find('.uploadCancelBtn');
+            $(btnArea)[0].innerHTML = "<i class='material-icons'>cancel</i>";
+         }
+
+         // 취소버튼 누르면 파일창 Reset시키는 function 
+         function resetFileArea() {
+            // 나중에해
          }
 
 
@@ -1541,12 +960,12 @@
          $(".preListen").on("click", function (e) {
             e.preventDefault();
             $(".submitBtn").prop("disabled", false);
-            setAllElement();
+            setAllElements();
             jsonData = {
                title: title,
                content: content,
                gender: gender,
-               alarmBell: alarmBell
+               // alarmBell: alarmBell 미리듣기에선 알람벨 안넣어도 되지않을까? - 그냥 화면에 있는거 재생시키면 됨  
             };
 
             $.ajax({
@@ -1556,22 +975,38 @@
                dataType: 'json',
                success: function (result) {
                   $("#sourceLink").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
-                  $("#player")[0].load();
                   // 나중에 alarm서버에 저장해서 local말고 서버폴더로 설정해줄것  
+                  // 화면에있는거 쓰자 => register모달에 있는 alarm area자체를 삭제해버리자! > 나중에 
                   $("#alarmSourceLink").attr('src', "http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm" + alarmBell + ".wav");
-                  $("#alarmPlayer")[0].load();
+                  sourceObj = $("#player")[0];
+                  alarmObj = $("#alarmPlayer")[0];
+                  introObj = $("#introPlayer")[0];
+                  endingObj = $("#endingPlayer")[0];
+
+                  // 코드정리 하자  > 나중에 
+                  alarmObj.load();
                   alarmObj.play();
                   alarmObj.addEventListener("ended", function (e) {
-                     sourceObj.play();
+                     introObj.load();
+                     introObj.play();
+                     introObj.addEventListener("ended", function (e) {
+                        sourceObj.load();
+                        sourceObj.play();
+                        sourceObj.addEventListener("ended", function (e) {
+                           endingObj.load();
+                           endingObj.play();
+                        });
+                     });
                   });
-               }
+
+               } // end of success function 
             }); // end of ajax
          }); //end of preListen button event
 
          // 저장버튼 클릭 이벤트(선행조건:미리듣기)
          $(".submitBtn").on("click", function (e) {
             e.preventDefault();
-            setAllElement();
+            setAllElements();
             var result;
 
             if ($(".urgentCheck").is(":checked")) {
@@ -1579,6 +1014,7 @@
                if (!result) {
                   return; // confirm창에서 취소버튼을 누른경우. 
                } else { // 긴급공지 
+                  // 메서드로 뺼 수 있나 고민해볼것
                   var uToday = new Date();
                   var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
                   var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));

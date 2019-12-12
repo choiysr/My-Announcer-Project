@@ -1,6 +1,7 @@
 package org.ms.announcer.service;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,13 +44,15 @@ public class BCBoardServiceImpl implements BCBoardService {
         if (category.equals("title")) {
             data = repos.findByTitleLike(search, page);
         } else if(category.equals("year-month-day")){
-            System.out.println("==============================꺄오======================================");
-
             String[] searchDateArr = search.replace("%", "").split("-");
             LocalDate sdate = LocalDate.of(Integer.parseInt(searchDateArr[0]),Integer.parseInt(searchDateArr[1]),Integer.parseInt(searchDateArr[2]));
-            // LocalDate sdate = LocalDate.
             data = repos.findByStartdate(sdate, page);
         } else {
+            String[] searchDateArr = search.replace("%", "").split("-");
+            LocalDate sdate = LocalDate.of(Integer.parseInt(searchDateArr[0]),Integer.parseInt(searchDateArr[1]),1);
+            YearMonth temp = YearMonth.of(sdate.getYear(), sdate.getMonth());
+            System.out.println("연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월");
+            data = repos.findByStartdateBetween(sdate, temp.atEndOfMonth(),page );
         }
         Map<String, Object> result = new HashMap<>();
         int now = data.getNumber();

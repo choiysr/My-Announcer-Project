@@ -27,12 +27,13 @@ public class BCBTests {
             dto.setContent("내용입니다"+i);
             // dto.setAudioName("audioName"+i);
             
-            // // LocalDate sdate = LocalDate.of(2019, (i%11==0 ? 1 : i%11), ((i*3)%30)==0? 1: i*3%30);
-            LocalDate sdate = LocalDate.of(2019,12,12);
+            LocalDate sdate = LocalDate.of(2019, (i%11==0 ? 1 : i%11), ((i*3)%30)==0? 1: i*3%30);
+            // LocalDate sdate = LocalDate.of(2019, 12, ((i*3)%30)==0? 1: i*3%30);
+            // LocalDate sdate = LocalDate.of(2019,12,12);
             dto.setStartdate(sdate);
             
-            LocalTime stime = LocalTime.of((i*3)%23 == 0 ? 1: (i*3)%23 , (i*7)%59 ==0  ? 1: (i*7)%59  );
-            // LocalTime stime = LocalTime.of(10 , (i)%59 == 0 ? 1: (i)%59  );
+            // LocalTime stime = LocalTime.of((i*3)%23 == 0 ? 1: (i*3)%23 , (i*7)%59 ==0  ? 1: (i*7)%59  );
+            LocalTime stime = LocalTime.of(14 , (i)%59 == 0 ? 1: (i)%59  );
             dto.setStarttime(stime);
             dto.setGender("woman");
             

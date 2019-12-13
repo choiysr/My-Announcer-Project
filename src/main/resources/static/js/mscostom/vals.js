@@ -8,10 +8,8 @@ var vals = (function () {
     let month = ((today.getMonth() + 1).toString().length == 1 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1));
     let hour = today.getHours().toString().length == 1 ? "0" + today.getHours() : today.getHours();
     let minute = today.getMinutes().toString().length == 1 ? "0" + today.getMinutes() : today.getMinutes();
-    let page = 1;
     let date = today.getFullYear() + "-" + month + "-" + day;
     let time = hour + ":" + minute  
-    
     
     
     

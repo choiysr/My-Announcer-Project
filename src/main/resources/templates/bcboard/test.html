@@ -1,0 +1,223 @@
+<div class="shopping-cart-area  pt-50 pb-60">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+             <div class="shopping-cart">
+                <!-- Nav tabs -->
+                <ul class="cart-page-menu row clearfix mb-30">
+                   <!--                         <li><a href="#shopping-cart" data-toggle="tab">shopping cart</a></li> -->
+                   <li class="active"><a href="#todayList" data-toggle="tab">오늘의 방송</a></li>
+                   <li><a href="#check-out" data-toggle="tab">방송등록</a></li>
+                   <li><a href="#totalList" data-toggle="tab">모든방송</a></li>
+                   <!--                         <li><a href="#order-complete" data-toggle="tab">order complete</a></li> -->
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                   <!-- todayList start -->
+                   <!-- 여기가 뿌리는 곳 입니다~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~오늘 방송 -->
+                   <div class="tab-pane active" id="todayList">
+                      <form action="#">
+                         <div class="shop-cart-table">
+                            <div class="table-content table-responsive">
+                               <table  id="listtable" class="table table-condensed">
+                               </table>
+                            </div>
+                         </div>
+                      </form>
+                   </div>
+                   <!-- TODAYLIST end -->
+                   <!-- check-out start -->
+                   <!-- 써먹을데가 있을 것 같다. 등록창으로 -->
+                   <div class="tab-pane" id="check-out">
+                      <!--아이디 변경해줘야함!!-->
+                      <form action="#">
+                         <div class="shop-cart-table check-out-wrap">
+                            <div class="row">
+                               <!-- <div class="col-md-6 col-sm-6 col-xs-12"> -->
+                               <!--         <div class="billing-details pr-20"> -->
+                               <h3 style="text-align: center; ">방송등록</h3>
+                               <br>
+                               <div id="registerFormDiv" style="text-align: right;">
+                                  <input type="checkbox" class="urgentCheck">긴급공지<br>
+                                  <table id="registerFormTable">
+                                     <tr>
+                                        <th class="formTitle" style="width: 300px;"><strong>제목</strong></th>
+                                        <th colspan="2"><input class="title" type="text" id="title"
+                                              placeholder="제목을 입력하세요">
+                                        </th>
+                                     </tr>
+                                     <tr>
+                                        <th class="formTitle"><strong>내용</strong></th>
+                                        <th colspan="2"><textarea class="custom-textarea" id="content"
+                                              placeholder="내용을 입력하세요"></textarea></th>
+                                     </tr>
+                                     <tr>
+                                        <th class="formTitle"><strong>음성설정</strong></th>
+                                        <th colspan="2"><select class="custom-select mb-15" id="voiceGender">
+                                              <option value="woman">여성</option>
+                                              <option value="man">남성</option>
+                                           </select></th>
+                                     </tr>
+                                     <tr>
+                                        <th class="formTitle"><strong>알람음</strong></th>
+                                        <th colspan="2"><select class="custom-select mb-15" id="alarmBell">
+                                              <option value="1">알람음1</option>
+                                              <option value="2">알람음2</option>
+                                              <option value="3">알람음3</option>
+                                              <option value="4">알람음4</option>
+                                              <option value="5">알람음5</option>
+                                           </select></th>
+                                     </tr>
+                                     <tr>
+                                        <th class="formTitle"><strong>INTRO</strong></th>
+                                        <th>
+                                           <input type="file" name="intro">
+                                           <audio id="introPlayer" controls style="display: none;">
+                                              <source id="introLink" src="">
+                                           </audio>
+                                        </th>
+                                        <th class="uploadCancelBtn">
+                                        </th>
+                                     </tr>
+                                     <tr>
+                                        <th>　</th>
+                                     </tr>
+                                     <tr>
+                                        <th class="formTitle"><strong>ENDING</strong></th>
+                                        <th>
+                                           <input type="file" name="ending">
+                                           <audio id="endingPlayer" controls style="display: none;">
+                                              <source id="endingLink" src="">
+                                           </audio>
+                                        </th>
+                                        <th class="uploadCancelBtn">
+                                        </th>
+                                     </tr>
+                                     <tr>
+                                        <th>　</th>
+                                     </tr>
+                                     <tr>
+                                        <th class="formTitle "><strong>방송일자</strong></th>
+                                        <th colspan="2">
+                                           <div class="ymd">
+                                              <input class="custom-select mb-15" type="date" id="ymdSet">
+                                           </div>
+                                        </th>
+                                     </tr>
+                                     <tr>
+                                        <th>　</th>
+                                     </tr>
+                                     <tr>
+                                        <th class="formTitle"><strong>방송시간</strong></th>
+                                        <th colspan="2">
+                                           <div class="time">
+                                              <input class="custom-select mb-15" type="time" id="timeSet">
+                                           </div>
+                                        </th>
+                                     </tr>
+                                     </tr>
+                                     <tr>
+                                        <th>　</th>
+                                     </tr>
+                                     <tr>
+                                        <div class="mt-20">
+                                           <th></th>
+                                           <th style="text-align: right" colspan="2">
+                                              <button class="repeat">반복설정</button>
+                                              <button class="preListen">미리듣기</button>
+                                              <button class="submitBtn" disabled=true>등록</button></th>
+                                        </div>
+                                     </tr>
+                                  </table>
+                                  <div class="audioArea" style="display: none;">
+                                     <audio id="player" controls>
+                                        <source id="sourceLink" src="">
+                                     </audio>
+                                  </div>
+                                  <div class="alarmAudioArea" style="display: none;">
+                                     <audio id="alarmPlayer" controls>
+                                        <source id="alarmSourceLink" src="">
+                                     </audio>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </form>
+                   </div>
+                   <!-- check-out end -->
+
+                   <!-- totalList start -->
+
+                   <div class="tab-pane" id="totalList">
+                      <!--아이디 변경해줘야함!!-->
+                      <form action="#">
+                         <div class="shop-cart-table check-out-wrap">
+                            <div class="table-content table-responsive">
+                               <table>
+                                  <tr>
+                                     <td>
+                                        <Select  class="custom-select mb-15" id="category" style=" min-width: 1.5cm ; max-width: 5cm ;  display: inline-block;">
+                                           <option selected value="title">제목</option>
+                                           <option value="year-month">연-월</option>
+                                           <option value="year-month-day">연-월-일</option>
+                                        </Select>
+                                     </td>
+                                     <td>
+                                        <div>
+                                           <input id="searchText" placeholder="제목 검색" type="text">
+
+                                           <input class="custom-select mb-15"  type="date" id="searchDate"
+                                              style="display: none;">
+
+                                           <input class="custom-select mb-15" type="month" id="searchMonth"
+                                              style="display: none;">
+                                        </div>
+                                     </td>
+                                     <td>
+                                        <button  data-text="검색" class="button-one font-16px" id="searchbtn">검색</button>
+                                     </td>
+
+                                  </tr>
+                               </table>
+
+                               <table class="table table-condensed"  id="totalListtable">
+                               </table>
+                            </div>
+                            <div id="pagediv" class="pagination text-center" style="font-size: 25px;">
+                            </div>
+                         </div>
+                      </form>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+ <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
+ <div class="hiddenAlarm">
+    <audio id="hiddenAlarm1" controls>
+       <source id="hiddenAlarmSourceLink1"
+          src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
+    </audio>
+    <audio id="hiddenAlarm2" controls>
+       <source id="hiddenAlarmSourceLink2"
+          src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm2.wav">
+    </audio>
+    <audio id="hiddenAlarm3" controls>
+       <source id="hiddenAlarmSourceLink3"
+          src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm3.wav">
+    </audio>
+    <audio id="hiddenAlarm4" controls>
+       <source id="hiddenAlarmSourceLink4"
+          src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm4.wav">
+    </audio>
+    <audio id="hiddenAlarm5" controls>
+       <source id="hiddenAlarmSourceLink5"
+          src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
+    </audio>
+ </div>
+</div>
+<!-- TODAYLIST-AREA END -->

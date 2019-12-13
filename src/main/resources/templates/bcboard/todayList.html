@@ -1,322 +1,9 @@
-<!doctype html>
-<html class="no-js" lang="en">
-
-<head>
-   <meta charset="utf-8">
-   <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <title>My Announcer</title>
-   <meta name="description" content="">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-   <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-   <!-- Place favicon.ico in the root directory -->
-
-   <!-- Google Font -->
-   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
-   <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-   <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}">
-   <link rel="stylesheet" th:href="@{~/css/animate.css}">
-   <link rel="stylesheet" th:href="@{~/css/jquery-ui.min.css}">
-   <link rel="stylesheet" th:href="@{~/css/meanmenu.min.css}">
-   <link rel="stylesheet" th:href="@{~/lib/css/nivo-slider.css}">
-   <link rel="stylesheet" th:href="@{~/lib/css/preview.css}">
-   <link rel="stylesheet" th:href="@{~/css/slick.css}">
-   <link rel="stylesheet" th:href="@{~/css/lightbox.min.css}">
-   <link rel="stylesheet" th:href="@{~/css/material-design-iconic-font.css}">
-   <link rel="stylesheet" th:href="@{~/css/default.css}">
-   <link rel="stylesheet" th:href="@{~/css/style.css}">
-   <link rel="stylesheet" th:href="@{~/css/shortcode.css}">
-   <link rel="stylesheet" th:href="@{~/css/responsive.css}">
-   <script th:src="@{~/js/vendor/modernizr-2.8.3.min.js}"></script>
-   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-   <!-- custom sytle for modal 모달창 custom 스타일임 -->
-   <style>
-      .modal-body table {
-         height: 120;
-         width: 100vw;
-      }
-
-      #registerFormTable th input {
-         width: 36vw;
-      }
-
-      .formTitle {
-         min-width: 2cm;
-         width: 80vw;
-         padding-right: 3%;
-         text-align: right;
-      }
-
-      #registerFormDiv {
-         padding-left: 25%;
-         padding-right: 25%;
-      }
-   </style>
-</head>
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/todayListLayout}">
 
 <body>
-   <!-- WRAPPER START -->
-   <div class="wrapper bg-dark-white">
 
-      <!-- HEADER-AREA START -->
-      <header id="sticky-menu" class="header header-2">
-         <div class="header-area">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-4 col-sm-offset-4 col-xs-7">
-                     <div class="logo text-center">
-                        <a href="index.html"><img src="img/logo/logo.png" alt="" /></a>
-                     </div>
-                  </div>
-                  <div class="col-sm-4 col-xs-5">
-                     <div class="mini-cart text-right">
-                        <ul>
-                           <li>
-                              <a class="cart-icon" href="#">
-                                 <i class="zmdi zmdi-shopping-cart"></i>
-                                 <span>3</span>
-                              </a>
-                              <div class="mini-cart-brief text-left">
-                                 <div class="cart-items">
-                                    <p class="mb-0">You have <span>03 items</span> in your shopping bag</p>
-                                 </div>
-                                 <div class="all-cart-product clearfix">
-                                    <div class="single-cart clearfix">
-                                       <div class="cart-photo">
-                                          <a href="#"><img src="img/cart/1.jpg" alt="" /></a>
-                                       </div>
-                                       <div class="cart-info">
-                                          <h5><a href="#">dummy product name</a></h5>
-                                          <p class="mb-0">Price : $ 100.00</p>
-                                          <p class="mb-0">Qty : 02 </p>
-                                          <span class="cart-delete"><a href="#"><i
-                                                   class="zmdi zmdi-close"></i></a></span>
-                                       </div>
-                                    </div>
-                                    <div class="single-cart clearfix">
-                                       <div class="cart-photo">
-                                          <a href="#"><img src="img/cart/2.jpg" alt="" /></a>
-                                       </div>
-                                       <div class="cart-info">
-                                          <h5><a href="#">dummy product name</a></h5>
-                                          <p class="mb-0">Price : $ 300.00</p>
-                                          <p class="mb-0">Qty : 01 </p>
-                                          <span class="cart-delete"><a href="#"><i
-                                                   class="zmdi zmdi-close"></i></a></span>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="cart-totals">
-                                    <h5 class="mb-0">Total <span class="floatright">$500.00</span></h5>
-                                 </div>
-                                 <div class="cart-bottom  clearfix">
-                                    <a href="#" class="button-one floatleft text-uppercase" data-text="View cart">View
-                                       cart</a>
-                                    <a href="#" class="button-one floatright text-uppercase" data-text="Check out">Check
-                                       out</a>
-                                 </div>
-                              </div>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!-- MAIN-MENU START -->
-         <div class="menu-toggle menu-toggle-2 hamburger hamburger--emphatic hidden-xs">
-            <div class="hamburger-box">
-               <div class="hamburger-inner"></div>
-            </div>
-         </div>
-         <div class="main-menu  hidden-xs">
-            <nav>
-               <ul>
-                  <li><a href="index.html">home</a>
-                     <div class="sub-menu menu-scroll">
-                        <ul>
-                           <li class="menu-title">Page's</li>
-                           <li><a href="index.html">Home Version 1</a></li>
-                           <li><a href="index-2.html">Home Version 2</a></li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li><a href="shop.html">products</a>
-                     <div class="mega-menu menu-scroll">
-                        <div class="table">
-                           <div class="table-cell">
-                              <div class="half-width">
-                                 <ul>
-                                    <li class="menu-title">best brands</li>
-                                    <li><a href="#">henning koppel</a></li>
-                                    <li><a href="#">jehs + Laub</a></li>
-                                    <li><a href="#">vicke lindstrand</a></li>
-                                    <li><a href="#">don chadwick</a></li>
-                                    <li><a href="#">akiko kuwahata</a></li>
-                                    <li><a href="#">barbro berlin</a></li>
-                                    <li><a href="#">cecilia hall</a></li>
-                                    <li><a href="#">don chadwick</a></li>
-                                 </ul>
-                              </div>
-                              <div class="half-width">
-                                 <ul>
-                                    <li class="menu-title">popular brands</li>
-                                    <li><a href="#">akiko kuwahata</a></li>
-                                    <li><a href="#">barbro berlin</a></li>
-                                    <li><a href="#">cecilia hall</a></li>
-                                    <li><a href="#">don chadwick</a></li>
-                                    <li><a href="#">henning koppel</a></li>
-                                    <li><a href="#">jehs + Laub</a></li>
-                                    <li><a href="#">vicke lindstrand</a></li>
-                                    <li><a href="#">don chadwick</a></li>
-                                 </ul>
-                              </div>
-                              <div class="full-width">
-                                 <div class="mega-menu-img">
-                                    <a href="single-product.html"><img src="img/megamenu/1.jpg" alt="" /></a>
-                                 </div>
-                              </div>
-                              <div class="pb-80"></div>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-                  <li><a href="#">Shortcodes</a>
-                     <div class="sub-menu menu-scroll">
-                        <ul>
-                           <li class="menu-title">Shortcodes</li>
-                           <li><a href="elements-accordions.html">Accordion</a></li>
-                           <li><a href="elements-toggles.html">Toggles</a></li>
-                           <li><a href="elements-tab.html">Tab</a></li>
-                           <li><a href="elements-product-tab.html">Product Tab</a></li>
-                           <li><a href="elements-product-tab-2.html">Product Tab 2</a></li>
-                           <li><a href="elements-carousel.html">product carousel</a></li>
-                           <li><a href="elements-carousel-2.html">product carousel 2</a></li>
-                           <li><a href="elements-featured-product.html">Featured Product</a></li>
-                           <li><a href="elements-featured-product-2.html">Featured Product 2</a></li>
-                           <li><a href="elements-button.html">Button</a></li>
-                           <li><a href="elements-table.html">Table</a></li>
-                           <li><a href="elements-progress-bars.html">Progress Bar</a></li>
-                           <li><a href="elements-blog.html">Blog</a></li>
-                           <li><a href="elements-blog-2.html">Blog - 2</a></li>
-                           <li><a href="elements-team.html">Team</a></li>
-                           <li><a href="elements-footer.html">Footer</a></li>
-                           <li><a href="elements-footer-2.html">Footer 2</a></li>
-                           <li><a href="elements-map.html">Map</a></li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li><a href="shop-sidebar.html">accesories</a></li>
-                  <li><a href="shop-list.html">lookbook</a></li>
-                  <li><a href="blog.html">blog</a></li>
-                  <li><a href="#">pages</a>
-                     <div class="sub-menu menu-scroll">
-                        <ul>
-                           <li class="menu-title">Page's</li>
-                           <li><a href="shop.html">Shop</a></li>
-                           <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                           <li><a href="shop-grid-right-sidebar.html">Shop Right Sidebar</a></li>
-                           <li><a href="shop-list.html">Shop List</a></li>
-                           <li><a href="shop-list-right-sidebar.html">Shop List right sidebar</a></li>
-                           <li><a href="single-product.html">Single Product</a></li>
-                           <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
-                           <li><a href="cart.html">Shopping Cart</a></li>
-                           <li><a href="todayList.html">todayList</a></li>
-                           <li><a href="checkout.html">Checkout</a></li>
-                           <li><a href="order.html">Order</a></li>
-                           <li><a href="login.html">login / Registration</a></li>
-                           <li><a href="my-account.html">My Account</a></li>
-                           <li><a href="404.html">404</a></li>
-                           <li><a href="blog.html">Blog</a></li>
-                           <li><a href="single-blog.html">Single Blog</a></li>
-                           <li><a href="single-blog-sidebar.html">Single Blog Sidebar</a></li>
-                           <li><a href="about.html">About Us</a></li>
-                           <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li><a href="about.html">about us</a></li>
-                  <li><a href="contact.html">contact</a></li>
-               </ul>
-            </nav>
-         </div>
-         <!-- MAIN-MENU END -->
-      </header>
-      <!-- HEADER-AREA END -->
-      <!-- Mobile-menu start -->
-      <div class="mobile-menu-area">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-                  <div class="mobile-menu">
-                     <nav id="dropdown">
-                        <ul>
-                           <li><a href="index.html">home</a>
-                              <ul>
-                                 <li><a href="index.html">Home Version 1</a></li>
-                                 <li><a href="index-2.html">Home Version 2</a></li>
-                              </ul>
-                           </li>
-                           <li><a href="shop.html">products</a></li>
-                           <li><a href="shop-sidebar.html">accesories</a></li>
-                           <li><a href="shop-list.html">lookbook</a></li>
-                           <li><a href="blog.html">blog</a></li>
-                           <li><a href="#">pages</a>
-                              <ul>
-                                 <li><a href="shop.html">Shop</a></li>
-                                 <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                                 <li><a href="shop-list.html">Shop List</a></li>
-                                 <li><a href="single-product.html">Single Product</a></li>
-                                 <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
-                                 <li><a href="cart.html">Shopping Cart</a></li>
-                                 <li><a href="todayList.html">todayList</a></li>
-                                 <li><a href="checkout.html">Checkout</a></li>
-                                 <li><a href="order.html">Order</a></li>
-                                 <li><a href="login.html">login / Registration</a></li>
-                                 <li><a href="my-account.html">My Account</a></li>
-                                 <li><a href="404.html">404</a></li>
-                                 <li><a href="blog.html">Blog</a></li>
-                                 <li><a href="single-blog.html">Single Blog</a></li>
-                                 <li><a href="single-blog-sidebar.html">Single Blog Sidebar</a></li>
-                                 <li><a href="about.html">About Us</a></li>
-                                 <li><a href="contact.html">Contact</a></li>
-                              </ul>
-                           </li>
-                           <li><a href="about.html">about us</a></li>
-                           <li><a href="contact.html">contact</a></li>
-                        </ul>
-                     </nav>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Mobile-menu end -->
-      <!-- HEADING-BANNER START -->
-      <div class="heading-banner-area overlay-bg">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="heading-banner">
-                     <div class="heading-banner-title">
-                        <h2>todayList</h2>
-                     </div>
-                     <div class="breadcumbs pb-15">
-                        <ul>
-                           <li><a href="index.html">Home</a></li>
-                           <li>todayList</li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- HEADING-BANNER END -->
-      <!-- TODAYLIST-AREA START -->
+   <div layout:fragment="custom-content">
       <div class="shopping-cart-area  pt-50 pb-60">
          <div class="container">
             <div class="row">
@@ -339,7 +26,7 @@
                            <form action="#">
                               <div class="shop-cart-table">
                                  <div class="table-content table-responsive">
-                                    <table  id="listtable" class="table table-condensed">
+                                    <table id="listtable" class="table table-condensed">
                                     </table>
                                  </div>
                               </div>
@@ -476,7 +163,8 @@
                                     <table>
                                        <tr>
                                           <td>
-                                             <Select  class="custom-select mb-15" id="category" style=" min-width: 1.5cm ; max-width: 5cm ;  display: inline-block;">
+                                             <Select class="custom-select mb-15" id="category"
+                                                style=" min-width: 1.5cm ; max-width: 5cm ;  display: inline-block;">
                                                 <option selected value="title">제목</option>
                                                 <option value="year-month">연-월</option>
                                                 <option value="year-month-day">연-월-일</option>
@@ -486,7 +174,7 @@
                                              <div>
                                                 <input id="searchText" placeholder="제목 검색" type="text">
 
-                                                <input class="custom-select mb-15"  type="date" id="searchDate"
+                                                <input class="custom-select mb-15" type="date" id="searchDate"
                                                    style="display: none;">
 
                                                 <input class="custom-select mb-15" type="month" id="searchMonth"
@@ -494,13 +182,14 @@
                                              </div>
                                           </td>
                                           <td>
-                                             <button  data-text="검색" class="button-one font-16px" id="searchbtn">검색</button>
+                                             <button data-text="검색" class="button-one font-16px"
+                                                id="searchbtn">검색</button>
                                           </td>
 
                                        </tr>
                                     </table>
 
-                                    <table class="table table-condensed"  id="totalListtable">
+                                    <table class="table table-condensed" id="totalListtable">
                                     </table>
                                  </div>
                                  <div id="pagediv" class="pagination text-center" style="font-size: 25px;">
@@ -537,607 +226,252 @@
             <source id="hiddenAlarmSourceLink5"
                src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
          </audio>
-      </div>
-   </div>
-   <!-- TODAYLIST-AREA END -->
-
-   <!-- FOOTER START -->
-   <footer>
-      <!-- Footer-area start -->
-      <div class="footer-area footer-3">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
-                  <div class="single-footer">
-                     <h3 class="footer-title  title-border">Contact Us</h3>
-                     <ul class="footer-contact">
-                        <li><span>Address :</span>28 Green Tower, Street Name,<br>New York City, USA</li>
-                        <li><span>Cell-Phone :</span>012345 - 123456789</li>
-                        <li><span>Email :</span>your-email@gmail.com</li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                  <div class="single-footer">
-                     <h3 class="footer-title  title-border">accounts</h3>
-                     <ul class="footer-menu">
-                        <li><a href="my-account.html"><i class="zmdi zmdi-dot-circle"></i>My Account</a></li>
-                        <li><a href="todayList.html"><i class="zmdi zmdi-dot-circle"></i>My todayList</a></li>
-                        <li><a href="cart.html"><i class="zmdi zmdi-dot-circle"></i>My Cart</a></li>
-                        <li><a href="login.html"><i class="zmdi zmdi-dot-circle"></i>Sign In</a></li>
-                        <li><a href="checkout.html"><i class="zmdi zmdi-dot-circle"></i>Check out</a></li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="col-lg-2 col-md-2 hidden-sm col-xs-12">
-                  <div class="single-footer">
-                     <h3 class="footer-title  title-border">shipping</h3>
-                     <ul class="footer-menu">
-                        <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>New Products</a></li>
-                        <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Top Sellers</a></li>
-                        <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Manufactirers</a></li>
-                        <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Suppliers</a></li>
-                        <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Specials</a></li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                  <div class="single-footer">
-                     <h3 class="footer-title  title-border">Email Newsletters</h3>
-                     <div class="footer-subscribe">
-                        <form action="#">
-                           <input type="text" name="email" placeholder="Email Address..." />
-                           <button class="button-one submit-btn-4" type="submit"
-                              data-text="Subscribe">Subscribe</button>
-                        </form>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Footer-area end -->
-      <!-- Copyright-area start -->
-      <div class="copyright-area copyright-2">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-6 col-xs-12">
-                  <div class="copyright">
-                     <p class="mb-0">&copy; <a href="http://themeforest.net/user/codecarnival#contact"
-                           target="_blank">CodeCarnival </a> 2016. All Rights Reserved.</p>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-xs-12">
-                  <div class="payment  text-right">
-                     <a href="#"><img src="img/payment/1.png" alt="" /></a>
-                     <a href="#"><img src="img/payment/2.png" alt="" /></a>
-                     <a href="#"><img src="img/payment/3.png" alt="" /></a>
-                     <a href="#"><img src="img/payment/4.png" alt="" /></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Copyright-area start -->
-   </footer>
-   <!-- FOOTER END -->
-   <!-- QUICKVIEW PRODUCT -->
-   <div id="quickview-wrapper">
-      <!-- Modal -->
-      <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-               </div>
-               <div class="modal-body">
-                  <div class="modal-product">
-                     <div class="product-images">
-                        <div class="main-image images">
-                           <img alt="#" src="img/product/quickview-photo.jpg" />
-                        </div>
-                     </div><!-- .product-images -->
-
-                     <div class="product-info">
-                        <h1>Aenean eu tristique</h1>
-                        <div class="price-box-3">
-                           <hr />
-                           <div class="s-price-box">
-                              <span class="new-price">$160.00</span>
-                              <span class="old-price">$190.00</span>
-                           </div>
-                           <hr />
-                        </div>
-                        <a href="shop.html" class="see-all">See all features</a>
-                        <div class="quick-add-to-cart">
-                           <form method="post" class="cart">
-                              <div class="numbers-row">
-                                 <input type="number" id="french-hens" value="3">
-                              </div>
-                              <button class="single_add_to_cart_button" type="submit">Add to cart</button>
-                           </form>
-                        </div>
-                        <div class="quick-desc">
-                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est
-                           tristique auctor. Donec non est at libero.
-                        </div>
-                        <div class="social-sharing">
-                           <div class="widget widget_socialsharing_widget">
-                              <h3 class="widget-title-modal">Share this product</h3>
-                              <ul class="social-icons">
-                                 <li><a target="_blank" title="Google +" href="#" class="gplus social-icon"><i
-                                          class="zmdi zmdi-google-plus"></i></a></li>
-                                 <li><a target="_blank" title="Twitter" href="#" class="twitter social-icon"><i
-                                          class="zmdi zmdi-twitter"></i></a></li>
-                                 <li><a target="_blank" title="Facebook" href="#" class="facebook social-icon"><i
-                                          class="zmdi zmdi-facebook"></i></a></li>
-                                 <li><a target="_blank" title="LinkedIn" href="#" class="linkedin social-icon"><i
-                                          class="zmdi zmdi-linkedin"></i></a></li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div><!-- .product-info -->
-                  </div><!-- .modal-product -->
-               </div><!-- .modal-body -->
-            </div><!-- .modal-content -->
-         </div><!-- .modal-dialog -->
-      </div>
-      <!-- END Modal -->
-   </div>
-   <!-- END QUICKVIEW PRODUCT -->
-
-   </div>
-   <!-- WRAPPER END -->
-   <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>
-   <script th:src="@{~/js/bootstrap.min.js}"></script>
-   <script th:src="@{~/js/jquery.meanmenu.js}"></script>
-   <script th:src="@{~/js/slick.min.js}"></script>
-   <script th:src="@{~/js/jquery.treeview.js}"></script>
-   <script th:src="@{~/js/lightbox.min.js}"></script>
-   <script th:src="@{~/js/jquery-ui.min.js}"></script>
-   <script th:src="@{~/lib/js/jquery.nivo.slider.js}"></script>
-   <script th:src="@{~/js/jquery.nicescroll.min.js}"></script>
-   <script th:src="@{~/js/countdon.min.js}"></script>
-   <script th:src="@{~/js/wow.min.js}"></script>
-   <script th:src="@{~/js/plugins.js}"></script>
-   <script th:src="@{~/js/main.js}"></script>
+         <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>s
+         <script th:src="@{~/js/mscostom/vals.js}"></script>
+         <script th:src="@{~/js/mscostom/totallist.js}"></script>
+         <script th:src="@{~/js/mscostom/todaylist.js}"></script>
+         <script>
 
 
-   <script>
-      var listdiv = $("#listtable");
-      var totalListtable = $("#totalListtable");
-      var pagediv = $("#pagediv")
+            //데이터 가져오는 코드
+            // var today = new Date();
+            // var day = ((today.getDate()).toString().length == 1 ? "0" + (today.getDate()) : (today.getDate()));
+            // var month = ((today.getMonth() + 1).toString().length == 1 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1));
+            // var hour = today.getHours().toString().length == 1 ? "0" + today.getHours() : today.getHours();
+            // var minute = today.getMinutes().toString().length == 1 ? "0" + today.getMinutes() : today.getMinutes();
+            // var page = 1;
+            // var date = today.getFullYear() + "-" + month + "-" + day;
+            // var time = hour + ":" + minute;
+
+           
+
+            /////////////////////////////////////////////////////////////// after loading dom 
+
+            $(document).ready(function () {
 
 
-      ///////totlaList code start
-      function appendTotalList(list) {
-         var str = ""
-         var th = '<th>날짜</th><th>시간</th><th>제목</th><th>수정/삭제</th><th>'
-         list.data.forEach(list => {
-            var time = list.starttime.substring(0, 5).replace(":", "")
-            str +=
-               '<tr>' +
-               '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.startdate + '</h4>' + '</td>' +
-               '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.starttime + '</h4>' + '</td>' +
-               '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.title +     '</h4>' + '</td>' +
-               '<td style="height:70px; padding-top: 25px;">' + '<p  style="padding-left: 5px; display: inline-block;s min-width: 0.8cm;" >수정/</P>' +
-               '<p  style=" padding-left: 5px; display: inline-block; min-width: 0.8cm;" >삭제</P>' +
-               '</td>' +
-               +'</tr>'
-         });
-
-         var page = ''
-         page += "<ul >"
-         page +=
-            '<li>' + '<a href="#" onclick="loadpage(' + 1 + ',\'' + list.category + '\',\'' + list.search + '\',event)" > <i class="fas fa-less-than"> </a></i></li>'
-         for (let start = list.start; start <= list.end; start++) {
-            if (start == list.now) {
-               page +=
-                  '<li class="active">' + '<a href="#" onclick="loadpage(' + start + ',\'' + list.category + '\',' + list.search + ' ,event)" >' + start + '</a></li>'
-            } else {
-               page +=
-                  '<li>' + '<a href="#" onclick="loadpage(' + start + ',\'' + list.category + '\',\'' + list.search + '\',event)">' + start + '</a></li>'
-            }
-         }
-         page +=
-            '<li>' + '<a href="#" onclick="loadpage(' + list.totalpages + ',\'' + list.category + '\',\'' + list.search + '\',event)" > <i class="fas fa-greater-than"> </a></i></li>'
-         page += "</ul>"
-         totalListtable.html(th)
-         totalListtable.append(str)
-         pagediv.html(page)
-      } // end of append totallist 
-
-      function loadpage(page, category, search, event) {
-
-         if (event) {
-            event.preventDefault();
-         }
-
-         //데이터 가져오는 코드
-         var today = new Date();
-         var day = ((today.getDate()).toString().length == 1 ? "0" + (today.getDate()) : (today.getDate()));
-         var month = ((today.getMonth() + 1).toString().length == 1 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1));
-         var hour = today.getHours().toString().length == 1 ? "0" + today.getHours() : today.getHours();
-         var minute = today.getMinutes().toString().length == 1 ? "0" + today.getMinutes() : today.getMinutes();
-         var date = today.getFullYear() + "-" + month + "-" + day;
-         var time = hour + ":" + minute;
-         var json = {
-            startdate: date,
-            starttime: time
-         }
-         console.log(category)
-         $.ajax({
-            url: "/rbcboard/totalList?page=" + page + "&category=" + category + "&search=" + search,
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-               appendTotalList(result)
-            }
-         }); // end of ajax 
-      } // end of loadpage function 
 
 
-      //반복코드
-      playAlert = setInterval(function () {
-         var hour = new Date().getHours() < 10 ? "0" + new Date().getHours() : new Date().getHours()
-         var Minutes = new Date().getMinutes() < 10 ? "0" + new Date().getMinutes() : new Date().getMinutes()
-         var seconds = new Date().getSeconds() < 10 ? "0" + new Date().getSeconds() : new Date().getSeconds();
-         var now = hour + "" + Minutes
-         var target = "#" + now;
-         if ($(target).length == 1) {
-            $(target)[0].play()
-         }
-      }, 60000);
 
-      function startPlay(target, event) {
-         event.preventDefault()
-         var targetAudio = $("#" + target);
-         var targetAlarm = "#hiddenAlarm" + targetAudio.data("alarmbell");
-         var targetAlaramObj = $(targetAlarm)[0]
-         var targetAudioObj = $(targetAudio)[0]
-         console.log($(this));
-         console.log(this)
-         $(this).attr('class', 'fa-stop-circle');
-         targetAlaramObj.play();
-         targetAlaramObj.addEventListener("ended", function (e) {
-            targetAudioObj.play();
-         });
-      }
+               ///////////////////// modal event area ////////////////////
+               var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
 
-      //리스트 뿌려주는 코드
-      function appendlist(list) {
-         var str = ""
-         var th = '<th>제목</th><th>재생시간</th><th>재생</th><th>&nbsp</th><th>수정/삭제</th><th>'
-         list.content.forEach(list => {
-            var time = list.starttime.substring(0, 5).replace(":", "")
-            var wholePathOfFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.audioName;
-            str +=
-               '<tr class="listTable">' +
-               '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<h4>' + list.title + '</h4>' + '</td>' +
-               '<td style="padding-top: 40px;"">' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
-               '<td  style="padding-top: 40px;">' + '<a href="#"><i class="far fa-play-circle playBtn" style="font-size:30px" data-time = "' + time + '"></a></i>' + '</td>' +
-               // 재생중에는 i class를 far fa-stop-circle로 바꿔줌 .
-               '<td class="test" style="padding-top: 25px; padding-left: 5px; padding-right: 5px; height:70px;">' +
-               '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
-               '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
-               // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
-               // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw; visibility:hidden;">'+
-               //'<p>시작시간 ' + list.starttime.substring(0, 5) + '</P>' +
-               '</td>' +
-               '<td style=" padding-top: 25px;"" >' + '<p  style="padding-left: 5px; min-width: 2cm;" >수정</p>' + 
-                  '<p  style="padding-left: 5px; min-width: 0.8cm;" >삭제</p>' + '</td>' +
-               '</tr>'
-         });
-         listdiv.html(th)
-         listdiv.append(str)
-         $(".playerInList")[0].load();
-      }
-
-      /////////////////////////////////////////////////////////////// after loading dom 
-
-      $(document).ready(function () {
-         listdiv.on('click', '.playBtn', function (e) {
-            e.preventDefault();
-            var btn = $(this)
-            var target = $(this).attr('data-time');
-            var audio = $("#audio" + target)
-            var img = btn.closest("tr").children(".test").children(".playImg")
-            var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
-
-            if (btn.attr('class') === 'far fa-stop-circle playBtn') {
-               targetAlarm[0].pause();
-               targetAlarm[0].currentTime = 0;
-               audio[0].pause();
-               audio[0].currentTime = 0;
-               btn.attr('class', 'far fa-play-circle playBtn')
-               img.attr("src", "../../img/mscustom/audioLine.jpg")
-               return;
-            }
-            console.log(audio.attr("data-alarmBell"));
-
-            img.attr("src", "../../img/mscustom/soundwave.gif")
-            btn.attr('class', 'far fa-stop-circle playBtn')
-            targetAlarm[0].play();
-
-            targetAlarm[0].addEventListener("ended", function (e) {
-               audio[0].play()
-               audio[0].addEventListener("ended", function (e) {
-                  btn.attr('class', 'far fa-play-circle playBtn')
-                  img.attr("src", "../../img/mscustom/audioLine.jpg")
-               });
-            });
-         }) // end of playBtn event in list 
-
-         //데이터 가져오는 코드
-         var today = new Date();
-         var day = ((today.getDate()).toString().length == 1 ? "0" + (today.getDate()) : (today.getDate()));
-         var month = ((today.getMonth() + 1).toString().length == 1 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1));
-         var hour = today.getHours().toString().length == 1 ? "0" + today.getHours() : today.getHours();
-         var minute = today.getMinutes().toString().length == 1 ? "0" + today.getMinutes() : today.getMinutes();
-         var page = 1;
-         var date = today.getFullYear() + "-" + month + "-" + day;
-         var time = hour + ":" + minute;
-
-         var json = {
-            startdate: date,
-         }
-
-         console.log(json)
-         $.ajax({
-            url: "/rbcboard/todayList/" + date,
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-               appendlist(result)
-            }
-         }); // end of todayList get ajax 
-
-
-         ///////////////////// modal event area ////////////////////
-         var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
-
-         // 미리듣기/등록하기 클릭시 dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
-         function setAllElements() {
-            title = $("#title").val();
-            content = $("#content").val();
-            gender = $("#voiceGender option:selected").val();
-            alarmBell = $("#alarmBell option:selected").val();
-            alarmObj = $("#alarmPlayer")[0];
-            sourceObj = $("#player")[0];
-            introObj = $("#introPlayer")[0];
-            endingObj = $("#endingPlayer")[0];
-         }
-
-
-         // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
-         $(".urgentCheck").change(function (e) {
-            var isChecked = $(".urgentCheck").is(":checked");
-            $("#ymdSet, #timeSet").prop("disabled", isChecked);
-            $(".repeat").prop("disabled", isChecked);
-         });
-
-
-         // 파일업로드 part 
-         // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
-         $("input[type='file']").change(function () {
-            var formData = new FormData();
-            var additionalAudio = $(this)[0].files;
-            var fileTagName = this.name;
-            // 유효성 검사(파일크기, 파일형식)
-            if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) {
-               $(this).val("");
-               return false;
-            }
-            formData.append("additionalAudio", additionalAudio[0]);
-            formData.append("forRegister",false);
-            $.ajax({
-               url: 'http://localhost:8080/rbcboard/fileUpload',
-               processData: false,
-               contentType: false,
-               data: formData,
-               type: 'POST',
-               dataType: 'json',
-               success: function (result) {
-                  console.log(result);
-                  console.log(additionalAudio[0].name);
-                  console.log(additionalAudio[0]);
-                  $("#" + fileTagName + "Link").attr('src', "http://localhost:8080/rbcboard/" + result[0])
-                  makeCancelBtn(fileTagName);
-               }
-            });
-         }) // end of upload 
-
-         // 파일 유효성 검사 function (파일크기, 파일형식) == 
-         function validateFile(fileName, fileSize) {
-            var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
-            var maxSize = 10485760;
-            if (fileSize > maxSize) {
-               alert("업로드 가능한 파일 크기를 초과했습니다.")
-               return false;
-            };
-            if (!regex.test(fileName)) {
-               alert("해당 형식의 파일은 업로드 할 수 없습니다.")
-               return false;
-            };
-            return true;
-         }
-
-         // 파일 업로드되면 취소하는 버튼 만드는 function
-         function makeCancelBtn(targetAudioTagName) {
-            var targetAudio = $("input[name='" + targetAudioTagName + "']");
-            var btnArea = targetAudio.parent().parent().find('.uploadCancelBtn');
-            $(btnArea)[0].innerHTML = "<i class='material-icons'>cancel</i>";
-         }
-
-         // 취소버튼 누르면 파일창 Reset시키는 function 
-         function resetFileArea() {
-            // 나중에해
-         }
-
-
-         // 미리듣기 버튼 이벤트
-         $(".preListen").on("click", function (e) {
-            e.preventDefault();
-            $(".submitBtn").prop("disabled", false);
-            setAllElements();
-            jsonData = {
-               title: title,
-               content: content,
-               gender: gender,
-               // alarmBell: alarmBell 미리듣기에선 알람벨 안넣어도 되지않을까? - 그냥 화면에 있는거 재생시키면 됨  
-            };
-
-            $.ajax({
-               url: 'http://localhost:8080/rbcboard/prelisten',
-               data: jsonData,
-               type: 'GET',
-               dataType: 'json',
-               success: function (result) {
-                  $("#sourceLink").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
-                  // 나중에 alarm서버에 저장해서 local말고 서버폴더로 설정해줄것  
-                  // 화면에있는거 쓰자 => register모달에 있는 alarm area자체를 삭제해버리자! > 나중에 
-                  $("#alarmSourceLink").attr('src', "http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm" + alarmBell + ".wav");
-                  sourceObj = $("#player")[0];
+               // 미리듣기/등록하기 클릭시 dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
+               function setAllElements() {
+                  title = $("#title").val();
+                  content = $("#content").val();
+                  gender = $("#voiceGender option:selected").val();
+                  alarmBell = $("#alarmBell option:selected").val();
                   alarmObj = $("#alarmPlayer")[0];
+                  sourceObj = $("#player")[0];
                   introObj = $("#introPlayer")[0];
                   endingObj = $("#endingPlayer")[0];
+               }
 
-                  // 코드정리 하자  > 나중에 
-                  alarmObj.load();
-                  alarmObj.play();
-                  alarmObj.addEventListener("ended", function (e) {
-                     introObj.load();
-                     introObj.play();
-                     introObj.addEventListener("ended", function (e) {
-                        sourceObj.load();
-                        sourceObj.play();
-                        sourceObj.addEventListener("ended", function (e) {
-                           endingObj.load();
-                           endingObj.play();
+
+               // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
+               $(".urgentCheck").change(function (e) {
+                  var isChecked = $(".urgentCheck").is(":checked");
+                  $("#ymdSet, #timeSet").prop("disabled", isChecked);
+                  $(".repeat").prop("disabled", isChecked);
+               });
+
+
+               // 파일업로드 part 
+               // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
+               $("input[type='file']").change(function () {
+                  var formData = new FormData();
+                  var additionalAudio = $(this)[0].files;
+                  var fileTagName = this.name;
+                  // 유효성 검사(파일크기, 파일형식)
+                  if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) {
+                     $(this).val("");
+                     return false;
+                  }
+                  formData.append("additionalAudio", additionalAudio[0]);
+                  formData.append("forRegister", false);
+                  $.ajax({
+                     url: 'http://localhost:8080/rbcboard/fileUpload',
+                     processData: false,
+                     contentType: false,
+                     data: formData,
+                     type: 'POST',
+                     dataType: 'json',
+                     success: function (result) {
+                        console.log(result);
+                        console.log(additionalAudio[0].name);
+                        console.log(additionalAudio[0]);
+                        $("#" + fileTagName + "Link").attr('src', "http://localhost:8080/rbcboard/" + result[0])
+                        makeCancelBtn(fileTagName);
+                     }
+                  });
+               }) // end of upload 
+
+               // 파일 유효성 검사 function (파일크기, 파일형식) == 
+               function validateFile(fileName, fileSize) {
+                  var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
+                  var maxSize = 10485760;
+                  if (fileSize > maxSize) {
+                     alert("업로드 가능한 파일 크기를 초과했습니다.")
+                     return false;
+                  };
+                  if (!regex.test(fileName)) {
+                     alert("해당 형식의 파일은 업로드 할 수 없습니다.")
+                     return false;
+                  };
+                  return true;
+               }
+
+               // 파일 업로드되면 취소하는 버튼 만드는 function
+               function makeCancelBtn(targetAudioTagName) {
+                  var targetAudio = $("input[name='" + targetAudioTagName + "']");
+                  var btnArea = targetAudio.parent().parent().find('.uploadCancelBtn');
+                  $(btnArea)[0].innerHTML = "<i class='material-icons'>cancel</i>";
+               }
+
+               // 취소버튼 누르면 파일창 Reset시키는 function 
+               function resetFileArea() {
+                  // 나중에해
+               }
+
+
+               // 미리듣기 버튼 이벤트
+               $(".preListen").on("click", function (e) {
+                  e.preventDefault();
+                  $(".submitBtn").prop("disabled", false);
+                  setAllElements();
+                  jsonData = {
+                     title: title,
+                     content: content,
+                     gender: gender,
+                     // alarmBell: alarmBell 미리듣기에선 알람벨 안넣어도 되지않을까? - 그냥 화면에 있는거 재생시키면 됨  
+                  };
+
+                  $.ajax({
+                     url: 'http://localhost:8080/rbcboard/prelisten',
+                     data: jsonData,
+                     type: 'GET',
+                     dataType: 'json',
+                     success: function (result) {
+                        $("#sourceLink").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
+                        // 나중에 alarm서버에 저장해서 local말고 서버폴더로 설정해줄것  
+                        // 화면에있는거 쓰자 => register모달에 있는 alarm area자체를 삭제해버리자! > 나중에 
+                        $("#alarmSourceLink").attr('src', "http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm" + alarmBell + ".wav");
+                        sourceObj = $("#player")[0];
+                        alarmObj = $("#alarmPlayer")[0];
+                        introObj = $("#introPlayer")[0];
+                        endingObj = $("#endingPlayer")[0];
+
+                        // 코드정리 하자  > 나중에 
+                        alarmObj.load();
+                        alarmObj.play();
+                        alarmObj.addEventListener("ended", function (e) {
+                           introObj.load();
+                           introObj.play();
+                           introObj.addEventListener("ended", function (e) {
+                              sourceObj.load();
+                              sourceObj.play();
+                              sourceObj.addEventListener("ended", function (e) {
+                                 endingObj.load();
+                                 endingObj.play();
+                              });
+                           });
                         });
-                     });
-                  });
 
-               } // end of success function 
-            }); // end of ajax
-         }); //end of preListen button event
+                     } // end of success function 
+                  }); // end of ajax
+               }); //end of preListen button event
 
-         // 저장버튼 클릭 이벤트(선행조건:미리듣기)
-         $(".submitBtn").on("click", function (e) {
-            e.preventDefault();
-            setAllElements();
-            var result;
+               // 저장버튼 클릭 이벤트(선행조건:미리듣기)
+               $(".submitBtn").on("click", function (e) {
+                  e.preventDefault();
+                  setAllElements();
+                  var result;
 
-            if ($(".urgentCheck").is(":checked")) {
-               result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
-               if (!result) {
-                  return; // confirm창에서 취소버튼을 누른경우. 
-               } else { // 긴급공지 
-                  // 메서드로 뺼 수 있나 고민해볼것
-                  var uToday = new Date();
-                  var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
-                  var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));
-                  var uHour = uToday.getHours().toString().length == 1 ? "0" + uToday.getHours() : uToday.getHours();
-                  var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
-                  var uDate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
-                  var uTime = uHour + ":" + uMinute;
-                  startdate = uDate;
-                  starttime = uTime;
+                  if ($(".urgentCheck").is(":checked")) {
+                     result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
+                     if (!result) {
+                        return; // confirm창에서 취소버튼을 누른경우. 
+                     } else { // 긴급공지 
+                        // 메서드로 뺼 수 있나 고민해볼것
+                        var uToday = new Date();
+                        var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
+                        var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));
+                        var uHour = uToday.getHours().toString().length == 1 ? "0" + uToday.getHours() : uToday.getHours();
+                        var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
+                        var uDate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
+                        var uTime = uHour + ":" + uMinute;
+                        startdate = uDate;
+                        starttime = uTime;
 
-                  jsonData = {
-                     content: content,
-                     title: title,
-                     gender: gender,
-                     startdate: startdate,
-                     starttime: starttime,
-                     audioVO: { alarmBell: alarmBell }
-                  };
+                        jsonData = {
+                           content: content,
+                           title: title,
+                           gender: gender,
+                           startdate: startdate,
+                           starttime: starttime,
+                           audioVO: { alarmBell: alarmBell }
+                        };
 
-                  alarmObj.play();
-                  alarmObj.addEventListener("ended", function (e) {
-                     sourceObj.play();
-                     sourceObj.addEventListener("ended", function (e) {
+                        alarmObj.play();
+                        alarmObj.addEventListener("ended", function (e) {
+                           sourceObj.play();
+                           sourceObj.addEventListener("ended", function (e) {
+                              location.reload();
+                           });
+                        });
+                     }
+                  } else { // 긴급방송이 아닌경우 
+                     result = confirm("방송을 등록하시겠습니까?");
+                     if (!result) {
+                        return;
+                     } else {
+                        var ymdSet = $("#ymdSet")[0];
+                        var timeSet = $("#timeSet")[0]
+                        startdate = ymdSet.value;
+                        console.log(startdate);
+                        console.log("startdate 위에확인");
+                        starttime = timeSet.value;
+                        console.log(starttime);
+                        console.log("starttime 위에확인");
+                        jsonData = {
+                           content: content,
+                           title: title,
+                           gender: gender,
+                           startdate: startdate,
+                           starttime: starttime,
+                           audioVO: { alarmBell: alarmBell }
+                        };
                         location.reload();
-                     });
-                  });
-               }
-            } else { // 긴급방송이 아닌경우 
-               result = confirm("방송을 등록하시겠습니까?");
-               if (!result) {
-                  return;
-               } else {
-                  var ymdSet = $("#ymdSet")[0];
-                  var timeSet = $("#timeSet")[0]
-                  startdate = ymdSet.value;
-                  console.log(startdate);
-                  console.log("startdate 위에확인");
-                  starttime = timeSet.value;
-                  console.log(starttime);
-                  console.log("starttime 위에확인");
-                  jsonData = {
-                     content: content,
-                     title: title,
-                     gender: gender,
-                     startdate: startdate,
-                     starttime: starttime,
-                     audioVO: { alarmBell: alarmBell }
-                  };
-                  location.reload();
-               }
-            } // end of else(긴급방송이 아닌경우)
-            $.ajax({
-               url: 'http://localhost:8080/rbcboard/register',
-               data: JSON.stringify(jsonData),
-               type: 'POST',
-               contentType: "application/json; charset=utf-8",
-            }); // end of ajax
-         }); // end of submitbutton event
-
-         //totalList start
-         loadpage(1, "title", "");
-
-         $("#searchbtn").on("click", function (e) {
-            e.preventDefault();
-            
-            var cate = $("#category").val();
-
-            if (cate == "title") {
-               loadpage(1, cate, $("#searchText").val())
-            } else if (cate == "year-month") {
-               loadpage(1, cate, $("#searchMonth").val())
-               alert($("#searchMonth").val())
-            } else if(cate == "year-month-day") {
-               loadpage(1, cate, $("#searchDate").val())
-            }
-
-         }); // searchBtn click event 
-
-         $("#category").on("change", function (params) {
-            $("#searchText").css("display", "none")
-            $("#searchDate").css("display", "none")
-            $("#searchMonth").css("display", "none")
-            var cate = $(this).val()
-
-
-            if (cate == "title") {
-               $("#searchText").css("display", "inline-block")
-            } else if (cate == "year-month") {
-               $("#searchMonth").css("display", "inline-block")
-            } else {
-               $("#searchDate").css("display", "inline-block")
-            }
-
-
-         })
-
-
-         loadpage(1, "title", "")
+                     }
+                  } // end of else(긴급방송이 아닌경우)
+                  $.ajax({
+                     url: 'http://localhost:8080/rbcboard/register',
+                     data: JSON.stringify(jsonData),
+                     type: 'POST',
+                     contentType: "application/json; charset=utf-8",
+                  }); // end of ajax
+               }); // end of submitbutton event
 
 
 
-      }); // end of ready function 
-   </script>
+
+               loadpage(1, "title", "")
+
+
+
+            }); // end of ready function 
+         </script>
+
+      </div>
+   </div>
+
+
+
+
+
+
+
 </body>
 
 </html>

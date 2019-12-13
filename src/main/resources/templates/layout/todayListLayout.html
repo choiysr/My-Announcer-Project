@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
    <meta charset="utf-8">
    <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <title>Wishlist || Hurst</title>
+   <title>My Announcer</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,6 +14,7 @@
    <!-- Google Font -->
    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
    <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}">
    <link rel="stylesheet" th:href="@{~/css/animate.css}">
@@ -29,7 +30,31 @@
    <link rel="stylesheet" th:href="@{~/css/shortcode.css}">
    <link rel="stylesheet" th:href="@{~/css/responsive.css}">
    <script th:src="@{~/js/vendor/modernizr-2.8.3.min.js}"></script>
+   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
+   <!-- custom sytle for modal 모달창 custom 스타일임 -->
+   <style>
+      .modal-body table {
+         height: 120;
+         width: 100vw;
+      }
+
+      #registerFormTable th input {
+         width: 36vw;
+      }
+
+      .formTitle {
+         min-width: 2cm;
+         width: 80vw;
+         padding-right: 3%;
+         text-align: right;
+      }
+
+      #registerFormDiv {
+         padding-left: 25%;
+         padding-right: 25%;
+      }
+   </style>
 </head>
 
 <body>
@@ -199,7 +224,7 @@
                            <li><a href="single-product.html">Single Product</a></li>
                            <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
                            <li><a href="cart.html">Shopping Cart</a></li>
-                           <li><a href="wishlist.html">Wishlist</a></li>
+                           <li><a href="todayList.html">todayList</a></li>
                            <li><a href="checkout.html">Checkout</a></li>
                            <li><a href="order.html">Order</a></li>
                            <li><a href="login.html">login / Registration</a></li>
@@ -247,7 +272,7 @@
                                  <li><a href="single-product.html">Single Product</a></li>
                                  <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
                                  <li><a href="cart.html">Shopping Cart</a></li>
-                                 <li><a href="wishlist.html">Wishlist</a></li>
+                                 <li><a href="todayList.html">todayList</a></li>
                                  <li><a href="checkout.html">Checkout</a></li>
                                  <li><a href="order.html">Order</a></li>
                                  <li><a href="login.html">login / Registration</a></li>
@@ -277,12 +302,12 @@
                <div class="col-md-12">
                   <div class="heading-banner">
                      <div class="heading-banner-title">
-                        <h2>Wishlist</h2>
+                        <h2>todayList</h2>
                      </div>
                      <div class="breadcumbs pb-15">
                         <ul>
                            <li><a href="index.html">Home</a></li>
-                           <li>Wishlist</li>
+                           <li>todayList</li>
                         </ul>
                      </div>
                   </div>
@@ -291,9 +316,11 @@
          </div>
       </div>
       <!-- HEADING-BANNER END -->
-      <!-- WISHLIST-AREA START -->
-      ㅈ
-      <!-- WISHLIST-AREA END -->
+      <!-- TODAYLIST-AREA START -->
+      <section layout:fragment="custom-content">
+         <p>Your page content goes here</p>
+      </section>
+
       <!-- FOOTER START -->
       <footer>
          <!-- Footer-area start -->
@@ -315,7 +342,7 @@
                         <h3 class="footer-title  title-border">accounts</h3>
                         <ul class="footer-menu">
                            <li><a href="my-account.html"><i class="zmdi zmdi-dot-circle"></i>My Account</a></li>
-                           <li><a href="wishlist.html"><i class="zmdi zmdi-dot-circle"></i>My Wishlist</a></li>
+                           <li><a href="todayList.html"><i class="zmdi zmdi-dot-circle"></i>My todayList</a></li>
                            <li><a href="cart.html"><i class="zmdi zmdi-dot-circle"></i>My Cart</a></li>
                            <li><a href="login.html"><i class="zmdi zmdi-dot-circle"></i>Sign In</a></li>
                            <li><a href="checkout.html"><i class="zmdi zmdi-dot-circle"></i>Check out</a></li>
@@ -455,100 +482,6 @@
    <script th:src="@{~/js/wow.min.js}"></script>
    <script th:src="@{~/js/plugins.js}"></script>
    <script th:src="@{~/js/main.js}"></script>
-   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-
-   <script>
-      var listdiv = $("#listtable");
-      var pagediv = $("#pagediv")
-      //반복코드
-
-      function loadpage(page, category, search, event) {
-
-         console.log("1---------" + category);
-
-         if (event) {
-            event.preventDefault();
-         }
-
-         //데이터 가져오는 코드
-         var today = new Date();
-         var day = ((today.getDate()).toString().length == 1 ? "0" + (today.getDate()) : (today.getDate()));
-         var month = ((today.getMonth() + 1).toString().length == 1 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1));
-         var hour = today.getHours().toString().length == 1 ? "0" + today.getHours() : today.getHours();
-         var minute = today.getMinutes().toString().length == 1 ? "0" + today.getMinutes() : today.getMinutes();
-         var date = today.getFullYear() + "-" + month + "-" + day;
-         var time = hour + ":" + minute;
-
-         var json = {
-            startdate: date,
-            starttime: time
-         }
-
-         console.log(category)
-         $.ajax({
-            url: "/rbcboard/totalList?page=" + page + "&category=" + category + "&search=" + search,
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-
-               appendlist(result)
-
-            }
-         })
-
-
-      }
-
-      function appendlist(list) {
-         var str = ""
-         list.data.forEach(list => {
-            var time = list.starttime.substring(0, 5).replace(":", "")
-            //var wholePathOfFile = list.audioPath.replace(/\\/gi, "-") + list.audioName;
-            str +=
-               '<tr>' +
-               '<td style="height:70px;" >' + '<h3>' + list.startdate + '</h3>' + '</td>' +
-               '<td style="height:70px;" >' + '<h3>' + list.title + '</h3>' + '</td>' +
-               '<td>' + '<p  style="padding-left: 5px; min-width: 0.8cm;" >수정</P>' + '</td>' +
-               '<td>' + '<p  style=" padding-left: 5px; min-width: 0.8cm;" >삭제</P>' + '</td>' +
-               +'</tr>'
-         });
-
-         var page = ''
-         page += "<ul >"
-         page +=
-            '<li>' + '<a href="#" onclick="loadpage(' + 1 + ',\'' + list.category + '\',\'' + list.search + '\',event)" > <i class="fas fa-less-than"> </a></i></li>'
-         for (let start = list.start; start <= list.end; start++) {
-            if (start == list.now) {
-               page +=
-                  '<li class="active">' + '<a href="#" onclick="loadpage(' + start + ',\'' + list.category + '\',' + list.search + ' ,event)" >' + start + '</a></li>'
-            } else {
-               page +=
-                  '<li>' + '<a href="#" onclick="loadpage(' + start + ',\'' + list.category + '\',\'' + list.search + '\',event)">' + start + '</a></li>'
-            }
-         }
-         page +=
-            '<li>' + '<a href="#" onclick="loadpage(' + list.totalpages + ',\'' + list.category + '\',\'' + list.search + '\',event)" > <i class="fas fa-greater-than"> </a></i></li>'
-         page += "</ul>"
-         listdiv.html(str)
-         pagediv.html(page)
-         $(".player")[0].load();
-      }
-
-      $(document).ready(function () {
-
-         loadpage(1, "title", "")
-
-         $("#searchbtn").on("click", function (e) {
-            e.preventDefault();
-            $("#category").val();
-            loadpage(1, $("#category").val(), $("#search").val())
-         })
-
-      }
-
-      )
-   </script>
 </body>
 
 </html>

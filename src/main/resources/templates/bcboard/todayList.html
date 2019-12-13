@@ -339,7 +339,7 @@
                            <form action="#">
                               <div class="shop-cart-table">
                                  <div class="table-content table-responsive">
-                                    <table  id="listtable" class="table table-condensed">
+                                    <table id="listtable" class="table table-condensed">
                                     </table>
                                  </div>
                               </div>
@@ -469,14 +469,14 @@
                         <!-- totalList start -->
 
                         <div class="tab-pane" id="totalList">
-                           <!--아이디 변경해줘야함!!-->
                            <form action="#">
                               <div class="shop-cart-table check-out-wrap">
                                  <div class="table-content table-responsive">
                                     <table>
                                        <tr>
                                           <td>
-                                             <Select  class="custom-select mb-15" id="category" style=" min-width: 1.5cm ; max-width: 5cm ;  display: inline-block;">
+                                             <Select class="custom-select mb-15" id="category"
+                                                style=" min-width: 1.5cm ; max-width: 5cm ;  display: inline-block;">
                                                 <option selected value="title">제목</option>
                                                 <option value="year-month">연-월</option>
                                                 <option value="year-month-day">연-월-일</option>
@@ -486,7 +486,7 @@
                                              <div>
                                                 <input id="searchText" placeholder="제목 검색" type="text">
 
-                                                <input class="custom-select mb-15"  type="date" id="searchDate"
+                                                <input class="custom-select mb-15" type="date" id="searchDate"
                                                    style="display: none;">
 
                                                 <input class="custom-select mb-15" type="month" id="searchMonth"
@@ -494,13 +494,14 @@
                                              </div>
                                           </td>
                                           <td>
-                                             <button  data-text="검색" class="button-one font-16px" id="searchbtn">검색</button>
+                                             <button data-text="검색" class="button-one font-16px"
+                                                id="searchbtn">검색</button>
                                           </td>
 
                                        </tr>
                                     </table>
 
-                                    <table class="table table-condensed"  id="totalListtable">
+                                    <table class="table table-condensed" id="totalListtable">
                                     </table>
                                  </div>
                                  <div id="pagediv" class="pagination text-center" style="font-size: 25px;">
@@ -720,7 +721,7 @@
                '<tr>' +
                '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.startdate + '</h4>' + '</td>' +
                '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.starttime + '</h4>' + '</td>' +
-               '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.title +     '</h4>' + '</td>' +
+               '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.title + '</h4>' + '</td>' +
                '<td style="height:70px; padding-top: 25px;">' + '<p  style="padding-left: 5px; display: inline-block;s min-width: 0.8cm;" >수정/</P>' +
                '<p  style=" padding-left: 5px; display: inline-block; min-width: 0.8cm;" >삭제</P>' +
                '</td>' +
@@ -821,12 +822,9 @@
                '<td class="test" style="padding-top: 25px; padding-left: 5px; padding-right: 5px; height:70px;">' +
                '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '" source id="sourcelink" src="http://localhost:8080/rbcboard/' + wholePathOfFile + '"> </audio>' +
                '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
-               // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">' +
-               // '<img src="../../img/mscustom/soundwave.gif" alt="" style=" width: 100vw; min-width: 1cm; height: 4vw; visibility:hidden;">'+
-               //'<p>시작시간 ' + list.starttime.substring(0, 5) + '</P>' +
                '</td>' +
-               '<td style=" padding-top: 25px;"" >' + '<p  style="padding-left: 5px; min-width: 2cm;" >수정</p>' + 
-                  '<p  style="padding-left: 5px; min-width: 0.8cm;" >삭제</p>' + '</td>' +
+               '<td style=" padding-top: 25px;"" >' + '<p  style="padding-left: 5px; min-width: 2cm;" >수정</p>' +
+               '<p  style="padding-left: 5px; min-width: 0.8cm;" >삭제</p>' + '</td>' +
                '</tr>'
          });
          listdiv.html(th)
@@ -924,13 +922,12 @@
             var formData = new FormData();
             var additionalAudio = $(this)[0].files;
             var fileTagName = this.name;
-            // 유효성 검사(파일크기, 파일형식)
+            // 유효성 검사(파일크기, 파일형식) 어차피 파일 1개니깐 
             if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) {
                $(this).val("");
                return false;
             }
             formData.append("additionalAudio", additionalAudio[0]);
-            formData.append("forRegister",false);
             $.ajax({
                url: 'http://localhost:8080/rbcboard/fileUpload',
                processData: false,
@@ -939,9 +936,8 @@
                type: 'POST',
                dataType: 'json',
                success: function (result) {
-                  console.log(result);
-                  console.log(additionalAudio[0].name);
-                  console.log(additionalAudio[0]);
+                  console.log("result확인");
+                  console.log(result[0]);
                   $("#" + fileTagName + "Link").attr('src', "http://localhost:8080/rbcboard/" + result[0])
                   makeCancelBtn(fileTagName);
                }
@@ -974,6 +970,35 @@
          function resetFileArea() {
             // 나중에해
          }
+
+
+         // 등록버튼클릭시 인트로와/엔딩오디오가 업로드 되어있는지 확인 및 controller로 데이터날린 후 저장하고 
+         // uuid를 포함한 파일명을 return하는 함수
+
+         function checkadditionalAudioExist(object) {
+            console.log("check메서드 진입_시점 체크")
+            var formData = new FormData();
+            var wholeFileName = "";
+            formData.append("additionalAudio", object[0]);
+            console.log("check메서드 진입_시점 체크2")
+            $.ajax({
+               url: 'http://localhost:8080/rbcboard/registerFiles',
+               processData: false,
+               contentType: false,
+               async: false,
+               data: formData,
+               type: 'POST',
+               dataType: 'json',
+               success: function (result) {
+                  wholeFileName = result[0].substring(result[0].lastIndexOf("*") + 1, result[0].length);
+                  console.log("도대체왜???")
+                  console.log("uuid+파일명+확장자")
+                  console.log(wholeFileName);
+               }
+            });
+            return wholeFileName;
+         } // end of checkadditionalAudioExist function 
+
 
 
          // 미리듣기 버튼 이벤트
@@ -1018,7 +1043,6 @@
                         });
                      });
                   });
-
                } // end of success function 
             }); // end of ajax
          }); //end of preListen button event
@@ -1045,20 +1069,56 @@
                   startdate = uDate;
                   starttime = uTime;
 
+                  var intro = "";
+                  var ending = "";
+
+                  // if intro exists
+                  if ($("#introLink").attr('src') !== "") {
+                     intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
+                  } 
+
+                  // if ending exists
+                  if ($("#endingLink").attr('src') !== "") {
+                     ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
+                  } 
+
+                  // return으로 파일명(with UUID)받아서 jsonData로는 only 파일명만 세팅해주기 
+
                   jsonData = {
                      content: content,
                      title: title,
                      gender: gender,
                      startdate: startdate,
                      starttime: starttime,
-                     audioVO: { alarmBell: alarmBell }
+                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
                   };
+
+                  sourceObj = $("#player")[0];
+                  alarmObj = $("#alarmPlayer")[0];
+                  introObj = $("#introPlayer")[0];
+                  endingObj = $("#endingPlayer")[0];
+
+                  // 코드정리 하자  > 나중에 
+                  alarmObj.load();
+                  introObj.load();
+                  sourceObj.load();
+                  endingObj.load();
 
                   alarmObj.play();
                   alarmObj.addEventListener("ended", function (e) {
-                     sourceObj.play();
-                     sourceObj.addEventListener("ended", function (e) {
-                        location.reload();
+                     console.log("알람끝")
+                     introObj.play();
+                     introObj.addEventListener("ended", function (e) {
+                        console.log("인트로끝")
+                        sourceObj.play();
+                        sourceObj.addEventListener("ended", function (e) {
+                           console.log("내용끝")
+                           endingObj.play();
+                           endingObj.addEventListener("ended", function (e) {
+                              console.log("로케이션리로드")
+                              // location.reload();
+                           })
+                        });
                      });
                   });
                }
@@ -1075,15 +1135,30 @@
                   starttime = timeSet.value;
                   console.log(starttime);
                   console.log("starttime 위에확인");
+                  var intro = "";
+                  var ending = "";
+                  if ($("#introLink").attr('src') !== "") {
+                     console.log("긴급방송이 아닌경우 : 인트로가 존재하는경우. 인트로 string확인 : ")
+                     intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
+                     console.log(intro);
+                  } // end of if intro exists
+                  if ($("#endingLink").attr('src') !== "") {
+                     console.log("긴급방송이 아닌경우 : 엔딩이 존재하는경우. 인트로 string확인 : ")
+                     ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
+                     console.log(ending);
+                  } // end of if ending exists
+
                   jsonData = {
                      content: content,
                      title: title,
                      gender: gender,
                      startdate: startdate,
                      starttime: starttime,
-                     audioVO: { alarmBell: alarmBell }
+                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
                   };
-                  location.reload();
+                  console.log("json데이터 셋팅됐나 확인");
+                  console.log(jsonData);
+                  // location.reload(); 잠깐막자.풀어 
                }
             } // end of else(긴급방송이 아닌경우)
             $.ajax({
@@ -1099,7 +1174,7 @@
 
          $("#searchbtn").on("click", function (e) {
             e.preventDefault();
-            
+
             var cate = $("#category").val();
 
             if (cate == "title") {
@@ -1110,7 +1185,7 @@
                loadpage(1, cate, $("#searchMonth").val())
                alert(cate)
                alert($("#searchMonth").val())
-            } else if(cate == "year-month-day") {
+            } else if (cate == "year-month-day") {
                loadpage(1, cate, $("#searchDate").val())
                alert(cate)
                alert($("#searchDate").val())
@@ -1123,8 +1198,6 @@
             $("#searchDate").css("display", "none")
             $("#searchMonth").css("display", "none")
             var cate = $(this).val()
-
-
             if (cate == "title") {
                $("#searchText").css("display", "inline-block")
             } else if (cate == "year-month") {
@@ -1132,10 +1205,7 @@
             } else {
                $("#searchDate").css("display", "inline-block")
             }
-
-
          })
-
 
          loadpage(1, "title", "")
 

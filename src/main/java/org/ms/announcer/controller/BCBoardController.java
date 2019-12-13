@@ -1,5 +1,8 @@
 package org.ms.announcer.controller;
 
+import static org.ms.announcer.utils.FileUtil.audioSave;
+import static org.springframework.http.HttpStatus.OK;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,7 +11,6 @@ import java.util.Map;
 
 import org.ms.announcer.domain.BCBoardDTO;
 import org.ms.announcer.service.BCBoardService;
-import static org.ms.announcer.utils.FileUtil.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import static org.springframework.http.HttpStatus.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,16 +47,36 @@ public class BCBoardController {
     @Setter(onMethod_ = { @Autowired })
     private BCBoardService service;
 
-    // ==================== Intro/ending 파일업로드 =================== 
-    @PostMapping(value = "/fileUpload") // 얘는 왜 get으로 안되는가? 
+    // ==================== Intro/ending 파일업로드 ===================
+    @PostMapping(value = "/fileUpload") // 얘는 왜 get으로 안되는가?
     public ResponseEntity<List<String>> fileUpload(MultipartFile additionalAudio) {
-        // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임. (prelisten수정 view and controller)
+        // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임. (prelisten수정 view and
+        // controller)
         List<String> list = new ArrayList<>();
-        System.out.println("name확인========================================================");
-        
-        String fileNameWithoutType = additionalAudio.getOriginalFilename().substring(0,additionalAudio.getOriginalFilename().lastIndexOf("."));
+        /*
+         * for(MultipartFile file : additionalAudio) { String fileNameWithoutType =
+         * file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf
+         * (".")); try { list.add(audioSave("tmp" + fileNameWithoutType,
+         * file.getBytes()).replace("\\", "-")); } catch (Exception e) {
+         * e.printStackTrace(); } }
+         */
+        String fileNameWithoutType = additionalAudio.getOriginalFilename().substring(0,
+                additionalAudio.getOriginalFilename().lastIndexOf("."));
         try {
             list.add(audioSave("tmp" + fileNameWithoutType, additionalAudio.getBytes()).replace("\\", "-"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(list, OK);
+    }
+
+    @PostMapping(value = "/registerFiles")
+    public ResponseEntity<List<String>> registerFiles(MultipartFile additionalAudio) {
+        List<String> list = new ArrayList<>();
+        String fileNameWithoutType = additionalAudio.getOriginalFilename().substring(0,
+                additionalAudio.getOriginalFilename().lastIndexOf("."));
+        try {
+            list.add(audioSave(fileNameWithoutType, additionalAudio.getBytes()).replace("\\", "*"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +95,8 @@ public class BCBoardController {
 
     @GetMapping(value = "/{uploadPath}")
     public ResponseEntity<byte[]> pathCheck(@PathVariable("uploadPath") String uploadPath) {
-        System.out.println(uploadPath);
+
+        System.out.println("when???????????????????????????????????");
         File audioFile = new File(uploadPath.replace("-", "\\"));
         byte[] audioData = null;
         try {
@@ -96,6 +118,11 @@ public class BCBoardController {
         String fileName = wholePath.substring((pathWithoutFname.length()), wholePath.length()); // uuid+파일명
         dto.getAudioVO().setAudioPath(pathWithoutFname);
         dto.getAudioVO().setAudioName(fileName);
+        System.out.println("순서대로 알람벨-인트로-엔딩");
+        System.out.println(dto.getAudioVO().getAlarmBell());
+        System.out.println(dto.getAudioVO().getIntro());
+        System.out.println(dto.getAudioVO().getEnding());
+
         service.register(dto);
     }
 

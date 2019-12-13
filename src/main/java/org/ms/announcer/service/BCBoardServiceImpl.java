@@ -51,7 +51,6 @@ public class BCBoardServiceImpl implements BCBoardService {
             String[] searchDateArr = search.replace("%", "").split("-");
             LocalDate sdate = LocalDate.of(Integer.parseInt(searchDateArr[0]),Integer.parseInt(searchDateArr[1]),1);
             YearMonth temp = YearMonth.of(sdate.getYear(), sdate.getMonth());
-            System.out.println("연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월연월");
             data = repos.findByStartdateBetween(sdate, temp.atEndOfMonth(),page );
         }
         Map<String, Object> result = new HashMap<>();
@@ -86,8 +85,6 @@ public class BCBoardServiceImpl implements BCBoardService {
         result.put("totalpages", total);
         result.put("category", category);
         result.put("search", search.replace("%", ""));
-        System.out.println("=========================================");
-        System.out.println(data.getContent());
         return result;
     }
 

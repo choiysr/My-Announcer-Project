@@ -11,28 +11,13 @@ var vals = (function () {
     let page = 1;
     let date = today.getFullYear() + "-" + month + "-" + day;
     let time = hour + ":" + minute  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     return{
         $listdiv:$listdiv,
         $totalListtable:$totalListtable,
         $pagediv:$pagediv,
         date:date,
         time:time
-
-
-
-
-    
-    
     }
 })()
 

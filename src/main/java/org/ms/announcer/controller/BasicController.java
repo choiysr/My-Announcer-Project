@@ -26,7 +26,7 @@ public class BasicController {
     @GetMapping("/totallist")
     public void getTotalList() {
     }
-    @GetMapping("/test2")
+    @GetMapping("/test")
     public void test2() {
     }
 

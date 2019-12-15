@@ -12,8 +12,8 @@
                      <!-- Nav tabs -->
                      <ul class="cart-page-menu row clearfix mb-30">
                         <!--                         <li><a href="#shopping-cart" data-toggle="tab">shopping cart</a></li> -->
-                        <li class="active"><a href="#todayList" data-toggle="tab">오늘의 방송</a></li>
-                        <li><a href="#check-out" data-toggle="tab">방송등록</a></li>
+                        <li class="active"><a href="#todayList" data-toggle="tab" id="todayListBtn">오늘의 방송</a></li>
+                        <li><a href="#registerModal" data-toggle="tab">방송등록</a></li>
                         <li><a href="#totalList" data-toggle="tab">모든방송</a></li>
                         <!--                         <li><a href="#order-complete" data-toggle="tab">order complete</a></li> -->
                      </ul>
@@ -35,7 +35,7 @@
                         <!-- TODAYLIST end -->
                         <!-- check-out start -->
                         <!-- 써먹을데가 있을 것 같다. 등록창으로 -->
-                        <div class="tab-pane" id="check-out">
+                        <div class="tab-pane" id="registerModal">
                            <!--아이디 변경해줘야함!!-->
                            <form action="#">
                               <div class="shop-cart-table check-out-wrap">
@@ -59,6 +59,14 @@
                                                    placeholder="내용을 입력하세요"></textarea></th>
                                           </tr>
                                           <tr>
+                                             <th class="formTitle"></th>
+                                             <th colspan="2" style="text-align: right;"><button
+                                                   id="spaceChecker">띄어쓰기교정</button></th>
+                                          </tr>
+                                          <tr>
+                                             <th>　</th>
+                                          </tr>
+                                          <tr>
                                              <th class="formTitle"><strong>음성설정</strong></th>
                                              <th colspan="2"><select class="custom-select mb-15" id="voiceGender">
                                                    <option value="woman">여성</option>
@@ -79,9 +87,6 @@
                                              <th class="formTitle"><strong>INTRO</strong></th>
                                              <th>
                                                 <input type="file" name="intro">
-                                                <audio id="introPlayer" controls style="display: none;">
-                                                   <source id="introLink" src="">
-                                                </audio>
                                              </th>
                                              <th class="uploadCancelBtn">
                                              </th>
@@ -93,9 +98,6 @@
                                              <th class="formTitle"><strong>ENDING</strong></th>
                                              <th>
                                                 <input type="file" name="ending">
-                                                <audio id="endingPlayer" controls style="display: none;">
-                                                   <source id="endingLink" src="">
-                                                </audio>
                                              </th>
                                              <th class="uploadCancelBtn">
                                              </th>
@@ -130,22 +132,21 @@
                                              <div class="mt-20">
                                                 <th></th>
                                                 <th style="text-align: right" colspan="2">
-                                                   <button class="repeat">반복설정</button>
-                                                   <button class="preListen">미리듣기</button>
-                                                   <button class="submitBtn" disabled=true>등록</button></th>
+                                                   <button data-text="반복설정" class="button-one font-16px" id="repeat">반복설정</button> &nbsp;
+                                                   <button data-text="미리듣기" class="button-one font-16px" id="preListen">미리듣기</button> &nbsp;
+                                                   <button data-text="방송등록" class="button-one font-16px" id="submitBtn" disabled=true>방송등록</button></th>
                                              </div>
                                           </tr>
                                        </table>
-                                       <div class="audioArea" style="display: none;">
-                                          <audio id="player" controls>
-                                             <source id="sourceLink" src="">
-                                          </audio>
-                                       </div>
-                                       <div class="alarmAudioArea" style="display: none;">
-                                          <audio id="alarmPlayer" controls>
-                                             <source id="alarmSourceLink" src="">
-                                          </audio>
-                                       </div>
+                                       <!-- sourcePlayer : TTS Source audio -->
+                                       <audio id="sourcePlayer" controls style="display: none;" src="">
+                                       </audio>
+                                       <!-- introPlayer : intro audio -->
+                                       <audio id="introPlayer" controls style="display: none;" src="">
+                                       </audio>
+                                       <!-- endingPlayer : ending audio -->
+                                       <audio id="endingPlayer" controls style="display: none;" src="">
+                                       </audio>
                                     </div>
                                  </div>
                               </div>
@@ -184,7 +185,6 @@
                                              <button data-text="검색" class="button-one font-16px"
                                                 id="searchbtn">검색</button>
                                           </td>
-
                                        </tr>
                                     </table>
 
@@ -204,195 +204,208 @@
       </div>
 
       <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
-      <div class="hiddenAlarm">
-         <audio id="hiddenAlarm1" controls>
-            <source id="hiddenAlarmSourceLink1"
-               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm1.wav">
-         </audio>
-         <audio id="hiddenAlarm2" controls>
-            <source id="hiddenAlarmSourceLink2"
-               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm2.wav">
-         </audio>
-         <audio id="hiddenAlarm3" controls>
-            <source id="hiddenAlarmSourceLink3"
-               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm3.wav">
-         </audio>
-         <audio id="hiddenAlarm4" controls>
-            <source id="hiddenAlarmSourceLink4"
-               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm4.wav">
-         </audio>
-         <audio id="hiddenAlarm5" controls>
-            <source id="hiddenAlarmSourceLink5"
-               src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
-         </audio>
-         <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>s
-         <script th:src="@{~/js/mscostom/vals.js}"></script>
-         <script th:src="@{~/js/mscostom/totallist.js}"></script>
-         <script th:src="@{~/js/mscostom/todaylist.js}"></script>
-         <script>
+      <div class="hiddenAlarm" style="display: none;">
+         <audio id="hiddenAlarm1" controls th:src="@{~/alarmbell/alarm1.wav}"></audio>
+         <audio id="hiddenAlarm2" controls th:src="@{~/alarmbell/alarm2.wav}"></audio>
+         <audio id="hiddenAlarm3" controls th:src="@{~/alarmbell/alarm3.wav}"></audio>
+         <audio id="hiddenAlarm4" controls th:src="@{~/alarmbell/alarm4.wav}"></audio>
+         <audio id="hiddenAlarm5" controls th:src="@{~/alarmbell/alarm5.wav}"></audio>
+      </div>
 
-            $(document).ready(function () {
+      <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>
+      <script th:src="@{~/js/mscostom/vals.js}"></script>
+      <script th:src="@{~/js/mscostom/totallist.js}"></script>
+      <script th:src="@{~/js/mscostom/todaylist.js}"></script>
 
-               ///////////////////// modal event area ////////////////////
-               var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
 
-               function setAllElements() {
-                  title = $("#title").val();
-                  content = $("#content").val();
-                  gender = $("#voiceGender option:selected").val();
-                  alarmBell = $("#alarmBell option:selected").val();
-                  alarmObj = $("#alarmPlayer")[0];
-                  sourceObj = $("#player")[0];
-                  introObj = $("#introPlayer")[0];
-                  endingObj = $("#endingPlayer")[0];
-               }
 
-               // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
-               $(".urgentCheck").change(function (e) {
-                  var isChecked = $(".urgentCheck").is(":checked");
-                  $("#ymdSet, #timeSet").prop("disabled", isChecked);
-                  $(".repeat").prop("disabled", isChecked);
-               });
+      <script>
+         $(document).ready(function () {
 
-               // ===============================================================================               
+            getTodayList();
 
-               // 등록버튼클릭시 인트로와/엔딩오디오가 업로드 되어있는지 확인 및 controller로 데이터날린 후 저장하고 
-               // uuid를 포함한 파일명을 return하는 함수
-               function checkadditionalAudioExist(object) {
-                  console.log("check메서드 진입_시점 체크")
-                  var formData = new FormData();
-                  var wholeFileName = "";
-                  formData.append("additionalAudio", object[0]);
-                  console.log("check메서드 진입_시점 체크2")
-                  $.ajax({
-                     url: 'http://localhost:8080/rbcboard/registerFiles',
-                     processData: false,
-                     contentType: false,
-                     async: false,
-                     data: formData,
-                     type: 'POST',
-                     dataType: 'json',
-                     success: function (result) {
-                        wholeFileName = result[0].substring(result[0].lastIndexOf("*") + 1, result[0].length);
-                        console.log("도대체왜???")
-                        console.log("uuid+파일명+확장자")
-                        console.log(wholeFileName);
-                     }
-                  });
-                  return wholeFileName;
-               } // end of checkadditionalAudioExist function 
+            ///////////////////// modal event area ////////////////////
+            var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
+            var audioObjects;
 
-               // ===============================================================================
+            // 미리듣기/등록하기 클릭시 dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
+            function setAllElements() {
+               title = $("#title").val();
+               content = $("#content").val();
+               gender = $("#voiceGender option:selected").val();
+               alarmBell = $("#alarmBell option:selected").val();
+               setAudioElements();
+            }
 
-               // 파일 유효성 검사 function (파일크기, 파일형식) 
-               function validateFile(fileName, fileSize) {
-                  var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
-                  var maxSize = 10485760;
-                  if (fileSize > maxSize) {
-                     alert("업로드 가능한 파일 크기를 초과했습니다.")
-                     return false;
-                  };
-                  if (!regex.test(fileName)) {
-                     alert("해당 형식의 파일은 업로드 할 수 없습니다.")
-                     return false;
-                  };
-                  return true;
-               }
+            function setAudioElements() {
+               alarmObj = $("#hiddenAlarm" + alarmBell)[0];
+               sourceObj = $("#sourcePlayer")[0];
+               introObj = $("#introPlayer")[0];
+               endingObj = $("#endingPlayer")[0];
+               audioObjects = [alarmObj, introObj, sourceObj, endingObj];
+            }
 
-               // ===============================================================================
 
-               // 파일 업로드되면 취소하는 버튼 만드는 function
-               function makeCancelBtn(targetAudioTagName) {
-                  var targetAudio = $("input[name='" + targetAudioTagName + "']");
-                  var btnArea = targetAudio.parent().parent().find('.uploadCancelBtn');
-                  $(btnArea)[0].innerHTML = "<i class='material-icons'>cancel</i>";
-               }
+            // ===============================================================================     
+            // 띄어쓰기 교정  ==>  API이상함. 다른걸로 수정하던지 없애던지 할 것  
+            $("#spaceChecker").on("click", function (e) {
+               e.preventDefault();
+               var key = "3439797815659168424";
+               var sentence = $("#content").val();
+               var jsonData = {
+                  key: key,
+               };
+               $.getJSON("http://api.adams.ai/datamixiApi/autospacing?sentence=" + sentence, jsonData, function (data) {
+                  var resultText = data.return_object.answer;
+                  $("#content").val(resultText);
+               })
+            })
 
-               // ===============================================================================
+            // =============================================================================== 
 
-               // 취소버튼 누르면 파일창 Reset시키는 function 
-               function resetFileArea() {
-                  // 나중에해
-               }
+            // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
+            $(".urgentCheck").change(function (e) {
+               var isChecked = $(".urgentCheck").is(":checked");
+               $("#ymdSet, #timeSet").prop("disabled", isChecked);
+               $("#repeat").prop("disabled", isChecked);
+            });
 
-               // 파일업로드 part 
-               // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
-               $("input[type='file']").change(function () {
-                  var formData = new FormData();
-                  var additionalAudio = $(this)[0].files;
-                  var fileTagName = this.name;
-                  // 유효성 검사(파일크기, 파일형식)
-                  if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) {
-                     $(this).val("");
-                     return false;
+            // ===============================================================================               
+
+            // 등록버튼클릭시 인트로와/엔딩오디오가 업로드 되어있는지 확인 및 controller로 데이터날린 후 저장하고 
+            // uuid를 포함한 파일명을 return하는 함수
+            function checkadditionalAudioExist(object) {
+               var formData = new FormData();
+               var wholeFileName = "";
+               formData.append("additionalAudio", object[0]);
+               $.ajax({
+                  url: 'http://localhost:8080/rbcboard/registerFiles',
+                  processData: false,
+                  contentType: false,
+                  async: false,
+                  data: formData,
+                  type: 'POST',
+                  dataType: 'json',
+                  success: function (result) {
+                     wholeFileName = result[0].substring(result[0].lastIndexOf("*") + 1, result[0].length);
+                     console.log(wholeFileName);
                   }
-                  formData.append("additionalAudio", additionalAudio[0]);
-                  formData.append("forRegister", false);
-                  $.ajax({
-                     url: 'http://localhost:8080/rbcboard/fileUpload',
-                     processData: false,
-                     contentType: false,
-                     data: formData,
-                     type: 'POST',
-                     dataType: 'json',
-                     success: function (result) {
-                        console.log(result);
-                        console.log(additionalAudio[0].name);
-                        console.log(additionalAudio[0]);
-                        $("#" + fileTagName + "Link").attr('src', "http://localhost:8080/rbcboard/" + result[0])
-                        makeCancelBtn(fileTagName);
-                     }
-                  });
                });
+               return wholeFileName;
+            } // end of checkadditionalAudioExist function 
 
-               // 미리듣기 버튼 이벤트
-               $(".preListen").on("click", function (e) {
-                  e.preventDefault();
-                  $(".submitBtn").prop("disabled", false);
-                  setAllElements();
-                  jsonData = {
-                     title: title,
-                     content: content,
-                     gender: gender,
-                  };
+            // ===============================================================================
 
-                  $.ajax({
-                     url: 'http://localhost:8080/rbcboard/prelisten',
-                     data: jsonData,
-                     type: 'GET',
-                     dataType: 'json',
-                     success: function (result) {
-                        $("#sourceLink").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
-                        // 나중에 alarm서버에 저장해서 local말고 서버폴더로 설정해줄것
-                        // 화면에있는거 쓰자 => register모달에 있는 alarm area자체를 삭제해버리자! > 나중에
-                        $("#alarmSourceLink").attr('src', "http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm" + alarmBell + ".wav");
-                        sourceObj = $("#player")[0];
-                        alarmObj = $("#alarmPlayer")[0];
-                        introObj = $("#introPlayer")[0];
-                        endingObj = $("#endingPlayer")[0];
+            // 파일 유효성 검사 function (파일크기, 파일형식) 
+            function validateFile(fileName, fileSize) {
+               var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
+               var maxSize = 10485760;
+               if (fileSize > maxSize) {
+                  alert("업로드 가능한 파일 크기를 초과했습니다.")
+                  return false;
+               };
+               if (!regex.test(fileName)) {
+                  alert("해당 형식의 파일은 업로드 할 수 없습니다.")
+                  return false;
+               };
+               return true;
+            }
 
-                        // 코드정리 하자  > 나중에
-                        alarmObj.load();
-                        alarmObj.play();
-                        alarmObj.addEventListener("ended", function (e) {
-                           introObj.load();
-                           introObj.play();
-                           introObj.addEventListener("ended", function (e) {
-                              sourceObj.load();
-                              sourceObj.play();
-                              sourceObj.addEventListener("ended", function (e) {
-                                 endingObj.load();
-                                 endingObj.play();
-                              });
-                           });
-                        });
-                     } // end of success function 
-                  }); // end of ajax
-               }); //end of preListen button event
+            // ===============================================================================
+
+            // 오디오객체배열을 파라미터로 받아 재생시켜주는 function
+            function playAllAudios(audios) {
+               for (let j = audios.length - 1; j > 0; j--) {
+                  // 이거 나중에 수정해주자 : 페이지경로로되어있는 이유는 초기화해주어서 그런듯 
+                  if (audios[j].src == "http://localhost:8080/bcboard/todayList") {
+                     audios.splice(j, 1);
+                  } else {
+                     audios[j].load();
+                  }
+               }
+               audios[0].play();
+               for (let i = 0; i < audios.length - 1; i++) {
+                  audios[i].addEventListener("ended", function (e) {
+                     audios[i + 1].play();
+                     this.removeEventListener("ended", arguments.callee);
+                  });
+               }
+            }
+
+            // ===============================================================================
+
+            // 파일 업로드되면 취소하는 버튼 만드는 function
+            function makeCancelBtn(targetAudioTagName) {
+               var targetAudio = $("input[name='" + targetAudioTagName + "']");
+               var btnArea = targetAudio.parent().parent().find('.uploadCancelBtn');
+               $(btnArea)[0].innerHTML
+                  = "<i class='material-icons' id='" + targetAudioTagName + "'>cancel</i>";
+            }
+
+            // ===============================================================================
+
+            // 파일업로드 취소 버튼 event (업로드된 파일reset)
+            $(".uploadCancelBtn").on("click", function () {
+               $("input[name='" + this.children[0].id + "']").val("");
+               this.innerHTML = "";
+            })
+
+            // ===============================================================================
+
+            // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
+            $("input[type='file']").change(function () {
+               var formData = new FormData();
+               var additionalAudio = $(this)[0].files;
+               var fileTagName = this.name;
+               if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) { // 유효성검사
+                  $(this).val("");
+                  return false;
+               }
+               formData.append("additionalAudio", additionalAudio[0]);
+               formData.append("forRegister", false);
+               $.ajax({
+                  url: 'http://localhost:8080/rbcboard/fileUpload',
+                  processData: false,
+                  contentType: false,
+                  data: formData,
+                  type: 'POST',
+                  dataType: 'json',
+                  success: function (result) {
+                     $("#" + fileTagName + "Player").attr('src', "http://localhost:8080/rbcboard/" + result[0])
+                     makeCancelBtn(fileTagName);
+                  }
+               });
+            });
+
+            // ===============================================================================               
+            // 미리듣기 버튼 이벤트
+            $("#preListen").on("click", function (e) {
+               e.preventDefault();
+               $("#submitBtn").prop("disabled", false);
+               setAllElements();
+               jsonData = {
+                  title: title,
+                  content: content,
+                  gender: gender
+               };
+               $.ajax({
+                  url: 'http://localhost:8080/rbcboard/prelisten',
+                  data: jsonData,
+                  type: 'GET',
+                  dataType: 'json',
+                  async: false,
+                  success: function (result) {
+                     $("#sourcePlayer").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
+                     setAudioElements();
+                     playAllAudios(audioObjects);
+                  } // end of success function 
+               }); // end of ajax
+            }); //end of preListen button event
 
 
-            // 저장버튼 클릭 이벤트(선행조건:미리듣기)
-            $(".submitBtn").on("click", function (e) {
+            // ===============================================================================               
+            // 저장버튼 클릭 이벤트
+            $("#submitBtn").on("click", function (e) {
                e.preventDefault();
                setAllElements();
                var result;
@@ -403,25 +416,28 @@
                      return; // confirm창에서 취소버튼을 누른경우.
                   } else { // 긴급공지
                      // 메서드로 뺼 수 있나 고민해볼것
-                     var uToday = new Date();
+                   /*   var uToday = new Date();
                      var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
                      var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));
                      var uHour = uToday.getHours().toString().length == 1 ? "0" + uToday.getHours() : uToday.getHours();
                      var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
                      var uDate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
-                     var uTime = uHour + ":" + uMinute;
-                     startdate = uDate;
-                     starttime = uTime;
+                     var uTime = uHour + ":" + uMinute; */
+                     startdate = vals.date;
+                     starttime = vals.time;
+                     console.log(startdate);
+                     console.log(starttime);
+                     console.log("타임,데이트확인. 만기야 여기좀 봐줘")
 
                      var intro = "";
                      var ending = "";
 
                      // if intro exists
-                     if ($("#introLink").attr('src') !== "") {
+                     if ($("#introPlayer").attr('src') !== "") {
                         intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
                      }
                      // if ending exists
-                     if ($("#endingLink").attr('src') !== "") {
+                     if ($("#endingPlayer").attr('src') !== "") {
                         ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
                      }
                      // return으로 파일명(with UUID)받아서 jsonData로는 only 파일명만 세팅해주기
@@ -435,33 +451,28 @@
                         audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
                      };
 
-                     alarmObj.play();
-                     alarmObj.addEventListener("ended", function (e) {
-                        sourceObj.play();
-                        sourceObj.addEventListener("ended", function (e) {
-                           location.reload();
-                        });
-                     });
+                     setAudioElements();
+                     playAllAudios(audioObjects);
                   }
                } else { // 긴급방송이 아닌경우 
+                  var ymdSet = $("#ymdSet")[0];
+                  var timeSet = $("#timeSet")[0];
+                  if(ymdSet.value=="" || timeSet.value==""){
+                     alert("방송 일자와 시간을 설정해주세요.")
+                     return;
+                  }
                   result = confirm("방송을 등록하시겠습니까?");
                   if (!result) {
                      return;
                   } else {
-                     var ymdSet = $("#ymdSet")[0];
-                     var timeSet = $("#timeSet")[0]
                      startdate = ymdSet.value;
-                     console.log(startdate);
-                     console.log("startdate 위에확인");
                      starttime = timeSet.value;
-                     console.log(starttime);
-                     console.log("starttime 위에확인");
                      var intro = "";
                      var ending = "";
-                     if ($("#introLink").attr('src') !== "") {
+                     if ($("#introPlayer").attr('src') !== "") {
                         intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
                      } // end of if intro exists
-                     if ($("#endingLink").attr('src') !== "") {
+                     if ($("#endingPlayer").attr('src') !== "") {
                         ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
                      } // end of if ending exists
 
@@ -473,10 +484,6 @@
                         starttime: starttime,
                         audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
                      };
-
-                     console.log("json데이터 셋팅됐나 확인");
-                     console.log(jsonData);
-                     location.reload();  
                   }
                } // end of else(긴급방송이 아닌경우)
 
@@ -485,7 +492,10 @@
                   data: JSON.stringify(jsonData),
                   type: 'POST',
                   contentType: "application/json; charset=utf-8",
-               }); // end of ajax
+               }).done(function (data) {
+                  getTodayList();
+                  $("#todayListBtn").trigger('click');
+               }) // end of ajax
             }); // end of submitbutton event
 
 
@@ -504,11 +514,9 @@
             });
 
             loadpage(1, "title", "")
-
-
-            }); // end of ready function
-         </script>
-      </div>
+         }); // end of ready function
+      </script>
    </div>
 </body>
+
 </html>

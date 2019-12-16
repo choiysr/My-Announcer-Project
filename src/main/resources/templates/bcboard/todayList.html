@@ -122,6 +122,14 @@
                                                 </div>
                                              </th>
                                           </tr>
+                                          <tr>
+                                             <th class="formTitle"><strong>방송시간</strong></th>
+                                             <th colspan="2">
+                                                <div class="time">
+                                                   <input type="text" id="repeat">
+                                                </div>
+                                             </th>
+                                          </tr>
                                           </tr>
                                           <tr>
                                              <th>　</th>
@@ -223,27 +231,27 @@
                      <h4>월간반복</h4>
                      <input id="repeatMonth" type="date">
                   </div>
-                  <div id="repeatWeekdiv" style="display:none ;">
+                  <div id="repeatWeekdiv" >
                      <h4>주간반복</h4>
                      <label >일</label>
-                     <input name="repeatWeek" type="checkbox" value="0">
+                     <input name="repeatWeek" type="checkbox"data-val="0">
                      <label >월</label>
-                     <input name="repeatWeek" type="checkbox" value="1">
+                     <input name="repeatWeek" type="checkbox" data-val="1">
                      <label >화</label>
-                     <input name="repeatWeek" type="checkbox" value="2">
+                     <input name="repeatWeek" type="checkbox" data-val="2">
                      <label >수</label>
-                     <input name="repeatWeek"  type="checkbox" value="3">
+                     <input name="repeatWeek"  type="checkbox"data-val="3">
                      <label >목</label>
-                     <input name="repeatWeek" type="checkbox" data-val="aaaaaaaaa" value="4">
+                     <input name="repeatWeek" type="checkbox" data-val="4">
                      <label >금</label>
-                     <input name="repeatWeek" type="checkbox" value="5">
+                     <input name="repeatWeek" type="checkbox" data-val="5">
                      <label >토</label>
-                     <input name="repeatWeek" type="checkbox" value="6">
+                     <input name="repeatWeek" type="checkbox" data-val="6">
 
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+                  <button id="repeatSubmitBtn" type="button" class="btn btn-default" data-dismiss="modal">확인</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                </div>
             </div>
@@ -522,6 +530,8 @@
                      } else {
                         var ymdSet = $("#ymdSet")[0];
                         var timeSet = $("#timeSet")[0]
+                        var repeatSet = $("#repeat").val()
+
                         startdate = ymdSet.value;
                         console.log(startdate);
                         console.log("startdate 위에확인");
@@ -536,15 +546,36 @@
                         if ($("#endingLink").attr('src') !== "") {
                            ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
                         } // end of if ending exists
+                        if (repeatSet .startsWith("week")) {
+                           jsonData = {
+                              content: content,
+                              title: title,
+                              gender: gender,
+                              starttime: starttime,
+                              audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
+                              repleRepeatVO:{repeatWeek: repeatSet}
+                           };
+                        }else if(repeatSet .startsWith("month")){
+                              jsonData = {
+                                 content: content,
+                                 title: title,
+                                 gender: gender,
+                                 starttime: starttime,
+                                 audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
+                                 repleRepeatVO:{repeatMonth: repeatSet}
+                              };
+                           }else{
+                                 jsonData = {
+                                    content: content,
+                                    title: title,
+                                    gender: gender,
+                                    startdate: startdate,
+                                    starttime: starttime,
+                                    audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
+                                 };
 
-                        jsonData = {
-                           content: content,
-                           title: title,
-                           gender: gender,
-                           startdate: startdate,
-                           starttime: starttime,
-                           audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
-                        };
+                        }
+                        
 
                         console.log("json데이터 셋팅됐나 확인");
                         console.log(jsonData);
@@ -561,19 +592,6 @@
                }); // end of submitbutton event
 
 
-               $("#category").on("change", function (params) {
-                  $("#searchText").css("display", "none")
-                  $("#searchDate").css("display", "none")
-                  $("#searchMonth").css("display", "none")
-                  var cate = $(this).val()
-                  if (cate == "title") {
-                     $("#searchText").css("display", "inline-block")
-                  } else if (cate == "year-month") {
-                     $("#searchMonth").css("display", "inline-block")
-                  } else {
-                     $("#searchDate").css("display", "inline-block")
-                  }
-               });
 
                loadpage(1, "title", "")
 

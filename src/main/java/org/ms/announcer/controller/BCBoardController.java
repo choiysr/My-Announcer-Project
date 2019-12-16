@@ -95,6 +95,9 @@ public class BCBoardController {
     @GetMapping(value = "/{uploadPath}")
     public ResponseEntity<byte[]> pathCheck(@PathVariable("uploadPath") String uploadPath) {
 
+        System.out.println("패스확인==========");
+        System.out.println(uploadPath);
+
         File audioFile = new File(uploadPath.replace("-", "\\"));
         byte[] audioData = null;
         try {

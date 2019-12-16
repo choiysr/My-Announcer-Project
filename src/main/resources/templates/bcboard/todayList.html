@@ -252,7 +252,7 @@
                                                    <button class="repeat" type="button" data-toggle="modal"
                                                       data-target="#myModal">반복설정</button>
                                                    <button class="preListen">미리듣기</button>
-                                                   <button class="submitBtn" disabled=true>등록</button></th>
+                                                   <button class="submitBtn" id="submitBtn" disabled=true>등록</button></th>
                                              </div>
                                           </tr>
                                        </table>
@@ -406,6 +406,7 @@
 
          $(document).ready(function() {
             getTodayList();
+            loadpage(1, "title", "");
          })
       
       </script>

@@ -87,7 +87,6 @@ public class BCBoardController {
 
     @GetMapping(value = "/{uploadPath}")
     public ResponseEntity<byte[]> pathCheck(@PathVariable("uploadPath") String uploadPath) {
-
         File audioFile = new File(uploadPath.replace("-", "\\"));
         byte[] audioData = null;
         try {
@@ -134,8 +133,7 @@ public class BCBoardController {
     @GetMapping("/totalList")
     public ResponseEntity<Map<String, Object>> getTotalList(
             @PageableDefault(page = 0, direction = Direction.ASC, sort = {"startdate", "starttime" }) Pageable page,
-            String category, String search
-            ) {
+            String category, String search) {
                 // Pageable page = PageRequest.of(0, 10);
         Map<String, Object> result = service.getAllList(page, category, search);
         return new ResponseEntity<>(result, OK);

@@ -24,6 +24,21 @@ function setAudioElements() {
     audioObjects = [alarmObj, introObj, sourceObj, endingObj];
 }
 
+// 화면내의 dto요소들 전체 초기화(reset) - 조회(수정)화면 & 등록화면 
+// 코드수정할것(깔끔하고 간결하게)
+function removeAllElements() {
+    for (let i = 0; i < 2; i++) {
+        $(".title")[i].value= "";
+        $(".content")[i].value= "";
+        $(".voiceGender")[i].value = $(".voiceGender")[i][0].value;
+        $(".alarmBell")[i].value = $(".alarmBell")[i][0].value;
+        $(".intro")[i].value= "";
+        $(".ending")[i].value= "";
+        $(".ymdSet")[i].value="";
+        $(".timeSet")[i].value="";
+    }
+}
+
 // ===============================================================================
 // 띄어쓰기 교정  ==>  API이상함. 다른걸로 수정하던지 없애던지 할 것 
 // rud적용 완료.
@@ -98,8 +113,12 @@ function validateFile(fileName, fileSize) {
 // just function 수정 필요 없음. 
 function playAllAudios(audios) {
     for (let j = audios.length - 1; j > 0; j--) {
+        console.log("in playAllAudios")
+        console.log("src확인" + audios[j].src);
         // 이거 나중에 수정해주자 : 페이지경로로되어있는 이유는 초기화해주어서 그런듯 
+        //  startwith로 바꿔
         if (audios[j].src == "http://localhost:8080/bcboard/todayList") {
+            console.log("여기들어오는가")
             audios.splice(j, 1);
         } else {
             audios[j].load();
@@ -107,6 +126,7 @@ function playAllAudios(audios) {
     }
     audios[0].play();
     for (let i = 0; i < audios.length - 1; i++) {
+        console.log("재생되는애들" + audios[i] + i);
         audios[i].addEventListener("ended", function (e) {
             audios[i + 1].play();
             this.removeEventListener("ended", arguments.callee);
@@ -129,8 +149,10 @@ function makeCancelBtn(targetAdditionalAudio) {
 // 파일업로드 취소 버튼 event (업로드된 파일reset)
 // rud적용 완료.
 $(".uploadCancelBtn").on("click", function () {
-    $(this).parent().find($("input[type='file']").val(""));
-    this.innerHTML = ""; 
+    var $targetTr = $(this).parent();
+    var $targetFileArea = $targetTr.children().find($("input[type='file']"));
+    $targetFileArea.val("");
+    this.innerHTML = "";
 });
 
 // ===============================================================================
@@ -139,7 +161,7 @@ $(".uploadCancelBtn").on("click", function () {
 // rud적용 완료.
 $("input[type='file']").change(function () {
     var formData = new FormData();
-    var $currFile =$(this);
+    var $currFile = $(this);
     var additionalAudio = $currFile[0].files;
 
     var fileTagName = this.name;
@@ -167,10 +189,13 @@ $("input[type='file']").change(function () {
 // 수정이 제대로 된것일까.
 $(".preListen").on("click", function (e) {
     e.preventDefault();
-    $(this).parent().parent().find(".submitBtn").prop("disabled",false);
-    var $forsending = $(this).parent().parent().parent();
-    console.log($forsending);
-    setAllElements($forsending);
+    $(this).parent().parent().find(".submitBtn").prop("disabled", false);
+    var $targetForm = $(this).parent().parent().parent();
+    console.log($targetForm);
+    setAllElements($targetForm);
+    console.log("미리듣기타이틀확인");
+    console.log("=============")
+    console.log(title);
     jsonData = {
         title: title,
         content: content,
@@ -181,8 +206,10 @@ $(".preListen").on("click", function (e) {
         data: jsonData,
         type: 'GET',
         dataType: 'json',
+        contentType: "application/json; charset=utf-8",
         async: false,
         success: function (result) {
+            console.log("미리듣기 성공확인");
             $("#sourcePlayer").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
             setAudioElements();
             playAllAudios(audioObjects);
@@ -195,7 +222,8 @@ $(".preListen").on("click", function (e) {
 // 저장버튼 클릭 이벤트
 $("#submitBtn").on("click", function (e) {
     e.preventDefault();
-    setAllElements();
+    var $targetForm = $(this).parent().parent().parent();
+    setAllElements($targetForm);
     var result;
 
     if ($(".urgentCheck").is(":checked")) {
@@ -225,6 +253,7 @@ $("#submitBtn").on("click", function (e) {
             }
             // return으로 파일명(with UUID)받아서 jsonData로는 only 파일명만 세팅해주기
 
+
             jsonData = {
                 content: content,
                 title: title,
@@ -238,6 +267,7 @@ $("#submitBtn").on("click", function (e) {
             playAllAudios(audioObjects);
         }
     } else { // 긴급방송이 아닌경우 
+        console.log("엄마")
         var ymdSet = $("#ymdSet")[0];
         var timeSet = $("#timeSet")[0];
         if (ymdSet.value == "" || timeSet.value == "") {
@@ -278,18 +308,20 @@ $("#submitBtn").on("click", function (e) {
     }).done(function (data) {
         getTodayList();
         $("#todayListBtn").trigger('click');
+        removeAllElements();
+        
     }) // end of ajax
 }); // end of submitbutton event
 
 $("#repeatType").on("change", function () {
     var target = $(this);
     console.log(target.val());
-    
-    $("#repeatWeekdiv").css("display","none")
-    $("#repeatMonthdiv").css("display","none")
-    
+
+    $("#repeatWeekdiv").css("display", "none")
+    $("#repeatMonthdiv").css("display", "none")
+
     $("input[name=repeatWeek]").val("")
     $("#repeatMonth").val("")
-    
-    $("#"+target.val()+"div").css("display","")
+
+    $("#" + target.val() + "div").css("display", "")
 })

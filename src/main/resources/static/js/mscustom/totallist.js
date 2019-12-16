@@ -67,9 +67,7 @@
 //검색 버튼 누를때
 $("#searchbtn").on("click", function (e) {
    e.preventDefault();
-
    var cate = $("#category").val();
-
    if (cate == "title") {
       loadpage(1, cate, $("#searchText").val())
    } else if (cate == "year-month") {

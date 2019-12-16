@@ -13,13 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * BCBoardServiceImpl
  */
 @Service
-@Slf4j
 public class BCBoardServiceImpl implements BCBoardService {
 
     @Setter(onMethod_ = { @Autowired })
@@ -30,8 +28,11 @@ public class BCBoardServiceImpl implements BCBoardService {
         repos.save(dto);
     }
 
-    public Page<BCBoardDTO> getTodayList(LocalDate date, Pageable page) {
-        Page<BCBoardDTO> result = repos.findAllByStartdate(date, page);
+    public Page<BCBoardDTO> getTodayList(String date, String week,  Pageable page) {
+        // Page<BCBoardDTO> result = repos.findAllByStartdate(date, page);
+        week = "%"+week+"%";
+        String monthRepeat ="%" +(date.split("-")[2])+ "%";
+        Page<BCBoardDTO> result = repos.findByStartdate(date, week, monthRepeat, page);
         return result;
     }
 
@@ -55,11 +56,9 @@ public class BCBoardServiceImpl implements BCBoardService {
         }
         Map<String, Object> result = new HashMap<>();
         int now = data.getNumber();
-        log.info("" + now);
         int total = data.getTotalPages();
 
         // 시작페이지 설정
-        // int start = now - 1 <= 0 ? 1 : (now+1)-2;
         int start = 0;
         if (now - 1 <= 0 || total < 5) {
             start = 1;

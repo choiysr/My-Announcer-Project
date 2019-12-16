@@ -1,6 +1,5 @@
 package org.ms.announcer.service;
 
-import java.time.LocalDate;
 import java.util.Map;
 
 import org.ms.announcer.domain.BCBoardDTO;
@@ -14,6 +13,6 @@ public interface BCBoardService {
 
     public void register(BCBoardDTO dto);
     public Map<String , Object> getAllList(Pageable page, String category, String search);
-    public Page<BCBoardDTO> getTodayList(LocalDate date , Pageable page );
+    public Page<BCBoardDTO> getTodayList(String date , String week, Pageable page );
     
 }

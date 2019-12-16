@@ -130,7 +130,9 @@
                                              <div class="mt-20">
                                                 <th></th>
                                                 <th style="text-align: right" colspan="2">
-                                                   <button class="repeat">반복설정</button>
+                                                   <button>반복설정</button>
+                                                   <button class="repeat" type="button" data-toggle="modal"
+                                                      data-target="#myModal">반복설정</button>
                                                    <button class="preListen">미리듣기</button>
                                                    <button class="submitBtn" disabled=true>등록</button></th>
                                              </div>
@@ -203,6 +205,72 @@
          </div>
       </div>
 
+      <div class="modal fade" id="myModal" role="dialog">
+         <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4  class="modal-title">반복설정</h4>
+               </div>
+               <select id="repeatType"  >
+                  <option selected value="repeatWeek">주간</option>
+                  <option value="repeatMonth">월간</option>
+               </select>
+               <div  class="modal-body">
+                  <div id="repeatMonthdiv" style="display:none ;">
+                     <h4>월간반복</h4>
+                     <input id="repeatMonth" type="date">
+                  </div>
+                  <div id="repeatWeekdiv" style="display:none ;">
+                     <h4>주간반복</h4>
+                     <label >일</label>
+                     <input name="repeatWeek" type="checkbox" value="0">
+                     <label >월</label>
+                     <input name="repeatWeek" type="checkbox" value="1">
+                     <label >화</label>
+                     <input name="repeatWeek" type="checkbox" value="2">
+                     <label >수</label>
+                     <input name="repeatWeek"  type="checkbox" value="3">
+                     <label >목</label>
+                     <input name="repeatWeek" type="checkbox" data-val="aaaaaaaaa" value="4">
+                     <label >금</label>
+                     <input name="repeatWeek" type="checkbox" value="5">
+                     <label >토</label>
+                     <input name="repeatWeek" type="checkbox" value="6">
+
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+               </div>
+            </div>
+
+         </div>
+      </div>
+      <style>
+         .modal {
+            text-align: center;
+         }
+
+         @media screen and (min-width: 768px) {
+            .modal:before {
+               display: inline-block;
+               vertical-align: middle;
+               content: " ";
+               height: 100%;
+            }
+         }
+
+         .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+         }
+      </style>
+
       <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
       <div class="hiddenAlarm">
          <audio id="hiddenAlarm1" controls>
@@ -226,15 +294,16 @@
                src="http://localhost:8080/rbcboard/C:-AudioStorage-soundEffect-alarm5.wav">
          </audio>
          <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>s
-         <script th:src="@{~/js/mscostom/vals.js}"></script>
-         <script th:src="@{~/js/mscostom/totallist.js}"></script>
-         <script th:src="@{~/js/mscostom/todaylist.js}"></script>
+         <script th:src="@{~/js/mscustom/vals.js}"></script>
+         <script th:src="@{~/js/mscustom/totallist.js}"></script>
+         <script th:src="@{~/js/mscustom/todaylist.js}"></script>
+         <script th:src="@{~/js/mscustom/register.js}"></script>
          <script>
 
             $(document).ready(function () {
 
 
-               
+
 
                ///////////////////// modal event area ////////////////////
                var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
@@ -394,119 +463,119 @@
                }); //end of preListen button event
 
 
-            // 저장버튼 클릭 이벤트(선행조건:미리듣기)
-            $(".submitBtn").on("click", function (e) {
-               e.preventDefault();
-               setAllElements();
-               var result;
+               // 저장버튼 클릭 이벤트(선행조건:미리듣기)
+               $(".submitBtn").on("click", function (e) {
+                  e.preventDefault();
+                  setAllElements();
+                  var result;
 
-               if ($(".urgentCheck").is(":checked")) {
-                  result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
-                  if (!result) {
-                     return; // confirm창에서 취소버튼을 누른경우.
-                  } else { // 긴급공지
-                     // 메서드로 뺼 수 있나 고민해볼것
-                     var uToday = new Date();
-                     var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
-                     var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));
-                     var uHour = uToday.getHours().toString().length == 1 ? "0" + uToday.getHours() : uToday.getHours();
-                     var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
-                     var uDate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
-                     var uTime = uHour + ":" + uMinute;
-                     startdate = uDate;
-                     starttime = uTime;
+                  if ($(".urgentCheck").is(":checked")) {
+                     result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
+                     if (!result) {
+                        return; // confirm창에서 취소버튼을 누른경우.
+                     } else { // 긴급공지
+                        // 메서드로 뺼 수 있나 고민해볼것
+                        var uToday = new Date();
+                        var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
+                        var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));
+                        var uHour = uToday.getHours().toString().length == 1 ? "0" + uToday.getHours() : uToday.getHours();
+                        var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
+                        var uDate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
+                        var uTime = uHour + ":" + uMinute;
+                        startdate = uDate;
+                        starttime = uTime;
 
-                     var intro = "";
-                     var ending = "";
+                        var intro = "";
+                        var ending = "";
 
-                     // if intro exists
-                     if ($("#introLink").attr('src') !== "") {
-                        intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
-                     }
-                     // if ending exists
-                     if ($("#endingLink").attr('src') !== "") {
-                        ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
-                     }
-                     // return으로 파일명(with UUID)받아서 jsonData로는 only 파일명만 세팅해주기
+                        // if intro exists
+                        if ($("#introLink").attr('src') !== "") {
+                           intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
+                        }
+                        // if ending exists
+                        if ($("#endingLink").attr('src') !== "") {
+                           ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
+                        }
+                        // return으로 파일명(with UUID)받아서 jsonData로는 only 파일명만 세팅해주기
 
-                     jsonData = {
-                        content: content,
-                        title: title,
-                        gender: gender,
-                        startdate: startdate,
-                        starttime: starttime,
-                        audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
-                     };
+                        jsonData = {
+                           content: content,
+                           title: title,
+                           gender: gender,
+                           startdate: startdate,
+                           starttime: starttime,
+                           audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
+                        };
 
-                     alarmObj.play();
-                     alarmObj.addEventListener("ended", function (e) {
-                        sourceObj.play();
-                        sourceObj.addEventListener("ended", function (e) {
-                           location.reload();
+                        alarmObj.play();
+                        alarmObj.addEventListener("ended", function (e) {
+                           sourceObj.play();
+                           sourceObj.addEventListener("ended", function (e) {
+                              location.reload();
+                           });
                         });
-                     });
-                  }
-               } else { // 긴급방송이 아닌경우 
-                  result = confirm("방송을 등록하시겠습니까?");
-                  if (!result) {
-                     return;
+                     }
+                  } else { // 긴급방송이 아닌경우 
+                     result = confirm("방송을 등록하시겠습니까?");
+                     if (!result) {
+                        return;
+                     } else {
+                        var ymdSet = $("#ymdSet")[0];
+                        var timeSet = $("#timeSet")[0]
+                        startdate = ymdSet.value;
+                        console.log(startdate);
+                        console.log("startdate 위에확인");
+                        starttime = timeSet.value;
+                        console.log(starttime);
+                        console.log("starttime 위에확인");
+                        var intro = "";
+                        var ending = "";
+                        if ($("#introLink").attr('src') !== "") {
+                           intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
+                        } // end of if intro exists
+                        if ($("#endingLink").attr('src') !== "") {
+                           ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
+                        } // end of if ending exists
+
+                        jsonData = {
+                           content: content,
+                           title: title,
+                           gender: gender,
+                           startdate: startdate,
+                           starttime: starttime,
+                           audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
+                        };
+
+                        console.log("json데이터 셋팅됐나 확인");
+                        console.log(jsonData);
+                        location.reload();
+                     }
+                  } // end of else(긴급방송이 아닌경우)
+
+                  $.ajax({
+                     url: 'http://localhost:8080/rbcboard/register',
+                     data: JSON.stringify(jsonData),
+                     type: 'POST',
+                     contentType: "application/json; charset=utf-8",
+                  }); // end of ajax
+               }); // end of submitbutton event
+
+
+               $("#category").on("change", function (params) {
+                  $("#searchText").css("display", "none")
+                  $("#searchDate").css("display", "none")
+                  $("#searchMonth").css("display", "none")
+                  var cate = $(this).val()
+                  if (cate == "title") {
+                     $("#searchText").css("display", "inline-block")
+                  } else if (cate == "year-month") {
+                     $("#searchMonth").css("display", "inline-block")
                   } else {
-                     var ymdSet = $("#ymdSet")[0];
-                     var timeSet = $("#timeSet")[0]
-                     startdate = ymdSet.value;
-                     console.log(startdate);
-                     console.log("startdate 위에확인");
-                     starttime = timeSet.value;
-                     console.log(starttime);
-                     console.log("starttime 위에확인");
-                     var intro = "";
-                     var ending = "";
-                     if ($("#introLink").attr('src') !== "") {
-                        intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
-                     } // end of if intro exists
-                     if ($("#endingLink").attr('src') !== "") {
-                        ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
-                     } // end of if ending exists
-
-                     jsonData = {
-                        content: content,
-                        title: title,
-                        gender: gender,
-                        startdate: startdate,
-                        starttime: starttime,
-                        audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
-                     };
-
-                     console.log("json데이터 셋팅됐나 확인");
-                     console.log(jsonData);
-                     location.reload();  
+                     $("#searchDate").css("display", "inline-block")
                   }
-               } // end of else(긴급방송이 아닌경우)
+               });
 
-               $.ajax({
-                  url: 'http://localhost:8080/rbcboard/register',
-                  data: JSON.stringify(jsonData),
-                  type: 'POST',
-                  contentType: "application/json; charset=utf-8",
-               }); // end of ajax
-            }); // end of submitbutton event
-
-
-            $("#category").on("change", function (params) {
-               $("#searchText").css("display", "none")
-               $("#searchDate").css("display", "none")
-               $("#searchMonth").css("display", "none")
-               var cate = $(this).val()
-               if (cate == "title") {
-                  $("#searchText").css("display", "inline-block")
-               } else if (cate == "year-month") {
-                  $("#searchMonth").css("display", "inline-block")
-               } else {
-                  $("#searchDate").css("display", "inline-block")
-               }
-            });
-
-            loadpage(1, "title", "")
+               loadpage(1, "title", "")
 
 
             }); // end of ready function
@@ -514,4 +583,5 @@
       </div>
    </div>
 </body>
+
 </html>

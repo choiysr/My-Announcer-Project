@@ -30,13 +30,12 @@ public class BCBoardDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bno;
 
-    // notnull (javax) 줘야할까? 
+    // notnull (javax) 줘야할까?  네
     private String title;
     private String content;
     // MemberDTO만들면 MEMBER로 수정해야함. 
+
     private String mid;
-    // private String audioPath;
-    // private String audioName;
     private String gender;
     // private String alarmBell;
 
@@ -54,5 +53,8 @@ public class BCBoardDTO {
 
     @Embedded
     private AudioVO audioVO;
+
+    @Embedded
+    private RepeatVO repleRepeatVO;
 
 }

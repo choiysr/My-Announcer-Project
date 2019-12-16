@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 public interface BCBoardService {
 
     public void register(BCBoardDTO dto);
+    public BCBoardDTO read(Integer bno);
     public Map<String , Object> getAllList(Pageable page, String category, String search);
     public Page<BCBoardDTO> getTodayList(String date , String week, Pageable page );
     

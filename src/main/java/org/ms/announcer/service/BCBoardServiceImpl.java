@@ -28,6 +28,11 @@ public class BCBoardServiceImpl implements BCBoardService {
         repos.save(dto);
     }
 
+    @Override
+    public BCBoardDTO read(Integer bno) {
+        return repos.findById(bno).orElse(null);  // = rpose.findById(bno).get();
+    }
+
     public Page<BCBoardDTO> getTodayList(String date, String week,  Pageable page) {
         // Page<BCBoardDTO> result = repos.findAllByStartdate(date, page);
         week = "%"+week+"%";
@@ -86,5 +91,4 @@ public class BCBoardServiceImpl implements BCBoardService {
         result.put("search", search.replace("%", ""));
         return result;
     }
-
 }

@@ -31,12 +31,6 @@ var vals = (function () {
         todayListTh:todayListTh,
         totalListTh:totalListTh,
         week:week
-
-
-
-
-    
-    
     }
 })()
 

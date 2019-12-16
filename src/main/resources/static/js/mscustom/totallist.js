@@ -67,9 +67,7 @@
 //검색 버튼 누를때
 $("#searchbtn").on("click", function (e) {
    e.preventDefault();
-
    var cate = $("#category").val();
-
    if (cate == "title") {
       loadpage(1, cate, $("#searchText").val())
    } else if (cate == "year-month") {
@@ -81,8 +79,7 @@ $("#searchbtn").on("click", function (e) {
 }); // searchBtn click event 
 
 $("#category").on("change", function (params) {
-   $(this).parent("td").siblings("td").first().children('div > input').css("display", "none");3
-
+   $(this).parent("td").siblings("td").first().children('div > input').css("display", "none");
    var cate = $(this).val()
    if (cate == "title") {
       $("#searchText").css("display", "inline-block")
@@ -91,6 +88,4 @@ $("#category").on("change", function (params) {
    } else {
       $("#searchDate").css("display", "inline-block")
    }
-
-
 })

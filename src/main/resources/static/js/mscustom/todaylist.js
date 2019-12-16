@@ -6,12 +6,10 @@ playAlert = setInterval(function () {
    var now = hour + "" + Minutes
    var target = $("#icon" + now);
    console.log(now);
-
-
    if ($(target).length == 1) {
       target.click();
    }
-}, 20000);
+}, 60000);
 
 
 //리스트 뿌려주는 코드
@@ -23,21 +21,17 @@ function appendlist(list) {
       var wholePathOfFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.audioName;
       var wholePathOfIntroFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.intro;
       var wholePathOfedningFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.ending;
-      // console.log(list.audioVO.intro.length);
-      console.log(list.audioVO.intro);
-      
-
 
       str +=
          '<tr class="listTable">' +
-         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<h4>' + list.title + '</h4>' + '</td>' +
+         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<a class="listTitle" href="#" id="'+list.bno+'"><h4>' + list.title + '</h4></a>' + '</td>' +
          '<td style="padding-top: 40px;"">' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
          '<td  style="padding-top: 40px;">' + '<a  href="#"><i id="icon' + time + '" class="far fa-play-circle playBtn" style="font-size:30px" data-time = "' + time + '"></a></i>' + '</td>' +
          '<td class="test" style="padding-top: 25px; padding-left: 5px; padding-right: 5px; height:70px;">' +
          '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'
 
-      if ( list.audioVO.intro.length !== 0 ) {
-         str += '<audio style=" width: 35vw; min-width: 1cm; display:;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
+      if (list.audioVO.intro.length!==0) {
+         str += '<audio style=" width: 35vw; min-width: 1cm; " id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
             '<source src="http://localhost:8080/rbcboard/' + wholePathOfIntroFile + '" ></source>' +
             '</audio>'
       }
@@ -65,7 +59,6 @@ function appendlist(list) {
 }
 
 
-
 vals.$listdiv.on('click', '.playBtn', function (e) {
    e.preventDefault();
 
@@ -76,8 +69,6 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
    var ending = $("#ending" + target)
    var img = btn.closest("tr").children(".test").children(".playImg")
    var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
-
-
 
 
    if (btn.attr('class') === 'far fa-stop-circle playBtn') {
@@ -99,13 +90,8 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
       targetAlarm[0].removeEventListener("ended", arguments.callee)
       audio.siblings()[0].removeEventListener("ended", arguments.callee)
       audio.siblings()[1].removeEventListener("ended", arguments.callee)
-
-
-
       return;
    } else {
-
-
       img.attr("src", "../../img/mscustom/soundwave.gif")
       btn.attr('class', 'far fa-stop-circle playBtn')
 
@@ -140,7 +126,7 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
                   img.attr("src", "../../img/mscustom/audioLine.jpg")
                   return
                }
-   
+
 
                audio.siblings()[2].play()
                this.removeEventListener("ended", arguments.callee);
@@ -152,7 +138,7 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
                });
             });
 
-           
+
          });
 
       });
@@ -161,12 +147,33 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
 
 }) // end of playBtn event in list 
 
+// 제목클릭하면 모달로 조회창 띄우기
+// 소라가 191216 16:39 만지고 있는 부분임 !!
+vals.$listdiv.on('click', '.listTitle', function (e) {
+   $('div.modal').modal();
+   var targetBno = this.id;
+   $.ajax({
+      url: "/rbcboard/read/" + targetBno,
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      success: function (result) {
+         $("#RUDtitle").val(result.title);
+         $("#RUDcontent").val(result.content);
+         $("#RUDymdSet").val(result.startdate);
+         $("#RUDtimeSet").val(result.starttime);
+         $("#RUDvoiceGender").val(result.gender);
+         $("#RUDalarmBell").val(result.audioVO.alarmBell);
+      }
+   })
+});
 
-$.ajax({
-   url: "/rbcboard/todayList/" + vals.date +"/"+vals.week,
-   type: "GET",
-   contentType: "application/json; charset=utf-8",
-   success: function (result) {
-      appendlist(result)
-   }
-}); // end of todayList get ajax
+function getTodayList() {
+   $.ajax({
+      url: "/rbcboard/todayList/" + vals.date + "/" + vals.week,
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      success: function (result) {
+         appendlist(result)
+      }
+   }); // end of todayList get ajax
+}

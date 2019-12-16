@@ -52,13 +52,6 @@ public class BCBoardController {
         // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임. (prelisten수정 view and
         // controller)
         List<String> list = new ArrayList<>();
-        /*
-         * for(MultipartFile file : additionalAudio) { String fileNameWithoutType =
-         * file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf
-         * (".")); try { list.add(audioSave("tmp" + fileNameWithoutType,
-         * file.getBytes()).replace("\\", "-")); } catch (Exception e) {
-         * e.printStackTrace(); } }
-         */
         String fileNameWithoutType = additionalAudio.getOriginalFilename().substring(0,
                 additionalAudio.getOriginalFilename().lastIndexOf("."));
         try {
@@ -94,10 +87,6 @@ public class BCBoardController {
 
     @GetMapping(value = "/{uploadPath}")
     public ResponseEntity<byte[]> pathCheck(@PathVariable("uploadPath") String uploadPath) {
-
-        System.out.println("패스확인==========");
-        System.out.println(uploadPath);
-
         File audioFile = new File(uploadPath.replace("-", "\\"));
         byte[] audioData = null;
         try {
@@ -144,11 +133,20 @@ public class BCBoardController {
     @GetMapping("/totalList")
     public ResponseEntity<Map<String, Object>> getTotalList(
             @PageableDefault(page = 0, direction = Direction.ASC, sort = {"startdate", "starttime" }) Pageable page,
-            String category, String search
-            ) {
+            String category, String search) {
                 // Pageable page = PageRequest.of(0, 10);
         Map<String, Object> result = service.getAllList(page, category, search);
         return new ResponseEntity<>(result, OK);
+    }
+
+    @GetMapping("/read/{bno}")
+    public ResponseEntity<BCBoardDTO> getOneBCBoard(@PathVariable("bno") Integer bno) {
+       System.out.println("read진입확인");
+       System.out.println("오잉???");
+       BCBoardDTO bc = service.read(bno);
+       System.out.println(bc);
+       
+        return new ResponseEntity<>(service.read(bno),OK);
     }
 
     ////////// API METHOD ////////////
@@ -159,31 +157,25 @@ public class BCBoardController {
         String url = "";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("charset", "UTF-8");
-
-        // 네이버 API : 남자 음성 사용
+       
         String clovaUrl = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
+        String clovaUrlPremium = "https://naveropenapi.apigw.ntruss.com/voice-premium/v1/tts";
         String keyID = "8un3nj2jlx";
         String secretKey = "T1ZHOULzmPIOa58HmHvByTgGnMDTekgF8oZ1XSaE";
 
-        // 카카오 API 정보 : 여자 음성 사용
-        String kakaoUrl = "https://kakaoi-newtone-openapi.kakao.com/v1/synthesize";
-        String authKey = "KakaoAK 51b790b9e32597330a3825d667ef2c35";
+        headers.add("charset", "UTF-8");
+        headers.add("Content-Type", "application/x-www-form-urlencoded");
+        headers.add("X-NCP-APIGW-API-KEY-ID", keyID);
+        headers.add("X-NCP-APIGW-API-KEY", secretKey);
 
         if (dto.getGender().equals("man")) {
-            // 남자 음성 사용
             data = "speaker=jinho&speed=0&text=" + dto.getContent();
-            headers.add("Content-Type", "application/x-www-form-urlencoded");
-            headers.add("X-NCP-APIGW-API-KEY-ID", keyID);
-            headers.add("X-NCP-APIGW-API-KEY", secretKey);
             url = clovaUrl;
         } else {
-            // 여자 음성 사용
-            data = "<speak><voice name=\"WOMAN_READ_CALM\">" + dto.getContent() + "</voice></speak>";
-            headers.add("Content-Type", "application/xml");
-            headers.add("Authorization", authKey);
-            url = kakaoUrl;
+            data = "speaker=nara&speed=0&format=wav&text=" + dto.getContent();
+            url = clovaUrlPremium;
         }
+        
         return restTemplate.postForEntity(url, new HttpEntity<byte[]>(data.getBytes(), headers), byte[].class);
     }
 

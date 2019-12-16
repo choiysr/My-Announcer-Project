@@ -11,11 +11,9 @@
                   <div class="shopping-cart">
                      <!-- Nav tabs -->
                      <ul class="cart-page-menu row clearfix mb-30">
-                        <!--                         <li><a href="#shopping-cart" data-toggle="tab">shopping cart</a></li> -->
                         <li class="active"><a href="#todayList" data-toggle="tab" id="todayListBtn">오늘의 방송</a></li>
                         <li><a href="#registerModal" data-toggle="tab">방송등록</a></li>
                         <li><a href="#totalList" data-toggle="tab">모든방송</a></li>
-                        <!--                         <li><a href="#order-complete" data-toggle="tab">order complete</a></li> -->
                      </ul>
 
                      <!-- Tab panes -->
@@ -32,6 +30,123 @@
                               </div>
                            </form>
                         </div>
+
+                        <!-- 조회/수정 modal -->
+                        <div class="modal fade" id="layerpop">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <!-- header -->
+                                 <div class="modal-header">
+                                    <!-- 닫기(x) 버튼 -->
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <!-- header title -->
+                                    <h4 class="modal-title">Header</h4>
+                                 </div>
+                                 <!-- body -->
+                                 <div class="modal-body">
+                                    <!-- top of rudTable 조회창입니다=============================== -->
+                                    <table id="rudFormTable">
+                                       <tr>
+                                          <th class="formTitle" style="width: 100px;"><strong>제목</strong></th>
+                                          <th colspan="2"><input class="title" id="RUDtitle" type="text" placeholder="제목을 입력하세요">
+                                          </th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle"><strong>내용</strong></th>
+                                          <th colspan="2"><textarea class="custom-textarea content" id="RUDcontent"
+                                                placeholder="내용을 입력하세요"></textarea></th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle"></th>
+                                          <th colspan="2" style="text-align: right;"><button
+                                                class="spaceChecker">띄어쓰기교정</button></th>
+                                       </tr>
+                                       <tr>
+                                          <th>　</th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle"><strong>음성설정</strong></th>
+                                          <th colspan="2"><select class="custom-select mb-15 voiceGender" id="RUDvoiceGender">
+                                                <option value="woman">여성</option>
+                                                <option value="man">남성</option>
+                                             </select></th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle"><strong>알람음</strong></th>
+                                          <th colspan="2"><select class="custom-select mb-15 alarmBell" id="RUDalarmBell">
+                                                <option value="1">알람음1</option>
+                                                <option value="2">알람음2</option>
+                                                <option value="3">알람음3</option>
+                                                <option value="4">알람음4</option>
+                                                <option value="5">알람음5</option>
+                                             </select></th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle"><strong>INTRO</strong></th>
+                                          <th>
+                                             <input type="file" class="intro" id="RUDintro">
+                                          </th>
+                                          <th class="uploadCancelBtn">
+                                          </th>
+                                       </tr>
+                                       <tr>
+                                          <th>　</th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle"><strong>ENDING</strong></th>
+                                          <th>
+                                             <input type="file" class="ending" id="RUDending">
+                                          </th>
+                                          <th class="uploadCancelBtn">
+                                          </th>
+                                       </tr>
+                                       <tr>
+                                          <th>　</th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle "><strong>방송일자</strong></th>
+                                          <th colspan="2">
+                                             <div class="ymd">
+                                                <input class="custom-select mb-15 ymdSet" type="date" id="RUDymdSet">
+                                             </div>
+                                          </th>
+                                       </tr>
+                                       <tr>
+                                          <th>　</th>
+                                       </tr>
+                                       <tr>
+                                          <th class="formTitle"><strong>방송시간</strong></th>
+                                          <th colspan="2">
+                                             <div class="time">
+                                                <input class="custom-select mb-15 timeSet" type="time" id="RUDtimeSet">
+                                             </div>
+                                          </th>
+                                       </tr>
+                                       </tr>
+                                       <tr>
+                                          <th>　</th>
+                                       </tr>
+                                       <tr>
+                                          <div class="mt-20">
+                                             <th></th>
+                                             <th style="text-align: right" colspan="2">
+                                                <button class="repeat">반복설정</button> &nbsp;
+                                                <button class="preListen">미리듣기</button> &nbsp;
+                                                <button class="submitBtn" disabled=true>방송등록</button></th>
+                                          </div>
+                                       </tr>
+                                    </table>
+                                    <!-- end of rudTable -->
+                                 </div>
+                                 <!-- Footer -->
+                                 <div class="modal-footer">
+                                    Footer
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
                         <!-- TODAYLIST end -->
                         <!-- check-out start -->
                         <!-- 써먹을데가 있을 것 같다. 등록창으로 -->
@@ -55,12 +170,12 @@
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>내용</strong></th>
-                                             <th colspan="2"><textarea class="custom-textarea" id="content"
+                                             <th colspan="2"><textarea class="custom-textarea content" id="content"
                                                    placeholder="내용을 입력하세요"></textarea></th>
                                           </tr>
                                           <tr>
                                              <th class="formTitle"></th>
-                                             <th colspan="2" style="text-align: right;"><button
+                                             <th colspan="2" style="text-align: right;"><button class="spaceChecker"
                                                    id="spaceChecker">띄어쓰기교정</button></th>
                                           </tr>
                                           <tr>
@@ -68,14 +183,16 @@
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>음성설정</strong></th>
-                                             <th colspan="2"><select class="custom-select mb-15" id="voiceGender">
+                                             <th colspan="2"><select class="custom-select mb-15 voiceGender"
+                                                   id="voiceGender">
                                                    <option value="woman">여성</option>
                                                    <option value="man">남성</option>
                                                 </select></th>
                                           </tr>
                                           <tr>
                                              <th class="formTitle"><strong>알람음</strong></th>
-                                             <th colspan="2"><select class="custom-select mb-15" id="alarmBell">
+                                             <th colspan="2"><select class="custom-select mb-15 alarmBell"
+                                                   id="alarmBell">
                                                    <option value="1">알람음1</option>
                                                    <option value="2">알람음2</option>
                                                    <option value="3">알람음3</option>
@@ -86,7 +203,7 @@
                                           <tr>
                                              <th class="formTitle"><strong>INTRO</strong></th>
                                              <th>
-                                                <input type="file" name="intro">
+                                                <input type="file" class="intro" name="intro">
                                              </th>
                                              <th class="uploadCancelBtn">
                                              </th>
@@ -97,7 +214,7 @@
                                           <tr>
                                              <th class="formTitle"><strong>ENDING</strong></th>
                                              <th>
-                                                <input type="file" name="ending">
+                                                <input type="file" class="ending" name="ending">
                                              </th>
                                              <th class="uploadCancelBtn">
                                              </th>
@@ -109,7 +226,7 @@
                                              <th class="formTitle "><strong>방송일자</strong></th>
                                              <th colspan="2">
                                                 <div class="ymd">
-                                                   <input class="custom-select mb-15" type="date" id="ymdSet">
+                                                   <input class="custom-select mb-15 ymdSet" type="date" id="ymdSet">
                                                 </div>
                                              </th>
                                           </tr>
@@ -120,7 +237,7 @@
                                              <th class="formTitle"><strong>방송시간</strong></th>
                                              <th colspan="2">
                                                 <div class="time">
-                                                   <input class="custom-select mb-15" type="time" id="timeSet">
+                                                   <input class="custom-select mb-15 timeSet" type="time" id="timeSet">
                                                 </div>
                                              </th>
                                           </tr>
@@ -132,21 +249,12 @@
                                              <div class="mt-20">
                                                 <th></th>
                                                 <th style="text-align: right" colspan="2">
-                                                   <button data-text="반복설정" class="button-one font-16px" id="repeat">반복설정</button> &nbsp;
-                                                   <button data-text="미리듣기" class="button-one font-16px" id="preListen">미리듣기</button> &nbsp;
-                                                   <button data-text="방송등록" class="button-one font-16px" id="submitBtn" disabled=true>방송등록</button></th>
+                                                   <button class="repeat">반복설정</button> &nbsp;
+                                                   <button class="preListen">미리듣기</button> &nbsp;
+                                                   <button class="submitBtn" disabled=true>방송등록</button></th>
                                              </div>
                                           </tr>
                                        </table>
-                                       <!-- sourcePlayer : TTS Source audio -->
-                                       <audio id="sourcePlayer" controls style="display: none;" src="">
-                                       </audio>
-                                       <!-- introPlayer : intro audio -->
-                                       <audio id="introPlayer" controls style="display: none;" src="">
-                                       </audio>
-                                       <!-- endingPlayer : ending audio -->
-                                       <audio id="endingPlayer" controls style="display: none;" src="">
-                                       </audio>
                                     </div>
                                  </div>
                               </div>
@@ -212,311 +320,24 @@
          <audio id="hiddenAlarm5" controls th:src="@{~/alarmbell/alarm5.wav}"></audio>
       </div>
 
+      <!-- audioArea : 조회,수정,등록시 모두 활용할 수 있도록 분리 -->
+      <div class="allAudios" style="display: none;">
+      <!-- sourcePlayer : TTS Source audio -->
+      <audio class="sourcePlayer" id="sourcePlayer" controls src=""></audio>
+      <!-- introPlayer : intro audio -->
+      <audio class="introPlayer" id="introPlayer" controls src=""></audio>
+      <!-- endingPlayer : ending audio -->
+      <audio class="endingPlayer" id="endingPlayer" controls src=""></audio>
+      </div>
+
       <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>
-      <script th:src="@{~/js/mscostom/vals.js}"></script>
-      <script th:src="@{~/js/mscostom/totallist.js}"></script>
-      <script th:src="@{~/js/mscostom/todaylist.js}"></script>
+      <script th:src="@{~/js/mscustom/vals.js}"></script>
+      <script th:src="@{~/js/mscustom/totallist.js}"></script>
+      <script th:src="@{~/js/mscustom/todaylist.js}"></script>
+      <script th:src="@{~/js/mscustom/register.js}"></script>
 
-
-
-      <script>
-         $(document).ready(function () {
-
-            getTodayList();
-
-            ///////////////////// modal event area ////////////////////
-            var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
-            var audioObjects;
-
-            // 미리듣기/등록하기 클릭시 dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
-            function setAllElements() {
-               title = $("#title").val();
-               content = $("#content").val();
-               gender = $("#voiceGender option:selected").val();
-               alarmBell = $("#alarmBell option:selected").val();
-               setAudioElements();
-            }
-
-            function setAudioElements() {
-               alarmObj = $("#hiddenAlarm" + alarmBell)[0];
-               sourceObj = $("#sourcePlayer")[0];
-               introObj = $("#introPlayer")[0];
-               endingObj = $("#endingPlayer")[0];
-               audioObjects = [alarmObj, introObj, sourceObj, endingObj];
-            }
-
-
-            // ===============================================================================     
-            // 띄어쓰기 교정  ==>  API이상함. 다른걸로 수정하던지 없애던지 할 것  
-            $("#spaceChecker").on("click", function (e) {
-               e.preventDefault();
-               var key = "3439797815659168424";
-               var sentence = $("#content").val();
-               var jsonData = {
-                  key: key,
-               };
-               $.getJSON("http://api.adams.ai/datamixiApi/autospacing?sentence=" + sentence, jsonData, function (data) {
-                  var resultText = data.return_object.answer;
-                  $("#content").val(resultText);
-               })
-            })
-
-            // =============================================================================== 
-
-            // 긴급공지 체크 이벤트 - 비활성화시켜야할 요소들 disabled 
-            $(".urgentCheck").change(function (e) {
-               var isChecked = $(".urgentCheck").is(":checked");
-               $("#ymdSet, #timeSet").prop("disabled", isChecked);
-               $("#repeat").prop("disabled", isChecked);
-            });
-
-            // ===============================================================================               
-
-            // 등록버튼클릭시 인트로와/엔딩오디오가 업로드 되어있는지 확인 및 controller로 데이터날린 후 저장하고 
-            // uuid를 포함한 파일명을 return하는 함수
-            function checkadditionalAudioExist(object) {
-               var formData = new FormData();
-               var wholeFileName = "";
-               formData.append("additionalAudio", object[0]);
-               $.ajax({
-                  url: 'http://localhost:8080/rbcboard/registerFiles',
-                  processData: false,
-                  contentType: false,
-                  async: false,
-                  data: formData,
-                  type: 'POST',
-                  dataType: 'json',
-                  success: function (result) {
-                     wholeFileName = result[0].substring(result[0].lastIndexOf("*") + 1, result[0].length);
-                     console.log(wholeFileName);
-                  }
-               });
-               return wholeFileName;
-            } // end of checkadditionalAudioExist function 
-
-            // ===============================================================================
-
-            // 파일 유효성 검사 function (파일크기, 파일형식) 
-            function validateFile(fileName, fileSize) {
-               var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
-               var maxSize = 10485760;
-               if (fileSize > maxSize) {
-                  alert("업로드 가능한 파일 크기를 초과했습니다.")
-                  return false;
-               };
-               if (!regex.test(fileName)) {
-                  alert("해당 형식의 파일은 업로드 할 수 없습니다.")
-                  return false;
-               };
-               return true;
-            }
-
-            // ===============================================================================
-
-            // 오디오객체배열을 파라미터로 받아 재생시켜주는 function
-            function playAllAudios(audios) {
-               for (let j = audios.length - 1; j > 0; j--) {
-                  // 이거 나중에 수정해주자 : 페이지경로로되어있는 이유는 초기화해주어서 그런듯 
-                  if (audios[j].src == "http://localhost:8080/bcboard/todayList") {
-                     audios.splice(j, 1);
-                  } else {
-                     audios[j].load();
-                  }
-               }
-               audios[0].play();
-               for (let i = 0; i < audios.length - 1; i++) {
-                  audios[i].addEventListener("ended", function (e) {
-                     audios[i + 1].play();
-                     this.removeEventListener("ended", arguments.callee);
-                  });
-               }
-            }
-
-            // ===============================================================================
-
-            // 파일 업로드되면 취소하는 버튼 만드는 function
-            function makeCancelBtn(targetAudioTagName) {
-               var targetAudio = $("input[name='" + targetAudioTagName + "']");
-               var btnArea = targetAudio.parent().parent().find('.uploadCancelBtn');
-               $(btnArea)[0].innerHTML
-                  = "<i class='material-icons' id='" + targetAudioTagName + "'>cancel</i>";
-            }
-
-            // ===============================================================================
-
-            // 파일업로드 취소 버튼 event (업로드된 파일reset)
-            $(".uploadCancelBtn").on("click", function () {
-               $("input[name='" + this.children[0].id + "']").val("");
-               this.innerHTML = "";
-            })
-
-            // ===============================================================================
-
-            // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
-            $("input[type='file']").change(function () {
-               var formData = new FormData();
-               var additionalAudio = $(this)[0].files;
-               var fileTagName = this.name;
-               if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) { // 유효성검사
-                  $(this).val("");
-                  return false;
-               }
-               formData.append("additionalAudio", additionalAudio[0]);
-               formData.append("forRegister", false);
-               $.ajax({
-                  url: 'http://localhost:8080/rbcboard/fileUpload',
-                  processData: false,
-                  contentType: false,
-                  data: formData,
-                  type: 'POST',
-                  dataType: 'json',
-                  success: function (result) {
-                     $("#" + fileTagName + "Player").attr('src', "http://localhost:8080/rbcboard/" + result[0])
-                     makeCancelBtn(fileTagName);
-                  }
-               });
-            });
-
-            // ===============================================================================               
-            // 미리듣기 버튼 이벤트
-            $("#preListen").on("click", function (e) {
-               e.preventDefault();
-               $("#submitBtn").prop("disabled", false);
-               setAllElements();
-               jsonData = {
-                  title: title,
-                  content: content,
-                  gender: gender
-               };
-               $.ajax({
-                  url: 'http://localhost:8080/rbcboard/prelisten',
-                  data: jsonData,
-                  type: 'GET',
-                  dataType: 'json',
-                  async: false,
-                  success: function (result) {
-                     $("#sourcePlayer").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
-                     setAudioElements();
-                     playAllAudios(audioObjects);
-                  } // end of success function 
-               }); // end of ajax
-            }); //end of preListen button event
-
-
-            // ===============================================================================               
-            // 저장버튼 클릭 이벤트
-            $("#submitBtn").on("click", function (e) {
-               e.preventDefault();
-               setAllElements();
-               var result;
-
-               if ($(".urgentCheck").is(":checked")) {
-                  result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
-                  if (!result) {
-                     return; // confirm창에서 취소버튼을 누른경우.
-                  } else { // 긴급공지
-                     // 메서드로 뺼 수 있나 고민해볼것
-                   /*   var uToday = new Date();
-                     var uDay = ((uToday.getDate()).toString().length == 1 ? "0" + (uToday.getDate()) : (uToday.getDate()));
-                     var uMonth = ((uToday.getMonth() + 1).toString().length == 1 ? "0" + (uToday.getMonth() + 1) : (uToday.getMonth() + 1));
-                     var uHour = uToday.getHours().toString().length == 1 ? "0" + uToday.getHours() : uToday.getHours();
-                     var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
-                     var uDate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
-                     var uTime = uHour + ":" + uMinute; */
-                     startdate = vals.date;
-                     starttime = vals.time;
-                     console.log(startdate);
-                     console.log(starttime);
-                     console.log("타임,데이트확인. 만기야 여기좀 봐줘")
-
-                     var intro = "";
-                     var ending = "";
-
-                     // if intro exists
-                     if ($("#introPlayer").attr('src') !== "") {
-                        intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
-                     }
-                     // if ending exists
-                     if ($("#endingPlayer").attr('src') !== "") {
-                        ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
-                     }
-                     // return으로 파일명(with UUID)받아서 jsonData로는 only 파일명만 세팅해주기
-
-                     jsonData = {
-                        content: content,
-                        title: title,
-                        gender: gender,
-                        startdate: startdate,
-                        starttime: starttime,
-                        audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
-                     };
-
-                     setAudioElements();
-                     playAllAudios(audioObjects);
-                  }
-               } else { // 긴급방송이 아닌경우 
-                  var ymdSet = $("#ymdSet")[0];
-                  var timeSet = $("#timeSet")[0];
-                  if(ymdSet.value=="" || timeSet.value==""){
-                     alert("방송 일자와 시간을 설정해주세요.")
-                     return;
-                  }
-                  result = confirm("방송을 등록하시겠습니까?");
-                  if (!result) {
-                     return;
-                  } else {
-                     startdate = ymdSet.value;
-                     starttime = timeSet.value;
-                     var intro = "";
-                     var ending = "";
-                     if ($("#introPlayer").attr('src') !== "") {
-                        intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
-                     } // end of if intro exists
-                     if ($("#endingPlayer").attr('src') !== "") {
-                        ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
-                     } // end of if ending exists
-
-                     jsonData = {
-                        content: content,
-                        title: title,
-                        gender: gender,
-                        startdate: startdate,
-                        starttime: starttime,
-                        audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
-                     };
-                  }
-               } // end of else(긴급방송이 아닌경우)
-
-               $.ajax({
-                  url: 'http://localhost:8080/rbcboard/register',
-                  data: JSON.stringify(jsonData),
-                  type: 'POST',
-                  contentType: "application/json; charset=utf-8",
-               }).done(function (data) {
-                  getTodayList();
-                  $("#todayListBtn").trigger('click');
-               }) // end of ajax
-            }); // end of submitbutton event
-
-
-            $("#category").on("change", function (params) {
-               $("#searchText").css("display", "none")
-               $("#searchDate").css("display", "none")
-               $("#searchMonth").css("display", "none")
-               var cate = $(this).val()
-               if (cate == "title") {
-                  $("#searchText").css("display", "inline-block")
-               } else if (cate == "year-month") {
-                  $("#searchMonth").css("display", "inline-block")
-               } else {
-                  $("#searchDate").css("display", "inline-block")
-               }
-            });
-
-            loadpage(1, "title", "")
-         }); // end of ready function
-      </script>
    </div>
+   <!--이건 왜 여기 와야 하는걸까? -->
 </body>
 
 </html>

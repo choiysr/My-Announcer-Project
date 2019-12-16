@@ -16,11 +16,11 @@ function appendlist(list) {
    var str = ""
    var th = '<th>제목</th><th>재생시간</th><th>재생</th><th>&nbsp</th><th>수정/삭제</th><th>'
    list.content.forEach(list => {
-      var time = list.starttime.substring(0, 5).replace(":", "")
+      var time = list.starttime.substring(0, 5).replace(":", "");
       var wholePathOfFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.audioName;
       str +=
          '<tr class="listTable">' +
-         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<h4>' + list.title + '</h4>' + '</td>' +
+         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<a href="#"><h4 class="title" id='+list.bno+'>' + list.title + '</h4></a>' + '</td>' +
          '<td style="padding-top: 40px;"">' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
          '<td  style="padding-top: 40px;">' + '<a href="#">'
          + '<i class="far fa-play-circle playBtn" style="font-size:30px" data-time = "' + time + '"></a></i>' + '</td>' +
@@ -37,7 +37,7 @@ function appendlist(list) {
    vals.$listdiv.html(th)
    vals.$listdiv.append(str)
 
-   $(".playerInList")[0].load();
+   // $(".playerInList")[0].load();
 }
 
 vals.$listdiv.on('click', '.playBtn', function (e) {
@@ -48,6 +48,7 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
 
    var img = btn.closest("tr").children(".test").children(".playImg")
    var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
+
 
    if (btn.attr('class') === 'far fa-stop-circle playBtn') {
       targetAlarm[0].pause();
@@ -73,6 +74,27 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
       });
    });
 }) // end of playBtn event in list 
+
+
+// 제목클릭하면 모달로 조회창 띄우기
+// 소라가 191216 16:39 만지고 있는 부분임 !!
+vals.$listdiv.on('click', '.title', function (e) { 
+   $('div.modal').modal();
+   var targetBno = this.id;
+   $.ajax({
+      url: "/rbcboard/read/"+targetBno,
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      success: function(result) {
+         $("#RUDtitle").val(result.title);
+         $("#RUDcontent").val(result.content);
+         $("#RUDymdSet").val(result.startdate);
+         $("#RUDtimeSet").val(result.starttime);
+         $("#RUDvoiceGender").val(result.gender);
+         $("#RUDalarmBell").val(result.audioVO.alarmBell);
+      }
+   })
+}); 
 
 var json = {
    startdate: vals.date

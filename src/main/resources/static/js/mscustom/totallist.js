@@ -90,7 +90,6 @@ $("#category").on("change", function (params) {
    $("#searchMonth").css("display", "none")
    var cate = $(this).val()
 
-
    if (cate == "title") {
       $("#searchText").css("display", "inline-block")
    } else if (cate == "year-month") {
@@ -98,6 +97,4 @@ $("#category").on("change", function (params) {
    } else {
       $("#searchDate").css("display", "inline-block")
    }
-
-
 })

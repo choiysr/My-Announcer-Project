@@ -11,7 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * BCBoardRepository
  */
 public interface BCBoardRepository extends JpaRepository<BCBoardDTO, Integer> {
-    // List<BCBoardDTO> findAllByStartdate(LocalDate date , Pageable page);
 
     Page<BCBoardDTO> findAllByStartdate(LocalDate date, Pageable page);
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.ms.announcer.domain.BCBoardDTO;
 import org.ms.announcer.repositories.BCBoardRepository;
@@ -28,6 +29,11 @@ public class BCBoardServiceImpl implements BCBoardService {
     @Override
     public void register(BCBoardDTO dto) {
         repos.save(dto);
+    }
+
+    @Override
+    public BCBoardDTO read(Integer bno) {
+        return repos.findById(bno).orElse(null);  // = rpose.findById(bno).get();
     }
 
     public Page<BCBoardDTO> getTodayList(LocalDate date, Pageable page) {
@@ -87,5 +93,4 @@ public class BCBoardServiceImpl implements BCBoardService {
         result.put("search", search.replace("%", ""));
         return result;
     }
-
 }

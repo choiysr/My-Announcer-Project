@@ -53,13 +53,6 @@ public class BCBoardController {
         // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임. (prelisten수정 view and
         // controller)
         List<String> list = new ArrayList<>();
-        /*
-         * for(MultipartFile file : additionalAudio) { String fileNameWithoutType =
-         * file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf
-         * (".")); try { list.add(audioSave("tmp" + fileNameWithoutType,
-         * file.getBytes()).replace("\\", "-")); } catch (Exception e) {
-         * e.printStackTrace(); } }
-         */
         String fileNameWithoutType = additionalAudio.getOriginalFilename().substring(0,
                 additionalAudio.getOriginalFilename().lastIndexOf("."));
         try {
@@ -145,6 +138,16 @@ public class BCBoardController {
             String category, String search) {
         Map<String, Object> result = service.getAllList(page, category, search);
         return new ResponseEntity<>(result, OK);
+    }
+
+    @GetMapping("/read/{bno}")
+    public ResponseEntity<BCBoardDTO> getOneBCBoard(@PathVariable("bno") Integer bno) {
+       System.out.println("read진입확인");
+       System.out.println("오잉???");
+       BCBoardDTO bc = service.read(bno);
+       System.out.println(bc);
+       
+        return new ResponseEntity<>(service.read(bno),OK);
     }
 
     ////////// API METHOD ////////////

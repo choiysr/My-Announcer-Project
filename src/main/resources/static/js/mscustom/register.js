@@ -1,6 +1,6 @@
 // todaylist.js의 getTodayList() function호출
 // 이거 main으로 옮기는게 좋을듯 
-getTodayList();
+//getTodayList();
 
 ///////////////////// modal event area ////////////////////
 var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
@@ -281,3 +281,15 @@ $("#submitBtn").on("click", function (e) {
     }) // end of ajax
 }); // end of submitbutton event
 
+$("#repeatType").on("change", function () {
+    var target = $(this);
+    console.log(target.val());
+    
+    $("#repeatWeekdiv").css("display","none")
+    $("#repeatMonthdiv").css("display","none")
+    
+    $("input[name=repeatWeek]").val("")
+    $("#repeatMonth").val("")
+    
+    $("#"+target.val()+"div").css("display","")
+})

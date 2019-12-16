@@ -3,7 +3,6 @@ package org.ms.announcer.controller;
 import org.ms.announcer.service.BCBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,14 +19,11 @@ public class BasicController {
     BCBoardService bcboardService;
 
     @GetMapping("/todayList")
-    public void getTodayList(Model model) {
+    public void getTodayList() {
     }
 
     @GetMapping("/totallist")
     public void getTotalList() {
-    }
-    @GetMapping("/test")
-    public void test2() {
     }
 
 }

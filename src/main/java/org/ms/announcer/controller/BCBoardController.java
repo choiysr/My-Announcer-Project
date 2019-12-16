@@ -4,7 +4,6 @@ import static org.ms.announcer.utils.FileUtil.audioSave;
 import static org.springframework.http.HttpStatus.OK;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +88,6 @@ public class BCBoardController {
     @GetMapping(value = "/{uploadPath}")
     public ResponseEntity<byte[]> pathCheck(@PathVariable("uploadPath") String uploadPath) {
 
-        System.out.println("when???????????????????????????????????");
         File audioFile = new File(uploadPath.replace("-", "\\"));
         byte[] audioData = null;
         try {
@@ -120,22 +118,25 @@ public class BCBoardController {
     }
 
     // get 방식으로 url dptj 원하는 페이지, 오늘 날짜를 받는다.
-    @GetMapping("/todayList/{startdate}")
-    public ResponseEntity<Page<BCBoardDTO>> list(@PathVariable("startdate") String startdate) {
+    @GetMapping("/todayList/{startdate}/{week}")
+    public ResponseEntity<Page<BCBoardDTO>> list(
+        @PathVariable("startdate") String startdate, 
+        @PathVariable("week") String week) {
+
+        System.out.println("==================================================");
+        System.out.println(week);
         // 정렬하여 값 가져올 기준
-        Pageable page = PageRequest.of(0, 300, Direction.ASC, "startdate", "starttime");
-        // 문자열로 가저온 것을 split
-        String[] date = startdate.split("-");
-        // 값을 얻어온다.
-        Page<BCBoardDTO> result = service.getTodayList(
-                LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), page);
+        Pageable page = PageRequest.of(0, 300, Direction.ASC,  "starttime");
+        Page<BCBoardDTO> result = service.getTodayList( startdate, week, page);
         return new ResponseEntity<>(result, OK);
     }
 
     @GetMapping("/totalList")
     public ResponseEntity<Map<String, Object>> getTotalList(
-            @PageableDefault(page = 0, direction = Direction.ASC, sort = { "startdate", "starttime" }) Pageable page,
-            String category, String search) {
+            @PageableDefault(page = 0, direction = Direction.ASC, sort = {"startdate", "starttime" }) Pageable page,
+            String category, String search
+            ) {
+                // Pageable page = PageRequest.of(0, 10);
         Map<String, Object> result = service.getAllList(page, category, search);
         return new ResponseEntity<>(result, OK);
     }

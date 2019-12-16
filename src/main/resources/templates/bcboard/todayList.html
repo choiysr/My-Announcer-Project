@@ -249,9 +249,10 @@
                                              <div class="mt-20">
                                                 <th></th>
                                                 <th style="text-align: right" colspan="2">
-                                                   <button class="repeat">반복설정</button> &nbsp;
-                                                   <button class="preListen">미리듣기</button> &nbsp;
-                                                   <button class="submitBtn" disabled=true>방송등록</button></th>
+                                                   <button class="repeat" type="button" data-toggle="modal"
+                                                      data-target="#myModal">반복설정</button>
+                                                   <button class="preListen">미리듣기</button>
+                                                   <button class="submitBtn" disabled=true>등록</button></th>
                                              </div>
                                           </tr>
                                        </table>
@@ -311,6 +312,72 @@
          </div>
       </div>
 
+      <div class="modal fade" id="myModal" role="dialog">
+         <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4  class="modal-title">반복설정</h4>
+               </div>
+               <select id="repeatType"  >
+                  <option selected value="repeatWeek">주간</option>
+                  <option value="repeatMonth">월간</option>
+               </select>
+               <div  class="modal-body">
+                  <div id="repeatMonthdiv" style="display:none ;">
+                     <h4>월간반복</h4>
+                     <input id="repeatMonth" type="date">
+                  </div>
+                  <div id="repeatWeekdiv" style="display:none ;">
+                     <h4>주간반복</h4>
+                     <label >일</label>
+                     <input name="repeatWeek" type="checkbox" value="0">
+                     <label >월</label>
+                     <input name="repeatWeek" type="checkbox" value="1">
+                     <label >화</label>
+                     <input name="repeatWeek" type="checkbox" value="2">
+                     <label >수</label>
+                     <input name="repeatWeek"  type="checkbox" value="3">
+                     <label >목</label>
+                     <input name="repeatWeek" type="checkbox" data-val="aaaaaaaaa" value="4">
+                     <label >금</label>
+                     <input name="repeatWeek" type="checkbox" value="5">
+                     <label >토</label>
+                     <input name="repeatWeek" type="checkbox" value="6">
+
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+               </div>
+            </div>
+
+         </div>
+      </div>
+      <style>
+         .modal {
+            text-align: center;
+         }
+
+         @media screen and (min-width: 768px) {
+            .modal:before {
+               display: inline-block;
+               vertical-align: middle;
+               content: " ";
+               height: 100%;
+            }
+         }
+
+         .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+         }
+      </style>
+
       <!-- 알람음 hidden tag : 역할 - 각 방송에 맞는 알람음을 찾아 먼저 재생한다. -->
       <div class="hiddenAlarm" style="display: none;">
          <audio id="hiddenAlarm1" controls th:src="@{~/alarmbell/alarm1.wav}"></audio>
@@ -335,6 +402,14 @@
       <script th:src="@{~/js/mscustom/totallist.js}"></script>
       <script th:src="@{~/js/mscustom/todaylist.js}"></script>
       <script th:src="@{~/js/mscustom/register.js}"></script>
+      <script>
+
+         $(document).ready(function() {
+            getTodayList();
+         })
+      
+      </script>
+
 
    </div>
    <!--이건 왜 여기 와야 하는걸까? -->

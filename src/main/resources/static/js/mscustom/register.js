@@ -25,9 +25,22 @@ function setAudioElements() {
 }
 
 // 화면내의 dto요소들 전체 초기화(reset) - 조회(수정)화면 & 등록화면 
-// 코드수정할것(깔끔하고 간결하게) == 지금안쓰는데 쓸모가있을수있으니 지우지 말것
+// 코드수정할것(깔끔하고 간결하게)
 function removeAllElements() {
+    var elements = ["title","content",
+    "voiceGender","alarmBell","intro","ending","ymdSet","timeSet","uploadCancelBtn"];
+
+    for(let i=0;i<elements.length;i++) {
+        var $targetClass = $("."+elemtns[i]);
+        $targetClass.each(function(){
+            // 수정하자
+        })
+    }
+
+
     for (let i = 0; i < 2; i++) {
+
+
         $(".title")[i].value = "";
         $(".content")[i].value = "";
         $(".voiceGender")[i].value = $(".voiceGender")[i][0].value;

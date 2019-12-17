@@ -8,9 +8,7 @@ $("#deleteBCBoard").on("click", function () {
     if (!result) {
         return;
     } else {
-        /* var $targetBno = $(this).parent().parent().parent().find('#RUDbno'); */
-        var $targetBno = $("#RUDbno");
-        var bno = $targetBno[0].value;
+        var bno = $("#RUDbno").val();
         $.ajax({
             url: 'http://localhost:8080/rbcboard/'+bno,
             data: bno,
@@ -21,4 +19,14 @@ $("#deleteBCBoard").on("click", function () {
             $("#closeReadModal").trigger('click');
         })
     }
+});
+
+// [수정]버튼 이벤트
+$("#modifyBCBoard").on("click" ,function () {
+
+    var $rudForm =  $("#rudFormTable");
+    $rudForm.find('input').prop('readonly', false);
+    $rudForm.find('textarea').prop('readonly', false);
+    $rudForm.find('select').attr('disabled',false);
+
 });

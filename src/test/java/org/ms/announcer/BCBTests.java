@@ -55,7 +55,7 @@ public class BCBTests {
             // repeatVO.setRepeatWeek("0,1,4");
             // dto.setRepleRepeatVO(repeatVO);
             repeatVO.setRepeatMonth("16");
-            dto.setRepleRepeatVO(repeatVO);
+            dto.setRepeatVO(repeatVO);
 
             dto.setAudioVO(audio);
             service.register(dto);

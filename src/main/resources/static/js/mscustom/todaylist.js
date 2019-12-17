@@ -24,13 +24,13 @@ function appendlist(list) {
 
       str +=
          '<tr class="listTable">' +
-         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<a class="listTitle" href="#" id="'+list.bno+'"><h4>' + list.title + '</h4></a>' + '</td>' +
+         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<a class="listTitle" href="#" id="' + list.bno + '"><h4>' + list.title + '</h4></a>' + '</td>' +
          '<td style="padding-top: 40px;"">' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
          '<td  style="padding-top: 40px;">' + '<a  href="#"><i id="icon' + time + '" class="far fa-play-circle playBtn" style="font-size:30px" data-time = "' + time + '"></a></i>' + '</td>' +
          '<td class="test" style="padding-top: 25px; padding-left: 5px; padding-right: 5px; height:70px;">' +
          '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'
 
-      if (list.audioVO.intro.length!==0) {
+      if (list.audioVO.intro.length !== 0) {
          str += '<audio style=" width: 35vw; min-width: 1cm; " id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
             '<source src="http://localhost:8080/rbcboard/' + wholePathOfIntroFile + '" ></source>' +
             '</audio>'
@@ -150,19 +150,33 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
 // 제목클릭하면 모달로 조회창 띄우기
 // 소라가 191216 16:39 만지고 있는 부분임 !!
 vals.$listdiv.on('click', '.listTitle', function (e) {
-   $('div.modal').modal();
+   $('div.readModal').modal();
    var targetBno = this.id;
    $.ajax({
       url: "/rbcboard/read/" + targetBno,
       type: "GET",
       contentType: "application/json; charset=utf-8",
       success: function (result) {
+         $("#RUDbno").val(result.bno);
          $("#RUDtitle").val(result.title);
          $("#RUDcontent").val(result.content);
          $("#RUDymdSet").val(result.startdate);
          $("#RUDtimeSet").val(result.starttime);
          $("#RUDvoiceGender").val(result.gender);
          $("#RUDalarmBell").val(result.audioVO.alarmBell);
+         if (result.audioVO.intro !== "") {
+            var tmpStr = result.audioVO.intro;
+            $("#RUDintroFileName").val(tmpStr.substring(tmpStr.lastIndexOf('_')+1, tmpStr.length));
+         }
+         if (result.audioVO.ending !== "") {
+            var tmpStr = result.audioVO.ending;
+            $("#RUDendingFileName").val(tmpStr.substring(tmpStr.lastIndexOf('_')+1, tmpStr.length));
+         }
+        
+         var $rudForm =  $("#rudFormTable")
+         $rudForm.find('input').prop('readonly', true);
+         $rudForm.find('textarea').prop('readonly', true);
+         $rudForm.find('select').attr('disabled',true);
       }
    })
 });

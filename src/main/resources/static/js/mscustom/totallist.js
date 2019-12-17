@@ -3,16 +3,15 @@
  function appendTotalList(list) {
     var str = ""
     list.data.forEach(list => {
-       var time = list.starttime.substring(0, 5).replace(":", "")
        str +=
           '<tr>' 
 
-          if (list.repleRepeatVO !== null) {
-             if (list.repleRepeatVO.repeatWeek !== null ) {
-               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>매주 ' + list.repleRepeatVO.repeatWeek + '반복</h4>' + '</td>' 
+          if (list.repeatVO !== null) {
+             if (list.repeatVO.repeatWeek !== null ) {
+               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>매주 ' + list.repeatVO.repeatWeek + '반복</h4>' + '</td>' 
                 
              }else{
-               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>매월 ' + list.repleRepeatVO.repeatMonth + '일 반복</h4>' + '</td>' 
+               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>매월 ' + list.repeatVO.repeatMonth + '일 반복</h4>' + '</td>' 
              }
           }else{
             str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.startdate + '</h4>' + '</td>' 

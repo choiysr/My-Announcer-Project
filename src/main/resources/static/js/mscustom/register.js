@@ -25,7 +25,7 @@ function setAudioElements() {
 }
 
 // 화면내의 dto요소들 전체 초기화(reset) - 조회(수정)화면 & 등록화면 
-// 코드수정할것(깔끔하고 간결하게)
+// 코드수정할것(깔끔하고 간결하게) == 지금안쓰는데 쓸모가있을수있으니 지우지 말것
 function removeAllElements() {
     for (let i = 0; i < 2; i++) {
         $(".title")[i].value = "";
@@ -36,7 +36,11 @@ function removeAllElements() {
         $(".ending")[i].value = "";
         $(".ymdSet")[i].value = "";
         $(".timeSet")[i].value = "";
+        $(".uploadCancelBtn")[i].innerHTML = "";
     }
+    $("#sourcePlayer").attr('src', "");
+    $("#introPlayer").attr('src', "");
+    $("#endingPlayer").attr('src', "");
 }
 
 // ===============================================================================
@@ -110,15 +114,11 @@ function validateFile(fileName, fileSize) {
 // ===============================================================================
 
 // 오디오객체배열을 파라미터로 받아 재생시켜주는 function
-// just function 수정 필요 없음. 
-function playAllAudios(audios) {
+// 동작은하나 코드 수정이 시급해보임
+function playAllAudios(audios, isUrgent) {
     for (let j = audios.length - 1; j > 0; j--) {
-        console.log("in playAllAudios")
-        console.log("src확인" + audios[j].src);
         // 이거 나중에 수정해주자 : 페이지경로로되어있는 이유는 초기화해주어서 그런듯 
-        //  startwith로 바꿔
-        if (audios[j].src == "http://localhost:8080/bcboard/todayList") {
-            console.log("여기들어오는가")
+        if (audios[j].src.startsWith("http://localhost:8080/bcboard/todayList")) {
             audios.splice(j, 1);
         } else {
             audios[j].load();
@@ -126,11 +126,18 @@ function playAllAudios(audios) {
     }
     audios[0].play();
     for (let i = 0; i < audios.length - 1; i++) {
-        console.log("재생되는애들" + audios[i] + i);
-        audios[i].addEventListener("ended", function (e) {
+        audios[i].addEventListener("ended", function() {
             audios[i + 1].play();
+            if (i == audios.length - 2 && isUrgent == 1) {
+                // 긴급공지인 경우라면 끝나고 location.reload 
+                audios[i + 1].addEventListener("ended", function () {
+                    this.removeEventListener("ended", arguments.callee);
+                    location.reload();
+                })
+            }
             this.removeEventListener("ended", arguments.callee);
         });
+
     }
 }
 
@@ -139,7 +146,6 @@ function playAllAudios(audios) {
 // 파일 업로드되면 취소하는 버튼 만드는 function
 // rud적용 완료.
 function makeCancelBtn(targetAdditionalAudio) {
-    console.log(targetAdditionalAudio);
     var cancelBtnArea = targetAdditionalAudio.parent().parent().find('.uploadCancelBtn');
     cancelBtnArea[0].innerHTML = "<i class='material-icons cancelBtn'>cancel</i>";
 }
@@ -191,11 +197,7 @@ $(".preListen").on("click", function (e) {
     e.preventDefault();
     $(this).parent().parent().find(".submitBtn").prop("disabled", false);
     var $targetForm = $(this).parent().parent().parent();
-    console.log($targetForm);
     setAllElements($targetForm);
-    console.log("미리듣기타이틀확인");
-    console.log("=============")
-    console.log(title);
     jsonData = {
         title: title,
         content: content,
@@ -209,10 +211,9 @@ $(".preListen").on("click", function (e) {
         contentType: "application/json; charset=utf-8",
         async: false,
         success: function (result) {
-            console.log("미리듣기 성공확인");
             $("#sourcePlayer").attr('src', "http://localhost:8080/rbcboard/" + result[0]);
             setAudioElements();
-            playAllAudios(audioObjects);
+            playAllAudios(audioObjects, 0);
         } // end of success function
     });  // end of ajax
 }); //end of preListen button event
@@ -225,6 +226,7 @@ $("#submitBtn").on("click", function (e) {
     var $targetForm = $(this).parent().parent().parent();
     setAllElements($targetForm);
     var result;
+    var isUrgent = 0;
 
     if ($(".urgentCheck").is(":checked")) {
         result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
@@ -263,23 +265,24 @@ $("#submitBtn").on("click", function (e) {
                 audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
             };
 
+            isUrgent = 1;
             setAudioElements();
-            playAllAudios(audioObjects);
+            playAllAudios(audioObjects, isUrgent);
         }
     } else { // 긴급방송이 아닌경우 
         var ymdSet = $("#ymdSet")[0];
         var timeSet = $("#timeSet")[0];
-        /* if (ymdSet.value == "" || timeSet.value == "") {
+        if ($("#repeat").val() == "" && (ymdSet.value == "" || timeSet.value == "")) {
             alert("방송 일자와 시간을 설정해주세요.")
             return;
-        } */
+        }
         result = confirm("방송을 등록하시겠습니까?");
         if (!result) {
             return;
         } else {
             startdate = ymdSet.value;
             starttime = timeSet.value;
-            var repeatSet  = $("#repeat").val();
+            var repeatSet = $("#repeat").val();
             var intro = "";
             var ending = "";
             if ($("#introPlayer").attr('src') !== "") {
@@ -327,10 +330,11 @@ $("#submitBtn").on("click", function (e) {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
     }).done(function (data) {
-        getTodayList();
-        $("#todayListBtn").trigger('click');
-        removeAllElements();
-
+        /* getTodayList();
+        $("#todayListBtn").trigger('click'); */
+        if (isUrgent == 0) {
+            location.reload();
+        } // 새로고침은 어쩔수 없음. 더이상 생각하지 말자
     }) // end of ajax
 }); // end of submitbutton event
 
@@ -376,9 +380,9 @@ $("#repeatSubmitBtn").on("click", function () {
 })
 
 function repeatMonthSelectAppend() {
-    var str ='';
+    var str = '';
     for (let index = 1; index < 32; index++) {
-        str +=  '<option value="'+index+'">매월 '+index+'일</option>'
+        str += '<option value="' + index + '">매월 ' + index + '일</option>'
     }
     $("#repeatMonth").html(str)
 }

@@ -279,10 +279,10 @@ $("#submitBtn").on("click", function (e) {
     } else { // 긴급방송이 아닌경우 
         var ymdSet = $("#ymdSet")[0];
         var timeSet = $("#timeSet")[0];
-        if (ymdSet.value == "" || timeSet.value == "") {
+        /* if (ymdSet.value == "" || timeSet.value == "") {
             alert("방송 일자와 시간을 설정해주세요.")
             return;
-        }
+        } */
         result = confirm("방송을 등록하시겠습니까?");
         if (!result) {
             return;

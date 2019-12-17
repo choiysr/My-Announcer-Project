@@ -21,6 +21,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -108,45 +109,37 @@ public class BCBoardController {
         String fileName = wholePath.substring((pathWithoutFname.length()), wholePath.length()); // uuid+파일명
         dto.getAudioVO().setAudioPath(pathWithoutFname);
         dto.getAudioVO().setAudioName(fileName);
-        System.out.println("순서대로 알람벨-인트로-엔딩");
-        System.out.println(dto.getAudioVO().getAlarmBell());
-        System.out.println(dto.getAudioVO().getIntro());
-        System.out.println(dto.getAudioVO().getEnding());
-
         service.register(dto);
     }
 
     // get 방식으로 url dptj 원하는 페이지, 오늘 날짜를 받는다.
     @GetMapping("/todayList/{startdate}/{week}")
-    public ResponseEntity<Page<BCBoardDTO>> list(
-        @PathVariable("startdate") String startdate, 
-        @PathVariable("week") String week) {
+    public ResponseEntity<Page<BCBoardDTO>> list(@PathVariable("startdate") String startdate,
+            @PathVariable("week") String week) {
 
-        System.out.println("==================================================");
-        System.out.println(week);
         // 정렬하여 값 가져올 기준
-        Pageable page = PageRequest.of(0, 300, Direction.ASC,  "starttime");
-        Page<BCBoardDTO> result = service.getTodayList( startdate, week, page);
+        Pageable page = PageRequest.of(0, 300, Direction.ASC, "starttime");
+        Page<BCBoardDTO> result = service.getTodayList(startdate, week, page);
         return new ResponseEntity<>(result, OK);
     }
 
     @GetMapping("/totalList")
     public ResponseEntity<Map<String, Object>> getTotalList(
-            @PageableDefault(page = 0, direction = Direction.ASC, sort = {"startdate", "starttime" }) Pageable page,
+            @PageableDefault(page = 0, direction = Direction.ASC, sort = { "startdate", "starttime" }) Pageable page,
             String category, String search) {
-                // Pageable page = PageRequest.of(0, 10);
         Map<String, Object> result = service.getAllList(page, category, search);
         return new ResponseEntity<>(result, OK);
     }
 
     @GetMapping("/read/{bno}")
     public ResponseEntity<BCBoardDTO> getOneBCBoard(@PathVariable("bno") Integer bno) {
-       System.out.println("read진입확인");
-       System.out.println("오잉???");
-       BCBoardDTO bc = service.read(bno);
-       System.out.println(bc);
-       
-        return new ResponseEntity<>(service.read(bno),OK);
+        return new ResponseEntity<>(service.read(bno), OK);
+    }
+
+    @DeleteMapping("/{bno}")
+    public void deleteBCBoard(@PathVariable("bno") Integer bno) {
+        System.out.println("진입확인");
+        service.delete(bno);
     }
 
     ////////// API METHOD ////////////
@@ -157,7 +150,7 @@ public class BCBoardController {
         String url = "";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-       
+
         String clovaUrl = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
         String clovaUrlPremium = "https://naveropenapi.apigw.ntruss.com/voice-premium/v1/tts";
         String keyID = "8un3nj2jlx";
@@ -175,7 +168,7 @@ public class BCBoardController {
             data = "speaker=nara&speed=0&format=wav&text=" + dto.getContent();
             url = clovaUrlPremium;
         }
-        
+
         return restTemplate.postForEntity(url, new HttpEntity<byte[]>(data.getBytes(), headers), byte[].class);
     }
 

@@ -32,7 +32,7 @@
                         </div>
 
                         <!-- 조회/수정 modal -->
-                        <div class="modal fade" id="layerpop">
+                        <div class="modal fade readModal" id="layerpop">
                            <div class="modal-dialog">
                               <div class="modal-content">
                                  <!-- header -->
@@ -45,10 +45,12 @@
                                  <!-- body -->
                                  <div class="modal-body">
                                     <!-- top of rudTable 조회창입니다=============================== -->
-                                    <table id="rudFormTable">
+                                    <table id="rudFormTable" aria-disabled="true">
                                        <tr>
                                           <th class="formTitle" style="width: 100px;"><strong>제목</strong></th>
-                                          <th colspan="2"><input class="title" id="RUDtitle" type="text" placeholder="제목을 입력하세요">
+                                          <th colspan="2">
+                                             <h1 id="RUDbno" style="display: none;"></h1>
+                                             <input class="title" id="RUDtitle" type="text" placeholder="제목을 입력하세요">
                                           </th>
                                        </tr>
                                        <tr>
@@ -59,7 +61,7 @@
                                        <tr>
                                           <th class="formTitle"></th>
                                           <th colspan="2" style="text-align: right;"><button
-                                                class="spaceChecker">띄어쓰기교정</button></th>
+                                                class="spaceChecker" style="display: none;">띄어쓰기교정</button></th>
                                        </tr>
                                        <tr>
                                           <th>　</th>
@@ -84,7 +86,8 @@
                                        <tr>
                                           <th class="formTitle"><strong>INTRO</strong></th>
                                           <th>
-                                             <input type="file" class="intro" id="RUDintro">
+                                             <input type="file" class="intro" id="RUDintro" style="display: none;">
+                                             <input type="text" id="RUDintroFileName" value="등록된 파일이 없습니다.">  
                                           </th>
                                           <th class="uploadCancelBtn">
                                           </th>
@@ -95,7 +98,8 @@
                                        <tr>
                                           <th class="formTitle"><strong>ENDING</strong></th>
                                           <th>
-                                             <input type="file" class="ending" id="RUDending">
+                                             <input type="file" class="ending" id="RUDending" style="display: none;">
+                                             <input type="text" id="RUDendingFileName" value="등록된 파일이 없습니다."> 
                                           </th>
                                           <th class="uploadCancelBtn">
                                           </th>
@@ -129,8 +133,7 @@
                                        <tr>
                                           <div class="mt-20">
                                              <th></th>
-                                             <th style="text-align: right" colspan="2">
-                                                <button class="repeat">반복설정</button> &nbsp;
+                                             <th style="text-align: right; display: none;" colspan="2">
                                                 <button class="preListen">미리듣기</button> &nbsp;
                                                 <button class="submitBtn" disabled=true>방송등록</button></th>
                                           </div>
@@ -140,8 +143,9 @@
                                  </div>
                                  <!-- Footer -->
                                  <div class="modal-footer">
-                                    Footer
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                                    <button type="button" class="btn btn-default" id="modifyBCBoard">수정</button>
+                                    <button type="button" class="btn btn-default" id="deleteBCBoard">삭제</button>
+                                    <button type="button" class="btn btn-default" id="closeReadModal" data-dismiss="modal">닫기</button>
                                  </div>
                               </div>
                            </div>
@@ -415,6 +419,7 @@
       <script th:src="@{~/js/mscustom/totallist.js}"></script>
       <script th:src="@{~/js/mscustom/todaylist.js}"></script>
       <script th:src="@{~/js/mscustom/register.js}"></script>
+      <script th:src="@{~/js/mscustom/rud.js}"></script>
       <script>
 
          $(document).ready(function() {

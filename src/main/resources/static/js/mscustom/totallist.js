@@ -3,7 +3,6 @@
  function appendTotalList(list) {
     var str = ""
     list.data.forEach(list => {
-       var time = list.starttime.substring(0, 5).replace(":", "")
        str +=
           '<tr>' 
 

@@ -53,9 +53,9 @@ public class BCBTests {
             // 주간반복
             RepeatVO repeatVO = new RepeatVO();
             // repeatVO.setRepeatWeek("0,1,4");
-            // dto.setRepleRepeatVO(repeatVO);
+            // dto.setrepeatVO(repeatVO);
             repeatVO.setRepeatMonth("16");
-            dto.setRepeatVO(repeatVO);
+            // dto.setrepeatVO(repeatVO);
 
             dto.setAudioVO(audio);
             service.register(dto);

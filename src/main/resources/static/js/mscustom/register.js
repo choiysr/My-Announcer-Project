@@ -67,6 +67,15 @@ $(".urgentCheck").change(function (e) {
     var isChecked = $(".urgentCheck").is(":checked");
     $("#ymdSet, #timeSet").prop("disabled", isChecked);
     $("#repeat").prop("disabled", isChecked);
+    if(isChecked){
+        $("#ymdSet, #timeSet").css("background-color","lightgray")
+        $("#repeat").css("background-color","lightgray");
+    }else{
+        $("#ymdSet, #timeSet").css("background-color","")
+        $("#repeat").css("background-color","");
+
+    }
+
 });
 // ===============================================================================
 
@@ -216,6 +225,7 @@ $(".preListen").on("click", function (e) {
             playAllAudios(audioObjects, 0);
         } // end of success function
     });  // end of ajax
+    $(this).parent().parent().find(".submitBtn").css("color", "");
 }); //end of preListen button event
 
 
@@ -299,7 +309,7 @@ $("#submitBtn").on("click", function (e) {
                     gender: gender,
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
-                    repleRepeatVO: { repeatWeek: repeatSet }
+                    repeatVO: { repeatWeek: repeatSet }
                 };
             } else if (repeatSet.startsWith("month")) {
                 jsonData = {
@@ -308,7 +318,7 @@ $("#submitBtn").on("click", function (e) {
                     gender: gender,
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
-                    repleRepeatVO: { repeatMonth: repeatSet }
+                    repeatVO: { repeatMonth: repeatSet }
                 };
             } else {
                 jsonData = {
@@ -359,28 +369,43 @@ $("#repeatType").on("change", function () {
 
 $("#repeatSubmitBtn").on("click", function () {
     var str = ''
-
+    var ymdSet =$("#ymdSet")
+   
     if ($("#repeatType").val() === "repeatWeek") {
-        str += "week-"
+        str = "week-"
         $("input:checkbox[name='repeatWeek']:checked").each(function () {
             str += $(this).data("val") + ","
-            console.log($(this).data("val"));
-
         });
+
+        if (str === "week-" ) {
+            alert("반복설정이 필요합니다.!")
+            $("#repeat").val("")
+            ymdSet.attr("disabled", false);
+            ymdSet.css("background-color", "")
+            return;
+        }
     } else {
-        str += "month-"
+        str = "month-"
         str += $("#repeatMonth").val()
+        if (str === "month-" ) {
+            alert("반복설정이 필요합니다.!")
+            $("#repeat").val("")
+            ymdSet.attr("disabled", false);
+            ymdSet.css("background-color", "")
+            return;
+        }
 
     }
-    console.log(str);
 
-    $("#ymdSet").attr("disabled", true);
+    ymdSet.attr("disabled", true);
+    ymdSet.val("")
+    ymdSet.css("background-color", "lightgray")
     $("#repeat").val(str)
 
 })
 
 function repeatMonthSelectAppend() {
-    var str = '';
+    var str ='<option selected value="">월간반복</option>';
     for (let index = 1; index < 32; index++) {
         str += '<option value="' + index + '">매월 ' + index + '일</option>'
     }

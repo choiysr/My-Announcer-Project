@@ -63,6 +63,15 @@ $(".urgentCheck").change(function (e) {
     var isChecked = $(".urgentCheck").is(":checked");
     $("#ymdSet, #timeSet").prop("disabled", isChecked);
     $("#repeat").prop("disabled", isChecked);
+    if(isChecked){
+        $("#ymdSet, #timeSet").css("background-color","lightgray")
+        $("#repeat").css("background-color","lightgray");
+    }else{
+        $("#ymdSet, #timeSet").css("background-color","")
+        $("#repeat").css("background-color","");
+
+    }
+
 });
 // ===============================================================================
 
@@ -215,6 +224,7 @@ $(".preListen").on("click", function (e) {
             playAllAudios(audioObjects);
         } // end of success function
     });  // end of ajax
+    $(this).parent().parent().find(".submitBtn").css("color", "");
 }); //end of preListen button event
 
 
@@ -355,6 +365,7 @@ $("#repeatType").on("change", function () {
 
 $("#repeatSubmitBtn").on("click", function () {
     var str = ''
+    var ymdSet =$("#ymdSet")
    
     if ($("#repeatType").val() === "repeatWeek") {
         str = "week-"
@@ -365,7 +376,8 @@ $("#repeatSubmitBtn").on("click", function () {
         if (str === "week-" ) {
             alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
-            $("#ymdSet").attr("disabled", false);
+            ymdSet.attr("disabled", false);
+            ymdSet.css("background-color", "")
             return;
         }
     } else {
@@ -374,14 +386,16 @@ $("#repeatSubmitBtn").on("click", function () {
         if (str === "month-" ) {
             alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
-            $("#ymdSet").attr("disabled", false);
+            ymdSet.attr("disabled", false);
+            ymdSet.css("background-color", "")
             return;
         }
 
     }
 
-    $("#ymdSet").attr("disabled", true);
-    $("#ymdSet").val("")
+    ymdSet.attr("disabled", true);
+    ymdSet.val("")
+    ymdSet.css("background-color", "lightgray")
     $("#repeat").val(str)
 
 })

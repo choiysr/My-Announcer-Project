@@ -82,7 +82,10 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
       audio[0].pause();
       audio[0].currentTime = 0;
       audio[0].removeEventListener("ended", arguments.callee);
-      for (let index = 1; index < audio.length; index++) {
+      console.log();
+      
+      for (let index = 1; index < audio.siblings().length; index++) {
+         console.log( audio.siblings()[index]);
          audio.siblings()[index].pause();
          audio.siblings()[index].currentTime = 0;
          audio.siblings()[index].removeEventListener("ended", arguments.callee)

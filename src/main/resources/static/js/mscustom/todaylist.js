@@ -20,21 +20,21 @@ function appendlist(list) {
       var wholePathOfIntroFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.intro;
       var wholePathOfedningFile = list.audioVO.audioPath.replace(/\\/gi, "-") + list.audioVO.ending;
       //현재시간 >  지정시간 == 색변경
-      if(((vals.time).replace(":","")) > time ){
-         str+= '<tr style="background-color: #EEEEEE" class="listTable">'
-      }else{
-         str+= '<tr class="listTable">'
+      if (((vals.time).replace(":", "")) > time) {
+         str += '<tr style="background-color: #EEEEEE" class="listTable">'
+      } else {
+         str += '<tr class="listTable">'
       }
 
       str +=
-         
-         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<a class="listTitle" href="#" id="'+list.bno+'"><h4>' + list.title + '</h4></a>' + '</td>' +
+
+         '<td style="padding-top: 40px; height:70px; width:10vw;">' + '<a class="listTitle" href="#" id="' + list.bno + '"><h4>' + list.title + '</h4></a>' + '</td>' +
          '<td style="padding-top: 40px;"">' + '<h4>' + list.starttime.substring(0, 5) + '</h4>' + '</td>' +
          '<td  style="padding-top: 40px;">' + '<a  href="#"><i id="icon' + time + '" class="far fa-play-circle playBtn" style="font-size:30px" data-time = "' + time + '"></a></i>' + '</td>' +
          '<td class="test" style="padding-top: 25px; padding-left: 5px; padding-right: 5px; height:70px;">' +
          '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'
 
-      if (list.audioVO.intro.length!==0) {
+      if (list.audioVO.intro.length !== 0) {
          str += '<audio style=" width: 35vw; min-width: 1cm; " id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
             '<source src="http://localhost:8080/rbcboard/' + wholePathOfIntroFile + '" ></source>' +
             '</audio>'
@@ -72,27 +72,25 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
    var img = btn.closest("tr").children(".test").children(".playImg")
    var targetAlarm = $("#hiddenAlarm" + audio.attr("data-alarmBell"));
 
-  
+
 
    if (btn.attr('class') === 'far fa-stop-circle playBtn') {
       targetAlarm[0].pause();
       targetAlarm[0].currentTime = 0;
+      targetAlarm[0].removeEventListener("ended", arguments.callee)
 
       audio[0].pause();
-      audio.siblings()[0].pause();
-      audio.siblings()[1].pause();
-
       audio[0].currentTime = 0;
-      audio.siblings()[0].currentTime = 0;
-      audio.siblings()[1].currentTime = 0;
+      audio[0].removeEventListener("ended", arguments.callee);
+      for (let index = 1; index < audio.length; index++) {
+         audio.siblings()[index].pause();
+         audio.siblings()[index].currentTime = 0;
+         audio.siblings()[index].removeEventListener("ended", arguments.callee)
+      }
 
       btn.attr('class', 'far fa-play-circle playBtn')
       img.attr("src", "../../img/mscustom/audioLine.jpg")
 
-      audio[0].removeEventListener("ended", arguments.callee);
-      targetAlarm[0].removeEventListener("ended", arguments.callee)
-      audio.siblings()[0].removeEventListener("ended", arguments.callee)
-      audio.siblings()[1].removeEventListener("ended", arguments.callee)
       return;
    } else {
       img.attr("src", "../../img/mscustom/soundwave.gif")
@@ -154,8 +152,8 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
    var Minutes = cT.getMinutes() < 10 ? "0" + cT.getMinutes() : cT.getMinutes()
    var now = hour + "" + Minutes
    //현재시간  >= 지정시간 =>색 변경
-   
-   if(now >=  target){
+
+   if (now >= target) {
       console.log("들어옴");
       $(this).parents("tr").css("background-color", "#EEEEEE")
    }

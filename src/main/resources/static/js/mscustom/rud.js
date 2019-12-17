@@ -20,3 +20,13 @@ $("#deleteBCBoard").on("click", function () {
         })
     }
 });
+
+// [수정]버튼 이벤트
+$("#modifyBCBoard").on("click" ,function () {
+
+    var $rudForm =  $("#rudFormTable");
+    $rudForm.find('input').prop('readonly', false);
+    $rudForm.find('textarea').prop('readonly', false);
+    $rudForm.find('select').attr('disabled',false);
+
+}

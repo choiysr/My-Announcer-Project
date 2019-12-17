@@ -34,17 +34,17 @@ function appendlist(list) {
          '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'
 
       if (list.audioVO.intro.length !== 0) {
-         str += '<audio style=" width: 35vw; min-width: 1cm; display:none;" " id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
+         str += '<audio style=" width: 35vw; min-width: 1cm; display:;" " id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
             '<source src="http://localhost:8080/rbcboard/' + wholePathOfIntroFile + '" ></source>' +
             '</audio>'
       }
 
-      str += '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
+      str += '<audio style=" width: 35vw; min-width: 1cm; display:;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
          '<source src="http://localhost:8080/rbcboard/' + wholePathOfFile + '" ></source>' +
          '</audio>'
 
       if (list.audioVO.ending.length !== 0) {
-         str += '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
+         str += '<audio style=" width: 35vw; min-width: 1cm; display:;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
             '<source src="http://localhost:8080/rbcboard/' + wholePathOfedningFile + '" ></source>' +
             '</audio>'
       }

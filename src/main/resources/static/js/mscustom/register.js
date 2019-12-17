@@ -417,7 +417,7 @@ function registerTest() {
     $("#content").val("테스트 내용임둥")
     $("#voiceGender").val("테스트 내용임둥")
     $("#voiceGender").val("man")
-    $("#ymdSet").val(new Date().getFullYear()+"-"+new Date().getMonth()+"-"+new Date().getDate())
-    $("#timeSet").val(new Date().getHours()+":"+new Date().getMinutes())
+    $("#ymdSet").val(new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate())
+    $("#timeSet").val(new Date().getHours()+":"+(new Date().getMinutes()+1))
 }
 

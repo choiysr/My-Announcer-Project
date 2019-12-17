@@ -67,12 +67,12 @@ $(".urgentCheck").change(function (e) {
     var isChecked = $(".urgentCheck").is(":checked");
     $("#ymdSet, #timeSet").prop("disabled", isChecked);
     $("#repeat").prop("disabled", isChecked);
-    if(isChecked){
-        $("#ymdSet, #timeSet").css("background-color","lightgray")
-        $("#repeat").css("background-color","lightgray");
-    }else{
-        $("#ymdSet, #timeSet").css("background-color","")
-        $("#repeat").css("background-color","");
+    if (isChecked) {
+        $("#ymdSet, #timeSet").css("background-color", "lightgray")
+        $("#repeat").css("background-color", "lightgray");
+    } else {
+        $("#ymdSet, #timeSet").css("background-color", "")
+        $("#repeat").css("background-color", "");
 
     }
 
@@ -135,7 +135,7 @@ function playAllAudios(audios, isUrgent) {
     }
     audios[0].play();
     for (let i = 0; i < audios.length - 1; i++) {
-        audios[i].addEventListener("ended", function() {
+        audios[i].addEventListener("ended", function () {
             audios[i + 1].play();
             if (i == audios.length - 2 && isUrgent == 1) {
                 // 긴급공지인 경우라면 끝나고 location.reload 
@@ -350,7 +350,6 @@ $("#submitBtn").on("click", function (e) {
 
 $("#repeatType").on("change", function () {
     var target = $(this);
-    console.log(target.val());
 
     $("#repeatWeekdiv").css("display", "none")
     $("#repeatMonthdiv").css("display", "none")
@@ -358,7 +357,6 @@ $("#repeatType").on("change", function () {
 
     $("input:checkbox[name='repeatWeek']:checked").each(function () {
 
-        console.log($(this).data("val"));
 
         $(this).attr('checked', false);
 
@@ -369,15 +367,14 @@ $("#repeatType").on("change", function () {
 
 $("#repeatSubmitBtn").on("click", function () {
     var str = ''
-    var ymdSet =$("#ymdSet")
-   
+    var ymdSet = $("#ymdSet")
+
     if ($("#repeatType").val() === "repeatWeek") {
         str = "week-"
         $("input:checkbox[name='repeatWeek']:checked").each(function () {
             str += $(this).data("val") + ","
         });
-
-        if (str === "week-" ) {
+        if (str === "week-") {
             alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
             ymdSet.attr("disabled", false);
@@ -387,7 +384,7 @@ $("#repeatSubmitBtn").on("click", function () {
     } else {
         str = "month-"
         str += $("#repeatMonth").val()
-        if (str === "month-" ) {
+        if (str === "month-") {
             alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
             ymdSet.attr("disabled", false);
@@ -397,15 +394,32 @@ $("#repeatSubmitBtn").on("click", function () {
 
     }
 
+    if ($("#repeatType").val() === "repeatWeek") {
+        var weeks = [" 일", " 월", " 화", " 수", " 목", " 금", " 토"]
+        $("#repeat").val(str)
+        str = str.replace("week-", "매 주 ")
+        for (let index = 0; index < weeks.length; index++) {
+            if (index ==weeks.length ) {
+                str = str.replace(index+",",weeks[index])
+            }else{
+                str = str.replace(index,weeks[index])
+            }
+        }
+        $("#repeatView").val((str+"요일").replace(",요일", "요일"))
+    }else{
+        $("#repeat").val(str)
+        str = str.replace("month-","매 월 ")
+        $("#repeatView").val(str+"일")
+    }
+
     ymdSet.attr("disabled", true);
     ymdSet.val("")
     ymdSet.css("background-color", "lightgray")
-    $("#repeat").val(str)
 
 })
 
 function repeatMonthSelectAppend() {
-    var str ='<option selected value="">월간반복</option>';
+    var str = '<option selected value="">월간반복</option>';
     for (let index = 1; index < 32; index++) {
         str += '<option value="' + index + '">매월 ' + index + '일</option>'
     }
@@ -417,7 +431,7 @@ function registerTest() {
     $("#content").val("테스트 내용임둥")
     $("#voiceGender").val("테스트 내용임둥")
     $("#voiceGender").val("man")
-    $("#ymdSet").val(new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate())
-    $("#timeSet").val(new Date().getHours()+":"+(new Date().getMinutes()+1))
+    $("#ymdSet").val(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate())
+    $("#timeSet").val(new Date().getHours() + ":" + (new Date().getMinutes() + 1))
 }
 

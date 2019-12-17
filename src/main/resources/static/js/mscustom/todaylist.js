@@ -5,6 +5,8 @@ playAlert = setInterval(function () {
    var Minutes = cT.getMinutes() < 10 ? "0" + cT.getMinutes() : cT.getMinutes()
    var now = hour + "" + Minutes
    var target = $("#icon" + now);
+   console.log(now);
+   
    if ($(target).length == 1) {
       target.click();
    }
@@ -81,10 +83,8 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
       audio[0].pause();
       audio[0].currentTime = 0;
       audio[0].removeEventListener("ended", arguments.callee);
-      console.log();
       
       for (let index = 1; index < audio.siblings().length; index++) {
-         console.log( audio.siblings()[index]);
          audio.siblings()[index].pause();
          audio.siblings()[index].currentTime = 0;
          audio.siblings()[index].removeEventListener("ended", arguments.callee)
@@ -156,7 +156,6 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
    //현재시간  >= 지정시간 =>색 변경
 
    if (now >= target) {
-      console.log("들어옴");
       $(this).parents("tr").css("background-color", "#EEEEEE")
    }
 }) // end of playBtn event in list 

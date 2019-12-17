@@ -29,4 +29,4 @@ $("#modifyBCBoard").on("click" ,function () {
     $rudForm.find('textarea').prop('readonly', false);
     $rudForm.find('select').attr('disabled',false);
 
-}
+});

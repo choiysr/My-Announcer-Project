@@ -55,6 +55,6 @@ public class BCBoardDTO {
     private AudioVO audioVO;
 
     @Embedded
-    private RepeatVO repleRepeatVO;
+    private RepeatVO repeatVO;
 
 }

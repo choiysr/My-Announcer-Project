@@ -306,7 +306,7 @@ $("#submitBtn").on("click", function (e) {
                     gender: gender,
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
-                    repleRepeatVO: { repeatWeek: repeatSet }
+                    repeatVO: { repeatWeek: repeatSet }
                 };
             } else if (repeatSet.startsWith("month")) {
                 jsonData = {
@@ -315,7 +315,7 @@ $("#submitBtn").on("click", function (e) {
                     gender: gender,
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
-                    repleRepeatVO: { repeatMonth: repeatSet }
+                    repeatVO: { repeatMonth: repeatSet }
                 };
             } else {
                 jsonData = {

@@ -425,5 +425,12 @@ function repeatMonthSelectAppend() {
     $("#repeatMonth").html(str)
 }
 
-
+function registerTest() {
+    $("#title").val("테스트입니둥")
+    $("#content").val("테스트 내용임둥")
+    $("#voiceGender").val("테스트 내용임둥")
+    $("#voiceGender").val("man")
+    $("#ymdSet").val(new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate())
+    $("#timeSet").val(new Date().getHours()+":"+(new Date().getMinutes()+1))
+}
 

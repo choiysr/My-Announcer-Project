@@ -355,28 +355,39 @@ $("#repeatType").on("change", function () {
 
 $("#repeatSubmitBtn").on("click", function () {
     var str = ''
-
+   
     if ($("#repeatType").val() === "repeatWeek") {
-        str += "week-"
+        str = "week-"
         $("input:checkbox[name='repeatWeek']:checked").each(function () {
             str += $(this).data("val") + ","
-            console.log($(this).data("val"));
-
         });
+
+        if (str === "week-" ) {
+            alert("반복설정이 필요합니다.!")
+            $("#repeat").val("")
+            $("#ymdSet").attr("disabled", false);
+            return;
+        }
     } else {
-        str += "month-"
+        str = "month-"
         str += $("#repeatMonth").val()
+        if (str === "month-" ) {
+            alert("반복설정이 필요합니다.!")
+            $("#repeat").val("")
+            $("#ymdSet").attr("disabled", false);
+            return;
+        }
 
     }
-    console.log(str);
 
     $("#ymdSet").attr("disabled", true);
+    $("#ymdSet").val("")
     $("#repeat").val(str)
 
 })
 
 function repeatMonthSelectAppend() {
-    var str ='';
+    var str ='<option selected value="">월간반복</option>';
     for (let index = 1; index < 32; index++) {
         str +=  '<option value="'+index+'">매월 '+index+'일</option>'
     }

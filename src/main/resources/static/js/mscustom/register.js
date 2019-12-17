@@ -365,7 +365,7 @@ $("#repeatSubmitBtn").on("click", function () {
         });
     } else {
         str += "month-"
-        str += $("#repeatMonth").val().split("-")[2]
+        str += $("#repeatMonth").val()
 
     }
     console.log(str);
@@ -373,10 +373,15 @@ $("#repeatSubmitBtn").on("click", function () {
     $("#ymdSet").attr("disabled", true);
     $("#repeat").val(str)
 
-
-
-
 })
+
+function repeatMonthSelectAppend() {
+    var str ='';
+    for (let index = 1; index < 32; index++) {
+        str +=  '<option value="'+index+'">매월 '+index+'일</option>'
+    }
+    $("#repeatMonth").html(str)
+}
 
 
 

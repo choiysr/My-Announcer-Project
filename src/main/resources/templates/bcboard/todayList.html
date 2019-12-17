@@ -329,14 +329,18 @@
                   <button type="button" class="close" data-dismiss="modal">×</button>
                   <h4  class="modal-title">반복설정</h4>
                </div>
-               <select id="repeatType"  >
-                  <option selected value="repeatWeek">주간</option>
-                  <option value="repeatMonth">월간</option>
-               </select>
                <div  class="modal-body">
+                  <select id="repeatType"  style="width: 4cm;" >
+                     <option selected value="repeatWeek">주간</option>
+                     <option value="repeatMonth">월간</option>
+                  </select>
+                  <br>
+                  <br>
+                  <br>
                   <div id="repeatMonthdiv" style="display:none ;">
                      <h4>월간반복</h4>
-                     <input id="repeatMonth" type="date">
+                     <select style="width: 4cm;"  id="repeatMonth">
+                     </select>
                   </div>
                   <div id="repeatWeekdiv" >
                      <h4>주간반복</h4>
@@ -415,6 +419,7 @@
          $(document).ready(function() {
             getTodayList();
             loadpage(1, "title", "");
+            repeatMonthSelectAppend();
          })
       
       </script>

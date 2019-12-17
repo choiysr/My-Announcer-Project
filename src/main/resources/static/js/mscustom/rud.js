@@ -8,9 +8,7 @@ $("#deleteBCBoard").on("click", function () {
     if (!result) {
         return;
     } else {
-        /* var $targetBno = $(this).parent().parent().parent().find('#RUDbno'); */
-        var $targetBno = $("#RUDbno");
-        var bno = $targetBno[0].value;
+        var bno = $("#RUDbno").val();
         $.ajax({
             url: 'http://localhost:8080/rbcboard/'+bno,
             data: bno,

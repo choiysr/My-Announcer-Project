@@ -82,10 +82,10 @@ $(".urgentCheck").change(function (e) {
     $("#repeat").prop("disabled", isChecked);
     if (isChecked) {
         $("#ymdSet, #timeSet").css("background-color", "lightgray")
-        $("#repeat").css("background-color", "lightgray");
+        $("#repeatView").css("background-color", "lightgray");
     } else {
         $("#ymdSet, #timeSet").css("background-color", "")
-        $("#repeat").css("background-color", "");
+        $("#repeatView").css("background-color", "");
 
     }
 
@@ -251,6 +251,8 @@ $("#submitBtn").on("click", function (e) {
     var result;
     var isUrgent = 0;
 
+    
+
     if ($(".urgentCheck").is(":checked")) {
         result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
         if (!result) {
@@ -295,10 +297,7 @@ $("#submitBtn").on("click", function (e) {
     } else { // 긴급방송이 아닌경우 
         var ymdSet = $("#ymdSet")[0];
         var timeSet = $("#timeSet")[0];
-        if ($("#repeat").val() == "" && (ymdSet.value == "" || timeSet.value == "")) {
-            alert("방송 일자와 시간을 설정해주세요.")
-            return;
-        }
+
         result = confirm("방송을 등록하시겠습니까?");
         if (!result) {
             return;
@@ -388,8 +387,8 @@ $("#repeatSubmitBtn").on("click", function () {
             str += $(this).data("val") + ","
         });
         if (str === "week-") {
-            alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
+            $("#repeatView").val("")
             ymdSet.attr("disabled", false);
             ymdSet.css("background-color", "")
             return;
@@ -398,8 +397,8 @@ $("#repeatSubmitBtn").on("click", function () {
         str = "month-"
         str += $("#repeatMonth").val()
         if (str === "month-") {
-            alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
+            $("#repeatView").val("")
             ymdSet.attr("disabled", false);
             ymdSet.css("background-color", "")
             return;
@@ -439,12 +438,12 @@ function repeatMonthSelectAppend() {
     $("#repeatMonth").html(str)
 }
 
-function registerTest() {
-    $("#title").val("테스트입니둥")
-    $("#content").val("테스트 내용임둥")
-    $("#voiceGender").val("테스트 내용임둥")
-    $("#voiceGender").val("man")
-    $("#ymdSet").val(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate())
-    $("#timeSet").val(new Date().getHours() + ":" + (new Date().getMinutes() + 1))
-}
+// function registerTest() {
+//     $("#title").val("테스트입니둥")
+//     $("#content").val("테스트 내용임둥")
+//     $("#voiceGender").val("테스트 내용임둥")
+//     $("#voiceGender").val("man")
+//     $("#ymdSet").val(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate())
+//     $("#timeSet").val(new Date().getHours() + ":" + (new Date().getMinutes() + 1))
+// }
 

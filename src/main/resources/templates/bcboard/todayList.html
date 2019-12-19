@@ -137,7 +137,7 @@
                                        <tr>
                                           <div class="mt-20">
                                              <th></th>
-                                             <th style="text-align: right; display:;" colspan="2">
+                                             <th style="text-align: right; " colspan="2">
                                                 <button class="preListen">미리듣기</button> &nbsp;</th>
                                           </div>
                                        </tr>
@@ -250,10 +250,11 @@
                                              </th>
                                           </tr>
                                           <tr>
-                                             <th class="formTitle"><strong>방송시간</strong></th>
+                                             <th class="formTitle"><strong>반복</strong></th>
                                              <th colspan="2">
                                                 <div class="time">
-                                                   <input type="text" id="repeat">
+                                                   <input type="text" readonly id="repeatView">
+                                                   <input type="text" hidden  id="repeat">
                                                 </div>
                                              </th>
                                           </tr>
@@ -431,7 +432,7 @@
             loadpage(1, "title", "");
             repeatMonthSelectAppend();
             //일일이 테스트하기 귀찮아서 만듬 ㅋㅅㅋ
-            //registerTest()
+            registerTest()
          })
       
       </script>

@@ -149,7 +149,6 @@ $("#updateBCBoard").on("click", function (e) {
     } // 
 })
 
-
 // 오디오파일을 업로드했을때 바로 intro에 넣어준다 -> register에 function있음
 // (미리듣기/등록시에) 수정화면에 파일셋팅 안되어있으면 기존파일을 가져와서 introPlayer에 셋팅해주는 메서드
 function getOriginalAudios(targetAudio) {

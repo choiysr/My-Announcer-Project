@@ -82,10 +82,11 @@ $(".urgentCheck").change(function (e) {
     $("#repeat").prop("disabled", isChecked);
     if (isChecked) {
         $("#ymdSet, #timeSet").css("background-color", "lightgray")
-        $("#repeat").css("background-color", "lightgray");
+        $("#repeatView").css("background-color", "lightgray");
     } else {
         $("#ymdSet, #timeSet").css("background-color", "")
-        $("#repeat").css("background-color", "");
+        $("#repeatView").css("background-color", "");
+
     }
 
 });
@@ -342,6 +343,8 @@ $("#submitBtn").on("click", function (e) {
     var result;
     var isUrgent = 0;
 
+    
+
     if ($(".urgentCheck").is(":checked")) {
         result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
         if (!result) {
@@ -453,12 +456,12 @@ $("#submitBtn").on("click", function (e) {
 
 $("#repeatType").on("change", function () {
     var target = $(this);
-    console.log(target.val());
 
     $("#repeatWeekdiv").css("display", "none")
     $("#repeatMonthdiv").css("display", "none")
     $("input:checkbox[name='repeatWeek']:checked").each(function () {
-        console.log($(this).data("val"));
+
+
         $(this).attr('checked', false);
     });
     $("#" + target.val() + "div").css("display", "")
@@ -473,10 +476,9 @@ $("#repeatSubmitBtn").on("click", function () {
         $("input:checkbox[name='repeatWeek']:checked").each(function () {
             str += $(this).data("val") + ","
         });
-
         if (str === "week-") {
-            alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
+            $("#repeatView").val("")
             ymdSet.attr("disabled", false);
             ymdSet.css("background-color", "")
             return;
@@ -485,8 +487,8 @@ $("#repeatSubmitBtn").on("click", function () {
         str = "month-"
         str += $("#repeatMonth").val()
         if (str === "month-") {
-            alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
+            $("#repeatView").val("")
             ymdSet.attr("disabled", false);
             ymdSet.css("background-color", "")
             return;
@@ -494,10 +496,27 @@ $("#repeatSubmitBtn").on("click", function () {
 
     }
 
+    if ($("#repeatType").val() === "repeatWeek") {
+        var weeks = [" 일", " 월", " 화", " 수", " 목", " 금", " 토"]
+        $("#repeat").val(str)
+        str = str.replace("week-", "매 주 ")
+        for (let index = 0; index < weeks.length; index++) {
+            if (index ==weeks.length ) {
+                str = str.replace(index+",",weeks[index])
+            }else{
+                str = str.replace(index,weeks[index])
+            }
+        }
+        $("#repeatView").val((str+"요일").replace(",요일", "요일"))
+    }else{
+        $("#repeat").val(str)
+        str = str.replace("month-","매 월 ")
+        $("#repeatView").val(str+"일")
+    }
+
     ymdSet.attr("disabled", true);
     ymdSet.val("")
     ymdSet.css("background-color", "lightgray")
-    $("#repeat").val(str)
 
 })
 
@@ -509,14 +528,14 @@ function repeatMonthSelectAppend() {
     $("#repeatMonth").html(str)
 }
 
-function registerTest() {
-    $("#title").val("테스트입니둥")
-    $("#content").val("테스트 내용임둥")
-    $("#voiceGender").val("테스트 내용임둥")
-    $("#voiceGender").val("man")
-    $("#ymdSet").val(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate())
-    $("#timeSet").val(new Date().getHours() + ":" + (new Date().getMinutes() + 1))
-}
+// function registerTest() {
+//     $("#title").val("테스트입니둥")
+//     $("#content").val("테스트 내용임둥")
+//     $("#voiceGender").val("테스트 내용임둥")
+//     $("#voiceGender").val("man")
+//     $("#ymdSet").val(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate())
+//     $("#timeSet").val(new Date().getHours() + ":" + (new Date().getMinutes() + 1))
+// }
 
 function getBCBoard(content, title, gender, starttime, alarmBell, intro, ending, repeatSet) {
     let result = {

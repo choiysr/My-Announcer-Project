@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.aspectj.util.FileUtil;
 import org.ms.announcer.domain.BCBoardDTO;
 import org.ms.announcer.service.BCBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +50,7 @@ public class BCBoardController {
     private BCBoardService service;
 
     // ==================== Intro/ending 파일업로드 ===================
-    @PostMapping(value = "/fileUpload") // 얘는 왜 get으로 안되는가?
+    @PostMapping(value = "/fileUpload") // 얘는 왜 get으로 안되는가? > byte너무길어서 url로 보낼수 없음
     public ResponseEntity<List<String>> fileUpload(MultipartFile additionalAudio) {
         // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임. (prelisten수정 view and
         // controller)
@@ -73,6 +75,25 @@ public class BCBoardController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return new ResponseEntity<>(list, OK);
+    }
+
+    @GetMapping(value = "/getPrevFile/{prevPath}")
+    public ResponseEntity<List<String>> getPrevFiles(@PathVariable("prevPath") String prevPath) {
+        System.out.println("파라미터확인");
+        System.out.println(prevPath);
+        File file = new File(prevPath.replace("-", "\\"));
+        System.out.println("에러체크1");
+        List<String> list = new ArrayList<>();
+        String fileNameWithoutType = prevPath.substring(prevPath.lastIndexOf("_")+1, prevPath.lastIndexOf("."));
+        try {
+            byte[] fileBytes = FileUtil.readAsByteArray(file);
+            list.add(audioSave(fileNameWithoutType, fileBytes).replace("\\", "*"));
+        } catch (Exception e) {
+            System.out.println("getprevfile method에서 에러");
+            e.printStackTrace();
+        }
+        System.out.println("리턴할 string"+list.get(0));
         return new ResponseEntity<>(list, OK);
     }
 
@@ -131,15 +152,31 @@ public class BCBoardController {
         return new ResponseEntity<>(result, OK);
     }
 
+    // 조회
     @GetMapping("/read/{bno}")
     public ResponseEntity<BCBoardDTO> getOneBCBoard(@PathVariable("bno") Integer bno) {
         return new ResponseEntity<>(service.read(bno), OK);
     }
 
+    // 삭제
     @DeleteMapping("/{bno}")
     public void deleteBCBoard(@PathVariable("bno") Integer bno) {
-        System.out.println("진입확인");
         service.delete(bno);
+    }
+
+    // 수정
+    @PutMapping("/modify")
+    public void updateBCBoard(@RequestBody BCBoardDTO dto) {
+        System.out.println("put 진입확인");
+        System.out.println("dto변경내역이 들어왔나 확인");
+        System.out.println(dto);
+        ResponseEntity<byte[]> response = makeAudio(dto);
+        String wholePath = audioSave(dto.getTitle(), response.getBody());
+        String pathWithoutFname = wholePath.substring(0, wholePath.lastIndexOf("\\") + 1); // 파일명을 제외한 경로.뒤에 슬래시 포함
+        String fileName = wholePath.substring((pathWithoutFname.length()), wholePath.length()); // uuid+파일명
+        dto.getAudioVO().setAudioPath(pathWithoutFname);
+        dto.getAudioVO().setAudioName(fileName);
+        service.update(dto);
     }
 
     ////////// API METHOD ////////////

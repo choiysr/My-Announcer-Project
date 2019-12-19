@@ -25,32 +25,32 @@ function setAudioElements() {
 }
 
 // 화면내의 dto요소들 전체 초기화(reset) - 조회(수정)화면 & 등록화면 
-// 코드수정할것(깔끔하고 간결하게)
+// 코드수정할것
+// 초기화되어야하는 모든 요소를 파악하고 하나씩 고치자. 
 function removeAllElements() {
-    var elements = ["title","content",
-    "voiceGender","alarmBell","intro","ending","ymdSet","timeSet","uploadCancelBtn"];
+    var inputElements = ["title", "content",
+        "intro", "ending", "ymdSet", "timeSet",
+        "RUDoriginalIntro", "RUDoriginalEnding","RUDoriginalPath"];
 
-    for(let i=0;i<elements.length;i++) {
-        var $targetClass = $("."+elemtns[i]);
-        $targetClass.each(function(){
-            // 수정하자
+    // inputElements 초기화 
+    for (let i = 0; i < inputElements.length; i++) {
+        var $targetClass = $("." + inputElements[i]);
+        $targetClass.each(function () {
+            $(this).val("");
         })
     }
 
-
     for (let i = 0; i < 2; i++) {
-
-
-        $(".title")[i].value = "";
-        $(".content")[i].value = "";
         $(".voiceGender")[i].value = $(".voiceGender")[i][0].value;
         $(".alarmBell")[i].value = $(".alarmBell")[i][0].value;
-        $(".intro")[i].value = "";
-        $(".ending")[i].value = "";
-        $(".ymdSet")[i].value = "";
-        $(".timeSet")[i].value = "";
+        $(".RUDfileName")[i].value = "등록된 파일이 없습니다.";
+        $($(".fakeBtnForAdditional")[i]).css('display', 'none');
+    }
+
+    for (let i = 0; i < 4; i++) {
         $(".uploadCancelBtn")[i].innerHTML = "";
     }
+
     $("#sourcePlayer").attr('src', "");
     $("#introPlayer").attr('src', "");
     $("#endingPlayer").attr('src', "");
@@ -80,13 +80,12 @@ $(".urgentCheck").change(function (e) {
     var isChecked = $(".urgentCheck").is(":checked");
     $("#ymdSet, #timeSet").prop("disabled", isChecked);
     $("#repeat").prop("disabled", isChecked);
-    if(isChecked){
-        $("#ymdSet, #timeSet").css("background-color","lightgray")
-        $("#repeat").css("background-color","lightgray");
-    }else{
-        $("#ymdSet, #timeSet").css("background-color","")
-        $("#repeat").css("background-color","");
-
+    if (isChecked) {
+        $("#ymdSet, #timeSet").css("background-color", "lightgray")
+        $("#repeat").css("background-color", "lightgray");
+    } else {
+        $("#ymdSet, #timeSet").css("background-color", "")
+        $("#repeat").css("background-color", "");
     }
 
 });
@@ -148,7 +147,7 @@ function playAllAudios(audios, isUrgent) {
     }
     audios[0].play();
     for (let i = 0; i < audios.length - 1; i++) {
-        audios[i].addEventListener("ended", function() {
+        audios[i].addEventListener("ended", function () {
             audios[i + 1].play();
             if (i == audios.length - 2 && isUrgent == 1) {
                 // 긴급공지인 경우라면 끝나고 location.reload 
@@ -167,9 +166,9 @@ function playAllAudios(audios, isUrgent) {
 
 // 파일 업로드되면 취소하는 버튼 만드는 function
 // rud적용 완료.
-function makeCancelBtn(targetAdditionalAudio) {
-    var cancelBtnArea = targetAdditionalAudio.parent().parent().find('.uploadCancelBtn');
-    cancelBtnArea[0].innerHTML = "<i class='material-icons cancelBtn'>cancel</i>";
+function makeCancelBtn($targetAdditionalAudio) {
+    var $cancelBtnArea = $targetAdditionalAudio.parent().parent().find('.uploadCancelBtn');
+    $cancelBtnArea[0].innerHTML = "<i class='material-icons cancelBtn'>cancel</i>";
 }
 
 // ===============================================================================
@@ -179,8 +178,20 @@ function makeCancelBtn(targetAdditionalAudio) {
 $(".uploadCancelBtn").on("click", function () {
     var $targetTr = $(this).parent();
     var $targetFileArea = $targetTr.children().find($("input[type='file']"));
+    // player필드까지 지워줘야함. 
     $targetFileArea.val("");
     this.innerHTML = "";
+    // 수정의 경우라면, fileName필드까지 지워줘야함  
+    // target = intro or ending 
+    var target = $targetFileArea.attr('name');
+    if (target.startsWith('RUD')) {
+        target = target.substring(3, target.length);
+    }
+    $("#" + target + "Player").attr('src', '');
+
+    if ($targetTr.find(".RUDfileName").length > 0) {
+        $targetTr.find(".RUDfileName").val("등록된 파일이 없습니다");
+    }
 });
 
 // ===============================================================================
@@ -188,16 +199,27 @@ $(".uploadCancelBtn").on("click", function () {
 // 파일 업로드 감지(업로드~미리듣기 전까지의 과정)
 // rud적용 완료.
 $("input[type='file']").change(function () {
-    var formData = new FormData();
+    // 수정인경우 filename필드에 파일이름을 바꿔줘야함 
     var $currFile = $(this);
-    var additionalAudio = $currFile[0].files;
+    var fileTagName = $currFile.attr('name');
+    if (fileTagName.startsWith('RUD')) {
+        // target = intro or ending 
+        var target = fileTagName.substring(3, fileTagName.length);
+        var $fileNameArea = $("input[name='RUD" + target + "']").parent().find(".RUDfileName");
+        var uploadedName = $(this).val();
+        $fileNameArea.val(uploadedName.substring(uploadedName.lastIndexOf("\\") + 1, uploadedName.length));
+        fileTagName = target;
+    }
 
-    var fileTagName = this.name;
+    var formData = new FormData();
+    var additionalAudio = $currFile[0].files;
     if (!validateFile(additionalAudio[0].name, additionalAudio[0].size)) { // 유효성검사
         $(this).val("");
         return false;
     }
+
     formData.append("additionalAudio", additionalAudio[0]);
+
     $.ajax({
         url: 'http://localhost:8080/rbcboard/fileUpload',
         processData: false,
@@ -218,7 +240,76 @@ $("input[type='file']").change(function () {
 $(".preListen").on("click", function (e) {
     e.preventDefault();
     $(this).parent().parent().find(".submitBtn").prop("disabled", false);
-    var $targetForm = $(this).parent().parent().parent();
+
+    var $targetForm = $(this).parent().parent().parent().parent();
+    console.log($targetForm);
+
+    // 수정창이라면
+    // 1.파일첨부 변경 안되었으면 기존 파일 가져다가 audio셋팅시켜줘야함
+    // -> 등록할때도 같으니 function으로 빼자 
+
+
+    // 수정일 경우에 
+    if (($targetForm).attr('id') === "rudFormTable") {
+        // set하기전에 palyer들 셋팅이 되어야함. 
+
+        // case 1) if player세팅이 안되어있고 & 기존파일이 있다면? 
+        // => 기존파일을 유지시킨다.(player src셋팅)
+
+        // case 2) if player 셋팅이 되어있다면? 
+        // => 수정시 덮어쓰는 경우 혹은
+        // 기존 파일이 없었는데 신규등록하는 경우이므로
+        // 그냥 셋팅된 값으로 재생시킨다. 
+
+        // case 3) if 기존파일이 있는데 그걸 삭제한다면?
+        // (기존파일 삭제하는 버튼 만들어야함) > 이거 파일 삭제 버튼으로 대체할것
+        // 내용이 있으면 버튼을 무조건 생성시킬것. 
+        // => 이경우 기존파일 path(RUDoriginalIntro)를 같이
+        // 날려주면 되므로(파일삭제 버튼에 기능추가) 
+        // case 4와 같은 경우로 취급한다.  
+
+        // case 4) if player셋팅이 안되어있고, 기존파일도 없다면
+        // => 그냥 없는 경우이므로 무시한다.
+
+        // case 1,3,4
+        // intro의 경우 (이거 intro ending합치는법 고민해볼것 )
+        var $introPlayer = $("#introPlayer")
+        var $RUDoriginalIntro = $("#RUDoriginalIntro");
+        var $RUDintroFileName = $("#RUDintroFileName").val();
+        var originalFileNameInPath = $RUDoriginalIntro.val();
+        if ($introPlayer.attr('src') == "") {
+            // player 셋팅이 안되어있는데 기존파일이 있다면(+RUDfileName value에 기존파일명이 있다면)?
+            // = (+삭제버튼이 눌려진 상태가 아니라 그대로인 상태라면 )
+            // player src를 기존파일경로로 셋팅시킨다. (contoller/{uploadpath}로 들어감.)
+            if ((originalFileNameInPath !== "") &&
+                ($RUDintroFileName == originalFileNameInPath.substring(originalFileNameInPath.lastIndexOf("_") + 1, originalFileNameInPath.length))) {
+                $introPlayer.attr('src', "http://localhost:8080/rbcboard/" + originalFileNameInPath);
+            }
+            // 기존 파일이 없다면? 
+            else {
+                // 무시, 나중에 필요하면 적자. 필요없으면 if문 &로 합치고 지우자 
+            }
+        } // end of player 셋팅이 안되어있는 경우 
+
+        // player 셋팅이 되어있는 경우 (case2)
+        else {
+            // 무시, 그냥 그 player를 재생시키면 되므로. 나중에 필요하면 적자. 
+        }
+
+        // ending의 경우 
+        var $endingPlayer = $("#endingPlayer")
+        var $RUDoriginalEnding = $("#RUDoriginalEnding");
+        var $RUDendingFileName = $("#RUDendingFileName").val();
+        originalFileNameInPath = $RUDoriginalEnding.val();
+        if ((originalFileNameInPath !== "") &&
+            ($RUDendingFileName == originalFileNameInPath.substring(originalFileNameInPath.lastIndexOf("_") + 1, originalFileNameInPath.length))) {
+            console.log("기존파일이 있고, 이후에 삭제되지 않았고, 추가로 덮어쓴 파일이 없다면 이게 실행되어야함");
+            console.log("그리고 미리듣기시 재생이 되어야함")
+            $endingPlayer.attr('src', "http://localhost:8080/rbcboard/" + originalFileNameInPath);
+        }
+
+    } // end of RUD condition
+
     setAllElements($targetForm);
     jsonData = {
         title: title,
@@ -277,8 +368,6 @@ $("#submitBtn").on("click", function (e) {
                 ending = checkadditionalAudioExist($("input[name='ending']")[0].files);
             }
             // return으로 파일명(with UUID)받아서 jsonData로는 only 파일명만 세팅해주기
-
-
             jsonData = {
                 content: content,
                 title: title,
@@ -295,7 +384,7 @@ $("#submitBtn").on("click", function (e) {
     } else { // 긴급방송이 아닌경우 
         var ymdSet = $("#ymdSet")[0];
         var timeSet = $("#timeSet")[0];
-        if ($("#repeat").val() == "" && (ymdSet.value == "" || timeSet.value == "")) {
+        if (($("#repeat").val() == "" && ymdSet.value == "") || (timeSet.value == "")) {
             alert("방송 일자와 시간을 설정해주세요.")
             return;
         }
@@ -316,14 +405,15 @@ $("#submitBtn").on("click", function (e) {
             } // end of if ending exists
 
             if (repeatSet.startsWith("week")) {
-                jsonData = {
+                jsonData = getBCBoard(content, title, gender, starttime, alarmBell, intro, ending, repeatSet)
+                /* jsonData = {
                     content: content,
                     title: title,
                     gender: gender,
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
                     repeatVO: { repeatWeek: repeatSet }
-                };
+                }; */
             } else if (repeatSet.startsWith("month")) {
                 jsonData = {
                     content: content,
@@ -351,7 +441,7 @@ $("#submitBtn").on("click", function (e) {
         url: 'http://localhost:8080/rbcboard/register',
         data: JSON.stringify(jsonData),
         type: 'POST',
-        contentType: "application/json; charset=utf-8",
+        contentType: "application/json; charset=utf-8"
     }).done(function (data) {
         /* getTodayList();
         $("#todayListBtn").trigger('click'); */
@@ -367,30 +457,24 @@ $("#repeatType").on("change", function () {
 
     $("#repeatWeekdiv").css("display", "none")
     $("#repeatMonthdiv").css("display", "none")
-
-
     $("input:checkbox[name='repeatWeek']:checked").each(function () {
-
         console.log($(this).data("val"));
-
         $(this).attr('checked', false);
-
     });
-
     $("#" + target.val() + "div").css("display", "")
 })
 
 $("#repeatSubmitBtn").on("click", function () {
     var str = ''
-    var ymdSet =$("#ymdSet")
-   
+    var ymdSet = $("#ymdSet")
+
     if ($("#repeatType").val() === "repeatWeek") {
         str = "week-"
         $("input:checkbox[name='repeatWeek']:checked").each(function () {
             str += $(this).data("val") + ","
         });
 
-        if (str === "week-" ) {
+        if (str === "week-") {
             alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
             ymdSet.attr("disabled", false);
@@ -400,7 +484,7 @@ $("#repeatSubmitBtn").on("click", function () {
     } else {
         str = "month-"
         str += $("#repeatMonth").val()
-        if (str === "month-" ) {
+        if (str === "month-") {
             alert("반복설정이 필요합니다.!")
             $("#repeat").val("")
             ymdSet.attr("disabled", false);
@@ -418,7 +502,7 @@ $("#repeatSubmitBtn").on("click", function () {
 })
 
 function repeatMonthSelectAppend() {
-    var str ='<option selected value="">월간반복</option>';
+    var str = '<option selected value="">월간반복</option>';
     for (let index = 1; index < 32; index++) {
         str += '<option value="' + index + '">매월 ' + index + '일</option>'
     }
@@ -430,7 +514,18 @@ function registerTest() {
     $("#content").val("테스트 내용임둥")
     $("#voiceGender").val("테스트 내용임둥")
     $("#voiceGender").val("man")
-    $("#ymdSet").val(new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate())
-    $("#timeSet").val(new Date().getHours()+":"+(new Date().getMinutes()+1))
+    $("#ymdSet").val(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate())
+    $("#timeSet").val(new Date().getHours() + ":" + (new Date().getMinutes() + 1))
 }
 
+function getBCBoard(content, title, gender, starttime, alarmBell, intro, ending, repeatSet) {
+    let result = {
+        'content': content,
+        'title': title,
+        'gender': gender,
+        'starttime': starttime,
+        'audioVO': { 'alarmBell': alarmBell, 'intro': intro, 'ending': ending },
+        'repeatVO': { 'repeatWeek': repeatSet }
+    };
+    return result;
+}

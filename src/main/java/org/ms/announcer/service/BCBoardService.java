@@ -13,6 +13,7 @@ public interface BCBoardService {
 
     public void register(BCBoardDTO dto);
     public BCBoardDTO read(Integer bno);
+    public void update(BCBoardDTO dto);
     public void delete(Integer bno);
     public Map<String , Object> getAllList(Pageable page, String category, String search);
     public Page<BCBoardDTO> getTodayList(String date , String week, Pageable page );

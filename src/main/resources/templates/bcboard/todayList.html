@@ -45,7 +45,7 @@
                                  <!-- body -->
                                  <div class="modal-body">
                                     <!-- top of rudTable 조회창입니다=============================== -->
-                                    <table id="rudFormTable" aria-disabled="true">
+                                    <table class="tableForm" id="rudFormTable" aria-disabled="true">
                                        <tr>
                                           <th class="formTitle" style="width: 100px;"><strong>제목</strong></th>
                                           <th colspan="2">
@@ -86,8 +86,10 @@
                                        <tr>
                                           <th class="formTitle"><strong>INTRO</strong></th>
                                           <th>
-                                             <input type="file" class="intro" id="RUDintro" style="display: none;">
-                                             <input type="text" id="RUDintroFileName" value="등록된 파일이 없습니다.">  
+                                             <input type="file" class="intro" name="RUDintro" style="display: block;">
+                                             <input type="text" class="RUDfileName" id="RUDintroFileName" value="등록된 파일이 없습니다."> 
+                                             <input type="text" class="RUDoriginalPath" id="RUDoriginalIntro" style="display:block;">
+                                             <button class="fakeBtnForAdditional" id="fakeBtnForIntro" style="display: none;">파일선택</button>
                                           </th>
                                           <th class="uploadCancelBtn">
                                           </th>
@@ -98,8 +100,10 @@
                                        <tr>
                                           <th class="formTitle"><strong>ENDING</strong></th>
                                           <th>
-                                             <input type="file" class="ending" id="RUDending" style="display: none;">
-                                             <input type="text" id="RUDendingFileName" value="등록된 파일이 없습니다."> 
+                                             <input type="file" class="ending" name="RUDending" style="display: block;">
+                                             <input type="text" class="RUDfileName" id="RUDendingFileName" value="등록된 파일이 없습니다."> 
+                                             <input type="text" class="RUDoriginalPath" id="RUDoriginalEnding" style="display:block;">
+                                             <button class="fakeBtnForAdditional" id="fakeBtnForEnding" style="display: none;">파일선택</button>
                                           </th>
                                           <th class="uploadCancelBtn">
                                           </th>
@@ -133,9 +137,8 @@
                                        <tr>
                                           <div class="mt-20">
                                              <th></th>
-                                             <th style="text-align: right; display: none;" colspan="2">
-                                                <button class="preListen">미리듣기</button> &nbsp;
-                                                <button class="submitBtn" disabled=true>방송등록</button></th>
+                                             <th style="text-align: right; display:;" colspan="2">
+                                                <button class="preListen">미리듣기</button> &nbsp;</th>
                                           </div>
                                        </tr>
                                     </table>
@@ -144,8 +147,9 @@
                                  <!-- Footer -->
                                  <div class="modal-footer">
                                     <button type="button" class="btn btn-default" id="modifyBCBoard">수정</button>
+                                    <button type="button" class="btn btn-default" id="updateBCBoard" style="display: none;">등록</button>
                                     <button type="button" class="btn btn-default" id="deleteBCBoard">삭제</button>
-                                    <button type="button" class="btn btn-default" id="closeReadModal" data-dismiss="modal">닫기</button>
+                                    <button type="button" class="btn btn-default" id="closeReadModal" data-dismiss="modal" onclick="removeAllElements()">닫기</button>
                                  </div>
                               </div>
                            </div>
@@ -153,7 +157,7 @@
 
                         <!-- TODAYLIST end -->
                         <!-- check-out start -->
-                        <!-- 써먹을데가 있을 것 같다. 등록창으로 -->
+                        <!-- 등록창 -->
                         <div class="tab-pane" id="registerModal">
                            <!--아이디 변경해줘야함!!-->
                            <form action="#">
@@ -165,7 +169,7 @@
                                     <br>
                                     <div id="registerFormDiv" style="text-align: right;">
                                        <input type="checkbox" class="urgentCheck">긴급공지<br>
-                                       <table id="registerFormTable">
+                                       <table class="tableForm" id="registerFormTable">
                                           <tr>
                                              <th class="formTitle" style="width: 300px;"><strong>제목</strong></th>
                                              <th colspan="2"><input class="title" type="text" id="title"

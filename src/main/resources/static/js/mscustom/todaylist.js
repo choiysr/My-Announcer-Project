@@ -34,17 +34,17 @@ function appendlist(list) {
          '<img class="playImg"  src="../../img/mscustom/audioLine.jpg"  alt="" style=" width: 100vw; min-width: 1cm; height: 4vw;">'
 
       if (list.audioVO.intro.length !== 0) {
-         str += '<audio style=" width: 35vw; min-width: 1cm; display:;" " id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
+         str += '<audio style=" width: 35vw; min-width: 1cm; display:none;" " id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '">' +
             '<source src="http://localhost:8080/rbcboard/' + wholePathOfIntroFile + '" ></source>' +
             '</audio>'
       }
 
-      str += '<audio style=" width: 35vw; min-width: 1cm; display:;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
+      str += '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
          '<source src="http://localhost:8080/rbcboard/' + wholePathOfFile + '" ></source>' +
          '</audio>'
 
       if (list.audioVO.ending.length !== 0) {
-         str += '<audio style=" width: 35vw; min-width: 1cm; display:;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
+         str += '<audio style=" width: 35vw; min-width: 1cm; display:none;" id="audio' + time + '" controls class="playerInList" data-alarmBell="' + list.audioVO.alarmBell + '"' +
             '<source src="http://localhost:8080/rbcboard/' + wholePathOfedningFile + '" ></source>' +
             '</audio>'
       }
@@ -178,15 +178,17 @@ vals.$listdiv.on('click', '.listTitle', function (e) {
          $("#RUDtimeSet").val(result.starttime);
          $("#RUDvoiceGender").val(result.gender);
          $("#RUDalarmBell").val(result.audioVO.alarmBell);
+         var tmpStr;
          if (result.audioVO.intro !== "") {
-            var tmpStr = result.audioVO.intro;
+            tmpStr = result.audioVO.intro;
             $("#RUDintroFileName").val(tmpStr.substring(tmpStr.lastIndexOf('_')+1, tmpStr.length));
+            $("#RUDoriginalIntro").val(result.audioVO.audioPath.replace(/\\/gi, "-") + result.audioVO.intro);
          }
          if (result.audioVO.ending !== "") {
-            var tmpStr = result.audioVO.ending;
+            tmpStr = result.audioVO.ending;
             $("#RUDendingFileName").val(tmpStr.substring(tmpStr.lastIndexOf('_')+1, tmpStr.length));
+            $("#RUDoriginalEnding").val(result.audioVO.audioPath.replace(/\\/gi, "-") + result.audioVO.ending);
          }
-        
          var $rudForm =  $("#rudFormTable")
          $rudForm.find('input').prop('readonly', true);
          $rudForm.find('textarea').prop('readonly', true);

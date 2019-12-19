@@ -5,6 +5,7 @@ import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ms.announcer.domain.AudioVO;
 import org.ms.announcer.domain.BCBoardDTO;
 import org.ms.announcer.repositories.BCBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,22 @@ public class BCBoardServiceImpl implements BCBoardService {
     @Override
     public void register(BCBoardDTO dto) {
         repos.save(dto);
+    }
+    
+    @Override
+    public void update(BCBoardDTO dto) {
+        System.out.println("update service imple실행");
+        BCBoardDTO target = read(dto.getBno());
+        System.out.println("target가져왔나 : "+ target);
+        target.setTitle(dto.getTitle());
+        target.setContent(dto.getContent());
+        target.setGender(dto.getGender());
+        target.setStartdate(dto.getStartdate());
+        target.setStarttime(dto.getStarttime());
+        AudioVO targetAudio = dto.getAudioVO();
+        target.setAudioVO(targetAudio);
+        System.out.println("target세팅 다시됐나 보자 : " + target);
+        repos.save(target);
     }
 
     @Override

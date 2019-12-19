@@ -15,13 +15,6 @@ var vals = (function () {
     let totalListTh = '<th>날짜</th><th>시간</th><th>제목</th><th>수정/삭제</th><th>'
     
     
-    
-    
-    
-    
-    
-    
-    
     return{
         $listdiv:$listdiv,
         $totalListtable:$totalListtable,

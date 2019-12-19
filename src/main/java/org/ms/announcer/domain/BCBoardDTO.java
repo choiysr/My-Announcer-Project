@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,20 +30,18 @@ public class BCBoardDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bno;
-
     // notnull (javax) 줘야할까?  네
     private String title;
     private String content;
     // MemberDTO만들면 MEMBER로 수정해야함. 
-
     private String mid;
     private String gender;
-    // private String alarmBell;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startdate;
 
     @DateTimeFormat(pattern = "HH:mm")
+    @Column(nullable = false)
     private LocalTime starttime;
 
     @CreationTimestamp

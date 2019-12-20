@@ -11,7 +11,8 @@
                   <div class="shopping-cart">
                      <!-- Nav tabs -->
                      <ul class="cart-page-menu row clearfix mb-30">
-                        <li class="active"><a href="#todayList" data-toggle="tab" id="todayListBtn" onclick="removeAllElements()">오늘의 방송</a></li>
+                        <li class="active"><a href="#todayList" data-toggle="tab" id="todayListBtn"
+                              onclick="removeAllElements()">오늘의 방송</a></li>
                         <li><a href="#registerModal" data-toggle="tab">방송등록</a></li>
                         <li><a href="#totalList" data-toggle="tab">모든방송</a></li>
                      </ul>
@@ -60,22 +61,24 @@
                                        </tr>
                                        <tr>
                                           <th class="formTitle"></th>
-                                          <th colspan="2" style="text-align: right;"><button
-                                                class="spaceChecker" style="display: none;">띄어쓰기교정</button></th>
+                                          <th colspan="2" style="text-align: right;"><button class="spaceChecker"
+                                                style="display: none;">띄어쓰기교정</button></th>
                                        </tr>
                                        <tr>
                                           <th>　</th>
                                        </tr>
                                        <tr>
                                           <th class="formTitle"><strong>음성설정</strong></th>
-                                          <th colspan="2"><select class="custom-select mb-15 voiceGender" id="RUDvoiceGender">
+                                          <th colspan="2"><select class="custom-select mb-15 voiceGender"
+                                                id="RUDvoiceGender">
                                                 <option value="woman">여성</option>
                                                 <option value="man">남성</option>
                                              </select></th>
                                        </tr>
                                        <tr>
                                           <th class="formTitle"><strong>알람음</strong></th>
-                                          <th colspan="2"><select class="custom-select mb-15 alarmBell" id="RUDalarmBell">
+                                          <th colspan="2"><select class="custom-select mb-15 alarmBell"
+                                                id="RUDalarmBell">
                                                 <option value="1">알람음1</option>
                                                 <option value="2">알람음2</option>
                                                 <option value="3">알람음3</option>
@@ -87,9 +90,12 @@
                                           <th class="formTitle"><strong>INTRO</strong></th>
                                           <th>
                                              <input type="file" class="intro" name="RUDintro" style="display: block;">
-                                             <input type="text" class="RUDfileName" id="RUDintroFileName" value="등록된 파일이 없습니다."> 
-                                             <input type="text" class="RUDoriginalPath" id="RUDoriginalIntro" style="display:block;">
-                                             <button class="fakeBtnForAdditional" id="fakeBtnForIntro" style="display: none;">파일선택</button>
+                                             <input type="text" class="RUDfileName" id="RUDintroFileName"
+                                                value="등록된 파일이 없습니다.">
+                                             <input type="text" class="RUDoriginalPath" id="RUDoriginalIntro"
+                                                style="display:block;">
+                                             <button class="fakeBtnForAdditional" id="fakeBtnForIntro"
+                                                style="display: none;">파일선택</button>
                                           </th>
                                           <th class="uploadCancelBtn">
                                           </th>
@@ -101,9 +107,12 @@
                                           <th class="formTitle"><strong>ENDING</strong></th>
                                           <th>
                                              <input type="file" class="ending" name="RUDending" style="display: block;">
-                                             <input type="text" class="RUDfileName" id="RUDendingFileName" value="등록된 파일이 없습니다."> 
-                                             <input type="text" class="RUDoriginalPath" id="RUDoriginalEnding" style="display:block;">
-                                             <button class="fakeBtnForAdditional" id="fakeBtnForEnding" style="display: none;">파일선택</button>
+                                             <input type="text" class="RUDfileName" id="RUDendingFileName"
+                                                value="등록된 파일이 없습니다.">
+                                             <input type="text" class="RUDoriginalPath" id="RUDoriginalEnding"
+                                                style="display:block;">
+                                             <button class="fakeBtnForAdditional" id="fakeBtnForEnding"
+                                                style="display: none;">파일선택</button>
                                           </th>
                                           <th class="uploadCancelBtn">
                                           </th>
@@ -147,9 +156,11 @@
                                  <!-- Footer -->
                                  <div class="modal-footer">
                                     <button type="button" class="btn btn-default" id="modifyBCBoard">수정</button>
-                                    <button type="button" class="btn btn-default" id="updateBCBoard" style="display: none;">등록</button>
+                                    <button type="button" class="btn btn-default" id="updateBCBoard"
+                                       style="display: none;">등록</button>
                                     <button type="button" class="btn btn-default" id="deleteBCBoard">삭제</button>
-                                    <button type="button" class="btn btn-default" id="closeReadModal" data-dismiss="modal" onclick="removeAllElements()">닫기</button>
+                                    <button type="button" class="btn btn-default" id="closeReadModal"
+                                       data-dismiss="modal" onclick="removeAllElements()">닫기</button>
                                  </div>
                               </div>
                            </div>
@@ -167,112 +178,122 @@
                                     <!--         <div class="billing-details pr-20"> -->
                                     <h3 style="text-align: center; ">방송등록</h3>
                                     <br>
-                                    <div id="registerFormDiv" style="text-align: right;">
-                                       <input type="checkbox" class="urgentCheck">긴급공지<br>
-                                       <table class="tableForm" id="registerFormTable">
-                                          <tr>
-                                             <th class="formTitle" style="width: 300px;"><strong>제목</strong></th>
-                                             <th colspan="2"><input class="title" type="text" id="title"
-                                                   placeholder="제목을 입력하세요">
-                                             </th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"><strong>내용</strong></th>
-                                             <th colspan="2"><textarea class="custom-textarea content" id="content"
-                                                   placeholder="내용을 입력하세요"></textarea></th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"></th>
-                                             <th colspan="2" style="text-align: right;"><button class="spaceChecker"
-                                                   id="spaceChecker">띄어쓰기교정</button></th>
-                                          </tr>
-                                          <tr>
-                                             <th>　</th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"><strong>음성설정</strong></th>
-                                             <th colspan="2"><select class="custom-select mb-15 voiceGender"
-                                                   id="voiceGender">
-                                                   <option value="woman">여성</option>
-                                                   <option value="man">남성</option>
-                                                </select></th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"><strong>알람음</strong></th>
-                                             <th colspan="2"><select class="custom-select mb-15 alarmBell"
-                                                   id="alarmBell">
-                                                   <option value="1">알람음1</option>
-                                                   <option value="2">알람음2</option>
-                                                   <option value="3">알람음3</option>
-                                                   <option value="4">알람음4</option>
-                                                   <option value="5">알람음5</option>
-                                                </select></th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"><strong>INTRO</strong></th>
-                                             <th>
-                                                <input type="file" class="intro" name="intro">
-                                             </th>
-                                             <th class="uploadCancelBtn">
-                                             </th>
-                                          </tr>
-                                          <tr>
-                                             <th>　</th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"><strong>ENDING</strong></th>
-                                             <th>
-                                                <input type="file" class="ending" name="ending">
-                                             </th>
-                                             <th class="uploadCancelBtn">
-                                             </th>
-                                          </tr>
-                                          <tr>
-                                             <th>　</th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle "><strong>방송일자</strong></th>
-                                             <th colspan="2">
-                                                <div class="ymd">
-                                                   <input class="custom-select mb-15 ymdSet" type="date" id="ymdSet">
-                                                </div>
-                                             </th>
-                                          </tr>
-                                          <tr>
-                                             <th>　</th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"><strong>방송시간</strong></th>
-                                             <th colspan="2">
-                                                <div class="time">
-                                                   <input class="custom-select mb-15 timeSet" type="time" id="timeSet">
-                                                </div>
-                                             </th>
-                                          </tr>
-                                          <tr>
-                                             <th class="formTitle"><strong>반복</strong></th>
-                                             <th colspan="2">
-                                                <div class="time">
-                                                   <input type="text" readonly id="repeatView">
-                                                   <input type="text" hidden  id="repeat">
-                                                </div>
-                                             </th>
-                                          </tr>
-                                          </tr>
-                                          <tr>
-                                             <th>　</th>
-                                          </tr>
-                                          <tr>
-                                             <div class="mt-20">
-                                                <th></th>
-                                                <th style="text-align: right" colspan="2">
-                                                   <button class="repeat" type="button" data-toggle="modal"
-                                                      data-target="#myModal">반복설정</button>
-                                                   <button class="preListen">미리듣기</button>
-                                                   <button style="color: lightgray;" class="submitBtn" id="submitBtn" disabled=true>등록</button></th>
-                                             </div>
-                                          </tr>
-                                       </table>
+                                    <div id="registerFormDiv">
+                                       <div style="text-align: right; margin-right: 20px;">
+                                          <input type="checkbox" class="urgentCheck">긴급공지<br>
+                                       </div>
+                                       <div style="width: 100%;  text-align: center;">
+                                          <div style="display: inline-block;">
+                                             <table  class="tableForm"
+                                                id="registerFormTable">
+                                                <tr>
+                                                   <td class="formTitle" ><p><strong>제목</strong></td></p>
+                                                   <td colspan="2"><input class="title" type="text" id="title"
+                                                         placeholder="제목을 입력하세요">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"><p><strong>내용</strong></p></td>
+                                                   <td colspan="2"><textarea class="custom-textarea content"
+                                                         id="content" placeholder="내용을 입력하세요"></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"></td>
+                                                   <td colspan="2" style="text-align: right;"><button
+                                                         class="spaceChecker" id="spaceChecker">띄어쓰기교정</button></td>
+                                                </tr>
+                                                <tr>
+                                                   <td>　</td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"><p><strong>음성설정</strong></p></td>
+                                                   <td colspan="2"><select class="custom-select mb-15 voiceGender"
+                                                         id="voiceGender">
+                                                         <option value="woman">여성</option>
+                                                         <option value="man">남성</option>
+                                                      </select></td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"><p><strong>알람음</strong></p></td>
+                                                   <td colspan="2"><select class="custom-select mb-15 alarmBell"
+                                                         id="alarmBell">
+                                                         <option value="1">알람음1</option>
+                                                         <option value="2">알람음2</option>
+                                                         <option value="3">알람음3</option>
+                                                         <option value="4">알람음4</option>
+                                                         <option value="5">알람음5</option>
+                                                      </select></td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"><p><strong>INTRO</strong></p></td>
+                                                   <td>
+                                                      <input type="file" class="intro" name="intro">
+                                                   </td>
+                                                   <td class="uploadCancelBtn">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <th>　</th>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"><p><strong>ENDING</strong></p></td>
+                                                   <td>
+                                                      <input type="file" class="ending" name="ending">
+                                                   </td>
+                                                   <td class="uploadCancelBtn">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>　</td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle "><p><strong>방송일자</strong></p></td>
+                                                   <td colspan="2">
+                                                      <div class="ymd">
+                                                         <input class="custom-select mb-15 ymdSet" type="date"
+                                                            id="ymdSet">
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <th>　</th>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"><p><strong>방송시간</strong></p></td>
+                                                   <td colspan="2">
+                                                      <div class="time">
+                                                         <input class="custom-select mb-15 timeSet" type="time"
+                                                            id="timeSet">
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle"><p><strong>반복</strong></p></td>
+                                                   <td colspan="2">
+                                                      <div class="time">
+                                                         <input type="text" readonly id="repeatView">
+                                                         <input type="text" hidden id="repeat">
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                                </tr>
+                                                <tr>
+                                                   <td>　</td>
+                                                </tr>
+                                                <tr>
+                                                   <div class="mt-20">
+                                                      <td></td>
+                                                      <td style="text-align: right" colspan="2">
+                                                         <button class="repeat" type="button" data-toggle="modal"
+                                                            data-target="#myModal">반복설정</button>
+                                                         <button class="preListen">미리듣기</button>
+                                                         <button style="color: lightgray;" class="submitBtn"
+                                                            id="submitBtn" disabled=true>등록</button></td>
+                                                   </div>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -336,10 +357,10 @@
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">×</button>
-                  <h4  class="modal-title">반복설정</h4>
+                  <h4 class="modal-title">반복설정</h4>
                </div>
-               <div  class="modal-body">
-                  <select id="repeatType"  style="width: 4cm;" >
+               <div class="modal-body">
+                  <select id="repeatType" style="width: 4cm;">
                      <option selected value="repeatWeek">주간</option>
                      <option value="repeatMonth">월간</option>
                   </select>
@@ -348,25 +369,25 @@
                   <br>
                   <div id="repeatMonthdiv" style="display:none ;">
                      <h4>월간반복</h4>
-                     <select style=" width: 4cm;"  id="repeatMonth">
-                       
+                     <select style=" width: 4cm;" id="repeatMonth">
+
                      </select>
                   </div>
-                  <div id="repeatWeekdiv" >
+                  <div id="repeatWeekdiv">
                      <h4>주간반복</h4>
-                     <label >일</label>
-                     <input name="repeatWeek" type="checkbox"data-val="0">
-                     <label >월</label>
+                     <label>일</label>
+                     <input name="repeatWeek" type="checkbox" data-val="0">
+                     <label>월</label>
                      <input name="repeatWeek" type="checkbox" data-val="1">
-                     <label >화</label>
+                     <label>화</label>
                      <input name="repeatWeek" type="checkbox" data-val="2">
-                     <label >수</label>
-                     <input name="repeatWeek"  type="checkbox"data-val="3">
-                     <label >목</label>
+                     <label>수</label>
+                     <input name="repeatWeek" type="checkbox" data-val="3">
+                     <label>목</label>
                      <input name="repeatWeek" type="checkbox" data-val="4">
-                     <label >금</label>
+                     <label>금</label>
                      <input name="repeatWeek" type="checkbox" data-val="5">
-                     <label >토</label>
+                     <label>토</label>
                      <input name="repeatWeek" type="checkbox" data-val="6">
 
                   </div>
@@ -411,12 +432,12 @@
 
       <!-- audioArea : 조회,수정,등록시 모두 활용할 수 있도록 분리 -->
       <div class="allAudios" style="display: none;">
-      <!-- sourcePlayer : TTS Source audio -->
-      <audio class="sourcePlayer" id="sourcePlayer" controls src=""></audio>
-      <!-- introPlayer : intro audio -->
-      <audio class="introPlayer" id="introPlayer" controls src=""></audio>
-      <!-- endingPlayer : ending audio -->
-      <audio class="endingPlayer" id="endingPlayer" controls src=""></audio>
+         <!-- sourcePlayer : TTS Source audio -->
+         <audio class="sourcePlayer" id="sourcePlayer" controls src=""></audio>
+         <!-- introPlayer : intro audio -->
+         <audio class="introPlayer" id="introPlayer" controls src=""></audio>
+         <!-- endingPlayer : ending audio -->
+         <audio class="endingPlayer" id="endingPlayer" controls src=""></audio>
       </div>
 
       <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>
@@ -427,14 +448,14 @@
       <script th:src="@{~/js/mscustom/rud.js}"></script>
       <script>
 
-         $(document).ready(function() {
+         $(document).ready(function () {
             getTodayList();
             loadpage(1, "title", "");
             repeatMonthSelectAppend();
             //일일이 테스트하기 귀찮아서 만듬 ㅋㅅㅋ
             registerTest()
          })
-      
+
       </script>
 
 

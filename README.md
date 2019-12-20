@@ -1,6 +1,7 @@
 # MyAnnouncer 
 
-자세한 내용은 포트폴리오 김만기.pdf를 읽어주시기 바랍니다.
+자세한 내용은 김만기_portfolio_1216v.pdf를 읽어주시기 바랍니다.
+[김만기_portfolio_1216v.pdf](https://github.com/Kmmanki/MyAnnouncer/files/3986346/_portfolio_1216v.pdf)
 
 #개요
 아파트 단지 등에서 사람이 직접 하던 방송의 문제점을 보완하기 위해 TTS(Text to Speech)서비스를 통한 
@@ -22,4 +23,3 @@
  4.월,일,주간 단위의 스케줄 조정
  5.다분야의 전문적 방송 콘텐츠 제공
 
-[포트폴리오 김만기.pdf](https://github.com/Kmmanki/MyAnnouncer/files/3986342/default.pdf)

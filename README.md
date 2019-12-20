@@ -22,3 +22,4 @@
  4.월,일,주간 단위의 스케줄 조정
  5.다분야의 전문적 방송 콘텐츠 제공
 
+[포트폴리오 김만기.pdf](https://github.com/Kmmanki/MyAnnouncer/files/3986342/default.pdf)

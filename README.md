@@ -1,7 +1,7 @@
 # MyAnnouncer 
 
-자세한 내용은 김만기_portfolio_1216v.pdf를 읽어주시기 바랍니다.
-[김만기_portfolio_1216v.pdf](https://github.com/Kmmanki/MyAnnouncer/files/3986346/_portfolio_1216v.pdf)
+자세한 내용은[김만기_portfolio_1216v.pdf](https://github.com/Kmmanki/MyAnnouncer/files/3986346/_portfolio_1216v.pdf)를 읽어주시기 바랍니다.
+
 
 #개요
 아파트 단지 등에서 사람이 직접 하던 방송의 문제점을 보완하기 위해 TTS(Text to Speech)서비스를 통한 

@@ -31,7 +31,7 @@ $("#modifyBCBoard").on("click", function (e) {
     $("#fakeBtnForIntro, #fakeBtnForEnding").css('display', 'block');
     // 일단 그냥
     // $("#modifyBCBoard").css('display','none');
-    $("#updateBCBoard").css('display', 'block');
+    $("#updateBCBoard").css('display', 'inline-block');
     if ($("#RUDoriginalIntro").val() !== "") {
         makeCancelBtn($("input[name='RUDintro']"));
     }

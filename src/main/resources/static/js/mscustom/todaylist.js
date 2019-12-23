@@ -52,8 +52,8 @@ function appendlist(list) {
       }
 
       str += '</td>' +
-         '<td style=" padding-top: 25px;"" >' + '<p  style="padding-left: 5px; min-width: 2cm;" >수정</p>' +
-         '<p  style="padding-left: 5px; min-width: 0.8cm;" >삭제</p>' + '</td>' +
+         '<td style=" padding-top: 25px;"" >' + '<a href="#"><p class="modifyBtnOutside" style="padding-left: 5px; min-width: 2cm;" >수정</p></a>' +
+         '<a href="#"><p class="deleteBtnOutside" style="padding-left: 5px; min-width: 0.8cm;" >삭제</p></a>' + '</td>' +
          '</tr>'
    });
 
@@ -62,6 +62,12 @@ function appendlist(list) {
 
    $(".playerInList")[0].load();
 }
+
+// 리스트내 수정 버튼 function 통합할것.(모달창 내부 버튼과) 
+vals.$listdiv.on("click",'.modifyBtnOutside', function (e) { 
+   $(this).parent().parent().parent().find(".listTitle h4").click();
+});
+
 
 
 vals.$listdiv.on('click', '.playBtn', function (e) {
@@ -161,7 +167,6 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
 }) // end of playBtn event in list 
 
 // 제목클릭하면 모달로 조회창 띄우기
-// 소라가 191216 16:39 만지고 있는 부분임 !!
 vals.$listdiv.on('click', '.listTitle', function (e) {
    $('div.readModal').modal();
    var targetBno = this.id;
@@ -177,6 +182,7 @@ vals.$listdiv.on('click', '.listTitle', function (e) {
          $("#RUDtimeSet").val(result.starttime);
          $("#RUDvoiceGender").val(result.gender);
          $("#RUDalarmBell").val(result.audioVO.alarmBell);
+
          var tmpStr;
          if (result.audioVO.intro !== "") {
             tmpStr = result.audioVO.intro;
@@ -188,10 +194,16 @@ vals.$listdiv.on('click', '.listTitle', function (e) {
             $("#RUDendingFileName").val(tmpStr.substring(tmpStr.lastIndexOf('_')+1, tmpStr.length));
             $("#RUDoriginalEnding").val(result.audioVO.audioPath.replace(/\\/gi, "-") + result.audioVO.ending);
          }
-         var $rudForm =  $("#rudFormTable")
-         $rudForm.find('input').prop('readonly', true);
-         $rudForm.find('textarea').prop('readonly', true);
-         $rudForm.find('select').attr('disabled',true);
+
+         // 반복설정 되어있는 방송일때 
+         if(result.repeatVO !== null) {
+            var $orgRepeatText = $("#RUDrepeat");
+            var $ymdSet = $("#RUDymdSet");
+            $orgRepeatText.val(result.repeatVO.repeatWeek == null ? result.repeatVO.repeatMonth : result.repeatVO.repeatWeek);
+            $("#RUDrepeatView").val(getRepeatViewText($orgRepeatText.val()));
+            $ymdSet.attr("placeholder", "반복설정된 방송입니다.");
+            $ymdSet.attr("disabled",true);
+         }
       }
    })
 });
@@ -206,3 +218,4 @@ function getTodayList() {
       }
    }); // end of todayList get ajax
 }
+

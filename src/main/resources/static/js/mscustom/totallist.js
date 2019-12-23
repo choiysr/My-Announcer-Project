@@ -8,10 +8,10 @@
 
           if (list.repeatVO !== null) {
              if (list.repeatVO.repeatWeek !== null ) {
-               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>매주 ' + list.repeatVO.repeatWeek + '반복</h4>' + '</td>' 
+               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + getRepeatViewText(list.repeatVO.repeatWeek) + '</h4>' + '</td>' 
                 
              }else{
-               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>매월 ' + list.repeatVO.repeatMonth + '일 반복</h4>' + '</td>' 
+               str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + getRepeatViewText(list.repeatVO.repeatMonth) + '</h4>' + '</td>' 
              }
           }else{
             str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + list.startdate + '</h4>' + '</td>' 

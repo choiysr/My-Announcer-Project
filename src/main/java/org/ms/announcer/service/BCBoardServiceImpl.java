@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.ms.announcer.domain.AudioVO;
 import org.ms.announcer.domain.BCBoardDTO;
+import org.ms.announcer.domain.RepeatVO;
 import org.ms.announcer.repositories.BCBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,8 @@ public class BCBoardServiceImpl implements BCBoardService {
         target.setStarttime(dto.getStarttime());
         AudioVO targetAudio = dto.getAudioVO();
         target.setAudioVO(targetAudio);
+        RepeatVO targetRepeat = dto.getRepeatVO();
+        target.setRepeatVO(targetRepeat);
         System.out.println("target세팅 다시됐나 보자 : " + target);
         repos.save(target);
     }

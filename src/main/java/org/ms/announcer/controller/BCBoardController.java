@@ -147,8 +147,8 @@ public class BCBoardController {
     @GetMapping("/totalList")
     public ResponseEntity<Map<String, Object>> getTotalList(
             @PageableDefault(page = 0, direction = Direction.ASC, sort = { "startdate", "starttime" }) Pageable page,
-            String category, String search) {
-        Map<String, Object> result = service.getAllList(page, category, search);
+            String category, String search, String userName) {
+        Map<String, Object> result = service.getAllList(page, category, search, userName);
         return new ResponseEntity<>(result, OK);
     }
 
@@ -191,8 +191,8 @@ public class BCBoardController {
         String clovaUrl = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
         String clovaUrlPremium = "https://naveropenapi.apigw.ntruss.com/voice-premium/v1/tts";
         //보안상의 이유로 삭제
-        String keyID = "";
-        String secretKey = "";
+        String keyID = "8un3nj2jlx";
+        String secretKey = "T1ZHOULzmPIOa58HmHvByTgGnMDTekgF8oZ1XSaE";
 
         headers.add("charset", "UTF-8");
         headers.add("Content-Type", "application/x-www-form-urlencoded");

@@ -65,7 +65,7 @@ $("#checkOverlap").on("click", function (e) {
             if(result === false){
                 alert("사용가능한 아이디입니다.")
                 $("#postRegister").attr("disabled", false)
-                $("#memberid").attr("readonly", true)
+                // $("#memberid").attr("readonly", true)
             }else{
                 alert("중복된 아이디입니다.")
                 $("#postRegister").attr("disabled", true)
@@ -86,6 +86,17 @@ function checkMinLength(id, pw, em,name,addr) {
         return true
 }
 
-$("#memberid").change( function () {
-    $("#postRegister").attr("disabled", true)
-})
+// $("#memberid").change( function () {
+//     $("#postRegister").attr("disabled", true)
+// })
+
+var checkOverlapOldVal;
+$("#memberid").on("propertychange change keyup paste", function() {
+    var currentVal = $(this).val();
+    if(currentVal == checkOverlapOldVal) {
+        return;
+    }
+    
+    checkOverlapOldVal = currentVal;
+    $("#postRegister").attr("disabled", true);
+});

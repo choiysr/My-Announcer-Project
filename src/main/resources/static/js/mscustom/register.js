@@ -2,6 +2,7 @@
 var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
 var audioObjects;
 
+
 // dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
 function setAllElements($targetForm) {
     title = $targetForm.find(".title").val();
@@ -22,26 +23,31 @@ function setAudioElements() {
 // 화면내의 dto요소들 전체 초기화(reset) - 조회(수정)화면 & 등록화면 
 // 코드수정할것
 // 초기화되어야하는 모든 요소를 파악하고 하나씩 고치자. 
-function removeAllElements() {
+/* function removeAllElements() {
+
     console.log("리셋 위치 확인");
-    var elementsToBeEmpty = ["title","content","intro","ending","RUDoriginalIntro","RUDoriginalEnding","RUDoriginalPath"];
+    var elementsToBeEmpty = ["title", "content", "intro", "ending", "RUDoriginalIntro", "RUDoriginalEnding", "RUDoriginalPath"];
     var selectElements = ["voiceGender", "alarmBell"];
 
-    elementsToBeEmpty.forEach(function(targetClass){
+    elementsToBeEmpty.forEach(function (targetClass) {
         $("." + targetClass).val("");
     })
 
-    selectElements.forEach(function(targetClass){
-        $("." + targetClass).find('option:first').attr('selected','selected');
+    selectElements.forEach(function (targetClass) {
+        $("." + targetClass).find('option:first').attr('selected', 'selected');
     })
 
     // jQuery html()보다 빠른 방법. html()은 정규표현식으로 유효성 체크를 해서 태그 수정을 거치기 때문에
     // innerHTML보다 느리다. 검증된 html(여기서는 공백)은 그냥 innerHTML으로 해주면 빠르다. 
     for (let i = 0; i < 4; i++) {
-        $(".uploadCancelBtn")[i].innerHTML = ""; 
+        $(".uploadCancelBtn")[i].innerHTML = "";
     }
 
+    $("#RUDrepeatSetting").css('display', 'none');
+    $("#RUDpreListen").css('display', 'none');
     $(".RUDfileName").val("등록된 파일이 없습니다.");
+    $("#modifyBCBoard").css('display', 'inline-block');
+    $("#updateBCBoard").css('display', 'none');
     $(".fakeBtnForAdditional").css('display', 'none');
     $("#sourcePlayer").attr('src', "");
     $("#introPlayer").attr('src', "");
@@ -50,10 +56,9 @@ function removeAllElements() {
 }
 
 function removeElementsRelatedRepeat() {
-    console.log("리핏리셋");
     var elementsToBeEmpty = ["ymdSet", "timeSet", "repeat", "repeatView"];
     var $ymdSet = $(".ymdSet");
-    elementsToBeEmpty.forEach(function(targetClass){
+    elementsToBeEmpty.forEach(function (targetClass) {
         $("." + targetClass).val("");
     })
     $("#repeatType option:first").prop("selected", "selected");
@@ -62,10 +67,47 @@ function removeElementsRelatedRepeat() {
     $("input:checkbox[name='repeatWeek']:checked").each(function () {
         $(this).attr('checked', false);
     });
-    $ymdSet.attr("placeholder","방송일자를 입력하세요.");
-    $ymdSet.css("background-color", "");
-    $ymdSet.attr("disabled", false);
+    $ymdSet.attr("placeholder", "방송일자를 입력하세요.")
+           .css("background-color", "")
+           .attr("disabled", false);
+} */
+
+    
+function removeAllElements() {
+     // 등록+수정화면 공통적으로 있는 객체 초기화 
+        $(".allAudios").children().attr('src',"");
+        $(".title, .content, .intro, .ending").val("");
+        $(".voiceGender, .alarmBell").find('option:first').attr('selected', 'selected');
+        $(".uploadCancelBtn").children().html("");
+
+    // 수정화면에만 있는 객체 초기화
+        $(".RUDoriginalPath").val("");
+        $(".rudResetSet-1").css('display','none');
+        $(".RUDfileName").val("등록된 파일이 없습니다.");
+        $("#modifyBCBoard").css('display', 'inline-block'); 
+
+        removeElementsRelatedRepeat();
 }
+
+function removeElementsRelatedRepeat() {
+    $(".timeSet, .repeat, .repeatView").val("");
+    var $ymdSet = $(".ymdSet");
+    $ymdSet.val("")
+    .attr("placeholder", "방송일자를 입력하세요.")
+    .attr("disabled", false)
+    .css("background-color", "");
+    removeRepeatElementsInModal();
+}
+
+function removeRepeatElementsInModal() {
+    $("#repeatType option:first").prop("selected", "selected");
+    $("#repeatWeekdiv").css("display", "")
+    $("#repeatMonthdiv").css("display", "none")
+    $("input:checkbox[name='repeatWeek']:checked").each(function () {
+        $(this).attr('checked', false);
+    });
+}
+
 
 // ===============================================================================
 // 띄어쓰기 교정  ==>  API이상함. 다른걸로 수정하던지 없애던지 할 것 
@@ -247,10 +289,23 @@ $("input[type='file']").change(function () {
 });
 
 // ===============================================================================
+// 등록,수정창의 input, textarea, select를 실시간으로 감지해서 변경이 생기면 등록버튼을 비활성화시키는 이벤트
+var oldVal;
+$(".realtimeCheck").on("propertychange change keyup paste", function() {
+    var currentVal = $(this).val();
+    if(currentVal == oldVal) {
+        return;
+    }
+    oldVal = currentVal;
+        $(this).parent().parent().parent().find(".submitBtn").prop("disabled", true).css("color", "lightgray");
+});
+
+// ===============================================================================
 // 미리듣기 버튼 이벤트
 // 수정이 제대로 된것일까.
 $(".preListen").on("click", function (e) {
     e.preventDefault();
+    // 수정??
     $(this).parent().parent().find(".submitBtn").prop("disabled", false);
 
     var $targetForm = $(this).parent().parent().parent().parent();
@@ -464,24 +519,35 @@ $("#submitBtn").on("click", function (e) {
 }); // end of submitbutton event
 
 
+
 // 등록/수정창의 '반복설정'클릭시 모달창 띄우며 현재창(반복설정버튼의 parent : table body)의 객체정보를 저장
 $(".repeatSetting").on("click", function () {
     var $currModalsParent = $(this).parent().parent().parent();
-    if($currModalsParent.find(".repeatView").val()!=="") {
-        $("#resetRepeat").css('display','block');
+    var $resetRepeat = $("#resetRepeat");
+    if ($currModalsParent.find(".repeatView").val() !== "") {
+        $resetRepeat.css('display', 'inline-block');
+    } else {
+        $resetRepeat.css('display', 'none');
     }
 
     // 반복설정해제 이벤트
-    $("#resetRepeat").on("click", function() {
-        console.log("이거 실행은 될까")
+    $("#resetRepeat").on("click", function () {
         removeElementsRelatedRepeat();
+        $currModalsParent.find(".repeat").val("");
+
+
         $("#closeRepeatBtn").trigger('click');
     })
 
+    // 반복설정이 되어있지 않은 상태에서 [취소]버튼을 누르면, 반복설정 모달창의 내용을 초기화
+    $("#closeRepeatBtn").on("click", function() {
+        if($currModalsParent.find(".repeatView").val() == "") {
+            removeRepeatElementsInModal();
+        }
+    })
 
     // 반복모달창내의 select 이벤트
     $("#repeatType").on("change", function () {
-        console.log("이벤트 발생 체크 ")
         var target = $(this);
         $("#repeatWeekdiv").css("display", "none")
         $("#repeatMonthdiv").css("display", "none")

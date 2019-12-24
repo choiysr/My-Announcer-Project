@@ -11,9 +11,8 @@ var vals = (function () {
     let minute = today.getMinutes().toString().length == 1 ? "0" + today.getMinutes() : today.getMinutes();
     let date = today.getFullYear() + "-" + month + "-" + day;
     let time = hour + ":" + minute  
-    let todayListTh = '<th>제목</th><th>재생시간</th><th>재생</th><th>&nbsp</th><th>수정/삭제</th><th>'
+    let todayListTh = '<th>제목</th><th>방송시간</th><th>재생</th><th>&nbsp</th><th>수정/삭제</th><th>'
     let totalListTh = '<th>날짜</th><th>시간</th><th>제목</th><th>수정/삭제</th><th>'
-    
     
     return{
         $listdiv:$listdiv,

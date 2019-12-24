@@ -29,10 +29,13 @@ $(".modifyBCBoard").on("click", function (e) {
     $rudForm.find('textarea').prop('readonly', false);
     $rudForm.find('select').attr('disabled', false);
 
+    $("#RUDrepeatSetting").css('display', 'inline-block');
+    $("#RUDpreListen").css('display', 'inline-block');
+
     $("#fakeBtnForIntro, #fakeBtnForEnding").css('display', 'block');
     // 일단 그냥
-    // $("#modifyBCBoard").css('display','none');
-    $("#updateBCBoard").css('display', 'block');
+    $("#modifyBCBoard").css('display','none');
+    $("#updateBCBoard").css('display', 'inline-block');
     if ($("#RUDoriginalIntro").val() !== "") {
         makeCancelBtn($("input[name='RUDintro']"));
     }

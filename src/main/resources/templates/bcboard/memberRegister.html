@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="id" value="ID" type="text">
+    <input id="password" value="1234" type="text">
+    <input id="name" value="김만기" type="text">
+    <button id="submit">확인</button>
+
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script>
+    $("#submit").on("click", function (e) {
+        e.preventDefault();
+
+        jsonData ={
+            memberid : $("#id").val(),
+            memberpassword: $("#password").val(),
+            name: $("#name").val()
+        }
+
+        $.ajax({
+            url:"/member/register",
+            data: JSON.stringify(jsonData),
+            contentType: "application/json; charset=utf-8",
+            // data: JSON.parse(jsonData),
+            // data: jsonData,
+            type:"POST",
+            success: function (result) {
+                alert("aaa")
+                
+            }
+        })
+        
+    })
+    </script>
+</body>
+</html>

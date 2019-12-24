@@ -134,21 +134,21 @@ public class BCBoardController {
     }
 
     // get 방식으로 url dptj 원하는 페이지, 오늘 날짜를 받는다.
-    @GetMapping("/todayList/{startdate}/{week}")
+    @GetMapping("/todayList/{startdate}/{week}/{mid}")
     public ResponseEntity<Page<BCBoardDTO>> list(@PathVariable("startdate") String startdate,
-            @PathVariable("week") String week) {
+            @PathVariable("week") String week, @PathVariable("mid") String mid) {
 
         // 정렬하여 값 가져올 기준
         Pageable page = PageRequest.of(0, 300, Direction.ASC, "starttime");
-        Page<BCBoardDTO> result = service.getTodayList(startdate, week, page);
+        Page<BCBoardDTO> result = service.getTodayList(startdate, week,mid ,page);
         return new ResponseEntity<>(result, OK);
     }
 
     @GetMapping("/totalList")
     public ResponseEntity<Map<String, Object>> getTotalList(
             @PageableDefault(page = 0, direction = Direction.ASC, sort = { "startdate", "starttime" }) Pageable page,
-            String category, String search) {
-        Map<String, Object> result = service.getAllList(page, category, search);
+            String category, String search, String userName) {
+        Map<String, Object> result = service.getAllList(page, category, search, userName);
         return new ResponseEntity<>(result, OK);
     }
 
@@ -190,6 +190,7 @@ public class BCBoardController {
 
         String clovaUrl = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
         String clovaUrlPremium = "https://naveropenapi.apigw.ntruss.com/voice-premium/v1/tts";
+        //보안상의 이유로 삭제
         String keyID = "8un3nj2jlx";
         String secretKey = "T1ZHOULzmPIOa58HmHvByTgGnMDTekgF8oZ1XSaE";
 

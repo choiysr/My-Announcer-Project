@@ -210,7 +210,7 @@ vals.$listdiv.on('click', '.listTitle', function (e) {
 
 function getTodayList() {
    $.ajax({
-      url: "/rbcboard/todayList/" + vals.date + "/" + vals.week,
+      url: "/rbcboard/todayList/" + vals.date + "/" + vals.week +"/"+getCookie("userName"),
       type: "GET",
       contentType: "application/json; charset=utf-8",
       success: function (result) {

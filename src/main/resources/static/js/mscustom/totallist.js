@@ -53,7 +53,7 @@
    }
 
    $.ajax({
-      url: "/rbcboard/totalList?page=" + page + "&category=" + category + "&search=" + search,
+      url: "/rbcboard/totalList?page=" + page + "&category=" + category + "&search=" + search +"&userName=" + getCookie("userName"),
       type: "GET",
       contentType: "application/json; charset=utf-8",
       success: function (result) {
@@ -77,9 +77,13 @@ $("#searchbtn").on("click", function (e) {
 
 }); // searchBtn click event 
 
-$("#category").on("change", function (params) {
-   $(this).parent("td").siblings("td").first().children('div > input').css("display", "none");
-   var cate = $(this).val()
+var searchCategoryChage= $("#category").on("change", function (params) {
+   $("#searchText").css("display", "none");
+   $("#searchDate").css("display", "none");
+   $("#searchMonth").css("display", "none");
+   // $(this).parent("td").siblings("td").first().children('div > input').css("display", "none");
+
+   var cate = $("#category").val()
    if (cate == "title") {
       $("#searchText").css("display", "inline-block")
    } else if (cate == "year-month") {

@@ -26,4 +26,8 @@ public class BasicController {
     public void getTotalList() {
     }
 
+    @GetMapping("/loginPage")
+    public void getMemberRegister() {
+    }
+
 }

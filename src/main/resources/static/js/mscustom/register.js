@@ -72,30 +72,30 @@ function removeElementsRelatedRepeat() {
            .attr("disabled", false);
 } */
 
-    
+
 function removeAllElements() {
-     // 등록+수정화면 공통적으로 있는 객체 초기화 
-        $(".allAudios").children().attr('src',"");
-        $(".title, .content, .intro, .ending").val("");
-        $(".voiceGender, .alarmBell").find('option:first').attr('selected', 'selected');
-        $(".uploadCancelBtn").children().html("");
+    // 등록+수정화면 공통적으로 있는 객체 초기화 
+    $(".allAudios").children().attr('src', "");
+    $(".title, .content, .intro, .ending").val("");
+    $(".voiceGender, .alarmBell").find('option:first').attr('selected', 'selected');
+    $(".uploadCancelBtn").children().html("");
 
     // 수정화면에만 있는 객체 초기화
-        $(".RUDoriginalPath").val("");
-        $(".rudResetSet-1").css('display','none');
-        $(".RUDfileName").val("등록된 파일이 없습니다.");
-        $("#modifyBCBoard").css('display', 'inline-block'); 
+    $(".RUDoriginalPath").val("");
+    $(".rudResetSet-1").css('display', 'none');
+    $(".RUDfileName").val("등록된 파일이 없습니다.");
+    $("#modifyBCBoard").css('display', 'inline-block');
 
-        removeElementsRelatedRepeat();
+    removeElementsRelatedRepeat();
 }
 
 function removeElementsRelatedRepeat() {
     $(".timeSet, .repeat, .repeatView").val("");
     var $ymdSet = $(".ymdSet");
     $ymdSet.val("")
-    .attr("placeholder", "방송일자를 입력하세요.")
-    .attr("disabled", false)
-    .css("background-color", "");
+        .attr("placeholder", "방송일자를 입력하세요.")
+        .attr("disabled", false)
+        .css("background-color", "");
     removeRepeatElementsInModal();
 }
 
@@ -291,13 +291,13 @@ $("input[type='file']").change(function () {
 // ===============================================================================
 // 등록,수정창의 input, textarea, select를 실시간으로 감지해서 변경이 생기면 등록버튼을 비활성화시키는 이벤트
 var oldVal;
-$(".realtimeCheck").on("propertychange change keyup paste", function() {
+$(".realtimeCheck").on("propertychange change keyup paste", function () {
     var currentVal = $(this).val();
-    if(currentVal == oldVal) {
+    if (currentVal == oldVal) {
         return;
     }
     oldVal = currentVal;
-        $(this).parent().parent().parent().find(".submitBtn").prop("disabled", true).css("color", "lightgray");
+    $(this).parent().parent().parent().find(".submitBtn").prop("disabled", true).css("color", "lightgray");
 });
 
 // ===============================================================================
@@ -439,6 +439,7 @@ $("#submitBtn").on("click", function (e) {
                 content: content,
                 title: title,
                 gender: gender,
+                'mid': getCookie("userName"),
                 startdate: startdate,
                 starttime: starttime,
                 audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
@@ -472,20 +473,22 @@ $("#submitBtn").on("click", function (e) {
             } // end of if ending exists
 
             if (repeatSet.startsWith("week")) {
-                jsonData = getBCBoard(content, title, gender, starttime, alarmBell, intro, ending, repeatSet)
-                /* jsonData = {
+                jsonData = {
                     content: content,
                     title: title,
                     gender: gender,
+                    'mid': getCookie("userName"),
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
                     repeatVO: { repeatWeek: repeatSet }
-                }; */
+                };
+                // jsonData = getBCBoard(content, title, gender, starttime, alarmBell, intro, ending, repeatSet)
             } else if (repeatSet.startsWith("month")) {
                 jsonData = {
                     content: content,
                     title: title,
                     gender: gender,
+                    'mid': getCookie("userName"),
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
                     repeatVO: { repeatMonth: repeatSet }
@@ -495,6 +498,7 @@ $("#submitBtn").on("click", function (e) {
                     content: content,
                     title: title,
                     gender: gender,
+                    'mid': getCookie("userName"),
                     startdate: startdate,
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
@@ -540,8 +544,8 @@ $(".repeatSetting").on("click", function () {
     })
 
     // 반복설정이 되어있지 않은 상태에서 [취소]버튼을 누르면, 반복설정 모달창의 내용을 초기화
-    $("#closeRepeatBtn").on("click", function() {
-        if($currModalsParent.find(".repeatView").val() == "") {
+    $("#closeRepeatBtn").on("click", function () {
+        if ($currModalsParent.find(".repeatView").val() == "") {
             removeRepeatElementsInModal();
         }
     })
@@ -624,3 +628,9 @@ function getBCBoard(content, title, gender, starttime, alarmBell, intro, ending,
     };
     return result;
 }
+
+
+var getCookie = function (name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? value[2] : null;
+};

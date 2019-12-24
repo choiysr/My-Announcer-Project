@@ -54,12 +54,11 @@ public class BCBoardServiceImpl implements BCBoardService {
     public void delete(Integer bno) {
         repos.deleteById(bno);
     }
-
-    public Page<BCBoardDTO> getTodayList(String date, String week,  Pageable page) {
+    public Page<BCBoardDTO> getTodayList(String date, String week, String mid,  Pageable page) {
         // Page<BCBoardDTO> result = repos.findAllByStartdate(date, page);
         week = "%"+week+"%";
         String monthRepeat ="%" +(date.split("-")[2])+ "%";
-        Page<BCBoardDTO> result = repos.findByStartdate(date, week, monthRepeat, page);
+        Page<BCBoardDTO> result = repos.findByStartdate(date, week, monthRepeat, mid , page);
         return result;
     }
 

@@ -375,6 +375,7 @@ $("#submitBtn").on("click", function (e) {
                 content: content,
                 title: title,
                 gender: gender,
+                'mid': getCookie("userName"),
                 startdate: startdate,
                 starttime: starttime,
                 audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
@@ -422,6 +423,7 @@ $("#submitBtn").on("click", function (e) {
                     content: content,
                     title: title,
                     gender: gender,
+                    'mid': getCookie("userName"),
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
                     repeatVO: { repeatMonth: repeatSet }
@@ -431,6 +433,7 @@ $("#submitBtn").on("click", function (e) {
                     content: content,
                     title: title,
                     gender: gender,
+                    'mid': getCookie("userName"),
                     startdate: startdate,
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending }
@@ -548,3 +551,9 @@ function getBCBoard(content, title, gender, starttime, alarmBell, intro, ending,
     };
     return result;
 }
+
+
+var getCookie = function (name) {
+	var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+	return value ? value[2] : null;
+ };

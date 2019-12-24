@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/todayListLayout}">
+
+
+<div layout:fragment="custom-content">
+
+    <div class="heading-banner-area overlay-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-banner">
+                        <div class="heading-banner-title">
+                            <h2>Login Page</h2>
+                        </div>
+                        <div class="breadcumbs pb-15">
+                            <ul>
+                                <li>Home</li>
+                                <li>Login Page</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="login-area  pt-80 pb-80">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <div class="customer-login text-center">
+                        <h3 class="title-3 title-border text-uppercase mb-30">로그인</h3>
+                        <p class="text-gray">함께하자 우리와 원한다면 로그인!</p>
+                        <form action="/login" method="POST">
+                            <input style="width: 50%;" type="text" placeholder="아이디" name="username">
+                            <input style="width: 50%;" type="password" placeholder="비밀번호" name="password">
+                            <input style="display: none;" id="loginBtn" type="submit">
+                        </form>
+                        <div>
+                            <button id="login" type="submit" data-text="login"
+                                class="button-one submit-button mt-15">로그인</button>
+                            <button id="registerBtn" data-toggle="modal" data-target="#exampleModal"
+                                data-text="Register" class="button-one submit-button mt-15">회원가입</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 회원가입 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">회원가입</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center;">
+                        <div style="display: inline-block;">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p>아이디</p>
+                                    </td>
+                                    <td>
+                                        <input minlength="5" type="text" placeholder="아이디" id="memberid">
+                                    </td>
+                                    <td>
+                                        <button id="checkOverlap" >중복확인</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>비밀번호</p>
+                                    </td>
+                                    <td>
+                                        <input minlength="5" type="password" placeholder="비밀번호" id="memberpassword">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>이메일</p>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="이메일" id="email">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>이름</p>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="이름" id="name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>주소</p>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="주소" id="address">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="CloseRegisterForm" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="postRegister" disabled class="btn btn-primary">가입하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script th:src="@{~/js/mscustom/memberRegister.js}"></script>
+    <script>
+        $(document).ready(function () {
+        })
+        
+           
+    </script>
+
+</html>

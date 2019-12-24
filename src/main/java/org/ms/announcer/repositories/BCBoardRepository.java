@@ -25,6 +25,6 @@ public interface BCBoardRepository extends JpaRepository<BCBoardDTO, Integer> {
     Page<BCBoardDTO> findByStartdate(LocalDate startdate, Pageable page);
     
     
-    @Query( value = "select b.* from tbl_bcboard b where DATE_FORMAT(b.startdate, '%Y-%m-%d') = ?1 or repeat_week like (?2) or repeat_month like (?3) ", nativeQuery = true)
-    Page<BCBoardDTO> findByStartdate(String startDate, String week, String month, Pageable page);
+    @Query( value = "select b.* from tbl_bcboard b where (DATE_FORMAT(b.startdate, '%Y-%m-%d') = ?1 or repeat_week like (?2) or repeat_month like (?3)) and mid = ?4 ", nativeQuery = true)
+    Page<BCBoardDTO> findByStartdate(String startDate, String week, String month, String mid, Pageable page);
 }

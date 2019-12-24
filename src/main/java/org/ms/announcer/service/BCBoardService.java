@@ -16,6 +16,6 @@ public interface BCBoardService {
     public void update(BCBoardDTO dto);
     public void delete(Integer bno);
     public Map<String , Object> getAllList(Pageable page, String category, String search);
-    public Page<BCBoardDTO> getTodayList(String date , String week, Pageable page );
+    public Page<BCBoardDTO> getTodayList(String date , String week, String mid, Pageable page );
     
 }

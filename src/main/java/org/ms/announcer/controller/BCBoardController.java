@@ -134,13 +134,13 @@ public class BCBoardController {
     }
 
     // get 방식으로 url dptj 원하는 페이지, 오늘 날짜를 받는다.
-    @GetMapping("/todayList/{startdate}/{week}")
+    @GetMapping("/todayList/{startdate}/{week}/{mid}")
     public ResponseEntity<Page<BCBoardDTO>> list(@PathVariable("startdate") String startdate,
-            @PathVariable("week") String week) {
+            @PathVariable("week") String week, @PathVariable("mid") String mid) {
 
         // 정렬하여 값 가져올 기준
         Pageable page = PageRequest.of(0, 300, Direction.ASC, "starttime");
-        Page<BCBoardDTO> result = service.getTodayList(startdate, week, page);
+        Page<BCBoardDTO> result = service.getTodayList(startdate, week,mid ,page);
         return new ResponseEntity<>(result, OK);
     }
 

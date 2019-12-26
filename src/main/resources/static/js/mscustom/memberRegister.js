@@ -59,7 +59,7 @@ $("#checkOverlap").on("click", function (e) {
     }
 
     $.ajax({
-        url: "/member/checkOverOverlap/"+$("#memberid").val(),
+        url: "/member/checkOverlap/"+$("#memberid").val(),
         type: "GET",
         success: function (result) {
             if(result === false){

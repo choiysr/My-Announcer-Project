@@ -12,22 +12,24 @@ import lombok.Setter;
  * BaiscController
  */
 @Controller
-@RequestMapping("/bcboard/*")
+@RequestMapping("/*")
 public class BasicController {
 
-    @Setter(onMethod_ = { @Autowired })
-    BCBoardService bcboardService;
-
-    @GetMapping("/todayList")
+    @GetMapping("/bcboard/todayList")
     public void getTodayList() {
     }
 
-    @GetMapping("/totallist")
+    @GetMapping("/bcboard/totallist")
     public void getTotalList() {
     }
 
-    @GetMapping("/loginPage")
+    @GetMapping("/bcboard/loginPage")
     public void getMemberRegister() {
     }
+
+    @GetMapping("/cpboard/myPage")
+    public void test() {
+    }
+
 
 }

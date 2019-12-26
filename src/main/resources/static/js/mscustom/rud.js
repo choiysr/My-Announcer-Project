@@ -74,11 +74,6 @@ $("#updateBCBoard").on("click", function (e) {
     startdate = $targetForm.find('.ymdSet').val();
     starttime = $targetForm.find('.timeSet').val();
     
-    console.log("왜 조건문에 만족하는가")
-    console.log($("#RUDrepeat").val());
-    console.log(startdate);
-    console.log(starttime);
-
     if (($("#RUDrepeat").val() == "" && startdate == "") || (starttime == "")) {
         alert("방송 일자와 시간을 설정해주세요.")
         return;
@@ -96,9 +91,7 @@ $("#updateBCBoard").on("click", function (e) {
         // 2. 기존파일을 유지시키는 경우 
 
         if ($("#introPlayer").attr('src') !== "") {
-            // 이 조건의 문제는 무조건 미리듣기를 한 이후여야함.
-            // textarea변경감지해서 등록버튼 비활성화 시키는 function을
-            // 목요일까지 만들자
+            // 무조건 미리듣기를 한 이후여야함.
             if ($("input[name='RUDintro']")[0].files.length == 0) {
                 // 기존파일을 유지시키는 경우 
                 // 파일명 받아와서 intro 세팅해줘야함.

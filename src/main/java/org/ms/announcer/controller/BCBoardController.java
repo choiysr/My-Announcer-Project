@@ -38,8 +38,6 @@ import lombok.Setter;
 /**
  * BCBoardController
  */
-// 오늘목표 : 글 받아서 DB에 등록하고 audio파일 저장확인. 미리듣기 설정(글 바꿀때마다 기존꺼 날리고).
-// list 페이지에서 즉시재생시키기(1번만)
 
 @RestController
 @RequestMapping("/rbcboard/*")
@@ -52,8 +50,7 @@ public class BCBoardController {
     // ==================== Intro/ending 파일업로드 ===================
     @PostMapping(value = "/fileUpload") // 얘는 왜 get으로 안되는가? > byte너무길어서 url로 보낼수 없음
     public ResponseEntity<List<String>> fileUpload(MultipartFile additionalAudio) {
-        // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임. (prelisten수정 view and
-        // controller)
+        // 경로만 hidden으로 리턴해줘서 나중에 prelisten누르면 같이 보내줄것임.
         List<String> list = new ArrayList<>();
         String fileNameWithoutType = additionalAudio.getOriginalFilename().substring(0,
                 additionalAudio.getOriginalFilename().lastIndexOf("."));
@@ -80,25 +77,19 @@ public class BCBoardController {
 
     @GetMapping(value = "/getPrevFile/{prevPath}")
     public ResponseEntity<List<String>> getPrevFiles(@PathVariable("prevPath") String prevPath) {
-        System.out.println("파라미터확인");
-        System.out.println(prevPath);
         File file = new File(prevPath.replace("-", "\\"));
-        System.out.println("에러체크1");
         List<String> list = new ArrayList<>();
         String fileNameWithoutType = prevPath.substring(prevPath.lastIndexOf("_")+1, prevPath.lastIndexOf("."));
         try {
             byte[] fileBytes = FileUtil.readAsByteArray(file);
             list.add(audioSave(fileNameWithoutType, fileBytes).replace("\\", "*"));
         } catch (Exception e) {
-            System.out.println("getprevfile method에서 에러");
             e.printStackTrace();
         }
-        System.out.println("리턴할 string"+list.get(0));
         return new ResponseEntity<>(list, OK);
     }
 
     // ==================== 미리듣기 ====================
-    // 등록하는거 아니면 모두 get으로 받아라.. mapping성격이 다 다르다
     @GetMapping(value = "/prelisten")
     public ResponseEntity<List<String>> preListen(BCBoardDTO dto) {
         ResponseEntity<byte[]> response = makeAudio(dto);
@@ -167,9 +158,6 @@ public class BCBoardController {
     // 수정
     @PutMapping("/modify")
     public void updateBCBoard(@RequestBody BCBoardDTO dto) {
-        System.out.println("put 진입확인");
-        System.out.println("dto변경내역이 들어왔나 확인");
-        System.out.println(dto);
         ResponseEntity<byte[]> response = makeAudio(dto);
         String wholePath = audioSave(dto.getTitle(), response.getBody());
         String pathWithoutFname = wholePath.substring(0, wholePath.lastIndexOf("\\") + 1); // 파일명을 제외한 경로.뒤에 슬래시 포함

@@ -8,20 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * BaiscController
  */
 @Controller
-@RequestMapping("/bcboard/*")
+@RequestMapping("/*")
 public class BasicController {
 
-
-    @GetMapping("/todayList")
+    @GetMapping("/bcboard/todayList")
     public void getTodayList() {
     }
 
-    @GetMapping("/totallist")
-    public void getTotalList() {
-    }
+    // @GetMapping("/bcboard/totallist")
+    // public void getTotalList() {
+    // }
 
-    @GetMapping("/loginPage")
+    @GetMapping("/bcboard/loginPage")
     public void getMemberRegister() {
     }
+
+    @GetMapping("/cpboard/myPage")
+    public void test() {
+    }
+
 
 }

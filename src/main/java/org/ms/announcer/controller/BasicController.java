@@ -15,9 +15,9 @@ public class BasicController {
     public void getTodayList() {
     }
 
-    @GetMapping("/bcboard/totallist")
-    public void getTotalList() {
-    }
+    // @GetMapping("/bcboard/totallist")
+    // public void getTotalList() {
+    // }
 
     @GetMapping("/bcboard/loginPage")
     public void getMemberRegister() {

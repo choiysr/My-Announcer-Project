@@ -35,6 +35,7 @@
                               onclick="removeAllElements()">오늘의 방송</a></li>
                         <li><a href="#registerModal" data-toggle="tab">방송등록</a></li>
                         <li><a href="#totalList" data-toggle="tab">모든방송</a></li>
+                        <li><a href="#" data-toggle="tab">구독한 컨텐츠</a></li>
                      </ul>
 
                      <!-- Tab panes -->
@@ -53,136 +54,163 @@
                         </div>
 
                         <!-- 조회/수정 modal -->
-                        <div class="modal fade readModal" id="layerpop">
+                        <div class="modal fade readModal" id="layerpop" data-backdrop="static">
                            <div class="modal-dialog">
                               <div class="modal-content">
                                  <!-- header -->
                                  <div class="modal-header">
                                     <!-- 닫기(x) 버튼 -->
-                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <button type="button" class="close" id="closeReadModal" data-dismiss="modal" onclick="removeAllElements()">×</button>
                                     <!-- header title -->
                                     <h4 class="modal-title">Header</h4>
                                  </div>
                                  <!-- body -->
-                                 <div class="modal-body">
-                                    <!-- top of rudTable 조회창입니다=============================== -->
+                                 <div id="modifyModal" style="text-align: center;"> 
+                                 <div class="modal-body" style="display: inline-block;">
+                                    <!-- top of rudTable 조회/수정창입니다=============================== -->
                                     <table class="tableForm" id="rudFormTable" aria-disabled="true">
                                        <tr>
-                                          <th class="formTitle" style="width: 100px;"><strong>제목</strong></th>
-                                          <th colspan="2">
+                                          <td class="formTitle"><strong>제목</strong></td>
+                                          <td colspan="2">
                                              <h1 id="RUDbno" style="display: none;"></h1>
-                                             <input class="title" id="RUDtitle" type="text" placeholder="제목을 입력하세요">
-                                          </th>
+                                             <input class="title realtimeCheck" id="RUDtitle" readonly type="text"
+                                                placeholder="제목을 입력하세요">
+                                          </td>
                                        </tr>
                                        <tr>
-                                          <th class="formTitle"><strong>내용</strong></th>
-                                          <th colspan="2"><textarea class="custom-textarea content" id="RUDcontent"
-                                                placeholder="내용을 입력하세요"></textarea></th>
+                                          <td class="formTitle"><strong>내용</strong></td>
+                                          <td colspan="2"><textarea class="custom-textarea content realtimeCheck"
+                                                readonly id="RUDcontent" placeholder="내용을 입력하세요"></textarea></td>
                                        </tr>
                                        <tr>
-                                          <th class="formTitle"></th>
-                                          <th colspan="2" style="text-align: right;"><button class="spaceChecker"
-                                                style="display: none;">띄어쓰기교정</button></th>
+                                          <td class="formTitle"></td>
+                                          <td colspan="2" style="text-align: right;"><button class="spaceChecker"
+                                                style="display: none;">띄어쓰기교정</button></td>
                                        </tr>
                                        <tr>
-                                          <th>　</th>
+                                          <td>　</td>
                                        </tr>
                                        <tr>
-                                          <th class="formTitle"><strong>음성설정</strong></th>
-                                          <th colspan="2"><select class="custom-select mb-15 voiceGender"
-                                                id="RUDvoiceGender">
+                                          <td class="formTitle"><strong>음성설정</strong></td>
+                                          <td colspan="2"><select class="custom-select mb-15 voiceGender realtimeCheck"
+                                                id="RUDvoiceGender" disabled>
                                                 <option value="woman">여성</option>
                                                 <option value="man">남성</option>
-                                             </select></th>
+                                             </select></td>
                                        </tr>
                                        <tr>
-                                          <th class="formTitle"><strong>알람음</strong></th>
-                                          <th colspan="2"><select class="custom-select mb-15 alarmBell"
-                                                id="RUDalarmBell">
+                                          <td class="formTitle"><strong>알람음</strong></td>
+                                          <td colspan="2"><select class="custom-select mb-15 alarmBell realtimeCheck"
+                                                id="RUDalarmBell" disabled>
                                                 <option value="1">알람음1</option>
                                                 <option value="2">알람음2</option>
                                                 <option value="3">알람음3</option>
                                                 <option value="4">알람음4</option>
                                                 <option value="5">알람음5</option>
-                                             </select></th>
+                                             </select></td>
                                        </tr>
                                        <tr>
-                                          <th class="formTitle"><strong>INTRO</strong></th>
-                                          <th>
-                                             <input type="file" class="intro" name="RUDintro" style="display: block;">
-                                             <input type="text" class="RUDfileName" id="RUDintroFileName"
-                                                value="등록된 파일이 없습니다.">
+                                          <td class="formTitle"><strong>INTRO</strong></td>
+                                          <td>
+                                             <input type="file" class="intro realtimeCheck" name="RUDintro"
+                                                style="display: none;">
+                                             <input type="text" readonly class="RUDfileName realtimeCheck"
+                                                id="RUDintroFileName" value="등록된 파일이 없습니다." style="margin-bottom: 1px;" disabled>
                                              <input type="text" class="RUDoriginalPath" id="RUDoriginalIntro"
-                                                style="display:block;">
-                                             <button class="fakeBtnForAdditional" id="fakeBtnForIntro"
-                                                style="display: none;">파일선택</button>
-                                          </th>
-                                          <th class="uploadCancelBtn">
-                                          </th>
+                                                style="display:none;">
+                                          </td>
+                                          <td class="uploadCancelBtn">
+                                          </td>
                                        </tr>
                                        <tr>
-                                          <th>　</th>
+                                          <td>　</td>
+                                          <td><button class="fakeBtnForAdditional rudResetSet-1" id="fakeBtnForIntro"
+                                                style="display: none; margin-bottom: 15px;"> 파일선택</button></td>
                                        </tr>
                                        <tr>
-                                          <th class="formTitle"><strong>ENDING</strong></th>
-                                          <th>
-                                             <input type="file" class="ending" name="RUDending" style="display: block;">
-                                             <input type="text" class="RUDfileName" id="RUDendingFileName"
-                                                value="등록된 파일이 없습니다.">
+                                          <td> </td>
+                                       </tr>
+                                       <tr>
+                                          <td class="formTitle"><strong>ENDING</strong></td>
+                                          <td>
+                                             <input type="file" class="ending realtimeCheck" name="RUDending"
+                                                style="display: none;">
+                                             <input type="text" readonly class="RUDfileName realtimeCheck"
+                                                id="RUDendingFileName" value="등록된 파일이 없습니다."
+                                                style="margin-bottom: 1px;" disabled>
                                              <input type="text" class="RUDoriginalPath" id="RUDoriginalEnding"
-                                                style="display:block;">
-                                             <button class="fakeBtnForAdditional" id="fakeBtnForEnding"
-                                                style="display: none;">파일선택</button>
-                                          </th>
-                                          <th class="uploadCancelBtn">
-                                          </th>
+                                                style="display:none;">
+                                          </td>
+                                          <td class="uploadCancelBtn">
+                                          </td>
                                        </tr>
                                        <tr>
-                                          <th>　</th>
+                                          <td>　</td>
+                                          <td>
+                                             <button class="fakeBtnForAdditional rudResetSet-1" id="fakeBtnForEnding"
+                                                style="display: none; margin-bottom: 15px;"> 파일선택</button>
+                                          </td>
                                        </tr>
                                        <tr>
-                                          <th class="formTitle "><strong>방송일자</strong></th>
-                                          <th colspan="2">
+                                          <td> </td>
+                                       </tr>
+                                       <tr>
+                                          <td class="formTitle"><strong>방송일자</strong></td>
+                                          <td colspan="2">
                                              <div class="ymd">
-                                                <input class="custom-select mb-15 ymdSet" type="date" id="RUDymdSet">
+                                                <input class="custom-select mb-15 ymdSet realtimeCheck" readonly
+                                                   type="text" id="RUDymdSet" placeholder="방송일자를 입력하세요."
+                                                   onfocus="(this.type='date')" onblur="(this.type='text')">
                                              </div>
-                                          </th>
+                                          </td>
                                        </tr>
                                        <tr>
-                                          <th>　</th>
-                                       </tr>
-                                       <tr>
-                                          <th class="formTitle"><strong>방송시간</strong></th>
-                                          <th colspan="2">
+                                          <td class="formTitle"><strong>방송시간</strong></td>
+                                          <td colspan="2">
                                              <div class="time">
-                                                <input class="custom-select mb-15 timeSet" type="time" id="RUDtimeSet">
+                                                <input class="custom-select mb-15 timeSet realtimeCheck" readonly
+                                                   type="text" id="RUDtimeSet" placeholder="방송시간을 입력하세요."
+                                                   onfocus="(this.type='time')" onblur="(this.type='text')">
                                              </div>
-                                          </th>
-                                       </tr>
+                                          </td>
                                        </tr>
                                        <tr>
-                                          <th>　</th>
+                                          <td class="formTitle"><strong>반복</strong></td>
+                                          <td colspan="2">
+                                             <div class="time">
+                                                <input type="text" readonly class="repeatView" id="RUDrepeatView">
+                                                <input type="text" class="repeat" id="RUDrepeat" style="display: none;">
+                                             </div>
+                                          </td>
+                                       </tr>
+                                       <tr>
+                                          <td>　</td>
                                        </tr>
                                        <tr>
                                           <div class="mt-20">
-                                             <th></th>
-                                             <th style="text-align: right; " colspan="2">
-                                                <button class="preListen">미리듣기</button> &nbsp;</th>
+                                             <td></td>
+                                             <td style="text-align: right; " colspan="2">
+                                                <button class="repeatSetting rudResetSet-1" id="RUDrepeatSetting" type="button" data-toggle="modal"
+                                                   data-target="#repeatModal" style="display: none;">반복설정</button>
+                                                <button class="preListen rudResetSet-1" id="RUDpreListen" style="display: none;">미리듣기</button>
+                                                <button class="modifyBCBoard" id="modifyBCBoard">수정</button>
+                                                <button class="submitBtn rudResetSet-1" id="updateBCBoard" style="display: none;">등록</button>
+                                                <button id="deleteBCBoard">삭제</button></td>
                                           </div>
                                        </tr>
                                     </table>
                                     <!-- end of rudTable -->
                                  </div>
+                              </div>
                                  <!-- Footer -->
-                                 <div style="text-align: right;" class="modal-footer">
-                                    <div style="display: inline-block; ">
-                                       <button type="button" class="btn btn-default" id="updateBCBoard"
-                                          style="display: none;">등록</button>
-                                          <button type="button" class="btn btn-default" id="modifyBCBoard">수정</button>
-                                          <button type="button" class="btn btn-default" id="deleteBCBoard">삭제</button>
-                                          <button type="button" class="btn btn-default" id="closeReadModal"
-                                             data-dismiss="modal" onclick="removeAllElements()">닫기</button>
-                                    </div>
+                                 <div class="modal-footer">
+ <!--                                    <button type="button" class="btn btn-default modifyBCBoard"
+                                       id="modifyBCBoard">수정</button>
+                                    <button type="button" class="btn btn-default submitBtn" id="updateBCBoard"
+                                       style="display: none;">등록</button> 
+                                    <button type="button" class="btn btn-default" id="deleteBCBoard">삭제</button>
+                                    <button type="button" class="btn btn-default" id="closeReadModal"
+                                       data-dismiss="modal" onclick="removeAllElements()">닫기</button>-->
                                  </div>
                               </div>
                            </div>
@@ -192,7 +220,6 @@
                         <!-- check-out start -->
                         <!-- 등록창 -->
                         <div class="tab-pane" id="registerModal">
-                           <!--아이디 변경해줘야함!!-->
                            <form action="#">
                               <div class="shop-cart-table check-out-wrap">
                                  <div class="row">
@@ -200,24 +227,28 @@
                                     <!--         <div class="billing-details pr-20"> -->
                                     <h3 style="text-align: center; ">방송등록</h3>
                                     <br>
-                                    <div id="registerFormDiv">
+                                    <div id="registerFormDiv" style="text-align: right;">
                                        <div style="text-align: right; margin-right: 20px;">
-                                          <input type="checkbox" class="urgentCheck">긴급공지<br>
+                                          <input type="checkbox" class="urgentCheck realtimeCheck">긴급공지<br>
                                        </div>
                                        <div style="width: 100%;  text-align: center;">
                                           <div style="display: inline-block;">
-                                             <table  class="tableForm"
-                                                id="registerFormTable">
+                                             <table class="tableForm" id="registerFormTable">
                                                 <tr>
-                                                   <td class="formTitle" ><p><strong>제목</strong></td></p>
-                                                   <td colspan="2"><input class="title" type="text" id="title"
-                                                         placeholder="제목을 입력하세요">
+                                                   <td class="formTitle">
+                                                      <p><strong>제목</strong></p>
+                                                   </td>
+                                                   <td colspan="2"><input class="title realtimeCheck" type="text"
+                                                         id="title" placeholder="제목을 입력하세요">
                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                   <td class="formTitle"><p><strong>내용</strong></p></td>
-                                                   <td colspan="2"><textarea class="custom-textarea content"
-                                                         id="content" placeholder="내용을 입력하세요"></textarea></td>
+                                                   <td class="formTitle">
+                                                      <p><strong>내용</strong></p>
+                                                   </td>
+                                                   <td colspan="2"><textarea
+                                                         class="custom-textarea content realtimeCheck" id="content"
+                                                         placeholder="내용을 입력하세요"></textarea></td>
                                                 </tr>
                                                 <tr>
                                                    <td class="formTitle"></td>
@@ -228,16 +259,22 @@
                                                    <td>　</td>
                                                 </tr>
                                                 <tr>
-                                                   <td class="formTitle"><p><strong>음성설정</strong></p></td>
-                                                   <td colspan="2"><select class="custom-select mb-15 voiceGender"
+                                                   <td class="formTitle">
+                                                      <p><strong>음성설정</strong></p>
+                                                   </td>
+                                                   <td colspan="2"><select
+                                                         class="custom-select mb-15 voiceGender realtimeCheck"
                                                          id="voiceGender">
                                                          <option value="woman">여성</option>
                                                          <option value="man">남성</option>
                                                       </select></td>
                                                 </tr>
                                                 <tr>
-                                                   <td class="formTitle"><p><strong>알람음</strong></p></td>
-                                                   <td colspan="2"><select class="custom-select mb-15 alarmBell"
+                                                   <td class="formTitle">
+                                                      <p><strong>알람음</strong></p>
+                                                   </td>
+                                                   <td colspan="2"><select
+                                                         class="custom-select mb-15 alarmBell realtimeCheck"
                                                          id="alarmBell">
                                                          <option value="1">알람음1</option>
                                                          <option value="2">알람음2</option>
@@ -247,54 +284,58 @@
                                                       </select></td>
                                                 </tr>
                                                 <tr>
-                                                   <td class="formTitle"><p><strong>INTRO</strong></p></td>
+                                                   <td class="formTitle"><strong>INTRO</strong></td>
                                                    <td>
-                                                      <input type="file" class="intro" name="intro">
+                                                      <input type="file" class="intro realtimeCheck" name="intro">
                                                    </td>
-                                                   <td class="uploadCancelBtn">
-                                                   </td>
+                                                   <th class="uploadCancelBtn">
+                                                   </th>
                                                 </tr>
                                                 <tr>
-                                                   <th>　</th>
+                                                   <td>　</td>
                                                 </tr>
                                                 <tr>
-                                                   <td class="formTitle"><p><strong>ENDING</strong></p></td>
+                                                   <td class="formTitle"><strong>ENDING</strong></td>
                                                    <td>
-                                                      <input type="file" class="ending" name="ending">
+                                                      <input type="file" class="ending realtimeCheck" name="ending">
                                                    </td>
-                                                   <td class="uploadCancelBtn">
+                                                   <th class="uploadCancelBtn">
+                                                   </th>
+                                                </tr>
+                                                <tr>
+                                                   <td>　</td>
+                                                </tr>
+                                                <tr>
+                                                   <td class="formTitle "><strong>방송일자</strong></td>
+                                                   <td colspan="2">
+                                                      <div class="ymd">
+                                                         <input class="custom-select mb-15 ymdSet realtimeCheck"
+                                                            type="text" id="ymdSet" placeholder="방송일자를 입력하세요"
+                                                            onfocus="(this.type='date')" onblur="(this.type='text')">
+                                                      </div>
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>　</td>
                                                 </tr>
                                                 <tr>
-                                                   <td class="formTitle "><p><strong>방송일자</strong></p></td>
+                                                   <td class="formTitle"><strong>방송시간</strong></td>
                                                    <td colspan="2">
-                                                      <div class="ymd">
-                                                         <input class="custom-select mb-15 ymdSet" type="date"
-                                                            id="ymdSet">
+                                                      <div class="time">
+                                                         <input class="custom-select mb-15 timeSet realtimeCheck"
+                                                            type="text" id="timeSet" placeholder="방송시간을 입력하세요"
+                                                            onfocus="(this.type='time')" onblur="(this.type='text')">
                                                       </div>
                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                   <th>　</th>
-                                                </tr>
-                                                <tr>
-                                                   <td class="formTitle"><p><strong>방송시간</strong></p></td>
+                                                   <td class="formTitle"><strong>반복</strong></td>
                                                    <td colspan="2">
                                                       <div class="time">
-                                                         <input class="custom-select mb-15 timeSet" type="time"
-                                                            id="timeSet">
-                                                      </div>
-                                                   </td>
-                                                </tr>
-                                                <tr>
-                                                   <td class="formTitle"><p><strong>반복</strong></p></td>
-                                                   <td colspan="2">
-                                                      <div class="time">
-                                                         <input type="text" readonly id="repeatView">
-                                                         <input type="text" hidden id="repeat">
+                                                         <input type="text" readonly class="repeatView realtimeCheck"
+                                                            id="repeatView">
+                                                         <input type="text" class="repeat" id="repeat"
+                                                            style="display: none;">
                                                       </div>
                                                    </td>
                                                 </tr>
@@ -306,8 +347,8 @@
                                                    <div class="mt-20">
                                                       <td></td>
                                                       <td style="text-align: right" colspan="2">
-                                                         <button class="repeat" type="button" data-toggle="modal"
-                                                            data-target="#myModal">반복설정</button>
+                                                         <button class="repeatSetting" type="button" data-toggle="modal"
+                                                            data-target="#repeatModal">반복설정</button>
                                                          <button class="preListen">미리듣기</button>
                                                          <button style="color: lightgray;" class="submitBtn"
                                                             id="submitBtn" disabled=true>등록</button></td>
@@ -324,7 +365,6 @@
                         <!-- check-out end -->
 
                         <!-- totalList start -->
-
                         <div class="tab-pane" id="totalList">
                            <form action="#">
                               <div class="shop-cart-table check-out-wrap">
@@ -372,9 +412,9 @@
          </div>
       </div>
 
-      <div class="modal fade" id="myModal" role="dialog">
+      <!-- 반복설정 모달창 -->
+      <div class="modal fade" id="repeatModal" role="dialog" data-backdrop="static">
          <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                <div class="modal-header">
@@ -392,7 +432,6 @@
                   <div id="repeatMonthdiv" style="display:none ;">
                      <h4>월간반복</h4>
                      <select style=" width: 4cm;" id="repeatMonth">
-
                      </select>
                   </div>
                   <div id="repeatWeekdiv">
@@ -415,8 +454,9 @@
                   </div>
                </div>
                <div class="modal-footer">
+                  <button id="resetRepeat" type="button" class="btn btn-default" style="display:none">반복설정해제</button>
                   <button id="repeatSubmitBtn" type="button" class="btn btn-default" data-dismiss="modal">확인</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                  <button type="button" class="btn btn-default" id="closeRepeatBtn" data-dismiss="modal">취소</button>
                </div>
             </div>
 
@@ -474,12 +514,7 @@
             getTodayList();
             loadpage(1, "title", "");
             repeatMonthSelectAppend();
-
-            
-            //일일이 테스트하기 귀찮아서 만듬 ㅋㅅㅋ
-            // registerTest()
          })
-
       </script>
 
 

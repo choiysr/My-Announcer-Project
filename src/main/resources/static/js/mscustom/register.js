@@ -1,13 +1,9 @@
-// todaylist.js의 getTodayList() function호출
-// 이거 main으로 옮기는게 좋을듯 
-//getTodayList();
 
-///////////////////// modal event area ////////////////////
 var startdate, starttime, title, content, gender, alarmBell, jsonData, alarmObj, sourceObj, introObj, endingObj;
 var audioObjects;
 
+
 // dto 요소들을 현재 설정되어 있는 값으로 설정해주는 함수(startdate,starttime제외)
-// 
 function setAllElements($targetForm) {
     title = $targetForm.find(".title").val();
     content = $targetForm.find(".content").val();
@@ -27,34 +23,91 @@ function setAudioElements() {
 // 화면내의 dto요소들 전체 초기화(reset) - 조회(수정)화면 & 등록화면 
 // 코드수정할것
 // 초기화되어야하는 모든 요소를 파악하고 하나씩 고치자. 
-function removeAllElements() {
-    var inputElements = ["title", "content",
-        "intro", "ending", "ymdSet", "timeSet",
-        "RUDoriginalIntro", "RUDoriginalEnding","RUDoriginalPath"];
+/* function removeAllElements() {
 
-    // inputElements 초기화 
-    for (let i = 0; i < inputElements.length; i++) {
-        var $targetClass = $("." + inputElements[i]);
-        $targetClass.each(function () {
-            $(this).val("");
-        })
-    }
+    console.log("리셋 위치 확인");
+    var elementsToBeEmpty = ["title", "content", "intro", "ending", "RUDoriginalIntro", "RUDoriginalEnding", "RUDoriginalPath"];
+    var selectElements = ["voiceGender", "alarmBell"];
 
-    for (let i = 0; i < 2; i++) {
-        $(".voiceGender")[i].value = $(".voiceGender")[i][0].value;
-        $(".alarmBell")[i].value = $(".alarmBell")[i][0].value;
-        $(".RUDfileName")[i].value = "등록된 파일이 없습니다.";
-        $($(".fakeBtnForAdditional")[i]).css('display', 'none');
-    }
+    elementsToBeEmpty.forEach(function (targetClass) {
+        $("." + targetClass).val("");
+    })
 
+    selectElements.forEach(function (targetClass) {
+        $("." + targetClass).find('option:first').attr('selected', 'selected');
+    })
+
+    // jQuery html()보다 빠른 방법. html()은 정규표현식으로 유효성 체크를 해서 태그 수정을 거치기 때문에
+    // innerHTML보다 느리다. 검증된 html(여기서는 공백)은 그냥 innerHTML으로 해주면 빠르다. 
     for (let i = 0; i < 4; i++) {
         $(".uploadCancelBtn")[i].innerHTML = "";
     }
 
+    $("#RUDrepeatSetting").css('display', 'none');
+    $("#RUDpreListen").css('display', 'none');
+    $(".RUDfileName").val("등록된 파일이 없습니다.");
+    $("#modifyBCBoard").css('display', 'inline-block');
+    $("#updateBCBoard").css('display', 'none');
+    $(".fakeBtnForAdditional").css('display', 'none');
     $("#sourcePlayer").attr('src', "");
     $("#introPlayer").attr('src', "");
     $("#endingPlayer").attr('src', "");
+    removeElementsRelatedRepeat()
 }
+
+function removeElementsRelatedRepeat() {
+    var elementsToBeEmpty = ["ymdSet", "timeSet", "repeat", "repeatView"];
+    var $ymdSet = $(".ymdSet");
+    elementsToBeEmpty.forEach(function (targetClass) {
+        $("." + targetClass).val("");
+    })
+    $("#repeatType option:first").prop("selected", "selected");
+    $("#repeatWeekdiv").css("display", "")
+    $("#repeatMonthdiv").css("display", "none")
+    $("input:checkbox[name='repeatWeek']:checked").each(function () {
+        $(this).attr('checked', false);
+    });
+    $ymdSet.attr("placeholder", "방송일자를 입력하세요.")
+           .css("background-color", "")
+           .attr("disabled", false);
+} */
+
+
+function removeAllElements() {
+    // 등록+수정화면 공통적으로 있는 객체 초기화 
+    $(".allAudios").children().attr('src', "");
+    $(".title, .content, .intro, .ending").val("");
+    $(".voiceGender, .alarmBell").find('option:first').attr('selected', 'selected');
+    $(".uploadCancelBtn").children().html("");
+
+    // 수정화면에만 있는 객체 초기화
+    $(".RUDoriginalPath").val("");
+    $(".rudResetSet-1").css('display', 'none');
+    $(".RUDfileName").val("등록된 파일이 없습니다.");
+    $("#modifyBCBoard").css('display', 'inline-block');
+
+    removeElementsRelatedRepeat();
+}
+
+function removeElementsRelatedRepeat() {
+    $(".timeSet, .repeat, .repeatView").val("");
+    var $ymdSet = $(".ymdSet");
+    $ymdSet.val("")
+        .attr("placeholder", "방송일자를 입력하세요.")
+        .attr("disabled", false)
+        .css("background-color", "");
+    removeRepeatElementsInModal();
+}
+
+function removeRepeatElementsInModal() {
+    $("#repeatType option:first").prop("selected", "selected");
+    $("#repeatWeekdiv").css("display", "")
+    $("#repeatMonthdiv").css("display", "none")
+    $("input:checkbox[name='repeatWeek']:checked").each(function () {
+        $(this).attr('checked', false);
+    });
+}
+
 
 // ===============================================================================
 // 띄어쓰기 교정  ==>  API이상함. 다른걸로 수정하던지 없애던지 할 것 
@@ -236,10 +289,23 @@ $("input[type='file']").change(function () {
 });
 
 // ===============================================================================
+// 등록,수정창의 input, textarea, select를 실시간으로 감지해서 변경이 생기면 등록버튼을 비활성화시키는 이벤트
+var oldVal;
+$(".realtimeCheck").on("propertychange change keyup paste", function () {
+    var currentVal = $(this).val();
+    if (currentVal == oldVal) {
+        return;
+    }
+    oldVal = currentVal;
+    $(this).parent().parent().parent().find(".submitBtn").prop("disabled", true).css("color", "lightgray");
+});
+
+// ===============================================================================
 // 미리듣기 버튼 이벤트
 // 수정이 제대로 된것일까.
 $(".preListen").on("click", function (e) {
     e.preventDefault();
+    // 수정??
     $(this).parent().parent().find(".submitBtn").prop("disabled", false);
 
     var $targetForm = $(this).parent().parent().parent().parent();
@@ -343,8 +409,6 @@ $("#submitBtn").on("click", function (e) {
     var result;
     var isUrgent = 0;
 
-    
-
     if ($(".urgentCheck").is(":checked")) {
         result = confirm("확인 버튼을 누르면 곧바로 방송이 송출됩니다. 정말 등록하시겠습니까?");
         if (!result) {
@@ -409,15 +473,16 @@ $("#submitBtn").on("click", function (e) {
             } // end of if ending exists
 
             if (repeatSet.startsWith("week")) {
-                jsonData = getBCBoard(content, title, gender, starttime, alarmBell, intro, ending, repeatSet)
-                /* jsonData = {
+                jsonData = {
                     content: content,
                     title: title,
                     gender: gender,
+                    'mid': getCookie("userName"),
                     starttime: starttime,
                     audioVO: { alarmBell: alarmBell, intro: intro, ending: ending },
                     repeatVO: { repeatWeek: repeatSet }
-                }; */
+                };
+                // jsonData = getBCBoard(content, title, gender, starttime, alarmBell, intro, ending, repeatSet)
             } else if (repeatSet.startsWith("month")) {
                 jsonData = {
                     content: content,
@@ -453,75 +518,87 @@ $("#submitBtn").on("click", function (e) {
         $("#todayListBtn").trigger('click'); */
         if (isUrgent == 0) {
             location.reload();
-        } // 새로고침은 어쩔수 없음. 더이상 생각하지 말자
+        } // 새로고침은 어쩔수 없음. 더이상 생각하지 말자. 아님 제일 나중에 고쳐(reset).
     }) // end of ajax
 }); // end of submitbutton event
 
-$("#repeatType").on("change", function () {
-    var target = $(this);
-
-    $("#repeatWeekdiv").css("display", "none")
-    $("#repeatMonthdiv").css("display", "none")
-    $("input:checkbox[name='repeatWeek']:checked").each(function () {
 
 
-        $(this).attr('checked', false);
-    });
-    $("#" + target.val() + "div").css("display", "")
-})
-
-$("#repeatSubmitBtn").on("click", function () {
-    var str = ''
-    var ymdSet = $("#ymdSet")
-
-    if ($("#repeatType").val() === "repeatWeek") {
-        str = "week-"
-        $("input:checkbox[name='repeatWeek']:checked").each(function () {
-            str += $(this).data("val") + ","
-        });
-        if (str === "week-") {
-            $("#repeat").val("")
-            $("#repeatView").val("")
-            ymdSet.attr("disabled", false);
-            ymdSet.css("background-color", "")
-            return;
-        }
+// 등록/수정창의 '반복설정'클릭시 모달창 띄우며 현재창(반복설정버튼의 parent : table body)의 객체정보를 저장
+$(".repeatSetting").on("click", function () {
+    var $currModalsParent = $(this).parent().parent().parent();
+    var $resetRepeat = $("#resetRepeat");
+    if ($currModalsParent.find(".repeatView").val() !== "") {
+        $resetRepeat.css('display', 'inline-block');
     } else {
-        str = "month-"
-        str += $("#repeatMonth").val()
-        if (str === "month-") {
-            $("#repeat").val("")
-            $("#repeatView").val("")
-            ymdSet.attr("disabled", false);
-            ymdSet.css("background-color", "")
+        $resetRepeat.css('display', 'none');
+    }
+
+    // 반복설정해제 이벤트
+    $("#resetRepeat").on("click", function () {
+        removeElementsRelatedRepeat();
+        $currModalsParent.find(".repeat").val("");
+
+
+        $("#closeRepeatBtn").trigger('click');
+    })
+
+    // 반복설정이 되어있지 않은 상태에서 [취소]버튼을 누르면, 반복설정 모달창의 내용을 초기화
+    $("#closeRepeatBtn").on("click", function () {
+        if ($currModalsParent.find(".repeatView").val() == "") {
+            removeRepeatElementsInModal();
+        }
+    })
+
+    // 반복모달창내의 select 이벤트
+    $("#repeatType").on("change", function () {
+        var target = $(this);
+        $("#repeatWeekdiv").css("display", "none")
+        $("#repeatMonthdiv").css("display", "none")
+        $("input:checkbox[name='repeatWeek']:checked").each(function () {
+            $(this).attr('checked', false);
+        });
+        $("#" + target.val() + "div").css("display", "")
+    })
+
+    // 과1:(수정)기존의 설정값이 있다면 초기화 됨을 안내하는 alert띄워야 함
+    // 과2:닫기버튼 누르면 모달창변경사항 reset되어야 함. 
+    $("#repeatSubmitBtn").on("click", function () {
+
+        var str = ''
+        var $ymdSet = $currModalsParent.find(".ymdSet");
+        var $repeat = $currModalsParent.find(".repeat");
+        var $repeatView = $currModalsParent.find(".repeatView");
+
+        if ($("#repeatType").val() === "repeatWeek") {
+            str = "week-"
+            $("input:checkbox[name='repeatWeek']:checked").each(function () {
+                str += $(this).data("val") + ","
+            });
+        } else {
+            str = "month-";
+            str += $("#repeatMonth").val();
+        }
+
+        if (str.length == str.lastIndexOf("-") + 1) {
+            $repeat.val("");
+            $repeatView.val("");
+            $ymdSet.attr("disabled", false);
+            $ymdSet.css("background-color", "");
             return;
+        } else {
+            $repeat.val(str);
+            $repeatView.val(getRepeatViewText(str));
         }
 
-    }
+        $ymdSet.attr("disabled", true);
+        $ymdSet.attr("placeholder", "반복설정된 방송입니다.");
+        $ymdSet.val("")
+        $ymdSet.css("background-color", "lightgray")
 
-    if ($("#repeatType").val() === "repeatWeek") {
-        var weeks = [" 일", " 월", " 화", " 수", " 목", " 금", " 토"]
-        $("#repeat").val(str)
-        str = str.replace("week-", "매 주 ")
-        for (let index = 0; index < weeks.length; index++) {
-            if (index ==weeks.length ) {
-                str = str.replace(index+",",weeks[index])
-            }else{
-                str = str.replace(index,weeks[index])
-            }
-        }
-        $("#repeatView").val((str+"요일").replace(",요일", "요일"))
-    }else{
-        $("#repeat").val(str)
-        str = str.replace("month-","매 월 ")
-        $("#repeatView").val(str+"일")
-    }
-
-    ymdSet.attr("disabled", true);
-    ymdSet.val("")
-    ymdSet.css("background-color", "lightgray")
-
+    })
 })
+
 
 function repeatMonthSelectAppend() {
     var str = '<option selected value="">월간반복</option>';
@@ -554,6 +631,6 @@ function getBCBoard(content, title, gender, starttime, alarmBell, intro, ending,
 
 
 var getCookie = function (name) {
-	var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-	return value ? value[2] : null;
- };
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? value[2] : null;
+};

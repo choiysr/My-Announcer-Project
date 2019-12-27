@@ -5,7 +5,7 @@ import org.ms.announcer.domain.MemberVO;
 
 public interface CPBoardService {
 
-    public void cpRegister(CPBoard cpboard);
+    public void register(CPBoard cpboard);
     public MemberVO getCP(String userName);
     
 }

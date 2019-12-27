@@ -18,7 +18,7 @@ public class CPBoardServiceImpl implements CPBoardService {
     private MemberRepository mrepo;
 
     @Override
-    public void cpRegister(CPBoard cpboard) {
+    public void register(CPBoard cpboard) {
         cprepo.save(cpboard);
     }
 

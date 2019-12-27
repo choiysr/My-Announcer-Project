@@ -110,8 +110,8 @@
                                  <!-- header -->
                                  <div class="modal-header">
                                     <!-- 닫기(x) 버튼 -->
-                                    <button type="button" class="close" id="closeRegisterModal" data-dismiss="modal"
-                                       onclick="removeAllElements()">×</button>
+                                    <button type="button" class="close" id="closeCPRegisterModal" data-dismiss="modal"
+                                       onclick="resetCPUploadElements()">×</button>
                                     <!-- header title -->
                                     <h4 class="modal-title">방송업로드</h4>
                                  </div>
@@ -133,7 +133,7 @@
                                              <td>파일</td>
                                              <td>삭제</td>
                                           </tr>
-                                          <tbody></tbody>
+                                          <tbody id="filelistArea"></tbody>
                                        </table>
                                        <!-- end of Table -->
                                        <button id="deleteFiles">선택한 파일삭제</button>

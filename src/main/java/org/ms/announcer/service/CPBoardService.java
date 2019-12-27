@@ -4,6 +4,6 @@ import org.ms.announcer.domain.CPBoard;
 
 public interface CPBoardService {
 
-    public void cpRegister(CPBoard cpboard);
+    public void register(CPBoard cpboard);
     
 }

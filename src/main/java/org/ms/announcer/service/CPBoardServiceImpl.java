@@ -13,7 +13,7 @@ public class CPBoardServiceImpl implements CPBoardService {
     private CPBoardRepository cprepo;
 
     @Override
-    public void cpRegister(CPBoard cpboard) {
+    public void register(CPBoard cpboard) {
         cprepo.save(cpboard);
     }
 

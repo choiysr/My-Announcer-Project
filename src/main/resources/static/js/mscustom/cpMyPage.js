@@ -77,6 +77,7 @@ function registerFiles() {
             $boards.each(function (i, e) {
                 var $currBoard = $($boards[i]);
                 var json = {
+                    memberid:getCookie("userName"),
                     'title': $currBoard.find(".audioTitle").val(),
                     'file_path': result[i].substring(0, result[i].lastIndexOf("\\") + 1),
                     'file_name': result[i].substring(result[i].lastIndexOf("\\") + 1, result[i].length),
@@ -159,3 +160,4 @@ function loadPage() {
 var getCookie = function (name) {
     var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return value ? value[2] : null;
+}

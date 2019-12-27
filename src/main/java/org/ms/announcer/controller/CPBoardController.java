@@ -9,7 +9,6 @@ import java.util.List;
 import org.ms.announcer.domain.CPBoard;
 import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.service.CPBoardService;
-import org.ms.announcer.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,16 +28,11 @@ public class CPBoardController {
     @Setter(onMethod_ = { @Autowired })
     private CPBoardService cpbService;
 
-    @Setter(onMethod_ = { @Autowired })
-    private MemberService mService;
-
-
     // =======================================================REGISTER 
     @PostMapping(value = "/register")
     public void register(@RequestBody CPBoard[] boards) {
         
         for(CPBoard board : boards) {
-            System.out.println("실행확인");
             cpbService.register(board);
         }
     }

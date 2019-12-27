@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private PasswordEncoder pe;
-    
+
     @Autowired
     MemberRepository memberRepository;
 
@@ -29,13 +29,13 @@ public class MemberServiceImpl implements MemberService {
     public void RegistMemeber(MemberVO vo) {
         MemberRole a = new MemberRole();
 
-        if(vo.getType().equals("CP")){
+        if (vo.getType().equals("CP")) {
             a.setRoleName("ROLE_CP");
             CPInfo info = new CPInfo();
             info.setMember(vo);
             vo.setCpInfo(info);
-            
-        }else{
+
+        } else {
             vo.setType("user");
             a.setRoleName("ROLE_USER");
         }
@@ -48,11 +48,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean checkOvaelap(String memberid) {
-<<<<<<< HEAD
-        Optional<MemberVO> member = memberRepository.findBymemberid(memberid);
-=======
         Optional<MemberVO> member = memberRepository.findById(memberid);
->>>>>>> 362be0647d4773cc70f49220055ac57345730ddf
         if (member.isPresent()) {
             return true;
         } else {
@@ -61,17 +57,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-<<<<<<< HEAD
-    public MemberVO findMember(String mid) {
-        return memberRepository.findBymemberid(mid).orElse(null);
-=======
     @Transactional
     public void updateCPinfo(MemberVO vo1) {
         MemberVO vo2 = memberRepository.findById(vo1.getId()).get();
 
-        memberRepository.updateCPInfo(vo1.getCpInfo().getTitle(), vo1.getCpInfo().getIntroduce(),vo2);
->>>>>>> 362be0647d4773cc70f49220055ac57345730ddf
+        memberRepository.updateCPInfo(vo1.getCpInfo().getTitle(), vo1.getCpInfo().getIntroduce(), vo2);
     }
 
-    
 }

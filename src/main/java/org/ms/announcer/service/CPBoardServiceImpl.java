@@ -1,6 +1,6 @@
 package org.ms.announcer.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.ms.announcer.domain.CPBoard;
 import org.ms.announcer.domain.MemberVO;
@@ -21,6 +21,8 @@ public class CPBoardServiceImpl implements CPBoardService {
 
     @Override
     public void register(CPBoard cpboard) {
+        Optional<MemberVO> member = mrepo.findById(cpboard.getMember().getId());
+        cpboard.setMember(member.orElse(null));
         cprepo.save(cpboard);
     }
 

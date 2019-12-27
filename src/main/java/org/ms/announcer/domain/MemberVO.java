@@ -6,16 +6,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import groovy.transform.ToString;
 import lombok.Data;
 
 /**
@@ -24,19 +24,18 @@ import lombok.Data;
 @Entity
 @Table(name = "tbl_Member")
 @Data
+@ToString(excludes = "cpInfo")
 public class MemberVO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer mno;
-    
-    
-    private String memberid;
+    private String id;
 
     private String memberpassword;
     private String email;
     private String name;
     private String address;
+    private String type;
+
     
     @CreationTimestamp
     private LocalDateTime regdate;
@@ -46,6 +45,11 @@ public class MemberVO {
 
 
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name = "meberid")
+    @JoinColumn(name = "role")
     private List<MemberRole> roles;
+
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "cpinfo")
+    // @JsonIgnore
+    private CPInfo cpInfo;
 }

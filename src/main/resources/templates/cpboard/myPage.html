@@ -45,7 +45,8 @@
                      </ul>
 
                      <!-- Tab panes -->
-                     <div class="tab-content">
+                     <!-- <div class="shop-cart-table"> -->
+                     <div class="shop-cart-table">
                         <!-- todayList start -->
                         <div class="tab-pane active" id="myPage">
                            <form action="#">
@@ -55,20 +56,25 @@
                                        <img src="../../img/mscustom/sampleProfile.jpg" width="100px" height="100px"
                                           alt="" />
                                     </div>
+
                                     <div class="product-info" style="float:left; padding: 15px;">
-                                       <div class="fix mb-20">
-                                          <span class="pro-price">허니보이스 김만기의 아침을 여는 출근방송</span>
+
+                                          <div class="fix mb-20">
+                                             <span class="pro-price"><p id="title">허니보이스 김만기의 아침을 여는 출근방송</p></span>
+                                             <input id="cpInfoTitle" type="text" class="custom-select mb-15 ">
+                                          </div>
+                                          <p id="id">@mangit </p>
+                                          <p id="introduce">안녕하세요. 김만기입니다. </p>
+                                          <input id="cpInfoIntroduce" type="text" class="custom-select mb-15 ">
                                        </div>
-                                       <p>@mangit </p>
-                                       <p>안녕하세요. 김만기입니다. </p>
-                                    </div>
-                                    <div class="btnArea" style="float: left; padding-left: 15em;">
-                                       <button id="modifyInfo" data-text="정보수정"
+                                       <div class="btnArea" style="float: left; padding-left: 15em;">
+                                          <button id="modifyInfo" data-text="정보수정"
                                           class="button-one submit-button mt-15">정보수정</button><br>
-                                       <button id="registerFiles" data-text="방송등록"
+                                          <button id="registerFiles" data-text="방송등록"
                                           class="button-one submit-button mt-15" onclick="openModal()">방송등록</button>
+                                       </div>
                                     </div>
-                                 </div>
+                                 <!-- </div> -->
                                  <!-- Single-product end -->
 
                               </div>
@@ -167,9 +173,15 @@
 
          $(document).ready(function () {
             $("#addFiles").on("change", showFiles);
+<<<<<<< HEAD
             $("#deleteFiles").on("click",deleteFiles);
             $("#submitBtn").on("click",registerFiles);
             getCPBoardList();
+=======
+            $("#deleteFiles").on("click", deleteFiles);
+            $("#submitBtn").on("click", registerFiles);
+            loadPage();
+>>>>>>> 362be0647d4773cc70f49220055ac57345730ddf
 
 
          })

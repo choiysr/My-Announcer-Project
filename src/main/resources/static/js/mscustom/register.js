@@ -383,6 +383,7 @@ $(".preListen").on("click", function (e) {
 // 저장버튼 클릭 이벤트
 $("#submitBtn").on("click", function (e) {
     e.preventDefault();
+    
     var $targetForm = $(this).parent().parent().parent();
     setAllElements($targetForm);
     var result;
@@ -401,7 +402,7 @@ $("#submitBtn").on("click", function (e) {
             var uMinute = uToday.getMinutes().toString().length == 1 ? "0" + uToday.getMinutes() : uToday.getMinutes();
             startdate = uToday.getFullYear() + "-" + uMonth + "-" + uDay;
             starttime = uHour + ":" + uMinute;
-
+            
             var intro = "";
             var ending = "";
 
@@ -444,6 +445,10 @@ $("#submitBtn").on("click", function (e) {
             var repeatSet = $("#repeat").val();
             var intro = "";
             var ending = "";
+            if(isPastDay(startdate)){
+                alert("방송날짜가 과거입니다. 재설정해주세요.")
+                return
+            }
             if ($("#introPlayer").attr('src') !== "") {
                 intro = checkadditionalAudioExist($("input[name='intro']")[0].files);
             } // end of if intro exists
@@ -608,4 +613,10 @@ function getBCBoard(content, title, gender, starttime, alarmBell, intro, ending,
     return result;
 }
 
+
+//등록 누르면 날짜가 과거인지 확인
+function isPastDay(ymd) {
+    //현재 > 지정날자 
+    return vals.date > ymd
+}
 

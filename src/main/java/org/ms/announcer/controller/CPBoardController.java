@@ -6,7 +6,6 @@ import static org.springframework.http.HttpStatus.OK;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ms.announcer.domain.BCBoardDTO;
 import org.ms.announcer.domain.CPBoard;
 import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.service.CPBoardService;
@@ -58,13 +57,19 @@ public class CPBoardController {
         }
         return new ResponseEntity<>(list, OK);
     }
+    
+    @GetMapping(value = "/getUserInfo")
+    public ResponseEntity<MemberVO> getUserInfo(String userName) {
+        MemberVO vo = cpbService.getCP(userName);
+        return new ResponseEntity<>(vo, OK);
+    }
+   
+ 
 
  // =======================================================LIST
     @GetMapping("/getCPBoardList/{mid}")
     public ResponseEntity<List<CPBoard>> getList(@PathVariable("mid") String mid) {
-        MemberVO vo = mService.findMember(mid);
-        List<CPBoard> result = cpbService.getList(vo);
-        return new ResponseEntity<>(result, OK);
+        return null;
     }
 
 }

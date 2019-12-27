@@ -23,11 +23,18 @@ public class MemberController {
 
     @PostMapping("register")
     public void register( @RequestBody MemberVO vo){
-        ms.RegistMemeber(vo);
+            System.out.println(vo.getType());
+            ms.RegistMemeber(vo);
     }
 
     @GetMapping("checkOverlap/{memberid}")
     public boolean checkOverlap(@PathVariable("memberid") String memberid){
      return ms.checkOvaelap(memberid);
+    }
+
+    @PostMapping(value = "/modifyCPInfo")
+    public void modifyCPInfo(@RequestBody MemberVO vo) {
+        ms.updateCPinfo(vo);
+
     }
 }

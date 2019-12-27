@@ -73,6 +73,10 @@ $("#updateBCBoard").on("click", function (e) {
     setAllElements($targetForm);
     startdate = $targetForm.find('.ymdSet').val();
     starttime = $targetForm.find('.timeSet').val();
+    if(isPastDay(startdate)){
+        alert("방송날짜가 과거입니다. 재설정해주세요.")
+        return
+    }
     
     if (($("#RUDrepeat").val() == "" && startdate == "") || (starttime == "")) {
         alert("방송 일자와 시간을 설정해주세요.")

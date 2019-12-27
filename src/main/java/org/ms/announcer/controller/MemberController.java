@@ -31,4 +31,10 @@ public class MemberController {
     public boolean checkOverlap(@PathVariable("memberid") String memberid){
      return ms.checkOvaelap(memberid);
     }
+
+    @PostMapping(value = "/modifyCPInfo")
+    public void modifyCPInfo(@RequestBody MemberVO vo) {
+        ms.updateCPinfo(vo);
+
+    }
 }

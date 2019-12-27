@@ -56,5 +56,7 @@ public class CPBoardController {
         MemberVO vo = service.getCP(userName);
         return new ResponseEntity<>(vo, OK);
     }
+   
+ 
 
 }

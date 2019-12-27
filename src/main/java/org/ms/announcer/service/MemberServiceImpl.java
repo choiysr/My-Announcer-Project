@@ -11,6 +11,7 @@ import org.ms.announcer.repositories.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * MemberServiceImpl
@@ -30,7 +31,10 @@ public class MemberServiceImpl implements MemberService {
 
         if(vo.getType().equals("CP")){
             a.setRoleName("ROLE_CP");
-            vo.setCpInfo(new CPInfo());
+            CPInfo info = new CPInfo();
+            info.setMember(vo);
+            vo.setCpInfo(info);
+            
         }else{
             vo.setType("user");
             a.setRoleName("ROLE_USER");
@@ -44,12 +48,20 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean checkOvaelap(String memberid) {
-        Optional<MemberVO> member = memberRepository.findByMemberid(memberid);
+        Optional<MemberVO> member = memberRepository.findById(memberid);
         if (member.isPresent()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    @Transactional
+    public void updateCPinfo(MemberVO vo1) {
+        MemberVO vo2 = memberRepository.findById(vo1.getId()).get();
+
+        memberRepository.updateCPInfo(vo1.getCpInfo().getTitle(), vo1.getCpInfo().getIntroduce(),vo2);
     }
 
     

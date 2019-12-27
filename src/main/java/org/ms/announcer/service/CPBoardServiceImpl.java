@@ -25,7 +25,7 @@ public class CPBoardServiceImpl implements CPBoardService {
     @Override
     public MemberVO getCP(String userName) {
 
-        return mrepo.findByMemberid(userName).get();
+        return mrepo.findById(userName).get();
     }
 
 

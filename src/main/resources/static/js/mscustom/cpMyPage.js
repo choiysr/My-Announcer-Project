@@ -77,7 +77,7 @@ function registerFiles() {
             $boards.each(function (i, e) {
                 var $currBoard = $($boards[i]);
                 var json = {
-                    memberid:getCookie("userName"),
+                    id:getCookie("userName"),
                     'title': $currBoard.find(".audioTitle").val(),
                     'file_path': result[i].substring(0, result[i].lastIndexOf("\\") + 1),
                     'file_name': result[i].substring(result[i].lastIndexOf("\\") + 1, result[i].length),
@@ -112,13 +112,13 @@ function resetCPUploadElements() {
 
 
 $("#modifyInfo").on("click",function () {
-    var title =$("#cpInfoTitle").val()
-    var introduce = $("cpInfoIntroduce").val()
+    var modifytitle =$("#cpInfoTitle").val()
+    var modifyintroduce = $("cpInfoIntroduce").val()
 
     jsondata =({
-      CPInfo:  {title:title,
-        introduce:introduce},
-        memberid:getCookie("userName")
+        id:getCookie("userName"),
+        CPInfo:  {title:modifytitle,
+        introduce:modifyintroduce}
     })
 
     $.ajax({
@@ -137,7 +137,7 @@ $("#modifyInfo").on("click",function () {
 
 function loadPage() {
     var title =$("#title")
-    var id =$("#memberid")
+    var id =$("#id")
     var introduce =$("#introduce")
 
     $.ajax({
@@ -147,7 +147,7 @@ function loadPage() {
         type: "GET",
         success: function (result) {
            console.log(result.cpInfo)
-           id.text(result.memberid)
+           id.text(result.id)
            title.text(result.cpInfo.title)
            introduce.text(result.cpInfo.introduce)
 
@@ -161,3 +161,30 @@ var getCookie = function (name) {
     var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return value ? value[2] : null;
 }
+
+$("#modifyInfo").on("click",function (e) {
+    e.preventDefault()
+    var title = $("#cpInfoTitle");
+    var introduce = $("#cpInfoIntroduce")
+
+    jsonData={
+        id: getCookie("userName"),
+        cpInfo:{
+            title: title.val(),
+            introduce: introduce.val()
+        }
+    }
+
+    $.ajax({
+        url: "/member/modifyCPInfo",
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        success: function (result) {
+
+           
+        }
+    })
+
+    
+})

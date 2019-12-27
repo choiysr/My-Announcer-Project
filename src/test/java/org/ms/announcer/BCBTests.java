@@ -3,7 +3,6 @@ package org.ms.announcer;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +18,8 @@ import org.ms.announcer.service.BCBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -81,7 +82,7 @@ public class BCBTests {
     public void cpMemberRegist(){
         MemberVO vo = new MemberVO();
 
-        vo.setMemberid("memberid22");
+        vo.setId("memberid22");
         vo.setMemberpassword("12345");
         vo.setType("CP");
         CPInfo cpinfo = new CPInfo();
@@ -100,9 +101,23 @@ public class BCBTests {
 
     @Test
     public void selectMemeber(){
-       Optional<MemberVO> a= mr.findByMemberid("memberid22");
-       System.out.println(a.isPresent());
-       System.out.println(a.get().getCpInfo().getIntroduce());
+    //    Optional<MemberVO> a= mr.findByMemberid("memberid22");
+    //    System.out.println(a.isPresent());
+    //    System.out.println(a.get().getCpInfo().getIntroduce());
+    }
+    @Test
+
+    @Commit
+    @Transactional 
+    public void updateTests(){
+        // CPInfo info = new CPInfo();
+        // info.setTitle("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS");
+        // info.setIntroduce("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS");
+
+        // MemberVO member = mr.findByMemberid("aaaaa").get();
+
+        // mr.updateCPInfo("cptest3333","EEEEEEEEEEEEEEEEEE" , member);
+    //   mr.updateCPInfo("tilte", "cptest");
     }
 
 }

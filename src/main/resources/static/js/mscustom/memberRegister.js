@@ -12,7 +12,7 @@ $("#logoutTag").css("display", "none")
 
 $("#postRegister").on("click", function (e) {
 
-    var id = $("#memberid").val() 
+    var id = $("#id").val() 
     var password = $("#memberpassword").val()
     var name = $("#name").val()
     var email = $("#email").val()
@@ -27,7 +27,7 @@ $("#postRegister").on("click", function (e) {
 
 
     jsonData = {
-        memberid: id,
+        id: id,
         memberpassword: password,
         type: type,
         email : email,
@@ -41,7 +41,7 @@ $("#postRegister").on("click", function (e) {
         contentType: "application/json; charset=utf-8",
         type: "POST",
         success: function (result) {
-        $("#memberid").val(""),
+        $("#id").val(""),
          $("#memberpassword").val(""),
         $("#name").val(""),
         $("#address").val("")
@@ -56,7 +56,7 @@ $("#postRegister").on("click", function (e) {
 $("#checkOverlap").on("click", function (e) {
     e.preventDefault();
 
-    var id = $("#memberid").val();
+    var id = $("#id").val();
 
     if (id.length < 5) {
         alert("id는 5자 이상!")
@@ -64,13 +64,13 @@ $("#checkOverlap").on("click", function (e) {
     }
 
     $.ajax({
-        url: "/member/checkOverlap/"+$("#memberid").val(),
+        url: "/member/checkOverlap/"+$("#id").val(),
         type: "GET",
         success: function (result) {
             if(result === false){
                 alert("사용가능한 아이디입니다.")
                 $("#postRegister").attr("disabled", false)
-                // $("#memberid").attr("readonly", true)
+                // $("#id").attr("readonly", true)
             }else{
                 alert("중복된 아이디입니다.")
                 $("#postRegister").attr("disabled", true)
@@ -91,12 +91,12 @@ function checkMinLength(id, pw, em,name,addr, type) {
         return true
 }
 
-// $("#memberid").change( function () {
+// $("#id").change( function () {
 //     $("#postRegister").attr("disabled", true)
 // })
 
 var checkOverlapOldVal;
-$("#memberid").on("propertychange change keyup paste", function() {
+$("#id").on("propertychange change keyup paste", function() {
     var currentVal = $(this).val();
     if(currentVal == checkOverlapOldVal) {
         return;

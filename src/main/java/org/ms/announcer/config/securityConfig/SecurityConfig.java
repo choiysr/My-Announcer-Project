@@ -32,6 +32,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests().antMatchers("/bcboard/loginPage").permitAll().antMatchers("/bcboard/*").hasRole("USER")
+        .antMatchers("/cpboard/*").hasRole("CP")
         .antMatchers("/bcboard/prelisten").permitAll();
                 
                 http.formLogin()

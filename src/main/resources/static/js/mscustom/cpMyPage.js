@@ -55,7 +55,57 @@ function registerFiles() {
     })
 }
 
+
 // 파일 성공쓰
 // 파일패스랑 이름 분리해서 제목이랑 매핑하고 register해주면 됨!
 
 
+
+$("#modifyInfo").on("click",function () {
+    var title =$("#cpInfoTitle").val()
+    var introduce = $("cpInfoIntroduce").val()
+
+    jsondata =({
+      CPInfo:  {title:title,
+        introduce:introduce},
+        memberid:getCookie("userName")
+    })
+
+    $.ajax({
+        url: "/rcpboard/modifyInfo",
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        success: function (result) {
+
+        }
+    })
+})
+
+
+function loadPage() {
+    var title =$("#title")
+    var id =$("#memberid")
+    var introduce =$("#introduce")
+
+    $.ajax({
+        url: "/rcpboard/getUserInfo",
+        data: {userName:getCookie("userName")},
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        success: function (result) {
+           console.log(result.cpInfo)
+           id.text(result.memberid)
+           title.text(result.cpInfo.title)
+           introduce.text(result.cpInfo.introduce)
+
+           
+        }
+    })
+    
+}
+
+var getCookie = function (name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? value[2] : null;
+};

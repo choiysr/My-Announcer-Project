@@ -16,12 +16,14 @@ public class CPInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer no;
-
+    
+    private String title;
     private String introduce;
     private String imgFile;
 
     public CPInfo(){
-        introduce = "안녕하세요";
+        title = "속이 거북이";
+        introduce = "안녕하세요. 김만기입니다";
         imgFile = "경로";
     }
     

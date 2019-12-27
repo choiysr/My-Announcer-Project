@@ -24,7 +24,7 @@ public class MemberController {
     @PostMapping("register")
     public void register( @RequestBody MemberVO vo){
             System.out.println(vo.getType());
-        ms.RegistMemeber(vo);
+            ms.RegistMemeber(vo);
     }
 
     @GetMapping("checkOverlap/{memberid}")

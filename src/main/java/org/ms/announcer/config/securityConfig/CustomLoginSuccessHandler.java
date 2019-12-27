@@ -33,7 +33,13 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
                 }
 
                 repo.addCookie(userName);
-                repo.sendRedirect("/bcboard/todayList");
+               String a = new String("[ROLE_CP]");
+               if (auth.getAuthorities().toString().equals(a)) {
+                   repo.sendRedirect("/cpboard/myPage");
+                   
+               }else{
+                   repo.sendRedirect("/bcboard/todayList");
+               }
     }
 
     

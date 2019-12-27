@@ -8,5 +8,6 @@ import org.ms.announcer.domain.MemberVO;
 public interface MemberService {
 public void RegistMemeber(MemberVO vo);
 public boolean checkOvaelap(String memberid);
+public MemberVO findMember(String mid);
     
 }

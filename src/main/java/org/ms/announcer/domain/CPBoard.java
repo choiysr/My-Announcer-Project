@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,7 +27,9 @@ public class CPBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bno;
 
-    private String mid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MemberVO member;
+
 	private String title;
 	private String file_path;
 	private String file_name;

@@ -36,12 +36,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean checkOvaelap(String memberid) {
-        Optional<MemberVO> member = memberRepository.findByMemberid(memberid);
+        Optional<MemberVO> member = memberRepository.findBymemberid(memberid);
         if (member.isPresent()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public MemberVO findMember(String mid) {
+        return memberRepository.findBymemberid(mid).orElse(null);
     }
 
     

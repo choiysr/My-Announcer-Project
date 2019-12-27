@@ -32,9 +32,7 @@ public class BCBoardServiceImpl implements BCBoardService {
     
     @Override
     public void update(BCBoardDTO dto) {
-        System.out.println("update service imple실행");
         BCBoardDTO target = read(dto.getBno());
-        System.out.println("target가져왔나 : "+ target);
         target.setTitle(dto.getTitle());
         target.setContent(dto.getContent());
         target.setGender(dto.getGender());
@@ -44,7 +42,6 @@ public class BCBoardServiceImpl implements BCBoardService {
         target.setAudioVO(targetAudio);
         RepeatVO targetRepeat = dto.getRepeatVO();
         target.setRepeatVO(targetRepeat);
-        System.out.println("target세팅 다시됐나 보자 : " + target);
         repos.save(target);
     }
 
@@ -57,6 +54,7 @@ public class BCBoardServiceImpl implements BCBoardService {
     public void delete(Integer bno) {
         repos.deleteById(bno);
     }
+
     public Page<BCBoardDTO> getTodayList(String date, String week, String mid,  Pageable page) {
         // Page<BCBoardDTO> result = repos.findAllByStartdate(date, page);
         week = "%"+week+"%";

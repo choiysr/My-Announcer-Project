@@ -1,6 +1,20 @@
 var tmpFormData = new FormData();
 var finalFormData = new FormData();
 
+// list spread
+function getCPBoardList() {
+    $.ajax({
+        url: "/rcpboard/getCPBoardList/" + getCookie("userName"),
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+            console.log("확인");
+            console.log(result);
+        }
+    }); // end of todayList get ajax
+}
+
+
 function openModal() {
     $(".addFileModal").modal();
 }
@@ -50,12 +64,12 @@ function registerFiles() {
     var $dates = $(".bcDate");
     var $titles = $(".audioTitle");
     var inputValidated = true;
-    $dates.each(function(i) {
-        if($dates[i].value == "" || $titles[i].value == "")
-        inputValidated = false;
+    $dates.each(function (i) {
+        if ($dates[i].value == "" || $titles[i].value == "")
+            inputValidated = false;
     });
 
-    if(!inputValidated) {
+    if (!inputValidated) {
         alert("방송 송출일자와 제목을 입력해주세요.")
         return;
     }
@@ -85,6 +99,7 @@ function registerFiles() {
                 jsonArr.push(json);
             });
             registerBoards(jsonArr);
+            alert("등록이 완료되었습니다.")
         } // end of success 
     })
 

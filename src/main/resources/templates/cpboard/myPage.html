@@ -71,12 +71,11 @@
                                  </div>
                                  <!-- Single-product end -->
 
-
-
-
                               </div>
-                              <!-- end of shop-cart-table -->
+                              <!-- end of col-lg-12 -->
                            </form>
+
+                           <h4> 리스트확인 </h4>
                         </div>
 
 
@@ -86,8 +85,6 @@
                            <form action="#">
                               <div class="shop-cart-table check-out-wrap">
                                  <div class="row">
-                                    <h3 style="text-align: center; ">방송등록</h3>
-                                    <br>
 
                                  </div>
                               </div>
@@ -172,6 +169,7 @@
             $("#addFiles").on("change", showFiles);
             $("#deleteFiles").on("click",deleteFiles);
             $("#submitBtn").on("click",registerFiles);
+            getCPBoardList();
 
 
          })

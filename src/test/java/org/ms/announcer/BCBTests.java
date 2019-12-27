@@ -1,16 +1,24 @@
 package org.ms.announcer;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 import org.ms.announcer.domain.AudioVO;
 import org.ms.announcer.domain.BCBoardDTO;
+import org.ms.announcer.domain.CPInfo;
+import org.ms.announcer.domain.MemberRole;
+import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.domain.RepeatVO;
 import org.ms.announcer.repositories.BCBoardRepository;
+import org.ms.announcer.repositories.MemberRepository;
 import org.ms.announcer.service.BCBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 /**
@@ -20,10 +28,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class BCBTests {
 
     @Autowired
+    MemberRepository mr;
+    
+    @Autowired
     BCBoardService service;
 
     @Autowired
     BCBoardRepository repo;
+
+    @Autowired
+    private PasswordEncoder pe;
 
     @Test
     public void Insert() {
@@ -61,6 +75,34 @@ public class BCBTests {
             service.register(dto);
 
         });
+    }
+
+    @Test
+    public void cpMemberRegist(){
+        MemberVO vo = new MemberVO();
+
+        vo.setMemberid("memberid22");
+        vo.setMemberpassword("12345");
+        vo.setType("CP");
+        CPInfo cpinfo = new CPInfo();
+        cpinfo.setIntroduce("introduce2222222222");
+        vo.setCpInfo(cpinfo);
+        vo.setMemberpassword(pe.encode(vo.getMemberpassword()));
+        MemberRole a = new MemberRole();
+        a.setRoleName("ROLE_BASIC");
+        List<MemberRole> rList = new ArrayList<>();
+        rList.add(a);
+        vo.setRoles(rList);
+        vo.setType("user");
+        mr.save(vo);
+    }
+
+
+    @Test
+    public void selectMemeber(){
+       Optional<MemberVO> a= mr.findByMemberid("memberid22");
+       System.out.println(a.isPresent());
+       System.out.println(a.get().getCpInfo().getIntroduce());
     }
 
 }

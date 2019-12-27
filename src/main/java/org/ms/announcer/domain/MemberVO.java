@@ -11,12 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * MemberVO
@@ -24,6 +26,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tbl_Member")
 @Data
+@ToString(exclude = "cpInfo")
 public class MemberVO {
 
     @Id
@@ -37,6 +40,8 @@ public class MemberVO {
     private String email;
     private String name;
     private String address;
+    private String type;
+
     
     @CreationTimestamp
     private LocalDateTime regdate;
@@ -48,4 +53,8 @@ public class MemberVO {
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "meberid")
     private List<MemberRole> roles;
+
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "meberid")
+    private CPInfo cpInfo;
 }

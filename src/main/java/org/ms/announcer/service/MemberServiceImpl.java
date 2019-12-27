@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.ms.announcer.domain.CPInfo;
 import org.ms.announcer.domain.MemberRole;
 import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.repositories.MemberRepository;
@@ -25,9 +26,16 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void RegistMemeber(MemberVO vo) {
-        vo.setMemberpassword(pe.encode(vo.getMemberpassword()));
         MemberRole a = new MemberRole();
-        a.setRoleName("ROLE_BASIC");
+
+        if(vo.getType().equals("CP")){
+            a.setRoleName("ROLE_CP");
+            vo.setCpInfo(new CPInfo());
+        }else{
+            vo.setType("user");
+            a.setRoleName("ROLE_USER");
+        }
+        vo.setMemberpassword(pe.encode(vo.getMemberpassword()));
         List<MemberRole> rList = new ArrayList<>();
         rList.add(a);
         vo.setRoles(rList);

@@ -17,8 +17,10 @@ $("#postRegister").on("click", function (e) {
     var name = $("#name").val()
     var email = $("#email").val()
     var address = $("#address").val()
+    var type = $("#type option:selected").val();
+    alert(type)
 
-    if (!checkMinLength(id, password, email,name,address)) {
+    if (!checkMinLength(id, password, email,name,address, type)) {
         return
     }
     
@@ -27,6 +29,7 @@ $("#postRegister").on("click", function (e) {
     jsonData = {
         memberid: id,
         memberpassword: password,
+        type: type,
         email : email,
         name: name,
         address: address
@@ -44,6 +47,8 @@ $("#postRegister").on("click", function (e) {
         $("#address").val("")
         $("#CloseRegisterForm").click();
         alert("회원가입이 완료되었습니다.")
+        location.reload()
+
         }
     })
 })
@@ -76,8 +81,8 @@ $("#checkOverlap").on("click", function (e) {
 })
 
 
-function checkMinLength(id, pw, em,name,addr) {
-    if (id.length == 0 || pw.length == 0 || name.length == 0 || address.length == 0 || em.length == 0 || addr.length == 0 ) {
+function checkMinLength(id, pw, em,name,addr, type) {
+    if (id.length == 0 || pw.length == 0 || name.length == 0 || address.length == 0 || em.length == 0 || addr.length == 0 || type.length == 0) {
         alert("미기입한 항목이 있습니다.")
         return false  }
     if (pw.length < 5) {

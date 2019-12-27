@@ -5,7 +5,6 @@
     list.data.forEach(list => {
        str +=
           '<tr>' 
-
           if (list.repeatVO !== null) {
              if (list.repeatVO.repeatWeek !== null ) {
                str+= '<td style="height:70px; padding-top: 25px;" >' + '<h4>' + getRepeatViewText(list.repeatVO.repeatWeek) + '</h4>' + '</td>' 

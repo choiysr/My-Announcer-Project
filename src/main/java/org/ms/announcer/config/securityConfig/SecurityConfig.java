@@ -26,7 +26,6 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 허용되어야 할 경로들
         web.ignoring().antMatchers("/resources/**");
-        //
     }
 
     @Override

@@ -168,7 +168,7 @@ vals.$listdiv.on('click', '.playBtn', function (e) {
 
 // 제목클릭하면 모달로 조회창 띄우기
 vals.$listdiv.on('click', '.listTitle', function (e) {
-   $('div.readModal').modal();
+   $('.readModal').modal();
    var targetBno = this.id;
    $.ajax({
       url: "/rbcboard/read/" + targetBno,

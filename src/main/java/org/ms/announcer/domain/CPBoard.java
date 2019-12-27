@@ -27,7 +27,6 @@ public class CPBoard {
 
     private String mid;
 	private String title;
-	private String content;
 	private String file_path;
 	private String file_name;
 

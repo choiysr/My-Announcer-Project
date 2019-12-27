@@ -24,8 +24,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
                 // System.out.println(auth.getPrincipal().toString());
                 // System.out.println(auth.getCredentials().toString());
                 Cookie userName = new Cookie("userName", auth.getName());
-                System.out.println("=========================================================================");
-
 
                 //24시간 세션 유지
                 HttpSession session = req.getSession(false);

@@ -70,7 +70,7 @@ public class BCBoardServiceImpl implements BCBoardService {
 
         // 카테고리구분
         if (category.equals("title")) {
-            data = repos.findByTitleLike(search, page, userName );
+            data = repos.findByTitleLike(search, page, userName);
         } else if(category.equals("year-month-day")){
             String[] searchDateArr = search.replace("%", "").split("-");
             LocalDate sdate = LocalDate.of(Integer.parseInt(searchDateArr[0]),Integer.parseInt(searchDateArr[1]),Integer.parseInt(searchDateArr[2]));
@@ -112,8 +112,6 @@ public class BCBoardServiceImpl implements BCBoardService {
         result.put("totalpages", total);
         result.put("category", category);
         result.put("search", search.replace("%", ""));
-        System.out.println(result.get("now"));
-        System.out.println(result.get("end"));
         return result;
     }
 

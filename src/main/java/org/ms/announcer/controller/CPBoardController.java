@@ -9,6 +9,7 @@ import java.util.List;
 import org.ms.announcer.domain.CPBoard;
 import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.service.CPBoardService;
+import org.ms.announcer.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +29,12 @@ public class CPBoardController {
     @Setter(onMethod_ = { @Autowired })
     private CPBoardService cpbService;
 
+    @Setter(onMethod_ = { @Autowired })
+    private MemberService memService;
+
     // =======================================================REGISTER 
     @PostMapping(value = "/register")
     public void register(@RequestBody CPBoard[] boards) {
-        
         for(CPBoard board : boards) {
             cpbService.register(board);
         }
@@ -63,7 +66,14 @@ public class CPBoardController {
  // =======================================================LIST
     @GetMapping("/getCPBoardList/{mid}")
     public ResponseEntity<List<CPBoard>> getList(@PathVariable("mid") String mid) {
-        return null;
+        MemberVO member = new MemberVO();
+        member.setId(mid);
+        System.out.println("왜에에에에엥에ㅔㅇ1");
+        List<CPBoard> result = new ArrayList<>();
+        System.out.println("왜에에에에엥에ㅔㅇ2");
+        result = cpbService.getCPBoardList(member);
+        System.out.println("왜에에에에엥에ㅔㅇ3");
+        return new ResponseEntity<>(result, OK);
     }
 
 }

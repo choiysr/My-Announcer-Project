@@ -27,7 +27,7 @@ public class CPBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bno;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private MemberVO member;
 
 	private String title;

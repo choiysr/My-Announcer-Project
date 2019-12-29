@@ -1,5 +1,6 @@
 package org.ms.announcer.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.ms.announcer.domain.CPBoard;
@@ -13,6 +14,7 @@ import lombok.Setter;
 
 @Service
 public class CPBoardServiceImpl implements CPBoardService {
+    
     @Setter(onMethod_ = { @Autowired })
     private CPBoardRepository cprepo;
 
@@ -27,8 +29,14 @@ public class CPBoardServiceImpl implements CPBoardService {
     }
 
     @Override
-    public MemberVO getCP(String userName) {
-        return mrepo.findById(userName).get();
+    public MemberVO getCP(String id) {
+        return mrepo.findById(id).get();
     }
+
+    @Override
+    public List<CPBoard> getCPBoardList(MemberVO member) {
+        return cprepo.findByMember(member);
+    }
+
 
 }

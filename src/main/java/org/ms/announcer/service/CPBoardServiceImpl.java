@@ -38,5 +38,10 @@ public class CPBoardServiceImpl implements CPBoardService {
         return cprepo.findByMember(member);
     }
 
+    @Override
+    public CPBoard getOneCPBoard(Integer bno) {
+        return cprepo.findById(bno).orElse(null);
+    }
+
 
 }

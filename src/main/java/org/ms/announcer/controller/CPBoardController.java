@@ -38,7 +38,7 @@ public class CPBoardController {
     @Setter(onMethod_ = { @Autowired })
     private MemberService memService;
 
-    // =======================================================REGISTER
+    // =======================================================CREATE 
     @PostMapping(value = "/register")
     public void register(@RequestBody CPBoard[] boards) {
         for (CPBoard board : boards) {
@@ -61,6 +61,20 @@ public class CPBoardController {
         return new ResponseEntity<>(list, OK);
     }
 
+
+
+
+    // =======================================================READ
+    @GetMapping(value = "/read/{bno}")
+    public ResponseEntity<CPBoard> read(@PathVariable("bno") Integer bno) {
+        System.out.println("bno확인 : "+bno);
+        CPBoard board = cpbService.getOneCPBoard(bno);
+        return new ResponseEntity<>(board, OK);
+    }
+
+
+
+    
     @GetMapping(value = "/getUserInfo")
     public ResponseEntity<MemberVO> getUserInfo(String userName) {
         MemberVO vo = cpbService.getCP(userName);
@@ -87,7 +101,7 @@ public class CPBoardController {
    
  
 
- // =======================================================LIST
+    // =======================================================APPEND LIST
     @GetMapping("/getCPBoardList/{mid}")
     public ResponseEntity<List<CPBoard>> getList(@PathVariable("mid") String mid) {
         MemberVO member = new MemberVO();
@@ -96,5 +110,11 @@ public class CPBoardController {
         result = cpbService.getCPBoardList(member);
         return new ResponseEntity<>(result, OK);
     }
+
+
+    
+
+
+
 
 }

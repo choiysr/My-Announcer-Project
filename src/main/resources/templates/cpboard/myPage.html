@@ -60,6 +60,13 @@
 
                                     <div class="product-info" style="float:left; padding: 15px;">
 
+<<<<<<< HEAD
+                                       <div class="fix mb-20">
+                                          <span class="pro-price">
+                                             <p id="title">허니보이스 김만기의 아침을 여는 출근방송</p>
+                                          </span>
+                                          <input id="cpInfoTitle" type="text" class="custom-select mb-15 ">
+=======
                                           <div class="fix mb-20">
                                              <span class="pro-price"><p id="title"></p></span>
                                              <input style="width: 20vw;" maxlength=30 id="cpInfoTitle" type="text" class="custom-select mb-15 ">
@@ -67,14 +74,19 @@
                                           <p id="id"></p>
                                           <p id="introduce"></p>
                                           <input style="width: 20vw;" maxlength=50 id="cpInfoIntroduce" type="text" class="custom-select mb-15 ">
+>>>>>>> 8227a59c8ce1ceeac608cb9bff1d0c85c7623eee
                                        </div>
-                                       <div class="btnArea" style="float: left; padding-left: 15em;">
-                                          <button id="modifyInfo" data-text="정보수정"
-                                          class="button-one submit-button mt-15">정보수정</button><br>
-                                          <button id="registerFiles" data-text="방송등록"
-                                          class="button-one submit-button mt-15" onclick="openModal()">방송등록</button>
-                                       </div>
+                                       <p id="id">@mangit </p>
+                                       <p id="introduce">안녕하세요. 김만기입니다. </p>
+                                       <input id="cpInfoIntroduce" type="text" class="custom-select mb-15 ">
                                     </div>
+                                    <div class="btnArea" style="float: left; padding-left: 15em;">
+                                       <button id="modifyInfo" data-text="정보수정"
+                                          class="button-one submit-button mt-15">정보수정</button><br>
+                                       <button id="registerFiles" data-text="방송등록"
+                                          class="button-one submit-button mt-15" onclick="event.preventDefault(); openModal('addFileModal')">방송등록</button>
+                                    </div>
+                                 </div>
                                  <!-- </div> -->
                                  <!-- Single-product end -->
 
@@ -83,7 +95,7 @@
                            </form>
                            <br> <br> <br>
                            <!-- 리스트나오는곳  -->
-                           <div class="table-content table-responsive">
+                           <div class="table-content table-responsive cpListDiv">
                               <table id="cpboardList" class="table table-condensed">
                               </table>
                            </div>
@@ -154,6 +166,46 @@
                               </div>
                            </div>
                         </div>
+                        <!-- end of 방송업로드 modal -->
+
+
+                        <!-- 조회/수정 modal -->
+                        <div class="modal fade readBoardModal" id="layerpop" data-backdrop="static">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <!-- header -->
+                                 <div class="modal-header">
+                                    <!-- 닫기(x) 버튼 -->
+                                    <button type="button" class="close" id="closeCPRegisterModal" data-dismiss="modal"
+                                       onclick="resetCPUploadElements()">×</button>
+                                    <!-- header title -->
+                                    <h4 class="modal-title">조회/수정</h4>
+                                 </div>
+                                 <!-- body -->
+                                 <div style="text-align: center;">
+                                    <div class="modal-body" style="display: inline-block;">
+                                       <table class="readOneBoardTable">
+                                          <tr>
+                                             <td>송출일자</td>
+                                             <td>방송제목</td>
+                                             <td>파일</td>
+                                          </tr>
+                                          <tbody id="oneBoardReceived"></tbody>
+                                       </table>
+                                       <!-- end of Table -->
+                                    </div>
+                                 </div>
+                                 <!-- Footer -->
+                                 <div class="modal-footer">
+                                    <button id="modifyCPBoardBtn">수정</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end of 조회/수정 modal -->
+
+
+
 
                      </div>
                   </div>
@@ -168,7 +220,8 @@
       <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>
       <script th:src="@{~/js/mscustom/functions.js}"></script>
       <script th:src="@{~/js/mscustom/cpMyPage.js}"></script>
-
+      <script th:src="@{~/js/mscustom/cpvals.js}"></script>
+ 
       <script>
 
          var formDataForFiles = new FormData();
@@ -179,7 +232,7 @@
             $("#addFiles").on("change", showFiles);
             $("#deleteFiles").on("click", deleteFiles);
             $("#submitBtn").on("click", registerFiles);
-            $(".oneCPBoard").on("click",readOneCPBoard);
+            $("#modifyCPBoardBtn").on("click", modifyCPBoard);
          })
       </script>
 

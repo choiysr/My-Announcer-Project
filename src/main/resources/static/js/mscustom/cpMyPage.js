@@ -1,7 +1,27 @@
 var tmpFormData = new FormData();
 var finalFormData = new FormData();
 
-// list spread
+
+function loadPage() {
+    var title = $("#title")
+    var id = $("#id")
+    var introduce = $("#introduce")
+
+    $.ajax({
+        url: "/rcpboard/getUserInfo",
+        data: { userName: getCookie("userName") },
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        success: function (result) {
+            console.log(result.cpInfo)
+            id.text(result.id)
+            title.text(result.cpInfo.title)
+            introduce.text(result.cpInfo.introduce)
+        }
+    })
+}
+
+// list spread ajax 
 function getCPBoardList() {
     $.ajax({
         url: "/rcpboard/getCPBoardList/" + getCookie("userName"),
@@ -14,11 +34,12 @@ function getCPBoardList() {
 }
 
 
+// 화면에 list뿌리는 function 
 function appendCPBoardList(list) {
     var str = "";
     let $cpboardList = $("#cpboardList");
     list.forEach(list => {
-        str += '<tr class="cpboardListTable">';
+        str += '<tr class="cpboardListTable oneCPBoard">';
         str += '<td style="padding-top: 40px;"">' + '<h4>' + list.bcdate + '</h4>' + '</td>';
         str += '<td style="padding-top: 40px;"">' + '<h4>' + list.title + '</h4>' + '</td>';
         str += '<td style="padding-top: 40px;"">' + '<h4>' + list.file_name.substring(list.file_name.lastIndexOf('_') + 1, list.file_name.length) + '</h4>' + '</td>';
@@ -29,10 +50,36 @@ function appendCPBoardList(list) {
     $cpboardList.append(str);
 }
 
+$("#modifyInfo").on("click", function (e) {
+    e.preventDefault()
+    var title = $("#cpInfoTitle");
+    var introduce = $("#cpInfoIntroduce")
 
+    jsonData = {
+        id: getCookie("userName"),
+        cpInfo: {
+            title: title.val(),
+            introduce: introduce.val()
+        }
+    }
+
+    $.ajax({
+        url: "/member/modifyCPInfo",
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        success: function (result) {
+        }
+    })
+})
+
+
+
+// 등록 모달창 띄우기 
 function openModal() {
     $(".addFileModal").modal();
 }
+
 
 // 파일업로드하면 화면에 띄워주는 function 
 function showFiles() {
@@ -75,7 +122,6 @@ function deleteFiles() {
 
 // 최종 등록 function 
 function registerFiles() {
-
     var $dates = $(".bcDate");
     var $titles = $(".audioTitle");
     var inputValidated = true;
@@ -190,6 +236,7 @@ $("#modifyInfo").on("click", function (e) {
             loadPage()
             title.val("")
             introduce.val("")
+            modifiedImgFile.val("")
         }
     })
 })

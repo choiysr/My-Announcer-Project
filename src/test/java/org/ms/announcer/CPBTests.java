@@ -3,7 +3,6 @@ package org.ms.announcer;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;

@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.fasterxml.jackson.databind.ser.std.UUIDSerializer;
-
 import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;

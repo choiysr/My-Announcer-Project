@@ -174,11 +174,12 @@
          var formDataForFiles = new FormData();
 
          $(document).ready(function () {
+            loadPage();
+            getCPBoardList();
             $("#addFiles").on("change", showFiles);
             $("#deleteFiles").on("click", deleteFiles);
             $("#submitBtn").on("click", registerFiles);
-            getCPBoardList();
-            loadPage();
+            $(".oneCPBoard").on("click",readOneCPBoard);
          })
       </script>
 

@@ -37,17 +37,17 @@ function getCPBoardList() {
 // 화면에 list뿌리는 function 
 function appendCPBoardList(list) {
     var str = "";
-    let $cpboardList = $("#cpboardList");
-    list.forEach(list => {
-        str += '<tr class="cpboardListTable oneCPBoard">';
-        str += '<td style="padding-top: 40px;"">' + '<h4>' + list.bcdate + '</h4>' + '</td>';
-        str += '<td style="padding-top: 40px;"">' + '<h4>' + list.title + '</h4>' + '</td>';
-        str += '<td style="padding-top: 40px;"">' + '<h4>' + list.file_name.substring(list.file_name.lastIndexOf('_') + 1, list.file_name.length) + '</h4>' + '</td>';
-        str += '<td style="padding-top: 40px;"">' + '<h4>' + '수정/삭제' + '</h4>' + '</td>';
+    list.forEach(board => {
+        str += '<tr class="oneCPBoard">';
+        str += '<td style="padding-top: 40px;"">' + '<h4>' + board.bcdate + '</h4>' + '</td>';
+        str += '<td style="padding-top: 40px;">' + '<a href="#"><h4 class= "CPBTitle" '
+        str += 'onclick="openModal(\'readBoardModal_' + board.bno + '\')">' + board.title + '</h4></a>' + '</td>';
+        str += '<td style="padding-top: 40px;">' + '<h4>' + board.file_name.substring(board.file_name.lastIndexOf('_') + 1, board.file_name.length) + '</h4>' + '</td>';
+        str += '<td style="padding-top: 40px;">' + '<h4>' + '수정/삭제' + '</h4>' + '</td>';
         str += '</tr>';
     });
-    $cpboardList.html('<th>방송일자</th><th>제목</th><th>파일명</th><th>수정/삭제</th>');
-    $cpboardList.append(str);
+    cpvals.$cpListTable.html(cpvals.listHead);
+    cpvals.$cpListTable.append(str);
 }
 
 $("#modifyInfo").on("click", function (e) {
@@ -75,10 +75,60 @@ $("#modifyInfo").on("click", function (e) {
 
 
 
-// 등록 모달창 띄우기 
-function openModal() {
-    $(".addFileModal").modal();
+// 모달창 띄우기 
+function openModal(targetModal) {
+    let realTargetString = targetModal;
+    if (targetModal.startsWith("readBoardModal")) {
+        let readTargetBno = targetModal.substring(targetModal.lastIndexOf('_') + 1, targetModal.length);
+        realTargetString = targetModal.substring(0, targetModal.lastIndexOf('_'));
+        getOneCPBoard(readTargetBno);
+    }
+    $("." + realTargetString).modal();
 }
+
+
+// 조회 
+function getOneCPBoard(bno) {
+    $.ajax({
+        'url': "/rcpboard/read/" + bno,
+        'type': 'GET',
+        'contentType': "application/json; charset=utf-8",
+        success: function (result) {
+            var str = "";
+            str += '<tr class="oneBoard">'
+            str += '<td> <input class="custom-select mb-15" id="modBcDate" type="date" value=' + result.bcdate + ' disabled></td>'
+            str += '<td> <input id="modTitle" type="text" value=' + result.title + ' disabled>' + '</td>'
+            str += '<td> <input id="modFileName" type="text" value=' + result.file_name.substring(result.file_name.lastIndexOf('_') + 1, result.file_name.length) + ' disabled>' + '</td>'
+            str += '</tr>'
+            $("#oneBoardReceived").html(str);
+        }
+    });
+}
+
+// 수정
+function modifyCPBoard() {
+    let $oneBoard = cpvals.$oneBoardReceived;
+    console.log($oneBoard.children().children());
+    $oneBoard.children().children().each(function (i,e) {
+        console.log(i);
+        console.log(e);
+        let $curr = $(e);
+        console.log($curr);
+        $curr.attr('disabled',false);
+    });
+  /*   $oneBoard.children().children().each(function (i,e) {
+        console.log(e[0])
+        e[0].disabled=false;
+        console.log(e);
+    });
+    let $bcDate = $('#modBcDate');
+    let $title = $('#modTitle');
+    let $fileName = $('#modFileName'); */
+
+    
+    
+}
+
 
 
 // 파일업로드하면 화면에 띄워주는 function 
@@ -99,7 +149,7 @@ function showFiles() {
             return false;
         }
         str += '<tr class="boards">'
-        str += '<td> <input class="custom-select mb-15 bcDate" type="date"' + '</td>'
+        str += '<td> <input class="custom-select mb-15 bcDate" type="date">' + '</td>'
         str += '<td> <input class="audioTitle" type="text" placeholder="방송제목을 입력하세요.">' + '</td>'
         str += '<td> <input class="fileName" type="text" disabled value="' + uploadedFileArr[i].name + '"></td>'
         str += '<td> <input name="deleteCheck" type="checkbox"> </td>'
@@ -140,7 +190,7 @@ function registerFiles() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/rcpboard/registerFiles',
+        url: '/rcpboard/registerFiles',
         processData: false,
         contentType: false,
         data: finalFormData,
@@ -170,7 +220,7 @@ function registerFiles() {
 
 function registerBoards(jsonArr) {
     $.ajax({
-        url: 'http://localhost:8080/rcpboard/register',
+        url: '/rcpboard/register',
         data: JSON.stringify(jsonArr),
         type: 'POST',
         contentType: "application/json; charset=utf-8",
@@ -184,9 +234,8 @@ function registerBoards(jsonArr) {
 function resetCPUploadElements() {
     tmpFormData = new FormData();
     finalFormData = new FormData();
-    $('#filelistArea').html("");
+    cpvals.$filelistArea.html("");
     $('#addFiles').val("");
-
 
     $("#modifyInfo").on("click", function () {
         var modifytitle = $("#cpInfoTitle").val()
@@ -214,3 +263,11 @@ function resetCPUploadElements() {
 
 
 
+
+// 동작안함. 수정할것 
+/* $('.oneCPBoard').hover(function () {
+    $(this).css("backgroundColor", "black");
+ }, function () {
+    $(this).css("backgroundColor", "white");
+ });
+ */

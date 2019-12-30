@@ -8,10 +8,25 @@ function getCPBoardList() {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         success: function (result) {
-            console.log("확인");
-            console.log(result);
+            appendCPBoardList(result);
         }
     }); // end of todayList get ajax
+}
+
+
+function appendCPBoardList(list) {
+    var str = "";
+    let $cpboardList = $("#cpboardList");
+    list.forEach(list => {
+        str += '<tr class="cpboardListTable">';
+        str += '<td style="padding-top: 40px;"">' + '<h4>' + list.bcdate + '</h4>' + '</td>';
+        str += '<td style="padding-top: 40px;"">' + '<h4>' + list.title + '</h4>' + '</td>';
+        str += '<td style="padding-top: 40px;"">' + '<h4>' + list.file_name.substring(list.file_name.lastIndexOf('_') + 1, list.file_name.length) + '</h4>' + '</td>';
+        str += '<td style="padding-top: 40px;"">' + '<h4>' + '수정/삭제' + '</h4>' + '</td>';
+        str += '</tr>';
+    });
+    $cpboardList.html('<th>방송일자</th><th>제목</th><th>파일명</th><th>수정/삭제</th>');
+    $cpboardList.append(str);
 }
 
 
@@ -91,7 +106,7 @@ function registerFiles() {
             $boards.each(function (i, e) {
                 var $currBoard = $($boards[i]);
                 var json = {
-                    'member' : {'id':getCookie("userName")},
+                    'member': { 'id': getCookie("userName") },
                     'title': $currBoard.find(".audioTitle").val(),
                     'file_path': result[i].substring(0, result[i].lastIndexOf("\\") + 1),
                     'file_name': result[i].substring(result[i].lastIndexOf("\\") + 1, result[i].length),
@@ -100,7 +115,8 @@ function registerFiles() {
                 jsonArr.push(json);
             });
             registerBoards(jsonArr);
-            alert("등록이 완료되었습니다.")
+            alert("등록이 완료되었습니다.");
+            getCPBoardList();
         } // end of success 
     })
 
@@ -198,20 +214,20 @@ $("#modifyInfo").on("click", function (e) {
 
 
 function loadPage() {
-    var title =$("#title")
-    var id =$("#id")
-    var introduce =$("#introduce")
+    var title = $("#title")
+    var id = $("#id")
+    var introduce = $("#introduce")
 
     $.ajax({
         url: "/rcpboard/getUserInfo",
-        data: {userName:getCookie("userName")},
+        data: { userName: getCookie("userName") },
         contentType: "application/json; charset=utf-8",
         type: "GET",
         success: function (result) {
-           console.log(result.cpInfo)
-           id.text(result.id)
-           title.text(result.cpInfo.title)
-           introduce.text(result.cpInfo.introduce)
+            console.log(result.cpInfo)
+            id.text(result.id)
+            title.text(result.cpInfo.title)
+            introduce.text(result.cpInfo.introduce)
         }
     })
 }

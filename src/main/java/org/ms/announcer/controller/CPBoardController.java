@@ -68,11 +68,8 @@ public class CPBoardController {
     public ResponseEntity<List<CPBoard>> getList(@PathVariable("mid") String mid) {
         MemberVO member = new MemberVO();
         member.setId(mid);
-        System.out.println("왜에에에에엥에ㅔㅇ1");
         List<CPBoard> result = new ArrayList<>();
-        System.out.println("왜에에에에엥에ㅔㅇ2");
         result = cpbService.getCPBoardList(member);
-        System.out.println("왜에에에에엥에ㅔㅇ3");
         return new ResponseEntity<>(result, OK);
     }
 

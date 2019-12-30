@@ -237,31 +237,97 @@ function resetCPUploadElements() {
     cpvals.$filelistArea.html("");
     $('#addFiles').val("");
 
-    $("#modifyInfo").on("click", function () {
-        var modifytitle = $("#cpInfoTitle").val()
-        var modifyintroduce = $("cpInfoIntroduce").val()
 
-        jsondata = ({
-            id: getCookie("userName"),
-            CPInfo: {
-                title: modifytitle,
-                introduce: modifyintroduce
-            }
-        })
+   
 
-        $.ajax({
-            url: "/rcpboard/modifyInfo",
-            data: JSON.stringify(jsonData),
-            contentType: "application/json; charset=utf-8",
-            type: "POST",
-            success: function (result) {
-
-            }
-        })
-    })
 };
 
 
+
+$("#modifyInfo").on("click", function (e) {
+    e.preventDefault()
+    var title = $("#cpInfoTitle");
+    var introduce = $("#cpInfoIntroduce")
+    title.val() == "" ? title.val($("#title").text()) : null;
+    introduce.val() == "" ? introduce.val($("#introduce").text()) : null;
+    var modifiedImgFile = $("#imgUpload");
+
+    if(!modifiedImgFile.val() ==""){
+        if(!validateImg(modifiedImgFile[0].files[0].name, modifiedImgFile[0].files[0].size)){
+            return
+        }
+        var formData = new FormData();
+        formData.append("uploadFile",modifiedImgFile[0].files[0])
+        var fileName = uploadImg(formData,fileName)
+    
+        jsonData = {
+            id: getCookie("userName"),
+            cpInfo: {
+                imgFile: fileName,
+                title: title.val(),
+                introduce: introduce.val()
+            }
+        }
+    }else{
+        jsonData = {
+            id: getCookie("userName"),
+            cpInfo: {
+                title: title.val(),
+                introduce: introduce.val()
+            }
+        }
+    }
+    $.ajax({
+        url: "/member/modifyCPInfo",
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        success: function (result) {
+            loadPage()
+            title.val("")
+            introduce.val("")
+            modifiedImgFile.val("")
+        }
+    })
+})
+
+function uploadImg(formData, ) {
+    var fileName
+    $.ajax({
+        url: "/member/uploadImg?userName="+getCookie("userName"),
+        processData:false,
+        contentType:false,
+        async: false,
+        data: formData,
+        type: "POST",
+        success: function (result) {
+            fileName = result
+        }
+    })
+    return fileName
+}
+
+function loadPage() {
+    var title = $("#title")
+    var id = $("#id")
+    var introduce = $("#introduce")
+    var thumnail = $("#CPThumnail")
+    
+
+    $.ajax({
+        url: "/rcpboard/getUserInfo",
+        data: { userName: getCookie("userName") },
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        success: function (result) {
+            console.log(result.cpInfo)
+            id.text(result.id)
+            title.text(result.cpInfo.title)
+            introduce.text(result.cpInfo.introduce)
+            thumnail.attr("src","/rcpboard/getImg?fileName=C:/CpImg/"+result.cpInfo.imgFile)
+        }   
+    })
+}
 
 
 // 동작안함. 수정할것 

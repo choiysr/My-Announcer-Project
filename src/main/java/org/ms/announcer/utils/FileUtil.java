@@ -53,5 +53,14 @@ public final class FileUtil {
         return filePath;
     }
 
+    public static void makeThumnailPath(){
+
+        File targetDir = new File("C:\\CpImg");
+
+        if(!targetDir.exists()){
+            targetDir.mkdirs();
+        }
+    }
+
 
 }

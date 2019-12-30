@@ -60,8 +60,13 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void updateCPinfo(MemberVO vo1) {
         MemberVO vo2 = memberRepository.findById(vo1.getId()).get();
+        System.out.println(vo2.getCpInfo().getImgFile());
 
-        memberRepository.updateCPInfo(vo1.getCpInfo().getTitle(), vo1.getCpInfo().getIntroduce(), vo2);
+        if(vo1.getCpInfo().getImgFile().equals("Defualt.png")){
+            vo1.getCpInfo().setImgFile(vo2.getCpInfo().getImgFile());
+        }
+        memberRepository.updateCPInfo(vo1.getCpInfo().getTitle(), vo1.getCpInfo().getIntroduce(), vo1.getCpInfo().getImgFile(), vo2);
+        
     }
 
 }

@@ -25,11 +25,12 @@ public class CPInfo {
     private String title;
     private String introduce;
     private String imgFile;
-
+    
     public CPInfo(){
-        title = "속이 거북이";
+
+        imgFile="Defualt.png";
+        title = "속이 거북이의 아침방송";
         introduce = "안녕하세요. 김만기입니다";
-        imgFile = "경로";
     }
 
     @OneToOne

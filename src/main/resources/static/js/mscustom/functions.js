@@ -23,6 +23,27 @@ function validateFile(fileName, fileSize) {
     return true;
 }
 
+function validateImg(fileName, fileSize) {
+    fileName=fileName.toLowerCase();
+    var regex = new RegExp("(.*?)\.(jpg|png)$");
+    var spcCheck = /[~!@#$%^&*()\-+|<>?:{}]/;
+    var maxSize = 10485760;
+    if (fileSize > maxSize) {
+        alert("업로드 가능한 파일 크기를 초과했습니다.")
+        return false;
+    };
+    if (!regex.test(fileName)) {
+        alert("해당 형식의 파일은 업로드 할 수 없습니다.")
+        return false;
+    };
+    if(spcCheck.test(fileName)){
+        alert("파일명에 허용되지 않는 특수문자가 있습니다.")
+        return false;
+    }
+
+    return true;
+}
+
 // ===============================================================================
 
 var getCookie = function (name) {

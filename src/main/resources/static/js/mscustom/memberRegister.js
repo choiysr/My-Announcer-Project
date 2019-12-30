@@ -18,7 +18,6 @@ $("#postRegister").on("click", function (e) {
     var email = $("#email").val()
     var address = $("#address").val()
     var type = $("#type option:selected").val();
-    alert(type)
 
     if (!checkMinLength(id, password, email,name,address, type)) {
         return

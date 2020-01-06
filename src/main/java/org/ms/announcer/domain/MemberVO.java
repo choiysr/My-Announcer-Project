@@ -44,15 +44,15 @@ public class MemberVO {
     private LocalDateTime updateddate;
 
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "role")
     private List<MemberRole> roles;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "cpinfo")
     // @JsonIgnore
     private CPInfo cpInfo;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    private List<Subscribe> subscribes;
+    // @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    // private List<Subscribe> subscribes;
 }

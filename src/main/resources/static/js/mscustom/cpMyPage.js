@@ -237,9 +237,6 @@ function resetCPUploadElements() {
     cpvals.$filelistArea.html("");
     $('#addFiles').val("");
 
-
-   
-
 };
 
 
@@ -287,8 +284,25 @@ $("#modifyInfo").on("click", function (e) {
             title.val("")
             introduce.val("")
             modifiedImgFile.val("")
+            title.css("display", "none");
+            introduce.css("display", "none");
+            modifiedImgFile.css("display", "none");
         }
     })
+    $(this).css("display", "none");
+    $("#modifyInfoBtn").css("display", "inline-block")
+})
+
+$("#modifyInfoBtn").on("click", function (e) {
+    e.preventDefault()
+    $(this).css("display", "none");
+    $("#modifyInfo").css("display","inline-block")
+
+    $("#cpInfoTitle").css("display","block");
+    $("#cpInfoIntroduce").css("display","block")
+    $("#imgUpload").css("display","block")
+    
+  
 })
 
 function uploadImg(formData, ) {

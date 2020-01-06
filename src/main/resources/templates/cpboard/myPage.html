@@ -53,38 +53,31 @@
                               <div class="col-lg-12">
                                  <div class="single-product clearfix">
                                     <div class="profileImg" style="padding: 15px; float:left; margin-right: 10px; ">
-                                       <img id="CPThumnail" src="" width="100px" height="100px"
-                                          alt="" />
-                                          <input id="imgUpload" type="file">
+                                       <img id="CPThumnail"
+                                          src=""
+                                          width="100px" height="100px" alt="">
+                                       <input style="display: none;" id="imgUpload" type="file">
                                     </div>
 
-                                    <div class="product-info" style="float:left; padding: 15px;">
+                                    <div class="product-info" style="width: 30vw; float:left; padding: 15px;">
 
-<<<<<<< HEAD
                                        <div class="fix mb-20">
                                           <span class="pro-price">
-                                             <p id="title">허니보이스 김만기의 아침을 여는 출근방송</p>
+                                             <p id="title">aaaaa</p>
                                           </span>
-                                          <input id="cpInfoTitle" type="text" class="custom-select mb-15 ">
-=======
-                                          <div class="fix mb-20">
-                                             <span class="pro-price"><p id="title"></p></span>
-                                             <input style="width: 20vw;" maxlength=30 id="cpInfoTitle" type="text" class="custom-select mb-15 ">
-                                          </div>
-                                          <p id="id"></p>
-                                          <p id="introduce"></p>
-                                          <input style="width: 20vw;" maxlength=50 id="cpInfoIntroduce" type="text" class="custom-select mb-15 ">
->>>>>>> 8227a59c8ce1ceeac608cb9bff1d0c85c7623eee
+                                          <input   style="width: 20vw; display: none;" maxlength="30" id="cpInfoTitle" type="text"
+                                             class="custom-select mb-15 ">
                                        </div>
-                                       <p id="id">@mangit </p>
-                                       <p id="introduce">안녕하세요. 김만기입니다. </p>
-                                       <input id="cpInfoIntroduce" type="text" class="custom-select mb-15 ">
+                                       <p id="id">cptest2</p>
+                                       <p id="introduce">ssssss</p>
+                                       <input style="width: 20vw; display: none;" maxlength="50" id="cpInfoIntroduce" type="text"
+                                          class="custom-select mb-15 ">
                                     </div>
-                                    <div class="btnArea" style="float: left; padding-left: 15em;">
-                                       <button id="modifyInfo" data-text="정보수정"
-                                          class="button-one submit-button mt-15">정보수정</button><br>
+                                    <div class="btnArea" style="float: left; ">
+                                       <button id="modifyInfo" data-text="수정완료" style="display: none;" class="button-one submit-button mt-15">수정완료</button><br>
+                                       <button id="modifyInfoBtn" data-text="정보수정" class="button-one submit-button mt-15">정보수정</button><br>
                                        <button id="registerFiles" data-text="방송등록"
-                                          class="button-one submit-button mt-15" onclick="event.preventDefault(); openModal('addFileModal')">방송등록</button>
+                                          class="button-one submit-button mt-15" onclick="event.preventDefault(); scrollupTrigger(); openModal('addFileModal')">방송등록</button>
                                     </div>
                                  </div>
                                  <!-- </div> -->
@@ -95,8 +88,12 @@
                            </form>
                            <br> <br> <br>
                            <!-- 리스트나오는곳  -->
-                           <div class="table-content table-responsive cpListDiv">
+                           <div class="table-content table-responsive">
                               <table id="cpboardList" class="table table-condensed">
+                                 <th>방송일자</th>
+                                 <th>제목</th>
+                                 <th>파일명</th>
+                                 <th>수정/삭제</th>
                               </table>
                            </div>
                         </div>
@@ -204,9 +201,6 @@
                         </div>
                         <!-- end of 조회/수정 modal -->
 
-
-
-
                      </div>
                   </div>
                </div>
@@ -221,11 +215,14 @@
       <script th:src="@{~/js/mscustom/functions.js}"></script>
       <script th:src="@{~/js/mscustom/cpMyPage.js}"></script>
       <script th:src="@{~/js/mscustom/cpvals.js}"></script>
- 
+      
+
       <script>
 
          var formDataForFiles = new FormData();
-
+         function scrollupTrigger() {
+            $("#scrollUp").trigger("click");
+         }
          $(document).ready(function () {
             loadPage();
             getCPBoardList();
@@ -233,7 +230,9 @@
             $("#deleteFiles").on("click", deleteFiles);
             $("#submitBtn").on("click", registerFiles);
             $("#modifyCPBoardBtn").on("click", modifyCPBoard);
+            
          })
+
       </script>
 
    </div>

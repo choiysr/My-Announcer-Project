@@ -21,5 +21,4 @@ public class CustomUserDetailsService implements UserDetailsService {
 		System.out.println(username);
 		return vo == null ? null : new CustomUser(vo);
 	}
-	
 }

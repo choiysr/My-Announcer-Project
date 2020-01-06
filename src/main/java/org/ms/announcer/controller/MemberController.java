@@ -7,6 +7,9 @@ import java.util.UUID;
 import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,9 +50,9 @@ public class MemberController {
     @PostMapping(value = "/uploadImg")
     public String uploadImg(MultipartFile uploadFile, String userName) {
         String uuid = UUID.randomUUID().toString();
-        String fileName = uuid+"_"+uploadFile.getOriginalFilename();
+        String fileName = uuid + "_" + uploadFile.getOriginalFilename();
 
-        File saveFile = new File("C:\\CpImg",fileName);
+        File saveFile = new File("C:\\CpImg", fileName);
         try {
             uploadFile.transferTo(saveFile);
         } catch (IllegalStateException e) {
@@ -60,4 +63,12 @@ public class MemberController {
         }
         return fileName;
     }
+
+    @GetMapping("getCPInfo")
+    public ResponseEntity<MemberVO> getCPInfo(String title, int page) {
+        Page<MemberVO> list = ms.getAllCPByTilte(title, page);
+
+       return new ResponseEntity<>(new MemberVO(), HttpStatus.OK);
+   }
+
 }

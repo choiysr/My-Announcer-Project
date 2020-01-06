@@ -18,8 +18,5 @@ public interface MemberRepository extends JpaRepository<MemberVO, Integer> {
     @Query(value = "update CPInfo cp set cp.title = :title, cp.imgFile = :imgFile, cp.introduce =:introduce where cp.member = :member")
     public int updateCPInfo(String title, String introduce, String imgFile, MemberVO member);
 
-    // @Query(value = "update MemberVO m set m.cpInfo.title = :title where memberid
-    // = :memberid")
-    // int updateCPInfo(String title, String memberid);
 
 }

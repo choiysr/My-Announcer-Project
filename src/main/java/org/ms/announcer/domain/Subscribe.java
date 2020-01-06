@@ -1,22 +1,22 @@
-package org.ms.announcer.domain;
+// package org.ms.announcer.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+// import javax.persistence.CascadeType;
+// import javax.persistence.Entity;
+// import javax.persistence.FetchType;
+// import javax.persistence.ManyToOne;
+// import javax.persistence.Table;
 
-import lombok.Data;
+// import lombok.Data;
 
-@Entity
-@Table(name = "tbl_subscribe")
-@Data
-public class Subscribe {
+// @Entity
+// @Table(name = "tbl_subscribe")
+// @Data
+// public class Subscribe {
 
 
-    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    private MemberVO member;
-    private MemberVO cp;
+//     @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+//     private MemberVO member;
+//     private MemberVO cp;
 
     
-}
+// }

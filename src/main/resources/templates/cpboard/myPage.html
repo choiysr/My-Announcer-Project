@@ -215,7 +215,8 @@
       <script th:src="@{~/js/mscustom/functions.js}"></script>
       <script th:src="@{~/js/mscustom/cpMyPage.js}"></script>
       <script th:src="@{~/js/mscustom/cpvals.js}"></script>
-      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+
 
       <script>
 
@@ -224,6 +225,14 @@
             $("#scrollUp").trigger("click");
          }
          $(document).ready(function () {
+
+            var socket = io(
+                "http://127.0.0.1:3000/" //-> 다른사람 서버에 접속
+            );
+            // socket.emit("connection",getCookie(userName))
+
+
+
             loadPage();
             getCPBoardList();
             $("#addFiles").on("change", showFiles);

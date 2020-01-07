@@ -60,7 +60,9 @@ function appendlist(list) {
    vals.$listdiv.html(vals.todayListTh)
    vals.$listdiv.append(str)
 
-   $(".playerInList")[0].load();
+   if (!($(".playerInList")[0] == null)) {
+      $(".playerInList")[0].load();
+   }
 }
 
 // 리스트내 수정 버튼 function 통합할것.(모달창 내부 버튼과) 

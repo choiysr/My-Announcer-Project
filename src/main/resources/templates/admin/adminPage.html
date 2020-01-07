@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/todayListLayout}">
+
+
+<div layout:fragment="custom-content">
+
+    <body>
+
+        <h1>adminPage</h1>
+        <textarea id="messages"></textarea>
+
+
+        <script th:src="@{~/js/vendor/jquery-1.12.0.min.js}"></script>
+        <script th:src="@{~/js/mscustom/vals.js}"></script>
+        <script th:src="@{~/js/mscustom/functions.js}"></script>
+        <script th:src="@{~/js/mscustom/subscribeInfo.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+
+        <script>
+
+            $(document).ready(function () {
+
+                var socket = io.connect('http://localhost:3000')
+                console.log(socket.emit("login", "admin"));
+
+                socket.on('s-msg', function (msg) {
+                    console.log("메시지 옴");
+
+                    console.log(msg+"명 접속중");
+                    $('#messages').text("");
+                    $('#messages').text(msg+"명 접속중");
+                });
+
+
+            })
+        </script>
+</div>
+</body>
+
+</html>

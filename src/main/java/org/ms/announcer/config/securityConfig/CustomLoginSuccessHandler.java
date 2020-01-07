@@ -29,7 +29,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
                 HttpSession session = req.getSession(false);
 
                 if(session != null){
-                    session.setMaxInactiveInterval(60*60*24);
+                    session.setMaxInactiveInterval(60*60*24*365);
                 }
 
                 repo.addCookie(userName);

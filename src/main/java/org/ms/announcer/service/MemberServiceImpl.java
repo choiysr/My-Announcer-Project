@@ -7,8 +7,13 @@ import java.util.Optional;
 import org.ms.announcer.domain.CPInfo;
 import org.ms.announcer.domain.MemberRole;
 import org.ms.announcer.domain.MemberVO;
+import org.ms.announcer.repositories.CPInfoRepository;
 import org.ms.announcer.repositories.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +29,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    CPInfoRepository cr;
 
     @Override
     public void RegistMemeber(MemberVO vo) {
@@ -62,11 +69,20 @@ public class MemberServiceImpl implements MemberService {
         MemberVO vo2 = memberRepository.findById(vo1.getId()).get();
         System.out.println(vo2.getCpInfo().getImgFile());
 
-        if(vo1.getCpInfo().getImgFile().equals("Default.png")){
+        if(vo1.getCpInfo().getImgFile().equals("default.png")){
             vo1.getCpInfo().setImgFile(vo2.getCpInfo().getImgFile());
         }
         memberRepository.updateCPInfo(vo1.getCpInfo().getTitle(), vo1.getCpInfo().getIntroduce(), vo1.getCpInfo().getImgFile(), vo2);
         
+    }
+
+    @Override
+    public Page<MemberVO> getAllCPByTilte(String title, int currentPage) {
+        Pageable page = PageRequest.of(currentPage, 10, Direction.ASC, "cpInfo.title");
+        // Page<CPInfo> list = cr.getAllCPFindBytitle(title, page);
+        // Page<CPInfo> list = cr.findByTitle(title, page);
+        
+        return null;
     }
 
 }

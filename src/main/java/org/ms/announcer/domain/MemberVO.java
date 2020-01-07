@@ -52,4 +52,7 @@ public class MemberVO {
     @JoinColumn(name = "cpinfo")
     // @JsonIgnore
     private CPInfo cpInfo;
+
+    // @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    // private List<Subscribe> subscribes;
 }

@@ -390,6 +390,10 @@ function resetCPUploadElements() {
     cpvals.$modifyConfirmBtn.css('display','none');
     cpvals.$modifyCPBoardBtn.css('display','inline-block');
     $('#addFiles').val("");
+<<<<<<< HEAD
+=======
+
+>>>>>>> cabf841fd65ae8575d4b523b652d8d3e32ff8cbf
 };
 
 
@@ -437,8 +441,25 @@ $("#modifyInfo").on("click", function (e) {
             title.val("")
             introduce.val("")
             modifiedImgFile.val("")
+            title.css("display", "none");
+            introduce.css("display", "none");
+            modifiedImgFile.css("display", "none");
         }
     })
+    $(this).css("display", "none");
+    $("#modifyInfoBtn").css("display", "inline-block")
+})
+
+$("#modifyInfoBtn").on("click", function (e) {
+    e.preventDefault()
+    $(this).css("display", "none");
+    $("#modifyInfo").css("display","inline-block")
+
+    $("#cpInfoTitle").css("display","block");
+    $("#cpInfoIntroduce").css("display","block")
+    $("#imgUpload").css("display","block")
+    
+  
 })
 
 function uploadImg(formData) {

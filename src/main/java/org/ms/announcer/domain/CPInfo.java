@@ -28,7 +28,7 @@ public class CPInfo {
     
     public CPInfo(){
 
-        imgFile="Default.png";
+        imgFile="default.png";
         title = "속이 거북이의 아침방송";
         introduce = "안녕하세요. 김만기입니다";
     }

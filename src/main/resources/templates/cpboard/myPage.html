@@ -53,7 +53,13 @@
                               <div class="col-lg-12">
                                  <div class="single-product clearfix">
                                     <div class="profileImg" style="padding: 15px; float:left; margin-right: 10px; ">
+<<<<<<< HEAD
                                        <img id="CPThumnail" src="" width="100px" height="100px" alt="">
+=======
+                                       <img id="CPThumnail"
+                                          src=""
+                                          width="100px" height="100px" alt="">
+>>>>>>> cabf841fd65ae8575d4b523b652d8d3e32ff8cbf
                                        <input style="display: none;" id="imgUpload" type="file">
                                     </div>
 
@@ -63,6 +69,7 @@
                                           <span class="pro-price">
                                              <p id="title">aaaaa</p>
                                           </span>
+<<<<<<< HEAD
                                           <input style="width: 20vw; display: none;" maxlength="30" id="cpInfoTitle"
                                              type="text" class="custom-select mb-15 ">
                                        </div>
@@ -79,6 +86,21 @@
                                        <button id="registerFiles" data-text="방송등록"
                                           class="button-one submit-button mt-15"
                                           onclick="event.preventDefault(); scrollupTrigger(); openModal('addFileModal')">방송등록</button>
+=======
+                                          <input   style="width: 20vw; display: none;" maxlength="30" id="cpInfoTitle" type="text"
+                                             class="custom-select mb-15 ">
+                                       </div>
+                                       <p id="id">cptest2</p>
+                                       <p id="introduce">ssssss</p>
+                                       <input style="width: 20vw; display: none;" maxlength="50" id="cpInfoIntroduce" type="text"
+                                          class="custom-select mb-15 ">
+                                    </div>
+                                    <div class="btnArea" style="float: left; ">
+                                       <button id="modifyInfo" data-text="수정완료" style="display: none;" class="button-one submit-button mt-15">수정완료</button><br>
+                                       <button id="modifyInfoBtn" data-text="정보수정" class="button-one submit-button mt-15">정보수정</button><br>
+                                       <button id="registerFiles" data-text="방송등록"
+                                          class="button-one submit-button mt-15" onclick="event.preventDefault(); scrollupTrigger(); openModal('addFileModal')">방송등록</button>
+>>>>>>> cabf841fd65ae8575d4b523b652d8d3e32ff8cbf
                                     </div>
                                  </div>
                                  <!-- </div> -->
@@ -96,9 +118,15 @@
                               </div>
                               <!-- end of col-lg-12 -->
                            </form>
+<<<<<<< HEAD
 
                            <!--  <div class="table-content table-responsive"> -->
                            <!-- <div>
+=======
+                           <br> <br> <br>
+                           <!-- 리스트나오는곳  -->
+                           <div class="table-content table-responsive">
+>>>>>>> cabf841fd65ae8575d4b523b652d8d3e32ff8cbf
                               <table id="cpboardList" class="table table-condensed">
                                  <th>방송일자</th>
                                  <th>제목</th>
@@ -226,6 +254,11 @@
       <script th:src="@{~/js/mscustom/functions.js}"></script>
       <script th:src="@{~/js/mscustom/cpMyPage.js}"></script>
       <script th:src="@{~/js/mscustom/cpvals.js}"></script>
+<<<<<<< HEAD
+=======
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+
+>>>>>>> cabf841fd65ae8575d4b523b652d8d3e32ff8cbf
 
       <script>
 
@@ -234,12 +267,21 @@
             $("#scrollUp").trigger("click");
          }
          $(document).ready(function () {
+
+            var socket = io(
+                "http://127.0.0.1:3000/" //-> 다른사람 서버에 접속
+            );
+            // socket.emit("connection",getCookie(userName))
+
+
+
             loadPage();
             getCPBoardList();
             $("#addFiles").on("change", showFiles);
             $("#deleteFiles").on("click", deleteFiles);
             $("#submitBtn").on("click", registerFiles);
             $("#modifyCPBoardBtn").on("click", modifyCPBoard);
+            
          })
 
       </script>

@@ -21,6 +21,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomLoginSuccessHandler customLoginSuccessHandler;
+    
+    @Autowired
+    private CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -39,7 +42,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .loginPage("/bcboard/loginPage")
                 .loginProcessingUrl("/login")
                 .successHandler(customLoginSuccessHandler);
-                http.logout().logoutUrl("/logout2")
+                http.logout().logoutSuccessHandler(customLogoutSuccessHandler).logoutUrl("/logout2")
                 .deleteCookies("userName")
                .invalidateHttpSession(true);
 

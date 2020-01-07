@@ -27,5 +27,9 @@ public class BasicController {
     public void getMyPage() {
     }
 
+    @GetMapping("/admin/adminPage")
+    public void admin() {
+    }
+
 
 }

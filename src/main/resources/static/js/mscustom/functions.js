@@ -5,7 +5,7 @@
 // 파일명에 특문(특히 *, /, -) 걸러주기! 
 function validateFile(fileName, fileSize) {
     var regex = new RegExp("(.*?)\.(wav|mp3|wma|aac|flac|mmf)$");
-    var spcCheck = /[~!@#$%^&*()\-+|<>?:{}]/;
+    var spcCheck = /[~!@#$%^&*()\-_+|<>?:{}]/;
     var maxSize = 10485760;
     if (fileSize > maxSize) {
         alert("업로드 가능한 파일 크기를 초과했습니다.")

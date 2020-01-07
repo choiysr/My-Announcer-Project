@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
         MemberVO vo2 = memberRepository.findById(vo1.getId()).get();
         System.out.println(vo2.getCpInfo().getImgFile());
 
-        if(vo1.getCpInfo().getImgFile().equals("Defualt.png")){
+        if(vo1.getCpInfo().getImgFile().equals("Default.png")){
             vo1.getCpInfo().setImgFile(vo2.getCpInfo().getImgFile());
         }
         memberRepository.updateCPInfo(vo1.getCpInfo().getTitle(), vo1.getCpInfo().getIntroduce(), vo1.getCpInfo().getImgFile(), vo2);

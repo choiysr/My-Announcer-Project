@@ -1,5 +1,6 @@
 var tmpFormData = new FormData();
 var finalFormData = new FormData();
+var isFileChanged = 0;
 
 
 function loadPage() {
@@ -23,6 +24,7 @@ function loadPage() {
 
 // list spread ajax 
 function getCPBoardList() {
+    console.log("getCPBoardList function에 들어왔나요")
     $.ajax({
         url: "/rcpboard/getCPBoardList/" + getCookie("userName"),
         type: "GET",
@@ -35,13 +37,14 @@ function getCPBoardList() {
 
 
 // 화면에 list뿌리는 function 
+// event.preventDefault(); scrollupTrigger();
 function appendCPBoardList(list) {
     var str = "";
     list.forEach(board => {
         str += '<tr class="oneCPBoard">';
         str += '<td style="padding-top: 40px;"">' + '<h4>' + board.bcdate + '</h4>' + '</td>';
         str += '<td style="padding-top: 40px;">' + '<a href="#"><h4 class= "CPBTitle" '
-        str += 'onclick="openModal(\'readBoardModal_' + board.bno + '\')">' + board.title + '</h4></a>' + '</td>';
+        str += 'onclick="event.preventDefault(); scrollupTrigger(); openModal(\'readBoardModal_' + board.bno + '\')">' + board.title + '</h4></a>' + '</td>';
         str += '<td style="padding-top: 40px;">' + '<h4>' + board.file_name.substring(board.file_name.lastIndexOf('_') + 1, board.file_name.length) + '</h4>' + '</td>';
         str += '<td style="padding-top: 40px;">' + '<h4>' + '수정/삭제' + '</h4>' + '</td>';
         str += '</tr>';
@@ -54,25 +57,65 @@ $("#modifyInfo").on("click", function (e) {
     e.preventDefault()
     var title = $("#cpInfoTitle");
     var introduce = $("#cpInfoIntroduce")
+    title.val() == "" ? title.val($("#title").text()) : null;
+    introduce.val() == "" ? introduce.val($("#introduce").text()) : null;
+    var modifiedImgFile = $("#imgUpload");
 
-    jsonData = {
-        id: getCookie("userName"),
-        cpInfo: {
-            title: title.val(),
-            introduce: introduce.val()
+    if (!modifiedImgFile.val() == "") {
+        if (!validateImg(modifiedImgFile[0].files[0].name, modifiedImgFile[0].files[0].size)) {
+            return
+        }
+        var formData = new FormData();
+        formData.append("uploadFile", modifiedImgFile[0].files[0])
+        var fileName = uploadImg(formData, fileName)
+
+        jsonData = {
+            id: getCookie("userName"),
+            cpInfo: {
+                imgFile: fileName,
+                title: title.val(),
+                introduce: introduce.val()
+            }
+        }
+    } else {
+        jsonData = {
+            id: getCookie("userName"),
+            cpInfo: {
+                title: title.val(),
+                introduce: introduce.val()
+            }
         }
     }
-
     $.ajax({
         url: "/member/modifyCPInfo",
         data: JSON.stringify(jsonData),
         contentType: "application/json; charset=utf-8",
         type: "POST",
         success: function (result) {
+            loadPage()
+            title.val("")
+            introduce.val("")
+            modifiedImgFile.val("")
+            title.css("display", "none");
+            introduce.css("display", "none");
+            modifiedImgFile.css("display", "none");
         }
     })
+    $(this).css("display", "none");
+    $("#modifyInfoBtn").css("display", "inline-block")
 })
 
+
+$("#modifyInfoBtn").on("click", function (e) {
+    e.preventDefault()
+    $(this).css("display", "none");
+    $("#modifyInfo").css("display", "inline-block")
+
+    $("#cpInfoTitle").css("display", "block");
+    $("#cpInfoIntroduce").css("display", "block")
+    $("#imgUpload").css("display", "block")
+
+})
 
 
 // 모달창 띄우기 
@@ -95,10 +138,13 @@ function getOneCPBoard(bno) {
         'contentType': "application/json; charset=utf-8",
         success: function (result) {
             var str = "";
-            str += '<tr class="oneBoard">'
+            str += '<tr class="oneBoard" id='+result.bno+'>'
             str += '<td> <input class="custom-select mb-15" id="modBcDate" type="date" value=' + result.bcdate + ' disabled></td>'
             str += '<td> <input id="modTitle" type="text" value=' + result.title + ' disabled>' + '</td>'
-            str += '<td> <input id="modFileName" type="text" value=' + result.file_name.substring(result.file_name.lastIndexOf('_') + 1, result.file_name.length) + ' disabled>' + '</td>'
+            str += '<td> <input id="fileNameViewer" type="text" value=' + result.file_name.substring(result.file_name.lastIndexOf('_') + 1, result.file_name.length) + ' disabled>'
+                + '<input style="display:none;" id="orgCPFileName" type="text" value=' + result.file_name.substring(result.file_name.lastIndexOf('_') + 1, result.file_name.length) + ' disabled>' + '</td>'
+            str += '<td id="modUploadBtnArea" style="display:none;"> <button id="modFakeFileUpload">파일수정</button></td>'
+            str += '<td id="modfileArea" style="display:none;"> <input id="modFileUpload" type="file"> </td>'
             str += '</tr>'
             $("#oneBoardReceived").html(str);
         }
@@ -107,26 +153,84 @@ function getOneCPBoard(bno) {
 
 // 수정
 function modifyCPBoard() {
-    let $oneBoard = cpvals.$oneBoardReceived;
-    console.log($oneBoard.children().children());
-    $oneBoard.children().children().each(function (i,e) {
-        console.log(i);
-        console.log(e);
-        let $curr = $(e);
-        console.log($curr);
-        $curr.attr('disabled',false);
-    });
-  /*   $oneBoard.children().children().each(function (i,e) {
-        console.log(e[0])
-        e[0].disabled=false;
-        console.log(e);
-    });
-    let $bcDate = $('#modBcDate');
-    let $title = $('#modTitle');
-    let $fileName = $('#modFileName'); */
+    let $oneBoard = $("#oneBoardReceived");
+    $("#modifyCPBoardBtn").css('display', 'none');
+    $("#modifyConfirmBtn").css('display', 'inline-block');
+    $("#modBcDate, #modTitle").attr('disabled', false);
 
-    
-    
+    let $uploadBtn = $("#modUploadBtnArea")
+    $uploadBtn.css('display', 'inline-block');
+    $uploadBtn.on("click", function (e) {
+        e.preventDefault();
+        $("#modFileUpload").trigger("click");
+    });
+
+
+    // 파일이 수정되면
+    $("input[type='file']").change(function () {
+        var currFile = $("#modFileUpload")[0].files[0]
+        if (!validateFile(currFile.name, currFile.size)) { // 유효성검사
+            $(this).val("");
+            return false;
+        }
+        $("#fileNameViewer").val(currFile.name);
+        console.log("파일이 변경됨")
+        isFileChanged = 1;
+
+    });
+
+
+    $("#modifyConfirmBtn").on("click", function () {
+        let modBcDate = document.getElementById('modBcDate').value
+        let modTitle = document.getElementById('modTitle').value
+        let json = "";
+
+        //파일명이 기존 파일명과 같은지 체크
+        if (isFileChanged == 0) {
+            console.log("파일 변경이 없는 경우임")
+            // 기존파일을 유지시켜야함 
+            // js단에서 처리해줘야 하는 이유(무조건 다시 저장해야하는이유) 
+            // : 파일은 다른 파일인데 이름이 같을경우 파일명 가지고만 그 둘을 구분할 수 없기 때문
+            // 단순히 org와 curr파일명이 같은지로 조건을 주면 안되고
+            // 변경이 있는지 없는지를 체크해서 변경이 없는 경우에 처리해줘야 함.
+            // 기존파일을 갖고오고 자시고 할 거 없고 controller에 넘겨줄때
+            // 기존파일을 유지시키는 경우 filepath를 keepPrev 이런식으로 주면 될듯
+            json = {
+                'bno' : $(".oneBoard").attr('id'),
+                'member': { 'id': getCookie("userName") },
+                'title': modTitle,
+                'file_path': 'KEEP',
+                'file_name': 'KEEP',
+                'bcdate': modBcDate
+            };
+        } else {
+            // 파일 변경이 있는경우
+            // fileSave() 에 formData넣어주기 
+            console.log("파일 변경이 있는 경우!!")
+            let newFile = $("#modFileUpload")[0].files;
+            finalFormData.append('files', newFile);
+            let fileResult = fileSave(finalFormData);
+            json = {
+                'bno' : $(".oneBoard").attr('id'),
+                'member': { 'id': getCookie("userName") },
+                'title': modTitle,
+                'file_path': fileResult[0].substring(0, fileResult[0].lastIndexOf("\\") + 1),
+                'file_name': fileResult[0].substring(fileResult[0].lastIndexOf("\\") + 1, fileResult[0].length),
+                'bcdate': modBcDate
+            };
+        } // end of else 
+
+        $.ajax({
+            url: '/rcpboard/modify',
+            data: JSON.stringify(json),
+            type: 'PUT',
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                $("#closeCPModifyModal").trigger("click");
+            }
+        });
+
+    }) // end of modifyConfirmBtn event 
 }
 
 
@@ -189,34 +293,81 @@ function registerFiles() {
         finalFormData.append('files', fileData[1]);
     }
 
+    var fileResultArr = fileSave(finalFormData);
+    console.log("-----------------")
+    console.log(fileResultArr);
+    var jsonArr = [];
+    var $boards = $(".boards");
+    $boards.each(function (i, e) {
+        var $currBoard = $($boards[i]);
+        var json = {
+            'member': { 'id': getCookie("userName") },
+            'title': $currBoard.find(".audioTitle").val(),
+            'file_path': fileResultArr[i].substring(0, fileResultArr[i].lastIndexOf("\\") + 1),
+            'file_name': fileResultArr[i].substring(fileResultArr[i].lastIndexOf("\\") + 1, fileResultArr[i].length),
+            'bcdate': $currBoard.find(".bcDate").val()
+        };
+        jsonArr.push(json);
+    });
+    registerBoards(jsonArr);
+    alert("등록이 완료되었습니다.");
+    getCPBoardList();
+
+    /*     $.ajax({
+          url: '/rcpboard/registerFiles',
+          processData: false,
+          contentType: false,
+          data: finalFormData,
+          type: 'POST',
+          dataType: 'json',
+          success: function (result) {
+              var jsonArr = [];
+              var $boards = $(".boards");
+              $boards.each(function (i, e) {
+                  var $currBoard = $($boards[i]);
+                  var json = {
+                      'member': { 'id': getCookie("userName") },
+                      'title': $currBoard.find(".audioTitle").val(),
+                      'file_path': result[i].substring(0, result[i].lastIndexOf("\\") + 1),
+                      'file_name': result[i].substring(result[i].lastIndexOf("\\") + 1, result[i].length),
+                      'bcdate': $currBoard.find(".bcDate").val()
+                  };
+                  jsonArr.push(json);
+              });
+              registerBoards(jsonArr);
+              alert("등록이 완료되었습니다.");
+              getCPBoardList();
+          } // end of success 
+      }) */
+} // end of register 
+
+
+function fileSave(fileFormDatas) {
+    
+    console.log("in fileSave function")
+    console.log(fileFormDatas);
+
+    let result = "";
     $.ajax({
         url: '/rcpboard/registerFiles',
         processData: false,
         contentType: false,
-        data: finalFormData,
+        data: fileFormDatas,
+        async:false,
         type: 'POST',
         dataType: 'json',
-        success: function (result) {
-            var jsonArr = [];
-            var $boards = $(".boards");
-            $boards.each(function (i, e) {
-                var $currBoard = $($boards[i]);
-                var json = {
-                    'member': { 'id': getCookie("userName") },
-                    'title': $currBoard.find(".audioTitle").val(),
-                    'file_path': result[i].substring(0, result[i].lastIndexOf("\\") + 1),
-                    'file_name': result[i].substring(result[i].lastIndexOf("\\") + 1, result[i].length),
-                    'bcdate': $currBoard.find(".bcDate").val()
-                };
-                jsonArr.push(json);
-            });
-            registerBoards(jsonArr);
-            alert("등록이 완료되었습니다.");
-            getCPBoardList();
-        } // end of success 
+        success: function (data) {
+            console.log(data);
+            console.log("성공..했니...")
+            result = data;
+        }
     })
+    return result;
 
 }
+
+
+
 
 function registerBoards(jsonArr) {
     $.ajax({
@@ -234,12 +385,11 @@ function registerBoards(jsonArr) {
 function resetCPUploadElements() {
     tmpFormData = new FormData();
     finalFormData = new FormData();
+    isFileChanged = 0;
     cpvals.$filelistArea.html("");
+    cpvals.$modifyConfirmBtn.css('display','none');
+    cpvals.$modifyCPBoardBtn.css('display','inline-block');
     $('#addFiles').val("");
-
-
-   
-
 };
 
 
@@ -252,14 +402,14 @@ $("#modifyInfo").on("click", function (e) {
     introduce.val() == "" ? introduce.val($("#introduce").text()) : null;
     var modifiedImgFile = $("#imgUpload");
 
-    if(!modifiedImgFile.val() ==""){
-        if(!validateImg(modifiedImgFile[0].files[0].name, modifiedImgFile[0].files[0].size)){
+    if (!modifiedImgFile.val() == "") {
+        if (!validateImg(modifiedImgFile[0].files[0].name, modifiedImgFile[0].files[0].size)) {
             return
         }
         var formData = new FormData();
-        formData.append("uploadFile",modifiedImgFile[0].files[0])
-        var fileName = uploadImg(formData,fileName)
-    
+        formData.append("uploadFile", modifiedImgFile[0].files[0])
+        var fileName = uploadImg(formData, fileName)
+
         jsonData = {
             id: getCookie("userName"),
             cpInfo: {
@@ -268,7 +418,7 @@ $("#modifyInfo").on("click", function (e) {
                 introduce: introduce.val()
             }
         }
-    }else{
+    } else {
         jsonData = {
             id: getCookie("userName"),
             cpInfo: {
@@ -291,12 +441,12 @@ $("#modifyInfo").on("click", function (e) {
     })
 })
 
-function uploadImg(formData, ) {
+function uploadImg(formData) {
     var fileName
     $.ajax({
-        url: "/member/uploadImg?userName="+getCookie("userName"),
-        processData:false,
-        contentType:false,
+        url: "/member/uploadImg?userName=" + getCookie("userName"),
+        processData: false,
+        contentType: false,
         async: false,
         data: formData,
         type: "POST",
@@ -312,7 +462,6 @@ function loadPage() {
     var id = $("#id")
     var introduce = $("#introduce")
     var thumnail = $("#CPThumnail")
-    
 
     $.ajax({
         url: "/rcpboard/getUserInfo",
@@ -324,8 +473,10 @@ function loadPage() {
             id.text(result.id)
             title.text(result.cpInfo.title)
             introduce.text(result.cpInfo.introduce)
-            thumnail.attr("src","/rcpboard/getImg?fileName=C:/CpImg/"+result.cpInfo.imgFile)
-        }   
+            console.log(result);
+
+            thumnail.attr("src", "/rcpboard/getImg?fileName=C:/CpImg/" + result.cpInfo.imgFile)
+        }
     })
 }
 

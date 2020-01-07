@@ -43,5 +43,15 @@ public class CPBoardServiceImpl implements CPBoardService {
         return cprepo.findById(bno).orElse(null);
     }
 
+    @Override
+    public void update(CPBoard cpboard) {
+        CPBoard target = getOneCPBoard(cpboard.getBno());
+        target.setBcdate(cpboard.getBcdate());
+        target.setTitle(cpboard.getTitle());
+        target.setFile_path(cpboard.getFile_path());
+        target.setFile_name(cpboard.getFile_name());
+        cprepo.save(target);
+    }
+
 
 }

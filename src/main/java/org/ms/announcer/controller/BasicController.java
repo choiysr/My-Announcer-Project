@@ -24,7 +24,7 @@ public class BasicController {
     }
 
     @GetMapping("/cpboard/myPage")
-    public void test() {
+    public void getMyPage() {
     }
 
 

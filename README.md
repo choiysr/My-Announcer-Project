@@ -1,20 +1,7 @@
-# MyAnnouncer 
+# MyAnnouncer Project Summary
 
-김만기_portfolio_1216v.pdf의 내용입니다.
-
-![슬라이드1](https://user-images.githubusercontent.com/50133267/71224358-fc75fe80-2318-11ea-9fc3-2724079a8146.JPG)
-
-
-![슬라이드2](https://user-images.githubusercontent.com/50133267/71224364-fe3fc200-2318-11ea-8a51-b95c3d68cf98.JPG)
-
-
-![슬라이드3](https://user-images.githubusercontent.com/50133267/71224368-00098580-2319-11ea-8081-c21c026b2d0a.JPG)
-
-
-![슬라이드4](https://user-images.githubusercontent.com/50133267/71224370-01d34900-2319-11ea-95ea-128d82e3dc55.JPG)
-
-
-![슬라이드5](https://user-images.githubusercontent.com/50133267/71224373-039d0c80-2319-11ea-89f2-f32cb3c1b42b.JPG)
-
-
-![슬라이드6](https://user-images.githubusercontent.com/50133267/71224375-04ce3980-2319-11ea-86ce-f18f0181ae57.JPG)
+![슬라이드2](https://user-images.githubusercontent.com/48176963/71882063-0308d080-3177-11ea-9a49-1246deee0622.PNG)
+![슬라이드3](https://user-images.githubusercontent.com/48176963/71882066-0439fd80-3177-11ea-81d1-af5e4ed146cc.PNG)
+![슬라이드4](https://user-images.githubusercontent.com/48176963/71882068-069c5780-3177-11ea-9cf0-b98027358f6b.PNG)
+![슬라이드5](https://user-images.githubusercontent.com/48176963/71882069-07cd8480-3177-11ea-9dd1-780356688f21.PNG)
+![슬라이드6](https://user-images.githubusercontent.com/48176963/71882078-0a2fde80-3177-11ea-9319-e833ea6e083a.PNG)

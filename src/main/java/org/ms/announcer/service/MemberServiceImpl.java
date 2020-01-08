@@ -34,6 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void RegistMemeber(MemberVO vo) {
+        
         MemberRole a = new MemberRole();
 
         if (vo.getType().equals("CP")) {
@@ -83,6 +84,12 @@ public class MemberServiceImpl implements MemberService {
         // Page<CPInfo> list = cr.findByTitle(title, page);
         
         return null;
+    }
+
+    @Override
+    public Integer aNumberOfMember() {
+        
+        return (int) memberRepository.count();
     }
 
 }

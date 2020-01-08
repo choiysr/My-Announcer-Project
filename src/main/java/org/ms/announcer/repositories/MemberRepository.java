@@ -17,6 +17,8 @@ public interface MemberRepository extends JpaRepository<MemberVO, Integer> {
     @Modifying
     @Query(value = "update CPInfo cp set cp.title = :title, cp.imgFile = :imgFile, cp.introduce =:introduce where cp.member = :member")
     public int updateCPInfo(String title, String introduce, String imgFile, MemberVO member);
+    
+
 
 
 }

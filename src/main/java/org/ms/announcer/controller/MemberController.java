@@ -70,5 +70,9 @@ public class MemberController {
 
        return new ResponseEntity<>(new MemberVO(), HttpStatus.OK);
    }
+    @GetMapping("getCountOfMember")
+    public ResponseEntity<Integer> getCountOfMember() {
+       return new ResponseEntity<>( ms.aNumberOfMember(), HttpStatus.OK);
+   }
 
 }

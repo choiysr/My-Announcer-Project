@@ -11,4 +11,5 @@ public interface MemberService {
     public boolean checkOvaelap(String memberid);
     public void updateCPinfo(MemberVO vo);
     public Page<MemberVO> getAllCPByTilte(String title, int currentPage);
+    public Integer aNumberOfMember();
 }

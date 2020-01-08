@@ -1,5 +1,6 @@
 package org.ms.announcer;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.ms.announcer.domain.CPInfo;
 import org.ms.announcer.domain.MemberRole;
 import org.ms.announcer.domain.MemberVO;
 import org.ms.announcer.domain.RepeatVO;
+import org.ms.announcer.repositories.AdminRepository;
 import org.ms.announcer.repositories.BCBoardRepository;
 import org.ms.announcer.repositories.MemberRepository;
 import org.ms.announcer.service.BCBoardService;
@@ -36,6 +38,10 @@ public class BCBTests {
 
     @Autowired
     BCBoardRepository repo;
+    
+    @Autowired
+    AdminRepository ap;
+    
 
     @Autowired
     private PasswordEncoder pe;
@@ -118,6 +124,17 @@ public class BCBTests {
 
         // mr.updateCPInfo("cptest3333","EEEEEEEEEEEEEEEEEE" , member);
     //   mr.updateCPInfo("tilte", "cptest");
+    }
+
+    @Test
+    public void countTest(){
+
+        // 오늘 접속하 사람의 수 
+        System.out.println(ap.findCountOfLoginByDate(LocalDate.now()));
+
+        //
+        System.out.println(mr.findRegisterdCount(LocalDate.of(2019, 12, 30).plusDays(1)));
+
     }
 
 }

@@ -1,5 +1,6 @@
 package org.ms.announcer.repositories;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.ms.announcer.domain.MemberVO;
@@ -18,7 +19,8 @@ public interface MemberRepository extends JpaRepository<MemberVO, Integer> {
     @Query(value = "update CPInfo cp set cp.title = :title, cp.imgFile = :imgFile, cp.introduce =:introduce where cp.member = :member")
     public int updateCPInfo(String title, String introduce, String imgFile, MemberVO member);
     
-
+    @Query(value = "select count(*) from tbl_member where regdate <= :date", nativeQuery = true)
+    public Integer findRegisterdCount(LocalDate date);
 
 
 }

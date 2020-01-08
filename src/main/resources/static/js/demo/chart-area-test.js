@@ -27,12 +27,23 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
+// 당월 일자를 계산하여 data labels에 넣어줌. ===============
+let now = new Date();
+let lastDayOfThisMonth = (new Date(now.getYear(), now.getMonth()+1,0)).getDate();
+let chartLabels = new Array();
+for(let i=1;i<=lastDayOfThisMonth;i++) {
+  chartLabels.push(i);
+}
+// ========================================================
+
+
+
 // Area Chart Example
 var ctx = document.getElementById("myAreaTest");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    labels: chartLabels,
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -78,7 +89,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return number_format(value);
           }
         },
         gridLines: {
@@ -110,7 +121,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ':' + number_format(tooltipItem.yLabel);
         }
       }
     }

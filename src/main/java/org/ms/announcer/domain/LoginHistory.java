@@ -2,7 +2,6 @@ package org.ms.announcer.domain;
 
 import java.time.LocalDate;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

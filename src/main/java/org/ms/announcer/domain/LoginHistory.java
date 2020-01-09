@@ -25,12 +25,8 @@ public class LoginHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Pno;
 
-    @CreationTimestamp
     private LocalDate loginDate;
 
-
-
-    
-    private String memeberId;
+    private String memberId;
     
 }

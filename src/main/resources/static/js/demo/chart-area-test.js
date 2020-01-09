@@ -27,23 +27,50 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
+
+console.log("언제호출?")
+
+var dayListForChart = new Array();
+var usersListForChart =  new Array();
+
+function getChartInfo() {
+  let today = new Date();
+  let year = today.getFullYear();
+  let day = ((today.getDate()).toString().length == 1 ? "0" + (today.getDate()) : (today.getDate()));
+  let month = ((today.getMonth() + 1).toString().length == 1 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1));
+  let todayFull = year + "-" + month + "-" + day;
+  $.ajax({
+      url: "/admin/getCountsByDay/" + todayFull,
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      async:false,
+      success: function (result) {
+          result.forEach(element => {
+              dayListForChart.push(parseInt(element.dates,10))
+              usersListForChart.push(parseInt(element.counts,10))
+          });
+      }
+  })
+}
+
+
 // 당월 일자를 계산하여 data labels에 넣어줌. ===============
-let now = new Date();
+/* let now = new Date();
 let lastDayOfThisMonth = (new Date(now.getYear(), now.getMonth()+1,0)).getDate();
 let chartLabels = new Array();
 for(let i=1;i<=lastDayOfThisMonth;i++) {
   chartLabels.push(i);
-}
+}  */
 // ========================================================
-
-
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaTest");
+getChartInfo();
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
-  data: {
-    labels: chartLabels,
+  data: { 
+    labels: dayListForChart,
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -57,7 +84,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [1,2,3,4,5,6,7],
+      data: usersListForChart,
     }],
   },
   options: {

@@ -43,7 +43,6 @@ public class MemberVO {
     @UpdateTimestamp
     private LocalDateTime updateddate;
 
-
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "role")
     private List<MemberRole> roles;

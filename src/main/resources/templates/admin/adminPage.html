@@ -241,11 +241,7 @@
     <!-- Page level plugins -->
     <script th:src="@{~/js/vendor/chart.js/Chart.min.js}"></script>
 
-    <!-- Page level custom scripts -->
-    <script th:src="@{~/js/demo/chart-area-demo.js}"></script>
-    <script th:src="@{~/js/demo/chart-area-test.js}"></script>
-    <script th:src="@{~/js/demo/chart-pie-demo.js}"></script>
-    <script th:src="@{~/js/demo/chart-pie-test.js}"></script>
+
     <!-- END OF ADMIN 관련 -->
     <script th:src="@{~/js/mscustom/vals.js}"></script>
     <script th:src="@{~/js/mscustom/functions.js}"></script>
@@ -255,6 +251,7 @@
     <script>
 
         $(document).ready(function () {
+
 
             var socket = io.connect('http://localhost:3000')
             console.log(socket.emit("login", "admin"));
@@ -271,21 +268,19 @@
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
-                        console.log("총 회원은"+result)
+                        console.log("총 회원은" + result)
                         console.log("현재 접속자 수: " + msg);
-                        
-                        
                     }
                 }); // end of todayList get ajax
-
-
-
-
             });
-
-
         })
     </script>
+
+        <!-- Page level custom scripts -->
+        <script th:src="@{~/js/demo/chart-area-demo.js}"></script>
+        <script th:src="@{~/js/demo/chart-area-test.js}"></script>
+        <script th:src="@{~/js/demo/chart-pie-demo.js}"></script>
+        <script th:src="@{~/js/demo/chart-pie-test.js}"></script>
     </div>
 </body>
 

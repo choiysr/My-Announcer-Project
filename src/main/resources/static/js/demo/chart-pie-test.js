@@ -4,15 +4,21 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 
 
-
 // Pie Chart Example
+function pieChartMaker(total,current) {
 var ctx = document.getElementById("testPieChart");
+
+// arr만들어 
+let chartInfo = new Array()
+chartInfo.push(current)
+chartInfo.push(total-current)
+
 var testPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
     labels: ["Connected", "Disconnected"],
     datasets: [{
-      data: [1, 14],
+      data: chartInfo,
       backgroundColor: ['#4e73df', '#1cc88a'],
       hoverBackgroundColor: ['#2e59d9', '#17a673'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -36,3 +42,4 @@ var testPieChart = new Chart(ctx, {
     cutoutPercentage: 80,
   },
 });
+}

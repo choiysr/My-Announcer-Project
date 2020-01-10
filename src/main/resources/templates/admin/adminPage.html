@@ -268,8 +268,8 @@
     <script>
         let currentMembers
         let totalMembers
+        
         $(document).ready(function () {
-
             // 전체 user갖고와서 뿌려줌 
             $.ajax({
                 url: "/admin/getAllMember",
@@ -311,18 +311,17 @@
                 }); // end of todayList get ajax
             });
 
+            let loginUserArr = new Array()
             socket.on('userList', function (msg) {
                 console.log("현재 접속중인 유저"+msg);
-                let loginUserArr = new Array()
                 loginUserArr = msg.split(',')
                 console.log(loginUserArr)
-                
+                loginUserArr.pop()
                 loginUserArr.forEach(user => {
                     let $user =  $("#"+user)
                     $user.html('접속중')
                     $user.css('color','green')
                 })
-                
             });
         })
     </script>

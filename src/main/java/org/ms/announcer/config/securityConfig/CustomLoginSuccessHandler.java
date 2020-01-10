@@ -42,9 +42,9 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
                 loginHistoryService.userLogin( LocalDate.now(), auth.getName().toString());
 
                 repo.addCookie(userName);
-               String a = new String("[ROLE_CP]");
+               String a = new String("[ROLE_ADMIN]");
                if (auth.getAuthorities().toString().equals(a)) {
-                   repo.sendRedirect("/cpboard/myPage");
+                   repo.sendRedirect("/admin/adminPage");
                    
                }else{
                    repo.sendRedirect("/bcboard/todayList");

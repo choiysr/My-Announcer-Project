@@ -249,30 +249,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 
     <script>
-
+        let currentMembers
+        let totalMembers
         $(document).ready(function () {
-
-
+            
+            
             var socket = io.connect('http://localhost:3000')
-            console.log(socket.emit("login", "admin"));
-
-            socket.on('s-msg', function (msg) {
-                console.log("메시지 옴");
-
-                console.log(msg + "명 접속중");
-                $('#messages').text("");
-                $('#messages').text(msg + "명 접속중");
-
+            socket.emit("login", "admin")
+            
+            socket.on('anumberOfConnection', function (msg) {
+                currentMembers = msg
                 $.ajax({
                     url: "/member/getCountOfMember",
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
+                        totalMembers =result
                         console.log("총 회원은" + result)
                         console.log("현재 접속자 수: " + msg);
+                        
+                        
+                        var ctx = document.getElementById("testPieChart");
+                        var testPieChart(ctx,result,msg);
                     }
+
                 }); // end of todayList get ajax
             });
+
+            socket.on('userList', function (msg) {
+                console.log("현재 접속중인 유저"+msg);
+                
+
+            });
+
+
+
+
+
+
+
+
+
         })
     </script>
 

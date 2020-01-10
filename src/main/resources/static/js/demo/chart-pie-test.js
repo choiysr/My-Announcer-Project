@@ -2,6 +2,9 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+
+
+
 // Pie Chart Example
 var ctx = document.getElementById("testPieChart");
 var testPieChart = new Chart(ctx, {
@@ -9,7 +12,7 @@ var testPieChart = new Chart(ctx, {
   data: {
     labels: ["Connected", "Disconnected"],
     datasets: [{
-      data: [90, 10],
+      data: [1, 14],
       backgroundColor: ['#4e73df', '#1cc88a'],
       hoverBackgroundColor: ['#2e59d9', '#17a673'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

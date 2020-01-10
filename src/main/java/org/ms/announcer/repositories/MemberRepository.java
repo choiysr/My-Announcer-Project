@@ -22,5 +22,7 @@ public interface MemberRepository extends JpaRepository<MemberVO, Integer> {
     @Query(value = "select count(*) from tbl_member where regdate <= :date", nativeQuery = true)
     public Integer findRegisterdCount(LocalDate date);
 
+    
+
 
 }

@@ -252,11 +252,11 @@
         let currentMembers
         let totalMembers
         $(document).ready(function () {
-            
-            
+
+
             var socket = io.connect('http://localhost:3000')
             socket.emit("login", "admin")
-            
+
             socket.on('anumberOfConnection', function (msg) {
                 currentMembers = msg
                 $.ajax({
@@ -264,25 +264,31 @@
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
-                        totalMembers =result
+                        totalMembers = result
                         console.log("총 회원은" + result)
                         console.log("현재 접속자 수: " + msg);
-                        
-                        
+
+
                         var ctx = document.getElementById("testPieChart");
-                        var testPieChart(ctx,result,msg);
+                        // var testPieChart(ctx,result,msg);
                     }
 
                 }); // end of todayList get ajax
             });
 
             socket.on('userList', function (msg) {
-                console.log("현재 접속중인 유저"+msg);
-                
+                console.log("현재 접속중인 유저" + msg);
+                let loginUserArr = new Array()
+                loginUserArr = msg.split(',')
+                console.log(loginUserArr)
+
+                loginUserArr.forEach(user => {
+                    let $user = $("#" + user)
+                    $user.html('접속중')
+                    $user.css('color', 'green')
+                })
 
             });
-
-
 
 
 
@@ -293,11 +299,11 @@
         })
     </script>
 
-        <!-- Page level custom scripts -->
-        <script th:src="@{~/js/demo/chart-area-demo.js}"></script>
-        <script th:src="@{~/js/demo/chart-area-test.js}"></script>
-        <script th:src="@{~/js/demo/chart-pie-demo.js}"></script>
-        <script th:src="@{~/js/demo/chart-pie-test.js}"></script>
+    <!-- Page level custom scripts -->
+    <script th:src="@{~/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{~/js/demo/chart-area-test.js}"></script>
+    <script th:src="@{~/js/demo/chart-pie-demo.js}"></script>
+    <script th:src="@{~/js/demo/chart-pie-test.js}"></script>
     </div>
 </body>
 

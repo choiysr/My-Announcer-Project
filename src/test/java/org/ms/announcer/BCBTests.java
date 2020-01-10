@@ -23,7 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
-
 /**
  * BCBTests
  */
@@ -32,16 +31,15 @@ public class BCBTests {
 
     @Autowired
     MemberRepository mr;
-    
+
     @Autowired
     BCBoardService service;
 
     @Autowired
     BCBoardRepository repo;
-    
+
     @Autowired
     AdminRepository ap;
-    
 
     @Autowired
     private PasswordEncoder pe;
@@ -85,37 +83,41 @@ public class BCBTests {
     }
 
     @Test
-    public void cpMemberRegist(){
-        MemberVO vo = new MemberVO();
+    public void cpMemberRegist() {
 
-        vo.setId("memberid22");
-        vo.setMemberpassword("12345");
-        vo.setType("CP");
-        CPInfo cpinfo = new CPInfo();
-        cpinfo.setIntroduce("introduce2222222222");
-        vo.setCpInfo(cpinfo);
-        vo.setMemberpassword(pe.encode(vo.getMemberpassword()));
-        MemberRole a = new MemberRole();
-        a.setRoleName("ROLE_BASIC");
-        List<MemberRole> rList = new ArrayList<>();
-        rList.add(a);
-        vo.setRoles(rList);
-        vo.setType("user");
-        mr.save(vo);
+        IntStream.range(0, 101).forEach(i -> {
+            MemberVO vo = new MemberVO();
+            vo.setId("dumyUser" + i);
+            vo.setMemberpassword("$10$cG8PFBE325hqny0cuPCnw.aQy9rERAvenorF2GP3Jn8B9VW6ahJMW");
+            vo.setType("user");
+            MemberRole a = new MemberRole();
+            a.setRoleName("ROLE_USER");
+            List<MemberRole> rList = new ArrayList<>();
+            rList.add(a);
+            vo.setRoles(rList);
+            mr.save(vo);
+
+        });
+
+        // CPInfo cpinfo = new CPInfo();
+        // cpinfo.setIntroduce("introduce2222222222");
+        // vo.setCpInfo(cpinfo);
+        // vo.setMemberpassword(pe.encode(vo.getMemberpassword()));
+        // vo.setType("user");
     }
-
 
     @Test
-    public void selectMemeber(){
-    //    Optional<MemberVO> a= mr.findByMemberid("memberid22");
-    //    System.out.println(a.isPresent());
-    //    System.out.println(a.get().getCpInfo().getIntroduce());
+    public void selectMemeber() {
+        // Optional<MemberVO> a= mr.findByMemberid("memberid22");
+        // System.out.println(a.isPresent());
+        // System.out.println(a.get().getCpInfo().getIntroduce());
     }
+
     @Test
 
     @Commit
-    @Transactional 
-    public void updateTests(){
+    @Transactional
+    public void updateTests() {
         // CPInfo info = new CPInfo();
         // info.setTitle("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS");
         // info.setIntroduce("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS");
@@ -123,14 +125,14 @@ public class BCBTests {
         // MemberVO member = mr.findByMemberid("aaaaa").get();
 
         // mr.updateCPInfo("cptest3333","EEEEEEEEEEEEEEEEEE" , member);
-    //   mr.updateCPInfo("tilte", "cptest");
+        // mr.updateCPInfo("tilte", "cptest");
     }
 
     @Test
-    public void countTest(){
+    public void countTest() {
 
-        // 오늘 접속하 사람의 수 
-        //System.out.println(ap.findCountOfLoginByDate(LocalDate.now()));
+        // 오늘 접속하 사람의 수
+        // System.out.println(ap.findCountOfLoginByDate(LocalDate.now()));
 
         //
         System.out.println(mr.findRegisterdCount(LocalDate.of(2019, 12, 30).plusDays(1)));

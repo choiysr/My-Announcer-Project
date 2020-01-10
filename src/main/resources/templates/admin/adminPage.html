@@ -304,6 +304,7 @@
                         console.log("총 회원은" + result)
                         console.log("현재 접속자 수: " + msg);
 
+                        pieChartMaker(result,msg)
 
                         var ctx = document.getElementById("testPieChart");
                     }
@@ -312,18 +313,25 @@
             });
 
             socket.on('userList', function (msg) {
-                console.log("현재 접속중인 유저"+msg);
                 let loginUserArr = new Array()
+                console.log("현재 접속중인 유저"+msg);
                 loginUserArr = msg.split(',')
                 console.log(loginUserArr)
-                
+                loginUserArr.pop()
                 loginUserArr.forEach(user => {
                     let $user =  $("#"+user)
                     $user.html('접속중')
                     $user.css('color','green')
                 })
-                
             });
+
+            socket.on('m-logout',function (user) {
+                let $user =  $("#"+user)
+                $user.html('비접속')
+                console.log(msg+"가 로그 아웃 하였습니다.");
+                
+            })
+
         })
     </script>
 

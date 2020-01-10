@@ -26,7 +26,6 @@ import lombok.Setter;
 @RequestMapping("/admin/*")
 public class AdminController {
 
-
     @Autowired
     private AdminService aservice;
 

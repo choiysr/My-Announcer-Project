@@ -21,7 +21,7 @@ public interface AdminRepository extends JpaRepository<LoginHistory, Integer> {
  +"group by h.loginDate")
   public List<Map<String, Integer>> getCountUserbyDayOfThisMonth(@Param("today") LocalDate today);  
 
-  @Query(value = "select * from tbl_login_history where login_date = :date and memeber_id = :userName", nativeQuery = true)
+  @Query(value = "select * from tbl_login_history where login_date = :date and member_id = :userName", nativeQuery = true)
   public LoginHistory findHistory(LocalDate date, String userName);
 
   @Query(value = "select count(*) from tbl_login_history where login_date = :date", nativeQuery = true)

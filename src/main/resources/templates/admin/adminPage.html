@@ -241,27 +241,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- SB ADMIN 관련 -->
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{~/js/vendor/jquery/jquery.min.js}"></script>
@@ -298,7 +277,6 @@
                 contentType: "application/json; charset=utf-8",
                 async: false,
                 success: function (result) { 
-                    console.log("응?")
                     let str = ""
                     result.forEach(element => {
                         str += "<tr>"
@@ -308,7 +286,6 @@
                         str += "<td id='"+element.id+"'>비접속</td>"
                         str += "</tr>"
                     });
-                    console.log("응?")
                     $("#tableOfUserList").html(str)
                 }
             })
@@ -336,6 +313,15 @@
 
             socket.on('userList', function (msg) {
                 console.log("현재 접속중인 유저"+msg);
+                let loginUserArr = new Array()
+                loginUserArr = msg.split(',')
+                console.log(loginUserArr)
+                
+                loginUserArr.forEach(user => {
+                    let $user =  $("#"+user)
+                    $user.html('접속중')
+                    $user.css('color','green')
+                })
                 
             });
         })

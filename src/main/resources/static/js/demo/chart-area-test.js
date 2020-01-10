@@ -27,14 +27,8 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-
-console.log("언제호출?")
-
 var dayListForChart = new Array();
 var usersListForChart =  new Array();
-
-
-// Problems must solved : 배열 or map생성해놓고 key 가 i 인 애의 value를 넣고 없으면 0 을 넣고  
 
 function getChartInfo() {
   let today = new Date();
@@ -48,17 +42,17 @@ function getChartInfo() {
       contentType: "application/json; charset=utf-8",
       async:false,
       success: function (result) {
-        /* const finalMap = new Map()
-        for(let i=1; i<day; i++) {
-     
-
-        } */
-        console.log("key어떻게")
-        console.log(result)
+        const resultMap = new Map()
           result.forEach(element => {
-              dayListForChart.push(parseInt(element.dates,10))
-              usersListForChart.push(parseInt(element.counts,10))
+            resultMap.set(parseInt(element.dates,10),parseInt(element.counts,10))
           });
+          for(let i=1; i<day; i++) {
+            dayListForChart.push(i)
+            if(!resultMap.has(i)) {
+              resultMap.set(i,0)
+            }
+            usersListForChart.push(resultMap.get(i))
+          }
       }
   })
 }

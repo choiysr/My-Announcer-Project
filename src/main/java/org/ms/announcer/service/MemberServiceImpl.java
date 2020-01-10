@@ -92,4 +92,9 @@ public class MemberServiceImpl implements MemberService {
         return (int) memberRepository.count();
     }
 
+    @Override
+    public List<MemberVO> getAllMembers() {
+        return memberRepository.findAll();
+    }
+
 }

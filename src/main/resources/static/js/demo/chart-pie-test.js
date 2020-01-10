@@ -42,4 +42,8 @@ var testPieChart = new Chart(ctx, {
     cutoutPercentage: 80,
   },
 });
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d81ef797a25ef69464eafc3babcc7a95dc8d6524

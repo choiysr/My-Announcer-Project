@@ -292,7 +292,7 @@
 
             var socket = io.connect('http://localhost:3000')
             socket.emit("login", "admin")
-            
+
             socket.on('anumberOfConnection', function (msg) {
                 currentMembers = msg
                 $.ajax({
@@ -300,11 +300,12 @@
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
-                        totalMembers =result
+                        totalMembers = result
                         console.log("총 회원은" + result)
                         console.log("현재 접속자 수: " + msg);
-                        
-                        
+
+                        pieChartMaker(result,msg)
+
                         var ctx = document.getElementById("testPieChart");
                     }
 
@@ -323,6 +324,14 @@
                     $user.css('color','green')
                 })
             });
+
+            socket.on('m-logout',function (user) {
+                let $user =  $("#"+user)
+                $user.html('비접속')
+                $user.css('color','black')
+                console.log(msg+"가 로그 아웃 하였습니다.");
+            })
+
         })
     </script>
 

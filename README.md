@@ -1,11 +1,11 @@
-# MyAnnouncer Project Summary
-
-![슬라이드2](https://user-images.githubusercontent.com/48176963/72394890-1c171000-377b-11ea-8a84-f4571442f9e0.PNG)
-![슬라이드3](https://user-images.githubusercontent.com/48176963/72394891-1c171000-377b-11ea-84d0-4689e3233998.PNG)
-![슬라이드4](https://user-images.githubusercontent.com/48176963/72394892-1c171000-377b-11ea-92e8-971bf655f9ad.PNG)
-![슬라이드5](https://user-images.githubusercontent.com/48176963/72394893-1cafa680-377b-11ea-8110-19152eeb1c8f.PNG)
-![슬라이드6](https://user-images.githubusercontent.com/48176963/72394894-1cafa680-377b-11ea-9326-596d591d3dc2.PNG)
-![슬라이드7](https://user-images.githubusercontent.com/48176963/72394895-1cafa680-377b-11ea-9ed8-2170736c74a8.PNG)
-![슬라이드8](https://user-images.githubusercontent.com/48176963/72394896-1d483d00-377b-11ea-88e6-fcccba594287.PNG)
-![슬라이드9](https://user-images.githubusercontent.com/48176963/72394897-1d483d00-377b-11ea-97f0-20cb0c907c66.PNG)
+![슬라이드1](https://user-images.githubusercontent.com/48176963/72682038-9a253f00-3b0c-11ea-8c53-452e035c5bf9.PNG)
+![슬라이드2](https://user-images.githubusercontent.com/48176963/72682040-9c879900-3b0c-11ea-9a23-a5aae3b83887.PNG)
+![슬라이드3](https://user-images.githubusercontent.com/48176963/72682042-9db8c600-3b0c-11ea-92f7-1734db4d3f81.PNG)
+![슬라이드4](https://user-images.githubusercontent.com/48176963/72682044-9f828980-3b0c-11ea-8b8f-8d3e2cc7c478.PNG)
+![슬라이드5](https://user-images.githubusercontent.com/48176963/72682047-a3161080-3b0c-11ea-9d4c-918ce18e1b8e.PNG)
+![슬라이드6](https://user-images.githubusercontent.com/48176963/72682048-a3161080-3b0c-11ea-80f8-5a641918def6.PNG)
+![슬라이드7](https://user-images.githubusercontent.com/48176963/72682049-a3aea700-3b0c-11ea-80c6-8cba2d867402.PNG)
+![슬라이드8](https://user-images.githubusercontent.com/48176963/72682050-a3aea700-3b0c-11ea-95f1-86de4c1bddac.PNG)
+![슬라이드9](https://user-images.githubusercontent.com/48176963/72682051-a3aea700-3b0c-11ea-9df1-f7c1941ee10c.PNG)
+![슬라이드10](https://user-images.githubusercontent.com/48176963/72682052-a3aea700-3b0c-11ea-9862-857535f8ba34.PNG)
 

@@ -178,7 +178,6 @@ public class BCBoardController {
 
         String clovaUrl = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
         String clovaUrlPremium = "https://naveropenapi.apigw.ntruss.com/voice-premium/v1/tts";
-        //보안상의 이유로 삭제
         String keyID = "8un3nj2jlx";
         String secretKey = "T1ZHOULzmPIOa58HmHvByTgGnMDTekgF8oZ1XSaE";
 

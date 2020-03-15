@@ -1,4 +1,3 @@
-![슬라이드1](https://user-images.githubusercontent.com/48176963/74619842-54df4600-517a-11ea-942a-b0fbb4e0b393.JPG)
 ![슬라이드2](https://user-images.githubusercontent.com/48176963/74619843-56107300-517a-11ea-9e66-7b57c7e8cef6.JPG)
 ![슬라이드3](https://user-images.githubusercontent.com/48176963/74619845-56107300-517a-11ea-9c11-8035636ced07.JPG)
 ![슬라이드4](https://user-images.githubusercontent.com/48176963/74619846-56a90980-517a-11ea-9954-18a9fe7da5b2.JPG)

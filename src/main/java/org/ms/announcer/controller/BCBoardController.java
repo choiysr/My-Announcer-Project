@@ -178,8 +178,8 @@ public class BCBoardController {
 
         String clovaUrl = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
         String clovaUrlPremium = "https://naveropenapi.apigw.ntruss.com/voice-premium/v1/tts";
-        String keyID = "8un3nj2jlx";
-        String secretKey = "T1ZHOULzmPIOa58HmHvByTgGnMDTekgF8oZ1XSaE";
+        String keyID = "KEY ID 입력";
+        String secretKey = "PRIVATE KEY 입력";
 
         headers.add("charset", "UTF-8");
         headers.add("Content-Type", "application/x-www-form-urlencoded");
@@ -220,7 +220,7 @@ public class BCBoardController {
      * // -H "Content-Type:application/x-www-form-urlencoded" \ // 'speaker={목소리
      * 종류}&speed={음성 재생 속도}&text={텍스트}' \ String clovaUrl =
      * "https://naveropenapi.apigw.ntruss.com/voice/v1/tts"; String keyID =
-     * "8un3nj2jlx"; String secretKey = "T1ZHOULzmPIOa58HmHvByTgGnMDTekgF8oZ1XSaE";
+     * "KEY ID 입력"; String secretKey = "PRIVATE API KEY 입력";
      * String speakerGender = dto.getGender().equals("man") ? "jinho" : "mijin";
      * String data = "speaker=" + speakerGender + "&speed=0&text=" +
      * dto.getContent();
